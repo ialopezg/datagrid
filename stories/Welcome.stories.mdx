@@ -1,0 +1,25 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import DataGrid, { DataGridProps } from '../src';
+import faker from '@faker-js/faker';
+
+<Meta title="Table Sections" component={DataGrid} />;
+
+export const Template: Story<DataGridProps> = (args) => (
+  <DataGrid {...args} />
+);
+
+<Story
+  name="Basic"
+  args={{
+    columns: [
+      { accessor: 'firstName', Header: 'First Name' },
+      { accessor: 'lastName', Header: 'Last Name' },
+    ],
+    data: [...Array(5)].map((_) => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+    })),
+  }}
+>
+  {Template.bind({})}
+</Story>;

@@ -9,7 +9,9 @@ interface FooterProps {}
 export const Footer: FC<FooterProps> = () => {
   const { table } = useDataGrid();
 
-  const hasFooterGroups = table.columns.some((c) => !!c.Footer);
+  const hasFooterGroups = table.columns.some(
+    (c) => c.depth === 0 && !!c.Footer
+  );
 
   return (
     <TableFooter>
