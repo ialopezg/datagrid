@@ -10,11 +10,11 @@ import { useDataGrid } from '../providers';
 interface TableProp {}
 
 export const Table: FC<TableProp> = () => {
-  const { table } = useDataGrid();
+  const { containerProps, table, tableProps } = useDataGrid();
 
   return (
-    <TableContainer component={Paper}>
-      <MuiTable {...table.getTableProps()}>
+    <TableContainer component={Paper} {...containerProps}>
+      <MuiTable stickyHeader {...table.getTableProps()} {...tableProps}>
         <Header />
         <Body />
         <Footer />

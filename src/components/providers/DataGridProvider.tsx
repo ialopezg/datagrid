@@ -12,11 +12,14 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   columns,
   children,
   data,
+  ...rest
 }) => {
   const table = useTable({ columns, data });
 
   return (
-    <DataGridContext.Provider value={{ table }}>{children}</DataGridContext.Provider>
+    <DataGridContext.Provider value={{ table, ...rest }}>
+      {children}
+    </DataGridContext.Provider>
   );
 };
 
