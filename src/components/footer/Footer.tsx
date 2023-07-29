@@ -20,7 +20,7 @@ export const Footer: FC<FooterProps> = () => {
             key={footerGroup.getFooterGroupProps().key}
           />
         ))}
-      
+
       <Pagination />
     </TableFooter>
   );

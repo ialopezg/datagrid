@@ -1,7 +1,7 @@
 import {
   TableContainerProps,
   TableFooterProps,
-  TableHeadProps,
+  TableHeadProps, TablePaginationProps,
   TableProps,
 } from '@mui/material';
 import { Column } from 'react-table';
@@ -14,6 +14,7 @@ export interface DataGridOptions {
   containerProps?: TableContainerProps;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
+  paginationProps?: TablePaginationProps;
   tableProps?: TableProps;
 }
 

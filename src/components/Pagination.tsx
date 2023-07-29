@@ -1,30 +1,27 @@
 import { TablePagination, TableRow } from '@mui/material';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 import { useDataGrid } from './providers';
 
 interface PaginationProps {}
 
 export const Pagination: FC<PaginationProps> = () => {
-  const { table } = useDataGrid();
-
-  // ** State
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const { table, paginationProps } = useDataGrid();
 
   const onRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+e.target.value);
-    setPage(0);
+    table.setPageSize(+e.target.value);
+    table.gotoPage(0);
   };
 
   return (
     <TableRow>
       <TablePagination
         count={table.rows.length}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        onPageChange={(_, page) => setPage(page)}
+        page={table.state.pageIndex}
+        rowsPerPage={table.state.pageSize}
+        onPageChange={(_, page) => table.gotoPage(page)}
         onRowsPerPageChange={onRowsPerPageChange}
+        {...paginationProps}
       />
     </TableRow>
   );

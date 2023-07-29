@@ -11,7 +11,7 @@ export const Body: FC<BodyProps> = () => {
 
   return (
     <TableBody {...table.getTableBodyProps()}>
-      {table.rows.map((row) => {
+      {table.page.map((row) => {
         table.prepareRow(row);
 
         return <BodyRow key={row.getRowProps().key} row={row} />;

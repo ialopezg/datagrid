@@ -49,9 +49,7 @@ HeaderGroup.args = {
       Header: 'Info',
       columns: [
         { accessor: 'age', Header: 'Age' },
-        { accessor: 'visits', Header: 'Visits' },
-        { accessor: 'status', Header: 'Status' },
-        { accessor: 'progress', Header: 'Profile Progress' },
+        { accessor: 'address', Header: 'Address' },
       ],
     },
   ],
@@ -59,8 +57,7 @@ HeaderGroup.args = {
     firstName: fake.name.firstName(),
     lastName: fake.name.lastName(),
     age: fake.datatype.number(100),
-    visits: fake.datatype.number(100),
-    progress: fake.datatype.number(100),
+    address: fake.address.streetAddress(),
   })),
 };
 
@@ -80,12 +77,10 @@ FooterGroup.args = {
       Header: 'Info',
       columns: [
         { accessor: 'age', Footer: 'Age', Header: 'Age' },
-        { accessor: 'visits', Footer: 'Visits', Header: 'Visits' },
-        { accessor: 'status', Footer: 'Status', Header: 'Status' },
         {
-          accessor: 'progress',
-          Footer: 'Profile Progress',
-          Header: 'Profile Progress',
+          accessor: 'address',
+          Footer: 'Address',
+          Header: 'Address',
         },
       ],
     },
@@ -94,7 +89,6 @@ FooterGroup.args = {
     firstName: fake.name.firstName(),
     lastName: fake.name.lastName(),
     age: fake.datatype.number(100),
-    visits: fake.datatype.number(100),
-    progress: fake.datatype.number(100),
+    address: fake.address.streetAddress(),
   })),
 };

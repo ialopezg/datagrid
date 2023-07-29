@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { useTable } from 'react-table';
+import { usePagination, useTable } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
@@ -14,7 +14,7 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   data,
   ...rest
 }) => {
-  const table = useTable({ columns, data });
+  const table = useTable({ columns, data }, usePagination);
 
   return (
     <DataGridContext.Provider value={{ table, ...rest }}>
