@@ -2,8 +2,8 @@ import { TableContainerProps, TableProps } from '@mui/material';
 import { Column } from 'react-table';
 import React, { FC } from 'react';
 
-import Table from './table';
 import DataGridProvider from './providers/DataGridProvider';
+import Container from './table/Container';
 
 export interface DataGridOptions {
   containerProps?: TableContainerProps;
@@ -17,7 +17,7 @@ export interface DataGridProps extends DataGridOptions {
 
 export const DataGrid: FC<DataGridProps> = (props) => (
   <DataGridProvider {...props}>
-    <Table />
+    <Container />
   </DataGridProvider>
 );
 
