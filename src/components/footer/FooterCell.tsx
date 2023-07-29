@@ -1,6 +1,11 @@
-import { TableCell } from '@mui/material';
+import MuiTableCell from '@mui/material/TableCell';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
+import { styled } from '@mui/material';
+
+const TableCell = styled(MuiTableCell)({
+  fontWeight: 'bold',
+});
 
 interface FooterCellProps {
   column: HeaderGroup;

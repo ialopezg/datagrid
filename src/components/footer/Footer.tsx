@@ -8,14 +8,17 @@ interface FooterProps {}
 export const Footer: FC<FooterProps> = () => {
   const { table } = useDataGrid();
 
+  const hasFooterGroups = table.columns.some((c) => !!c.Footer);
+
   return (
     <TableFooter>
-      {table.footerGroups.map((footerGroup) => (
-        <FooterRow
-          footerGroup={footerGroup}
-          key={footerGroup.getFooterGroupProps().key}
-        />
-      ))}
+      {hasFooterGroups &&
+        table.footerGroups.map((footerGroup) => (
+          <FooterRow
+            footerGroup={footerGroup}
+            key={footerGroup.getFooterGroupProps().key}
+          />
+        ))}
       {/*<TablePagination*/}
       {/*  count={3}*/}
       {/*  page={0}*/}
