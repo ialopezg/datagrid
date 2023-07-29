@@ -1,22 +1,24 @@
 import React, { FC } from 'react';
-import { TableInstance } from 'react-table';
 import { TableHead } from '@mui/material';
 
 import HeaderRow from './HeaderRow';
+import { useDataGrid } from '../providers';
 
-interface HeaderProp {
-  table: TableInstance<object>;
-}
+interface HeaderProp {}
 
-export const Header: FC<HeaderProp> = ({ table }) => (
-  <TableHead>
-    {table.headerGroups.map((headerGroup) => (
-      <HeaderRow
-        headerGroup={headerGroup}
-        key={headerGroup.getHeaderGroupProps().key}
-      />
-    ))}
-  </TableHead>
-);
+export const Header: FC<HeaderProp> = () => {
+  const { table } = useDataGrid();
+
+  return (
+    <TableHead>
+      {table.headerGroups.map((headerGroup) => (
+        <HeaderRow
+          headerGroup={headerGroup}
+          key={headerGroup.getHeaderGroupProps().key}
+        />
+      ))}
+    </TableHead>
+  );
+};
 
 export default Header;
