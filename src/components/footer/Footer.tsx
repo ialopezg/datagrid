@@ -2,6 +2,7 @@ import { TableFooter } from '@mui/material';
 import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import { FooterRow } from './FooterRow';
+import Pagination from '../Pagination';
 
 interface FooterProps {}
 
@@ -19,13 +20,8 @@ export const Footer: FC<FooterProps> = () => {
             key={footerGroup.getFooterGroupProps().key}
           />
         ))}
-      {/*<TablePagination*/}
-      {/*  count={3}*/}
-      {/*  page={0}*/}
-      {/*  rowsPerPage={10}*/}
-      {/*  rowsPerPageOptions={[5, 10, 25, 50, 100]}*/}
-      {/*  onPageChange={(_, page) => console.log(page)}*/}
-      {/*/>*/}
+      
+      <Pagination />
     </TableFooter>
   );
 };

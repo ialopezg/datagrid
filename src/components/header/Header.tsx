@@ -7,10 +7,10 @@ import { useDataGrid } from '../providers';
 interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
-  const { table } = useDataGrid();
+  const { headerProps, table } = useDataGrid();
 
   return (
-    <TableHead>
+    <TableHead {...headerProps}>
       {table.headerGroups.map((headerGroup) => (
         <HeaderRow
           headerGroup={headerGroup}

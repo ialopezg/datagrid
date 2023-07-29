@@ -1,4 +1,9 @@
-import { TableContainerProps, TableProps } from '@mui/material';
+import {
+  TableContainerProps,
+  TableFooterProps,
+  TableHeadProps,
+  TableProps,
+} from '@mui/material';
 import { Column } from 'react-table';
 import React, { FC } from 'react';
 
@@ -7,6 +12,8 @@ import Container from './table/Container';
 
 export interface DataGridOptions {
   containerProps?: TableContainerProps;
+  footerProps?: TableFooterProps;
+  headerProps?: TableHeadProps;
   tableProps?: TableProps;
 }
 
