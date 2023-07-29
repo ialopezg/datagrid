@@ -2,10 +2,10 @@ import MuiTable from '@mui/material/Table';
 import { Paper, TableContainer } from '@mui/material';
 import React, { FC } from 'react';
 
-import Header from './header';
-import Body from './body';
-import Footer from './footer';
-import { useDataGrid } from './providers';
+import Header from '../header';
+import Body from '../body';
+import Footer from '../footer';
+import { useDataGrid } from '../providers';
 
 interface TableProp {}
 
