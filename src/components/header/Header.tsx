@@ -11,7 +11,10 @@ interface HeaderProp {
 export const Header: FC<HeaderProp> = ({ table }) => (
   <TableHead>
     {table.headerGroups.map((headerGroup) => (
-      <HeaderRow headerGroup={headerGroup} />
+      <HeaderRow
+        headerGroup={headerGroup}
+        key={headerGroup.getHeaderGroupProps().key}
+      />
     ))}
   </TableHead>
 );

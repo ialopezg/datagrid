@@ -13,7 +13,7 @@ export const Body: FC<BodyProps> = ({ table }) => (
     {table.rows.map((row) => {
       table.prepareRow(row);
 
-      return <BodyRow row={row} />;
+      return <BodyRow key={row.getRowProps().key} row={row} />;
     })}
   </TableBody>
 );

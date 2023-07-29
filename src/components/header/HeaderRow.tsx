@@ -11,7 +11,7 @@ interface HeaderRowProps {
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => (
   <TableRow {...headerGroup.getHeaderGroupProps()}>
     {headerGroup.headers.map((column) => (
-      <HeaderCell column={column} />
+      <HeaderCell column={column} key={column.getHeaderProps().key} />
     ))}
   </TableRow>
 );

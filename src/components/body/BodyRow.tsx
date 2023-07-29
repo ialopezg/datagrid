@@ -10,7 +10,7 @@ interface BodyRowProps {
 export const BodyRow: FC<BodyRowProps> = ({ row }) => (
   <TableRow {...row.getRowProps()}>
     {row.cells.map((cell) => (
-      <BodyCell cell={cell} />
+      <BodyCell cell={cell} key={cell.getCellProps().key} />
     ))}
   </TableRow>
 );
