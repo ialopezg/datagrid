@@ -5,7 +5,6 @@ import React, { FC } from 'react';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
-  borderRight: '1px solid #ccc',
 });
 
 interface HeaderCellProps {
