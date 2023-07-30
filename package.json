@@ -1,8 +1,28 @@
 {
-  "version": "0.1.0",
+  "name": "react-datagrid",
+  "version": "1.0.0",
+  "author": "Isidro A. Lopez G.",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "module": "dist/react-table-mui.esm.js",
+  "keywords": [
+    "react-table",
+    "material-ui",
+    "material-table",
+    "react-datagrid"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ialopezg/react-datagrid"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "homepage": "https://github.com/ialopezg/react-datagrid#readme",
+  "bugs": {
+    "url": "https://github.com/ialopezg/react-datagrid/issues"
+  },
   "files": [
     "dist",
     "src"
@@ -26,17 +46,14 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "react-table-mui",
-  "author": "Kevin Vandy",
-  "module": "dist/react-table-mui.esm.js",
   "size-limit": [
     {
       "path": "dist/react-table-mui.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "20 KB"
     },
     {
       "path": "dist/react-table-mui.esm.js",
-      "limit": "10 KB"
+      "limit": "20 KB"
     }
   ],
   "devDependencies": {
