@@ -16,6 +16,7 @@ export const Pagination: FC<PaginationProps> = () => {
   return (
     <TableRow>
       <TablePagination
+        colSpan={table.visibleColumns.length + 10}
         count={table.rows.length}
         page={table.state.pageIndex}
         rowsPerPage={table.state.pageSize}

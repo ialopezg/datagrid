@@ -21,18 +21,25 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<DataGridProps> = (args) => <DataGrid {...args} />;
+const Template: Story<DataGridProps> = (args) => (
+  <DataGrid
+    detailPanel={(row) => <div>Hello World from row {row.id}!</div>}
+    {...args}
+  />
+);
 
 export const Basic = Template.bind({});
 Basic.args = {
   columns: [
     { accessor: 'firstName', Header: 'First Name' },
     { accessor: 'lastName', Header: 'Last Name' },
+    { accessor: 'age', Header: 'Age' },
     { accessor: 'address', Header: 'Address' },
   ],
   data: [...Array(5)].map((_) => ({
     firstName: fake.name.firstName(),
     lastName: fake.name.lastName(),
+    age: fake.datatype.number(80),
     address: fake.address.streetAddress(),
   })),
 };

@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import { usePagination, useSortBy, useTable } from 'react-table';
+import { useExpanded, usePagination, useSortBy, useTable } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
@@ -16,7 +16,12 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   options,
   ...rest
 }) => {
-  const table = useTable({ columns, data }, useSortBy, usePagination);
+  const table = useTable(
+    { columns, data },
+    useSortBy,
+    useExpanded,
+    usePagination
+  );
 
   return (
     <DataGridContext.Provider

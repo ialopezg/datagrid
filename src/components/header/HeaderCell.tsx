@@ -1,11 +1,6 @@
-import MuiTableCell from '@mui/material/TableCell';
-import { styled, TableSortLabel } from '@mui/material';
+import { TableCell, TableSortLabel } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
-
-const TableCell = styled(MuiTableCell)({
-  fontWeight: 'bold',
-});
 
 interface HeaderCellProps {
   column: HeaderGroup;
@@ -17,6 +12,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   return (
     <TableCell
       align={isParent ? 'center' : 'left'}
+      style={{ fontWeight: 'bold !important' }}
       variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >

@@ -5,8 +5,8 @@ import {
   TablePaginationProps,
   TableProps,
 } from '@mui/material';
-import { Column } from 'react-table';
-import React, { FC } from 'react';
+import { Column, Row } from 'react-table';
+import React, { FC, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
@@ -26,6 +26,7 @@ type DataGridOptionProps = Partial<DataGridOptions>;
 
 export interface DataGridOptionalProps {
   containerProps?: Partial<TableContainerProps>;
+  detailPanel?: (row: Row<object>) => ReactNode;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   options?: DataGridOptionProps;
