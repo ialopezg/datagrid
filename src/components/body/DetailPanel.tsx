@@ -19,7 +19,7 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
           borderBottom: !row.isExpanded ? 'none' : undefined,
           paddingBottom: row.isExpanded ? '1rem' : 0,
           paddingTop: row.isExpanded ? '1rem' : 0,
-          transition: 'padding 0.2s',
+          transition: 'all 0.2s',
         }}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>

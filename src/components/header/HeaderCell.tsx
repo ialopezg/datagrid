@@ -9,6 +9,10 @@ const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
 });
 
+const TableCellContent = styled('div')({
+  display: 'grid',
+});
+
 interface HeaderCellProps {
   column: HeaderGroup;
 }
@@ -24,19 +28,21 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
       variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      {!isParent && column.canSort ? (
-        <TableSortLabel
-          active={column.isSorted}
-          direction={column.isSortedDesc ? 'desc' : 'asc'}
-        >
-          {column.render('Header')}
-        </TableSortLabel>
-      ) : (
-        column.render('Header')
-      )}
-      {enableFiltering && column.canFilter && (
-        <FilterTextField column={column} />
-      )}
+      <TableCellContent>
+        {!isParent && column.canSort ? (
+          <TableSortLabel
+            active={column.isSorted}
+            direction={column.isSortedDesc ? 'desc' : 'asc'}
+          >
+            {column.render('Header')}
+          </TableSortLabel>
+        ) : (
+          column.render('Header')
+        )}
+        {enableFiltering && column.canFilter && (
+          <FilterTextField column={column} />
+        )}
+      </TableCellContent>
     </TableCell>
   );
 };

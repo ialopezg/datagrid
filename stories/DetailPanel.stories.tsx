@@ -3,41 +3,22 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import DataGrid, { DataGridProps } from '../src';
+import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Playground',
-  component: DataGrid,
+  title: 'Features/DetailPanel',
 };
 
 export default meta;
 
-const columns = [
-  {
-    Footer: 'Name',
-    Header: 'Name',
-    columns: [
-      {
-        accessor: 'firstName' as const,
-        Footer: 'First Name',
-        Header: 'First Name',
-      },
-      {
-        accessor: 'lastName' as const,
-        Footer: 'Last Name',
-        Header: 'Last Name',
-      },
-    ],
-  },
-  {
-    Footer: 'Info',
-    Header: 'Info',
-    columns: [
-      { accessor: 'city' as const, Footer: 'City', Header: 'City' },
-      { accessor: 'state' as const, Footer: 'State', Header: 'State' },
-    ],
-  },
+const columns: Column<any>[] = [
+  { accessor: 'firstName' as const, Header: 'First Name' },
+  { accessor: 'lastName' as const, Header: 'Last Name' },
+  { accessor: 'city' as const, Header: 'City' },
+  { accessor: 'state' as const, Header: 'State' },
 ];
-const data = [...Array(3)].map((_) => ({
+
+const data = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
@@ -47,14 +28,14 @@ const data = [...Array(3)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const Basic: Story<DataGridProps> = () => (
+export const DetailPanelEnabled: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
     detailPanel={(row: any) => {
       console.log(row);
       return (
-        <div style={{display: 'grid'}}>
+        <div style={{ display: 'grid' }}>
           <span>{row.original?.address}</span>
           <span>{row.original?.city}</span>
           <span>{row.original?.state}</span>
@@ -62,12 +43,7 @@ export const Basic: Story<DataGridProps> = () => (
         </div>
       );
     }}
-    enableFiltering
-    enablePagination
     enableSearch
-    enableSelection
-    enableSelectAll
-    paginationPosition="both"
     showToolbar
   />
 );

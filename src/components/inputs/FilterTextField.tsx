@@ -22,6 +22,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
 
   return (
     <TextField
+      margin="dense"
       onChange={(e) => {
         setFilterValue(e.target.value);
         onFilterChange(e.target.value);
