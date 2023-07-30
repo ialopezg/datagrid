@@ -5,8 +5,8 @@ import {
   TablePaginationProps,
   TableProps,
 } from '@mui/material';
-import { Column, Row } from 'react-table';
-import React, { FC, MouseEvent, ReactNode } from 'react';
+import { Column, Row, UseRowStateLocalState } from 'react-table';
+import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
@@ -23,6 +23,7 @@ export interface DataGridOptionalProps {
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<object>) => void;
+  onRowSelect?: (e: ChangeEvent, state: UseRowStateLocalState<object, unknown>) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   showFooter?: boolean;
@@ -44,7 +45,6 @@ export const DataGrid: FC<DataGridProps> = ({
   paginationPosition = 'bottom',
   showFooter = true,
   showHeader = true,
-  showToolbar = false,
   ...rest
 }) => (
   <DataGridProvider
@@ -55,7 +55,6 @@ export const DataGrid: FC<DataGridProps> = ({
     paginationPosition={paginationPosition}
     showFooter={showFooter}
     showHeader={showHeader}
-    showToolbar={showToolbar}
     {...rest}
   >
     <Container />
