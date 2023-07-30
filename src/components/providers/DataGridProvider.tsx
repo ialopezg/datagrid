@@ -3,6 +3,7 @@ import { usePagination, useTable } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
+import { defaultOptions } from '../defaultOptions';
 
 interface DataGridProviderProps extends DataGridProps {
   children: ReactNode;
@@ -12,12 +13,15 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   columns,
   children,
   data,
+  options,
   ...rest
 }) => {
   const table = useTable({ columns, data }, usePagination);
 
   return (
-    <DataGridContext.Provider value={{ table, ...rest }}>
+    <DataGridContext.Provider
+      value={{ options: { ...defaultOptions, ...options }, table, ...rest }}
+    >
       {children}
     </DataGridContext.Provider>
   );

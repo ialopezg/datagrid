@@ -7,7 +7,7 @@ import Pagination from '../Pagination';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = () => {
-  const { table } = useDataGrid();
+  const { options, table } = useDataGrid();
 
   const hasFooterGroups = table.columns.some(
     (c) => c.depth === 0 && !!c.Footer
@@ -23,7 +23,10 @@ export const Footer: FC<FooterProps> = () => {
           />
         ))}
 
-      <Pagination />
+      {options?.showPagination === true ||
+        (['bottom', 'both'].includes(String(options?.showPagination)) && (
+          <Pagination />
+        ))}
     </TableFooter>
   );
 };

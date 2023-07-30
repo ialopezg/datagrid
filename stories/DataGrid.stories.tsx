@@ -28,10 +28,12 @@ Basic.args = {
   columns: [
     { accessor: 'firstName', Header: 'First Name' },
     { accessor: 'lastName', Header: 'Last Name' },
+    { accessor: 'address', Header: 'Address' },
   ],
   data: [...Array(5)].map((_) => ({
     firstName: fake.name.firstName(),
     lastName: fake.name.lastName(),
+    address: fake.address.streetAddress(),
   })),
 };
 
@@ -85,7 +87,7 @@ FooterGroup.args = {
       ],
     },
   ],
-  data: [...Array(12)].map((_) => ({
+  data: [...Array(21)].map((_) => ({
     firstName: fake.name.firstName(),
     lastName: fake.name.lastName(),
     age: fake.datatype.number(100),

@@ -21,6 +21,8 @@ export const Pagination: FC<PaginationProps> = () => {
         rowsPerPage={table.state.pageSize}
         onPageChange={(_, page) => table.gotoPage(page)}
         onRowsPerPageChange={onRowsPerPageChange}
+        showFirstButton={(table.rows.length / table.state.pageSize) > 2}
+        showLastButton={(table.rows.length / table.state.pageSize) > 2}
         {...paginationProps}
       />
     </TableRow>
