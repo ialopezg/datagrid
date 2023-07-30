@@ -7,24 +7,19 @@ import Pagination from '../toolbar/Pagination';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = () => {
-  const { options, table } = useDataGrid();
-
-  const hasFooterGroups = table.columns.some(
-    (c) => c.depth === 0 && !!c.Footer
-  );
+  const { enablePagination, paginationPosition, table } = useDataGrid();
 
   return (
     <TableFooter>
-      {hasFooterGroups &&
-        table.footerGroups.map((footerGroup) => (
-          <FooterRow
-            footerGroup={footerGroup}
-            key={footerGroup.getFooterGroupProps().key}
-          />
-        ))}
+      {table.footerGroups.map((footerGroup) => (
+        <FooterRow
+          footerGroup={footerGroup}
+          key={footerGroup.getFooterGroupProps().key}
+        />
+      ))}
 
-      {options?.enablePagination === true ||
-        (['bottom', 'both'].includes(String(options?.enablePagination)) && (
+      {enablePagination &&
+        (['bottom', 'both'].includes(String(paginationPosition)) && (
           <Pagination />
         ))}
     </TableFooter>

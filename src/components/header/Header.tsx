@@ -8,13 +8,13 @@ import Pagination from '../toolbar/Pagination';
 interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
-  const { headerProps, options, table } = useDataGrid();
+  const { enablePagination, headerProps, paginationPosition, table } =
+    useDataGrid();
 
   return (
     <TableHead {...headerProps}>
-      {['both', 'top'].includes(String(options?.enablePagination)) && (
-        <Pagination />
-      )}
+      {enablePagination &&
+        ['both', 'top'].includes(String(paginationPosition)) && <Pagination />}
 
       {table.headerGroups.map((headerGroup) => (
         <HeaderRow

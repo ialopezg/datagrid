@@ -24,6 +24,8 @@ export default meta;
 const Template: Story<DataGridProps> = (args) => (
   <DataGrid
     detailPanel={(row) => <div>Hello World from row {row.id}!</div>}
+    enableSelectAll
+    enableSelection
     {...args}
   />
 );

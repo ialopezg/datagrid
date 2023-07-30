@@ -6,17 +6,20 @@ import BodyCell from './BodyCell';
 import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
 import ExpandRow from '../actions/ExpandRow';
+import SelectRow from '../actions/SelectRow';
 
 interface BodyRowProps {
   row: Row<object>;
 }
 
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
-  const { detailPanel } = useDataGrid();
+  const { detailPanel, enableSelection, onRowClick } = useDataGrid();
 
   return (
     <>
-      <TableRow {...row.getRowProps()}>
+      <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
+        {enableSelection && <SelectRow row={row} />}
+
         {detailPanel && <ExpandRow row={row} />}
 
         {row.cells.map((cell) => (

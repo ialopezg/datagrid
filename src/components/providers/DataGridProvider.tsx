@@ -9,7 +9,6 @@ import {
 
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
-import { defaultOptions } from '../defaultOptions';
 
 interface DataGridProviderProps extends DataGridProps {
   children: ReactNode;
@@ -19,7 +18,6 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   columns,
   children,
   data,
-  options,
   ...rest
 }) => {
   const table = useTable(
@@ -32,7 +30,7 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
 
   return (
     <DataGridContext.Provider
-      value={{ options: { ...defaultOptions, ...options }, table, ...rest }}
+      value={{ table, ...rest }}
     >
       {children}
     </DataGridContext.Provider>

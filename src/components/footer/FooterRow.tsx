@@ -9,10 +9,16 @@ interface FooterRowProps {
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
-  const { detailPanel } = useDataGrid();
+  const { detailPanel, enableSelection } = useDataGrid();
+
+  if (!footerGroup.getFooterGroupProps.name) {
+    return null;
+  }
 
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
+      {enableSelection && <TableCell style={{ width: '2rem' }} />}
+
       {detailPanel && <TableCell style={{ width: '2rem' }} />}
 
       {footerGroup.headers.map((column) => (
