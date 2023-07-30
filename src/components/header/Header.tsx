@@ -3,7 +3,7 @@ import { TableHead } from '@mui/material';
 
 import HeaderRow from './HeaderRow';
 import { useDataGrid } from '../providers';
-import Pagination from '../Pagination';
+import Pagination from '../toolbar/Pagination';
 
 interface HeaderProp {}
 

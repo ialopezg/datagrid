@@ -1,7 +1,7 @@
 import { TablePagination, TableRow } from '@mui/material';
 import React, { ChangeEvent, FC } from 'react';
 
-import { useDataGrid } from './providers';
+import { useDataGrid } from '../providers';
 
 interface PaginationProps {}
 

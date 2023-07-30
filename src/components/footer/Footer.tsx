@@ -2,7 +2,7 @@ import { TableFooter } from '@mui/material';
 import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import { FooterRow } from './FooterRow';
-import Pagination from '../Pagination';
+import Pagination from '../toolbar/Pagination';
 
 interface FooterProps {}
 
