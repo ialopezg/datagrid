@@ -1,12 +1,12 @@
-import fake from '@faker-js/faker';
-import { Meta } from '@storybook/react';
+import faker from '@faker-js/faker';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import DataGrid from '../src';
+import DataGrid, { DataGridProps } from '../src';
 import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Examples/Row Selection',
+  title: 'Features/Row',
 };
 
 export default meta;
@@ -19,21 +19,21 @@ const columns: Column<any>[] = [
 ];
 
 const data = [...Array(21)].map((_) => ({
-  firstName: fake.name.firstName(),
-  lastName: fake.name.lastName(),
-  age: fake.datatype.number(80),
-  address: fake.address.streetAddress(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
+  address: faker.address.streetAddress(),
 }));
 
-export const Enabled = () => (
+export const SelectionRow: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection />
 );
 
-export const EnableSelectAll = () => (
+export const SelectAllRows: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection enableSelectAll />
 );
 
-export const OnRowSelectionChange = () => (
+export const OnRowSelect: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}

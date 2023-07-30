@@ -75,7 +75,7 @@ This is the folder structure we set up for you:
 /test
   blah.test.tsx   # EDIT THIS
 /stories
-  DataGrid.stories.tsx # EDIT THIS
+  Playground.stories.tsx # EDIT THIS
 /.storybook
   main.js
   preview.js

@@ -4,6 +4,8 @@ import {
   TableHeadProps,
   TablePaginationProps,
   TableProps,
+  TextFieldProps,
+  TypographyProps,
 } from '@mui/material';
 import { Column, Row, UseRowStateLocalState } from 'react-table';
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
@@ -16,7 +18,7 @@ export interface DataGridProps {
   containerProps?: Partial<TableContainerProps>;
   data: any[];
   detailPanel?: (row: Row<object>) => ReactNode;
-  enableFilters?: boolean;
+  enableFiltering?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
   enableSelectAll?: boolean;
@@ -32,14 +34,16 @@ export interface DataGridProps {
   ) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
+  searchProps?: TextFieldProps;
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
   tableProps?: TableProps;
+  title?: string | ReactNode;
+  titleProps?: TypographyProps;
 }
 
 export const DataGrid: FC<DataGridProps> = ({
-  enableFilters = true,
   enablePagination = true,
   enableSearch = true,
   enableSorting = true,
@@ -49,7 +53,6 @@ export const DataGrid: FC<DataGridProps> = ({
   ...rest
 }) => (
   <DataGridProvider
-    enableFilters={enableFilters}
     enablePagination={enablePagination}
     enableSearch={enableSearch}
     enableSorting={enableSorting}

@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import {
-  useExpanded,
+  useExpanded, useFilters, useGlobalFilter,
   usePagination,
   useRowSelect,
   useSortBy,
@@ -22,6 +22,8 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
 }) => {
   const table = useTable(
     { columns, data },
+    useFilters,
+    useGlobalFilter,
     useSortBy,
     useExpanded,
     usePagination,

@@ -1,12 +1,12 @@
-import fake from '@faker-js/faker';
-import { Meta } from '@storybook/react';
+import faker from '@faker-js/faker';
+import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import DataGrid from '../src';
+import DataGrid, { DataGridProps } from '../src';
 import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Examples/Pagination',
+  title: 'Features/Pagination',
 };
 
 export default meta;
@@ -19,28 +19,28 @@ const columns: Column<any>[] = [
 ];
 
 const data = [...Array(21)].map((_) => ({
-  firstName: fake.name.firstName(),
-  lastName: fake.name.lastName(),
-  age: fake.datatype.number(80),
-  address: fake.address.streetAddress(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  age: faker.datatype.number(80),
+  address: faker.address.streetAddress(),
 }));
 
-export const Enabled = () => (
+export const PaginationEnabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 
-export const Disabled = () => (
+export const PaginationDisabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enablePagination={false} />
 );
 
-export const PositionOnBottom = () => (
+export const PaginationOnBottom: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 
-export const PositionOnTop = () => (
+export const PaginationOnTop: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="top" />
 );
 
-export const PositionOnBottomAndTop = () => (
+export const PaginationOnBothToolbars: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="both" />
 );
