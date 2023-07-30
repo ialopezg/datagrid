@@ -23,8 +23,8 @@ export const Footer: FC<FooterProps> = () => {
           />
         ))}
 
-      {options?.showPagination === true ||
-        (['bottom', 'both'].includes(String(options?.showPagination)) && (
+      {options?.enablePagination === true ||
+        (['bottom', 'both'].includes(String(options?.enablePagination)) && (
           <Pagination />
         ))}
     </TableFooter>

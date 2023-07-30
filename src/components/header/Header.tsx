@@ -12,10 +12,9 @@ export const Header: FC<HeaderProp> = () => {
 
   return (
     <TableHead {...headerProps}>
-      {options?.showPagination === true ||
-        (['both', 'top'].includes(String(options?.showPagination)) && (
-          <Pagination />
-        ))}
+      {['both', 'top'].includes(String(options?.enablePagination)) && (
+        <Pagination />
+      )}
 
       {table.headerGroups.map((headerGroup) => (
         <HeaderRow

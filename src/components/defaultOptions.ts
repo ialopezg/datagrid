@@ -1,11 +1,11 @@
 import { DataGridOptions } from './DataGrid';
 
 export const defaultOptions: DataGridOptions = {
-  showPagination: 'bottom',
-  showSearch: true,
-  showHead: true,
+  enableFilters: false,
+  enablePagination: 'bottom',
+  enableSearch: true,
+  enableSorting: true,
   showFooter: true,
+  showHeader: true,
   showToolbar: true,
-  showFilters: false,
-  showSorting: true,
 };

@@ -13,19 +13,19 @@ import Container from './table/Container';
 import { defaultOptions } from './defaultOptions';
 
 export interface DataGridOptions {
-  showPagination: boolean | 'top' | 'bottom' | 'both' | 'none';
-  showSearch: boolean;
-  showHead: boolean;
+  enableFilters: boolean;
+  enablePagination: boolean | 'top' | 'bottom' | 'both' | 'none';
+  enableSearch: boolean;
+  enableSorting: boolean;
   showFooter: boolean;
+  showHeader: boolean;
   showToolbar: boolean;
-  showFilters: boolean;
-  showSorting: boolean;
 }
 
 type DataGridOptionProps = Partial<DataGridOptions>;
 
 export interface DataGridOptionalProps {
-  containerProps?: TableContainerProps;
+  containerProps?: Partial<TableContainerProps>;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   options?: DataGridOptionProps;
