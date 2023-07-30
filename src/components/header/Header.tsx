@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { TableHead } from '@mui/material';
 
-import HeaderRow from './HeaderRow';
 import { useDataGrid } from '../providers';
 import Pagination from '../toolbar/Pagination';
+import HeaderRow from './HeaderRow';
 
 interface HeaderProp {}
 

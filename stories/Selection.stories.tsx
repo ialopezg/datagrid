@@ -38,9 +38,9 @@ export const OnRowSelectionChange = () => (
     columns={columns}
     data={data}
     enableSelection
-    onRowSelect={(e, state) => {
-      alert('Row Selected');
-      console.log({ e, state });
+    onRowSelect={(e, state, selectedRows) => {
+      alert(`Rows Selected: ${selectedRows.length}`);
+      console.log({ e, state, selectedRows });
     }}
   />
 );

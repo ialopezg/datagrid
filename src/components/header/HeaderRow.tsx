@@ -1,10 +1,10 @@
 import { TableCell, TableRow } from '@mui/material';
-import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
+import React, { FC } from 'react';
 
-import HeaderCell from './HeaderCell';
+import SelectAllRows from '../actions/SelectAllRows';
 import { useDataGrid } from '../providers';
-import { SelectAllRows } from '../actions';
+import HeaderCell from './HeaderCell';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup<object>;

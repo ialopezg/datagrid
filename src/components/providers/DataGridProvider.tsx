@@ -30,7 +30,7 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
 
   return (
     <DataGridContext.Provider
-      value={{ table, ...rest }}
+      value={{ columns, data, table, ...rest }}
     >
       {children}
     </DataGridContext.Provider>

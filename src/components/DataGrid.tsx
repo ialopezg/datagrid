@@ -11,8 +11,10 @@ import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 
-export interface DataGridOptionalProps {
+export interface DataGridProps {
+  columns: Column<any>[];
   containerProps?: Partial<TableContainerProps>;
+  data: any[];
   detailPanel?: (row: Row<object>) => ReactNode;
   enableFilters?: boolean;
   enablePagination?: boolean;
@@ -23,18 +25,17 @@ export interface DataGridOptionalProps {
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<object>) => void;
-  onRowSelect?: (e: ChangeEvent, state: UseRowStateLocalState<object, unknown>) => void;
+  onRowSelect?: (
+    e: ChangeEvent,
+    state: UseRowStateLocalState<object, unknown>,
+    selectedRows: Row<object>[]
+  ) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
   tableProps?: TableProps;
-}
-
-export interface DataGridProps extends DataGridOptionalProps {
-  columns: Column<any>[];
-  data: any[];
 }
 
 export const DataGrid: FC<DataGridProps> = ({

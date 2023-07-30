@@ -1,9 +1,9 @@
 import { TableInstance } from 'react-table';
 import { createContext } from 'react';
 
-import { DataGridOptionalProps } from '../DataGrid';
+import { DataGridProps } from '../DataGrid';
 
-export interface DataGridContextProps extends DataGridOptionalProps {
+export interface DataGridContextProps extends DataGridProps {
   table: TableInstance<object>;
 }
 

@@ -1,6 +1,7 @@
 import { Collapse, TableCell, TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
+
 import { useDataGrid } from '../providers';
 
 interface DetailPanelProps {

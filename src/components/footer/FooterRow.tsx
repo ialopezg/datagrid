@@ -1,17 +1,18 @@
 import { TableCell, TableRow } from '@mui/material';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
-import { FooterCell } from './FooterCell';
+
 import { useDataGrid } from '../providers';
+import FooterCell from './FooterCell';
 
 interface FooterRowProps {
   footerGroup: HeaderGroup<object>;
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
-  const { detailPanel, enableSelection } = useDataGrid();
+  const { columns, detailPanel, enableSelection } = useDataGrid();
 
-  if (!footerGroup.getFooterGroupProps.name) {
+  if (!columns.some((c) => c.Footer)) {
     return null;
   }
 
@@ -26,6 +27,6 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
       ))}
     </TableRow>
   );
-}
+};
 
 export default FooterRow;
