@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from '../src';
 
 const meta: Meta = {
-  title: 'Features/TreeData',
+  title: 'Features/RowTree',
   component: DataGrid,
 };
 
@@ -24,7 +24,7 @@ const data = [...Array(100)].map((_) => ({
   address: faker.address.streetAddress(),
   state: faker.address.state(),
   phone: faker.phone.phoneNumber(),
-  subRows: [...Array(faker.datatype.number(4))].map((_) => ({
+  subRows: [...Array(faker.datatype.number(3))].map((_) => ({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     address: faker.address.streetAddress(),
@@ -40,6 +40,6 @@ const data = [...Array(100)].map((_) => ({
   })),
 }));
 
-export const RowTree: Story<DataGridProps> = () => (
+export const RowTreeEnabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableRowTree />
 );

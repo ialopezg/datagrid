@@ -17,6 +17,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     detailPanel,
     enableRowTree,
     enableSelection,
+    hasExpandableRows,
     onRowClick,
     table,
     CustomBodyRowComponent,
@@ -31,8 +32,12 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
         {enableSelection && <SelectRow row={row} />}
 
-        {(enableRowTree || detailPanel) &&
-          (row.canExpand ? <ExpandRow row={row} /> : <TableCell />)}
+        {((enableRowTree && hasExpandableRows) || detailPanel) &&
+          (row.canExpand || detailPanel ? (
+            <ExpandRow row={row} />
+          ) : (
+            <TableCell />
+          ))}
 
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />

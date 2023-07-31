@@ -15,11 +15,11 @@ export const ExpandRow: FC<ExpandRowProps> = ({ row }) => {
       variant="head"
       {...row.getToggleRowExpandedProps({
         style: {
-          paddingLeft: `${row.depth * 1.5 + 0.25}rem`,
+          paddingLeft: `${row.depth * 1.75 + 0.25}rem`,
         },
       })}
     >
-      <IconButton onClick={() => row.toggleRowExpanded()} size="small">
+      <IconButton>
         <ArrowForwardIosIcon
           fontSize="small"
           style={{

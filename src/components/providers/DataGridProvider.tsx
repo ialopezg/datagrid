@@ -12,6 +12,7 @@ import {
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
 import { showOverrideWarnings } from '../helpers/overrideWarnings';
+import { RowHelper } from '../helpers/row.helper';
 
 interface DataGridProviderProps<D extends {}> extends DataGridProps<D> {
   children: ReactNode;
@@ -38,9 +39,19 @@ export const DataGridProvider = <D extends {}>({
     showOverrideWarnings(rest);
   }
 
+  const rowOptions = RowHelper({ table });
+
   return (
-    // @ts-ignore
-    <DataGridContext.Provider value={{ columns, data, table, ...rest }}>
+    <DataGridContext.Provider
+      // @ts-ignore
+      value={{
+        columns,
+        data,
+        table,
+        ...rowOptions,
+        ...rest,
+      }}
+    >
       {children}
     </DataGridContext.Provider>
   );
