@@ -3,7 +3,7 @@ import { Cell } from 'react-table';
 import React, { FC } from 'react';
 
 interface BodyCellProps {
-  cell: Cell<object>;
+  cell: Cell;
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => (

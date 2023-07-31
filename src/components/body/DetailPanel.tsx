@@ -5,7 +5,7 @@ import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 
 interface DetailPanelProps {
-  row: Row<object>;
+  row: Row;
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {

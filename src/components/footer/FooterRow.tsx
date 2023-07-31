@@ -6,7 +6,7 @@ import { useDataGrid } from '../providers';
 import FooterCell from './FooterCell';
 
 interface FooterRowProps {
-  footerGroup: HeaderGroup<object>;
+  footerGroup: HeaderGroup;
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {

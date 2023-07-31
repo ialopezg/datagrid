@@ -4,7 +4,7 @@ import { Row } from 'react-table';
 import React, { FC } from 'react';
 
 interface ExpandRowProps {
-  row: Row<object>;
+  row: Row;
 }
 
 export const ExpandRow: FC<ExpandRowProps> = ({ row }) => {

@@ -5,7 +5,7 @@ import React, { ChangeEvent, FC } from 'react';
 import { useDataGrid } from '../providers';
 
 interface SelectRowProps {
-  row: Row<object>;
+  row: Row;
 }
 
 export const SelectRow: FC<SelectRowProps> = ({ row }) => {

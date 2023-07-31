@@ -9,7 +9,7 @@ import ExpandRow from '../actions/ExpandRow';
 import SelectRow from '../actions/SelectRow';
 
 interface BodyRowProps {
-  row: Row<object>;
+  row: Row;
 }
 
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {

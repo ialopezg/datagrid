@@ -7,7 +7,7 @@ import { useDataGrid } from '../providers';
 import HeaderCell from './HeaderCell';
 
 interface HeaderRowProps {
-  headerGroup: HeaderGroup<object>;
+  headerGroup: HeaderGroup;
 }
 
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
