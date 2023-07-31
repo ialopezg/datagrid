@@ -1,6 +1,8 @@
-import React, { FC, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
-  useExpanded, useFilters, useGlobalFilter,
+  useExpanded,
+  useFilters,
+  useGlobalFilter,
   usePagination,
   useRowSelect,
   useSortBy,
@@ -10,16 +12,16 @@ import {
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
 
-interface DataGridProviderProps extends DataGridProps {
+interface DataGridProviderProps<D extends {}> extends DataGridProps<D> {
   children: ReactNode;
 }
 
-export const DataGridProvider: FC<DataGridProviderProps> = ({
+export const DataGridProvider = <D extends {}>({
   columns,
   children,
   data,
   ...rest
-}) => {
+}: DataGridProviderProps<D>) => {
   const table = useTable(
     { columns, data },
     useFilters,
@@ -31,9 +33,8 @@ export const DataGridProvider: FC<DataGridProviderProps> = ({
   );
 
   return (
-    <DataGridContext.Provider
-      value={{ columns, data, table, ...rest }}
-    >
+    // @ts-ignore
+    <DataGridContext.Provider value={{ columns, data, table, ...rest }}>
       {children}
     </DataGridContext.Provider>
   );
