@@ -7,7 +7,8 @@ import { useDataGrid } from '../providers';
 interface BodyProps {}
 
 export const Body: FC<BodyProps> = () => {
-  const { enablePagination, table, CustomBodyComponent } = useDataGrid();
+  const { bodyProps, enablePagination, table, CustomBodyComponent } =
+    useDataGrid();
   const rows = enablePagination ? table.page : table.rows;
 
   if (CustomBodyComponent) {
@@ -15,7 +16,7 @@ export const Body: FC<BodyProps> = () => {
   }
 
   return (
-    <TableBody {...table.getTableBodyProps()}>
+    <TableBody {...bodyProps} {...table.getTableBodyProps()}>
       {rows.map((row) => {
         table.prepareRow(row);
 

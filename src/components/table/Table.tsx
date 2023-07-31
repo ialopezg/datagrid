@@ -12,7 +12,7 @@ export const Table: FC<TableProp> = () => {
   const { showFooter, showHeader, table, tableProps } = useDataGrid();
 
   return (
-    <MuiTable stickyHeader {...table.getTableProps()} {...tableProps}>
+    <MuiTable {...tableProps} {...table.getTableProps()}>
       {showHeader && <Header />}
       <Body />
       {showFooter && <Footer />}

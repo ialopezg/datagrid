@@ -12,6 +12,8 @@ import {
   Column,
   HeaderGroup,
   Row,
+  TableBodyProps,
+  TableCellProps,
   TableInstance,
   UseRowStateLocalState,
 } from 'react-table';
@@ -21,10 +23,12 @@ import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 
 export interface DataGridProps<D extends {} = {}> {
+  bodyProps?: TableBodyProps;
   columns: Column<D | {}>[];
   containerProps?: TableContainerProps;
   data: D[];
   detailPanel?: (row: Row<D>) => ReactNode;
+  detailPanelProps?: TableCellProps;
   enableFiltering?: boolean;
   enablePagination?: boolean;
   enableSearch?: boolean;
@@ -45,6 +49,7 @@ export interface DataGridProps<D extends {} = {}> {
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
+  suppressOverrideWarning?: boolean;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;

@@ -9,7 +9,8 @@ interface DetailPanelProps {
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
-  const { detailPanel, table, CustomDetailPanelComponent } = useDataGrid();
+  const { detailPanel, detailPanelProps, table, CustomDetailPanelComponent } =
+    useDataGrid();
 
   if (CustomDetailPanelComponent) {
     return <>{CustomDetailPanelComponent(row, table)}</>;
@@ -25,6 +26,7 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
           paddingTop: row.isExpanded ? '1rem' : 0,
           transition: 'all 0.2s',
         }}
+        {...detailPanelProps}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>
       </TableCell>

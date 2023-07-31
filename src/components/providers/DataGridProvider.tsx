@@ -11,6 +11,7 @@ import {
 
 import { DataGridProps } from '../DataGrid';
 import DataGridContext from './DataGridContext';
+import { showOverrideWarnings } from '../helpers/overrideWarnings';
 
 interface DataGridProviderProps<D extends {}> extends DataGridProps<D> {
   children: ReactNode;
@@ -20,6 +21,7 @@ export const DataGridProvider = <D extends {}>({
   columns,
   children,
   data,
+  suppressOverrideWarning,
   ...rest
 }: DataGridProviderProps<D>) => {
   const table = useTable(
@@ -29,8 +31,12 @@ export const DataGridProvider = <D extends {}>({
     useSortBy,
     useExpanded,
     usePagination,
-    useRowSelect
+    useRowSelect,
   );
+
+  if (process.env.NODE_ENV !== 'production' && !suppressOverrideWarning) {
+    showOverrideWarnings(rest);
+  }
 
   return (
     // @ts-ignore
