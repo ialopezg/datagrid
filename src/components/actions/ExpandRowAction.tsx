@@ -1,4 +1,4 @@
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import MoreIcon from '@mui/icons-material/ExpandMore';
 import { IconButton, TableCell } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
@@ -26,10 +26,10 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
         aria-label={localization?.expand}
         title={localization?.expand}
       >
-        <ArrowForwardIosIcon
+        <MoreIcon
           fontSize="small"
           style={{
-            transform: row.isExpanded ? 'rotate(90deg)' : 'rotate(0)',
+            transform: row.isExpanded ? 'rotate(-180deg)' : 'rotate(0)',
             transition: 'transform 0.2s',
           }}
         />

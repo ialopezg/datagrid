@@ -120,10 +120,10 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     enableFiltering
     enablePagination
     enableSearch
-    enableSelection
     enableSelectAll
+    enableSelection
     paginationPosition="both"
     showToolbar
-    title={<h2>People Data</h2>}
+    title="People Data"
   />
 );

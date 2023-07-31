@@ -41,5 +41,10 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const RowTreeEnabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableRowTree />
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableExpandAll
+    enablePagination={false}
+  />
 );
