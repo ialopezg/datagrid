@@ -10,10 +10,20 @@ interface FooterRowProps {
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
-  const { columns, detailPanel, enableSelection } = useDataGrid();
+  const {
+    columns,
+    detailPanel,
+    enableSelection,
+    table,
+    CustomFooterRowComponent,
+  } = useDataGrid();
 
   if (!columns.some((c) => c.Footer)) {
     return null;
+  }
+
+  if (CustomFooterRowComponent) {
+    return <>{CustomFooterRowComponent(footerGroup, table)}</>;
   }
 
   return (

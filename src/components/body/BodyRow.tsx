@@ -13,7 +13,17 @@ interface BodyRowProps {
 }
 
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
-  const { detailPanel, enableSelection, onRowClick } = useDataGrid();
+  const {
+    detailPanel,
+    enableSelection,
+    onRowClick,
+    table,
+    CustomBodyRowComponent,
+  } = useDataGrid();
+
+  if (CustomBodyRowComponent) {
+    return <>{CustomBodyRowComponent(row, table)}</>;
+  }
 
   return (
     <>

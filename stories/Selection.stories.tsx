@@ -7,6 +7,7 @@ import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Row',
+  component: DataGrid,
 };
 
 export default meta;
@@ -38,8 +39,9 @@ export const OnRowSelect: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     enableSelection
+    enableSelectAll
     onRowSelect={(e, state, selectedRows) => {
-      alert(`Rows Selected: ${selectedRows.length}`);
+      alert(`Rows Selected: ${selectedRows.length + 1}`);
       console.log({ e, state, selectedRows });
     }}
   />

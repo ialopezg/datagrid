@@ -7,7 +7,14 @@ import {
   TextFieldProps,
   TypographyProps,
 } from '@mui/material';
-import { Column, Row, UseRowStateLocalState } from 'react-table';
+import {
+  Cell,
+  Column,
+  HeaderGroup,
+  Row,
+  TableInstance,
+  UseRowStateLocalState,
+} from 'react-table';
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
@@ -30,7 +37,7 @@ export interface DataGridProps<D extends {} = {}> {
   onRowSelect?: (
     e: ChangeEvent,
     state: UseRowStateLocalState<D, unknown>,
-    selectedRows: Row<D>[]
+    selectedRows: Row<D>[],
   ) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
@@ -41,6 +48,44 @@ export interface DataGridProps<D extends {} = {}> {
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
+
+  CustomBodyComponent?(table: TableInstance<D>): ReactNode;
+
+  CustomBodyCellComponent?(cell: Cell<D>, table: TableInstance<D>): ReactNode;
+
+  CustomBodyRowComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
+
+  CustomContainerComponent?(table: TableInstance<D>): ReactNode;
+
+  CustomDetailPanelComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
+
+  CustomFooterComponent?(table: TableInstance<D>): ReactNode;
+
+  CustomFooterCellComponent?(
+    column: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  CustomFooterRowComponent?(
+    row: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  CustomHeaderComponent?(table: TableInstance<D>): ReactNode;
+
+  CustomHeaderCellComponent?(
+    column: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  CustomHeaderRowComponent?(
+    headerGroup: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  CustomPaginationComponent?(table: TableInstance<D>): ReactNode;
+
+  CustomToolbarComponent?(table: TableInstance<D>): ReactNode;
 }
 
 export const DataGrid = <D extends {}>({

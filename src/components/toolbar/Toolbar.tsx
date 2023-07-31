@@ -14,7 +14,12 @@ const StyledToolbar = styled(MuiToolbar)({
 interface ToolbarProps {}
 
 export const Toolbar: FC<ToolbarProps> = () => {
-  const { enableSearch, title, titleProps } = useDataGrid();
+  const { enableSearch, table, title, titleProps, CustomToolbarComponent } =
+    useDataGrid();
+
+  if (CustomToolbarComponent) {
+    return <>{CustomToolbarComponent(table)}</>;
+  }
 
   return (
     <StyledToolbar>

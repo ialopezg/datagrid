@@ -18,7 +18,11 @@ interface HeaderCellProps {
 }
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
-  const { enableFiltering } = useDataGrid();
+  const { enableFiltering, table, CustomHeaderCellComponent } = useDataGrid();
+
+  if (CustomHeaderCellComponent) {
+    return <>{CustomHeaderCellComponent(column, table)}</>;
+  }
 
   const isParent = (column?.columns?.length ?? 0) > 0;
 

@@ -39,7 +39,11 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={onClearFilter} size="small">
+            <IconButton
+              disabled={filterValue?.length === 0}
+              onClick={onClearFilter}
+              size="small"
+            >
               <CloseIcon />
             </IconButton>
           </InputAdornment>

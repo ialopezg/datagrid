@@ -6,6 +6,7 @@ import DataGrid, { DataGridProps } from '../src';
 
 const meta: Meta = {
   title: 'Features/DetailPanel',
+  component: DataGrid,
 };
 
 export default meta;

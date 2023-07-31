@@ -8,7 +8,12 @@ import FooterRow from './FooterRow';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = () => {
-  const { enablePagination, paginationPosition, table } = useDataGrid();
+  const { enablePagination, paginationPosition, table, CustomFooterComponent } =
+    useDataGrid();
+
+  if (CustomFooterComponent) {
+    return <>{CustomFooterComponent(table)}</>;
+  }
 
   return (
     <TableFooter>
@@ -20,9 +25,9 @@ export const Footer: FC<FooterProps> = () => {
       ))}
 
       {enablePagination &&
-        (['bottom', 'both'].includes(String(paginationPosition)) && (
+        ['bottom', 'both'].includes(String(paginationPosition)) && (
           <Pagination />
-        ))}
+        )}
     </TableFooter>
   );
 };

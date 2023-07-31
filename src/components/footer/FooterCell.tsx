@@ -2,6 +2,7 @@ import MuiTableCell from '@mui/material/TableCell';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
 import { styled } from '@mui/material';
+import { useDataGrid } from '../providers';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
@@ -12,7 +13,12 @@ interface FooterCellProps {
 }
 
 export const FooterCell: FC<FooterCellProps> = ({ column }) => {
+  const { table, CustomFooterCellComponent } = useDataGrid();
   const isParent = (column?.columns?.length ?? 0) > 0;
+
+  if (CustomFooterCellComponent) {
+    return <>{CustomFooterCellComponent(column, table)}</>;
+  }
 
   return (
     <TableCell

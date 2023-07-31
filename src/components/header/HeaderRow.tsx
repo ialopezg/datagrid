@@ -11,11 +11,26 @@ interface HeaderRowProps {
 }
 
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
-  const { detailPanel, enableSelection } = useDataGrid();
+  const { detailPanel, enableSelection, table, CustomHeaderRowComponent } =
+    useDataGrid();
+
+  if (CustomHeaderRowComponent) {
+    return <>{CustomHeaderRowComponent(headerGroup, table)}</>;
+  }
+
+  const isParent = headerGroup.headers.some(
+    (h) => (h.columns?.length ?? 0) > 0,
+  );
 
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
-      {enableSelection && <SelectAllRows />}
+      {enableSelection ? (
+        !isParent ? (
+          <SelectAllRows />
+        ) : (
+          <TableCell style={{ width: '2rem' }} />
+        )
+      ) : null}
 
       {detailPanel && <TableCell style={{ width: '2rem' }} />}
 
@@ -24,6 +39,6 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       ))}
     </TableRow>
   );
-}
+};
 
 export default HeaderRow;

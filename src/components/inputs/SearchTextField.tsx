@@ -43,7 +43,11 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={onClearFilter} size="small">
+            <IconButton
+              disabled={searchValue.length === 0}
+              onClick={onClearFilter}
+              size="small"
+            >
               <CloseIcon />
             </IconButton>
           </InputAdornment>

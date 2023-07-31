@@ -2,13 +2,17 @@ import { TableBody } from '@mui/material';
 import React, { FC } from 'react';
 
 import BodyRow from './BodyRow';
-import { useDataGrid } from "../providers";
+import { useDataGrid } from '../providers';
 
 interface BodyProps {}
 
 export const Body: FC<BodyProps> = () => {
-  const { enablePagination, table } = useDataGrid();
+  const { enablePagination, table, CustomBodyComponent } = useDataGrid();
   const rows = enablePagination ? table.page : table.rows;
+
+  if (CustomBodyComponent) {
+    return <>{CustomBodyComponent(table)}</>;
+  }
 
   return (
     <TableBody {...table.getTableBodyProps()}>
@@ -19,6 +23,6 @@ export const Body: FC<BodyProps> = () => {
       })}
     </TableBody>
   );
-}
+};
 
 export default Body;

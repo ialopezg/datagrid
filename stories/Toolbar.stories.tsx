@@ -7,6 +7,7 @@ import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Toolbar',
+  component: DataGrid,
 };
 
 export default meta;

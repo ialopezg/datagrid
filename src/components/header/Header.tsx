@@ -8,8 +8,17 @@ import HeaderRow from './HeaderRow';
 interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
-  const { enablePagination, headerProps, paginationPosition, table } =
-    useDataGrid();
+  const {
+    enablePagination,
+    headerProps,
+    paginationPosition,
+    table,
+    CustomHeaderComponent,
+  } = useDataGrid();
+
+  if (CustomHeaderComponent) {
+    return <>{CustomHeaderComponent(table)}</>;
+  }
 
   return (
     <TableHead {...headerProps}>
