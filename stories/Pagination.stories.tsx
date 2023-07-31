@@ -14,16 +14,18 @@ export default meta;
 
 const columns: Column<any>[] = [
   { accessor: 'firstName', Header: 'First Name' },
-  { accessor: 'lastName', Header: 'Last Name' },
-  { accessor: 'age', Header: 'Age' },
-  { accessor: 'address', Header: 'Address' },
+  { accessor: 'lastName' as const, Header: 'Last Name' },
+  { accessor: 'address' as const, Header: 'Address' },
+  { accessor: 'state' as const, Header: 'State' },
+  { accessor: 'phone' as const, Header: 'Phone' },
 ];
 
 const data = [...Array(21)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
+  state: faker.address.state(),
+  phone: faker.phone.phoneNumber(),
 }));
 
 export const PaginationEnabled: Story<DataGridProps> = () => (

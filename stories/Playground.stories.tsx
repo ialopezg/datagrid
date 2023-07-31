@@ -78,7 +78,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
       zipCode: faker.address.zipCode(),
       phoneNumber: faker.phone.phoneNumber(),
     }))}
-    detailPanel={(row: any) => {
+    detailPanel={(row) => {
       console.log(row);
       return (
         <div style={{ display: 'grid' }}>

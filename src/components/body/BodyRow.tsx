@@ -1,4 +1,4 @@
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
@@ -15,6 +15,7 @@ interface BodyRowProps {
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   const {
     detailPanel,
+    enableRowTree,
     enableSelection,
     onRowClick,
     table,
@@ -30,7 +31,8 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
         {enableSelection && <SelectRow row={row} />}
 
-        {detailPanel && <ExpandRow row={row} />}
+        {(enableRowTree || detailPanel) &&
+          (row.canExpand ? <ExpandRow row={row} /> : <TableCell />)}
 
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />

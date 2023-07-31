@@ -9,7 +9,16 @@ interface ExpandRowProps {
 
 export const ExpandRow: FC<ExpandRowProps> = ({ row }) => {
   return (
-    <TableCell style={{ width: '2rem' }} size="small" variant="head">
+    <TableCell
+      style={{ width: '2rem' }}
+      size="small"
+      variant="head"
+      {...row.getToggleRowExpandedProps({
+        style: {
+          paddingLeft: `${row.depth * 1.5 + 0.25}rem`,
+        },
+      })}
+    >
       <IconButton onClick={() => row.toggleRowExpanded()} size="small">
         <ArrowForwardIosIcon
           fontSize="small"

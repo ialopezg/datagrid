@@ -21,6 +21,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const isParent = headerGroup.headers.some(
     (h) => (h.columns?.length ?? 0) > 0,
   );
+  const hasExpandableRows = table.page.some((r) => r.canExpand);
 
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
@@ -32,7 +33,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         )
       ) : null}
 
-      {detailPanel && <TableCell style={{ width: '2rem' }} />}
+      {(hasExpandableRows || detailPanel) && (
+        <TableCell style={{ width: '2rem' }} />
+      )}
 
       {headerGroup.headers.map((column) => (
         <HeaderCell column={column} key={column.getHeaderProps().key} />

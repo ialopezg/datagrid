@@ -31,6 +31,7 @@ export interface DataGridProps<D extends {} = {}> {
   detailPanelProps?: TableCellProps;
   enableFiltering?: boolean;
   enablePagination?: boolean;
+  enableRowTree?: boolean;
   enableSearch?: boolean;
   enableSelectAll?: boolean;
   enableSelection?: boolean;
