@@ -14,6 +14,7 @@ const TextField = styled(MuiTextField)({
 interface SearchTextFieldProps {}
 
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
+  const { localization } = useDataGrid();
   const { searchProps, table } = useDataGrid();
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -32,7 +33,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
         setSearchValue(e.target.value);
         onSearchChange(e.target.value);
       }}
-      placeholder="Search..."
+      placeholder={localization?.search}
       value={searchValue ?? ''}
       variant="standard"
       InputProps={{
@@ -44,9 +45,11 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
         endAdornment: (
           <InputAdornment position="end">
             <IconButton
+              aria-label={localization?.clear}
               disabled={searchValue.length === 0}
               onClick={onClearFilter}
               size="small"
+              title={localization?.clear}
             >
               <CloseIcon />
             </IconButton>

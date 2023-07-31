@@ -45,7 +45,7 @@ const ColumnMenuItem: FC<ColumnMenuItem> = ({ column }) => {
 interface HideColumnsActionProps {}
 
 export const HideColumnsAction: FC<HideColumnsActionProps> = () => {
-  const { table } = useDataGrid();
+  const { localization, table } = useDataGrid();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -55,7 +55,11 @@ export const HideColumnsAction: FC<HideColumnsActionProps> = () => {
 
   return (
     <>
-      <IconButton onClick={onToggleMenuAction}>
+      <IconButton
+        aria-label={localization?.hideColumns}
+        onClick={onToggleMenuAction}
+        title={localization?.hideColumns}
+      >
         <ViewColumnIcon />
       </IconButton>
 

@@ -2,12 +2,15 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IconButton, TableCell } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
+import { useDataGrid } from '../providers';
 
 interface ExpandRowActionProps {
   row: Row;
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
+  const { localization } = useDataGrid();
+
   return (
     <TableCell
       style={{ width: '2rem' }}
@@ -19,7 +22,10 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
         },
       })}
     >
-      <IconButton>
+      <IconButton
+        aria-label={localization?.expand}
+        title={localization?.expand}
+      >
         <ArrowForwardIosIcon
           fontSize="small"
           style={{

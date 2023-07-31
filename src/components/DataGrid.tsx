@@ -21,6 +21,7 @@ import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
+import { defaultLocalization, Localization } from './localization';
 
 export interface DataGridProps<D extends {} = {}> {
   bodyProps?: TableBodyProps;
@@ -40,6 +41,7 @@ export interface DataGridProps<D extends {} = {}> {
   enableSorting?: boolean;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
+  localization?: Localization;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
   onRowSelect?: (
     e: ChangeEvent,
@@ -101,6 +103,7 @@ export const DataGrid = <D extends {}>({
   enablePagination = true,
   enableRowTree = true,
   enableSorting = true,
+  localization = defaultLocalization,
   paginationPosition = 'bottom',
   showFooter = true,
   showHeader = true,
@@ -111,6 +114,7 @@ export const DataGrid = <D extends {}>({
     enablePagination={enablePagination}
     enableRowTree={enableRowTree}
     enableSorting={enableSorting}
+    localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
     showFooter={showFooter}
     showHeader={showHeader}
