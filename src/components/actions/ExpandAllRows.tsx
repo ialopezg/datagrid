@@ -1,8 +1,8 @@
+import DoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { IconButton, TableCell } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import AllOutIcon from '@mui/icons-material/AllOut';
 
 interface ExpandAllRowsProps {}
 
@@ -18,7 +18,7 @@ export const ExpandAllRows: FC<ExpandAllRowsProps> = () => {
       })}
     >
       <IconButton>
-        <AllOutIcon
+        <DoubleArrowDownIcon
           fontSize="small"
           style={{
             transform: table.isAllRowsExpanded ? 'rotate(90deg)' : 'rotate(0)',

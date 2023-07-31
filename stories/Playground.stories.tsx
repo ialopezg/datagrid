@@ -11,6 +11,32 @@ const meta: Meta = {
 
 export default meta;
 
+export const Default: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={[
+      {
+        accessor: 'firstName' as const,
+        Header: 'First Name',
+      },
+      {
+        accessor: 'lastName' as const,
+        Header: 'Last Name',
+      },
+      { accessor: 'city' as const, Header: 'City' },
+      { accessor: 'state' as const, Header: 'State' },
+    ]}
+    data={[...Array(3)].map((_) => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      address: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      zipCode: faker.address.zipCode(),
+      phoneNumber: faker.phone.phoneNumber(),
+    }))}
+  />
+);
+
 export const MinimumFeatures: Story<DataGridProps> = () => (
   <DataGrid
     columns={[

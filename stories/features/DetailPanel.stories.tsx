@@ -2,7 +2,7 @@ import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import DataGrid, { DataGridProps } from '../src';
+import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
   title: 'Features/DetailPanel',
@@ -40,5 +40,42 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
     }}
     enableSearch
     showToolbar
+  />
+);
+
+export const DetailPanelExpandAllEnabled: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={[
+      {
+        Header: 'First Name',
+        accessor: 'firstName',
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName',
+      },
+      {
+        Header: 'Address',
+        accessor: 'address',
+      },
+    ]}
+    data={[...Array(5)].map((_) => ({
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      address: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      zipCode: faker.address.zipCode(),
+      phone: faker.phone.phoneNumber(),
+    }))}
+    enableExpandAll
+    detailPanel={(row) => (
+      <div style={{ display: 'grid' }}>
+        <span>City: {row.original.city}</span>
+        <span>State: {row.original.state}</span>
+        <span>Zip: {row.original.zipCode}</span>
+        <span>Phone: {row.original.phone}</span>
+      </div>
+    )}
   />
 );

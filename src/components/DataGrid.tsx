@@ -96,11 +96,9 @@ export interface DataGridProps<D extends {} = {}> {
 }
 
 export const DataGrid = <D extends {}>({
-  enableExpandAll = true,
   enablePagination = true,
   enableRowTree = true,
   enableSearch = true,
-  enableSelectAll = true,
   enableSorting = true,
   paginationPosition = 'bottom',
   showFooter = true,
@@ -108,11 +106,9 @@ export const DataGrid = <D extends {}>({
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
-    enableExpandAll={enableExpandAll}
     enablePagination={enablePagination}
     enableRowTree={enableRowTree}
     enableSearch={enableSearch}
-    enableSelectAll={enableSelectAll}
     enableSorting={enableSorting}
     paginationPosition={paginationPosition}
     showFooter={showFooter}

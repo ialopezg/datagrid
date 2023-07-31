@@ -2,11 +2,11 @@ import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import DataGrid, { DataGridProps } from '../src';
+import DataGrid, { DataGridProps } from '../../src';
 import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Features/CustomComponents',
+  title: 'Features/Toolbar',
   component: DataGrid,
 };
 
@@ -24,18 +24,9 @@ const data = [...Array(100)].map((_) => ({
   lastName: faker.name.lastName(),
   address: faker.address.streetAddress(),
   state: faker.address.state(),
-  phone: faker.phone.phoneNumber(),
+  phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const CustomToolbar: Story<DataGridProps> = () => (
-  <DataGrid
-    columns={columns}
-    data={data}
-    showToolbar
-    CustomToolbarComponent={(_) => (
-      <div>
-        <h1>Hi, Custom Toolbar</h1>
-      </div>
-    )}
-  />
+export const ToolbarEnabled: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} showToolbar title="People Sample" />
 );
