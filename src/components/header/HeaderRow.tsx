@@ -1,11 +1,12 @@
 import { TableCell, TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
 import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import { useDataGrid } from '../providers';
 import HeaderCell from './HeaderCell';
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
+import { ColumnsVisibilityAction } from '../actions/ColumnsVisibilityAction';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup;
@@ -14,6 +15,7 @@ interface HeaderRowProps {
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
+    enableColumnHiding,
     enableExpandAll,
     enableSelection,
     hasExpandableRows,
@@ -25,8 +27,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     return <>{CustomHeaderRowComponent(headerGroup, table)}</>;
   }
 
-  const isParent = headerGroup.headers.some(
-    (h) => (h.columns?.length ?? 0) > 0,
+  const isParent = useMemo(
+    () => headerGroup.headers.some((h) => (h.columns?.length ?? 0) > 0),
+    [headerGroup.headers],
   );
 
   return (
@@ -49,6 +52,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       {headerGroup.headers.map((column) => (
         <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
+      {enableColumnHiding && !isParent && <ColumnsVisibilityAction />}
     </TableRow>
   );
 };

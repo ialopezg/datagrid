@@ -13,6 +13,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
   const {
     columns,
     detailPanel,
+    enableColumnHiding,
     enableSelection,
     table,
     CustomFooterRowComponent,
@@ -35,6 +36,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
       {footerGroup.headers.map((column) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
+      {enableColumnHiding && <TableCell />}
     </TableRow>
   );
 };

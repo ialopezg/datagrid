@@ -15,7 +15,6 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
     <TableCell
       style={{ width: '2rem' }}
       size="small"
-      variant="head"
       {...row.getToggleRowExpandedProps({
         style: {
           paddingLeft: `${row.depth * 1.75 + 0.25}rem`,

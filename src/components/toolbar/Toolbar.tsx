@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 import { SearchTextField } from '../inputs';
-import { HideColumnsAction } from '../actions/HideColumnsAction';
+import { ColumnsVisibilityAction } from '../actions/ColumnsVisibilityAction';
 
 const StyledToolbar = styled(MuiToolbar)({
   padding: '0.5rem',
@@ -38,7 +38,7 @@ export const Toolbar: FC<ToolbarProps> = () => {
     <StyledToolbar variant="dense" {...toolbarProps}>
       {title ? <Typography {...titleProps}>{title}</Typography> : <span />}
       {enableSearch && <SearchTextField />}
-      {enableColumnHiding && <HideColumnsAction />}
+      {enableColumnHiding && <ColumnsVisibilityAction />}
     </StyledToolbar>
   );
 };

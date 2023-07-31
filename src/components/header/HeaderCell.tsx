@@ -13,6 +13,11 @@ const TableCellContent = styled('div')({
   display: 'grid',
 });
 
+const TableCellText = styled('div')(({ theme }) => ({
+  borderRight: `solid 2px ${theme.palette.divider}`,
+  width: '100%',
+}));
+
 interface HeaderCellProps {
   column: HeaderGroup;
 }
@@ -34,14 +39,16 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     >
       <TableCellContent>
         {!isParent && column.canSort ? (
-          <TableSortLabel
-            active={column.isSorted}
-            direction={column.isSortedDesc ? 'desc' : 'asc'}
-          >
-            {column.render('Header')}
-          </TableSortLabel>
+          <TableCellText>
+            <TableSortLabel
+              active={column.isSorted}
+              direction={column.isSortedDesc ? 'desc' : 'asc'}
+            >
+              {column.render('Header')}
+            </TableSortLabel>
+          </TableCellText>
         ) : (
-          column.render('Header')
+          <TableCellText>{column.render('Header')}</TableCellText>
         )}
         {enableFiltering && column.canFilter && (
           <FilterTextField column={column} />

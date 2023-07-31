@@ -12,7 +12,6 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
   return (
     <TableCell
       size="small"
-      variant="head"
       {...table.getToggleAllRowsExpandedProps({
         style: { width: '2rem', paddingLeft: '0.5rem' },
       })}

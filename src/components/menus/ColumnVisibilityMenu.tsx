@@ -1,14 +1,11 @@
 import {
   Checkbox,
   FormControlLabel,
-  IconButton,
   Menu,
   MenuItem,
   Typography,
 } from '@mui/material';
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
-import React, { FC, MouseEvent, useState } from 'react';
-
+import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import { ColumnInstance } from 'react-table';
 
@@ -42,36 +39,28 @@ const ColumnMenuItem: FC<ColumnMenuItem> = ({ column }) => {
   );
 };
 
-interface HideColumnsActionProps {}
+interface ColumnVisibilityMenuProps {
+  anchorEl: HTMLElement | null;
+  setAnchorEl: (value: HTMLElement | null) => void;
+}
 
-export const HideColumnsAction: FC<HideColumnsActionProps> = () => {
-  const { localization, table } = useDataGrid();
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const onToggleMenuAction = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+export const ColumnVisibilityMenu: FC<ColumnVisibilityMenuProps> = ({
+  anchorEl,
+  setAnchorEl,
+}) => {
+  const { table } = useDataGrid();
 
   return (
-    <>
-      <IconButton
-        aria-label={localization?.hideColumns}
-        onClick={onToggleMenuAction}
-        title={localization?.hideColumns}
-      >
-        <ViewColumnIcon />
-      </IconButton>
-
-      <Menu
-        anchorEl={anchorEl}
-        onClose={() => setAnchorEl(null)}
-        open={!!anchorEl}
-      >
-        {table.columns.map((column, index) => (
-          <ColumnMenuItem column={column} key={`${index}-${column.id}`} />
-        ))}
-      </Menu>
-    </>
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+    >
+      {table.columns.map((column, index) => (
+        <ColumnMenuItem column={column} key={`${index}-${column.id}`} />
+      ))}
+    </Menu>
   );
 };
+
+export default ColumnVisibilityMenu;
