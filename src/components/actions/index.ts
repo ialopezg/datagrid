@@ -1,3 +1,3 @@
-export * from './ExpandRow';
-export * from './SelectAllRows';
-export * from './SelectRow';
+export * from './ExpandRowAction';
+export * from './SelectAllRowsAction';
+export * from './SelectRowAction';

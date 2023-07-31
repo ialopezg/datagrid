@@ -4,7 +4,7 @@ import {
   TableHeadProps,
   TablePaginationProps,
   TableProps,
-  TextFieldProps,
+  TextFieldProps, ToolbarProps,
   TypographyProps,
 } from '@mui/material';
 import {
@@ -29,6 +29,7 @@ export interface DataGridProps<D extends {} = {}> {
   data: D[];
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
+  enableColumnHiding?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
   enablePagination?: boolean;
@@ -55,6 +56,7 @@ export interface DataGridProps<D extends {} = {}> {
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
+  toolbarProps?: ToolbarProps;
 
   CustomBodyComponent?(table: TableInstance<D>): ReactNode;
 
@@ -98,21 +100,21 @@ export interface DataGridProps<D extends {} = {}> {
 export const DataGrid = <D extends {}>({
   enablePagination = true,
   enableRowTree = true,
-  enableSearch = true,
   enableSorting = true,
   paginationPosition = 'bottom',
   showFooter = true,
   showHeader = true,
+  showToolbar = true,
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
     enablePagination={enablePagination}
     enableRowTree={enableRowTree}
-    enableSearch={enableSearch}
     enableSorting={enableSorting}
     paginationPosition={paginationPosition}
     showFooter={showFooter}
     showHeader={showHeader}
+    showToolbar={showToolbar}
     {...rest}
   >
     <Container />

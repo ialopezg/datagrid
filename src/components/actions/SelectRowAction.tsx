@@ -4,11 +4,11 @@ import React, { ChangeEvent, FC } from 'react';
 
 import { useDataGrid } from '../providers';
 
-interface SelectRowProps {
+interface SelectRowActionProps {
   row: Row;
 }
 
-export const SelectRow: FC<SelectRowProps> = ({ row }) => {
+export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
   const { onRowSelect, table } = useDataGrid();
 
   const onRowSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,4 +23,4 @@ export const SelectRow: FC<SelectRowProps> = ({ row }) => {
   );
 };
 
-export default SelectRow;
+export default SelectRowAction;

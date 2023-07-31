@@ -4,9 +4,9 @@ import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 
-interface ExpandAllRowsProps {}
+interface ExpandAllRowsActionProps {}
 
-export const ExpandAllRows: FC<ExpandAllRowsProps> = () => {
+export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
   const { table } = useDataGrid();
 
   return (
@@ -30,4 +30,4 @@ export const ExpandAllRows: FC<ExpandAllRowsProps> = () => {
   );
 };
 
-export default ExpandAllRows;
+export default ExpandAllRowsAction;

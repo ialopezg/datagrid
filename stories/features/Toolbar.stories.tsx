@@ -28,5 +28,19 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const ToolbarEnabled: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} showToolbar />
+);
+
+export const ToolbarWithTitle: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} showToolbar title="People Sample" />
+);
+
+export const ToolbarWithSearch: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableSearch
+    showToolbar
+    title="People Sample"
+  />
 );

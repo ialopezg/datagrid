@@ -3,11 +3,11 @@ import { IconButton, TableCell } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
-interface ExpandRowProps {
+interface ExpandRowActionProps {
   row: Row;
 }
 
-export const ExpandRow: FC<ExpandRowProps> = ({ row }) => {
+export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
   return (
     <TableCell
       style={{ width: '2rem' }}
@@ -32,4 +32,4 @@ export const ExpandRow: FC<ExpandRowProps> = ({ row }) => {
   );
 };
 
-export default ExpandRow;
+export default ExpandRowAction;

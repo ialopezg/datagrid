@@ -2,10 +2,10 @@ import { TableCell, TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
 
-import SelectAllRows from '../actions/SelectAllRows';
+import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import { useDataGrid } from '../providers';
 import HeaderCell from './HeaderCell';
-import ExpandAllRows from '../actions/ExpandAllRows';
+import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup;
@@ -33,7 +33,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {enableSelection ? (
         !isParent ? (
-          <SelectAllRows />
+          <SelectAllRowsAction />
         ) : (
           <TableCell style={{ width: '2rem' }} />
         )
@@ -41,7 +41,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
       {(hasExpandableRows || detailPanel) &&
         (enableExpandAll && !isParent ? (
-          <ExpandAllRows />
+          <ExpandAllRowsAction />
         ) : (
           <TableCell style={{ width: '2rem' }} />
         ))}

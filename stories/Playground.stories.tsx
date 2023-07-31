@@ -115,6 +115,8 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         </div>
       );
     }}
+    enableColumnHiding
+    enableExpandAll
     enableFiltering
     enablePagination
     enableSearch
@@ -122,6 +124,6 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     enableSelectAll
     paginationPosition="both"
     showToolbar
-    title="People Data"
+    title={<h2>People Data</h2>}
   />
 );

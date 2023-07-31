@@ -5,8 +5,8 @@ import React, { FC } from 'react';
 import BodyCell from './BodyCell';
 import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
-import ExpandRow from '../actions/ExpandRow';
-import SelectRow from '../actions/SelectRow';
+import ExpandRowAction from '../actions/ExpandRowAction';
+import SelectRowAction from '../actions/SelectRowAction';
 
 interface BodyRowProps {
   row: Row;
@@ -30,11 +30,11 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   return (
     <>
       <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
-        {enableSelection && <SelectRow row={row} />}
+        {enableSelection && <SelectRowAction row={row} />}
 
         {((enableRowTree && hasExpandableRows) || detailPanel) &&
           (row.canExpand || detailPanel ? (
-            <ExpandRow row={row} />
+            <ExpandRowAction row={row} />
           ) : (
             <TableCell />
           ))}

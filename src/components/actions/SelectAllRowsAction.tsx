@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Checkbox, TableCell } from '@mui/material';
 import { useDataGrid } from '../providers';
 
-interface SelectAllRowsProps {}
+interface SelectAllRowsActionProps {}
 
-export const SelectAllRows: FC<SelectAllRowsProps> = () => {
+export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
   const { table, enableSelectAll } = useDataGrid();
 
   return (
@@ -16,4 +16,4 @@ export const SelectAllRows: FC<SelectAllRowsProps> = () => {
   );
 };
 
-export default SelectAllRows;
+export default SelectAllRowsAction;
