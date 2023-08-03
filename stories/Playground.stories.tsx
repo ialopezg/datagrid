@@ -115,7 +115,9 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         </div>
       );
     }}
+    enableColumnActions
     enableColumnHiding
+    enableColumnResizing
     enableExpandAll
     enableFiltering
     enablePagination

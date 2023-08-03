@@ -17,7 +17,7 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
   };
 
   return (
-    <TableCell style={{ width: '2rem' }}>
+    <TableCell style={{ width: '2rem', padding: '0.5rem' }}>
       <Checkbox {...row.getToggleRowSelectedProps()} onChange={onRowSelectChange} />
     </TableCell>
   );

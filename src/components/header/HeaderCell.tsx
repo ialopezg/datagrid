@@ -27,7 +27,7 @@ interface HeaderCellProps {
 }
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
-  const { enableFiltering, table, CustomHeaderCellComponent } = useDataGrid();
+  const { enableColumnActions, enableColumnResizing, enableFiltering, table, CustomHeaderCellComponent } = useDataGrid();
 
   if (CustomHeaderCellComponent) {
     return <>{CustomHeaderCellComponent(column, table)}</>;
@@ -44,7 +44,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
       variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      <TableCellContent {...column.getResizerProps()}>
+      <TableCellContent>
         <TableCellText>
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
@@ -56,13 +56,16 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
             )}
           </span>
           <span style={{ display: 'flex' }}>
-            {!isParent && <ColumnActionsAction column={column} />}
-            {!isLastColumn && (
+            {enableColumnActions && !isParent && (
+              <ColumnActionsAction column={column} />
+            )}
+            {enableColumnResizing && !isLastColumn && (
               <Divider
                 flexItem
                 onDoubleClick={() => table.resetResizing()}
                 orientation="vertical"
                 style={{ borderRightWidth: '2px', borderRadius: '2px' }}
+                {...column.getResizerProps()}
               />
             )}
           </span>

@@ -37,7 +37,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (
-            <TableCell />
+            <TableCell style={{ width: '1.5rem' }} />
           ))}
 
         {row.cells.map((cell) => (

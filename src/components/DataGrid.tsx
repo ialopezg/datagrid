@@ -30,7 +30,10 @@ export interface DataGridProps<D extends {} = {}> {
   data: D[];
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
+  enableColumnActions?: boolean;
   enableColumnHiding?: boolean;
+  enableColumnReordering?: boolean;
+  enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
   enableFiltering?: boolean;
   enablePagination?: boolean;
@@ -41,6 +44,7 @@ export interface DataGridProps<D extends {} = {}> {
   enableSorting?: boolean;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
+  isLoading?: boolean;
   localization?: Localization;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
   onRowSelect?: (

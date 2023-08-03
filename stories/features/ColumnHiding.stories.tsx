@@ -8,7 +8,6 @@ const meta: Meta = {
   title: 'Features/Column Hiding',
   component: DataGrid,
 };
-
 export default meta;
 
 export const ColumnHidingEnabled: Story<DataGridProps> = () => (

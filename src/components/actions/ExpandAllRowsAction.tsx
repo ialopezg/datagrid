@@ -12,9 +12,12 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
   return (
     <TableCell
       size="small"
-      {...table.getToggleAllRowsExpandedProps({
-        style: { width: '2rem', paddingLeft: '0.5rem' },
-      })}
+      {...table.getToggleAllRowsExpandedProps()}
+      style={{
+        padding: '0.5rem',
+        paddingRight: '0',
+        width: '3rem',
+      }}
     >
       <IconButton
         aria-label={localization?.expandAll}
