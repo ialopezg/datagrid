@@ -1,9 +1,10 @@
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
 
 import { useDataGrid } from '../providers';
 import FooterCell from './FooterCell';
+import SpacerCell from '../table/SpacerCell';
 
 interface FooterRowProps {
   footerGroup: HeaderGroup;
@@ -31,15 +32,15 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
       {(hasExpandableRows || detailPanel) && (
-        <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
+        <SpacerCell width={`${table.expandedDepth + 0.5}rem`} />
       )}
 
-      {enableSelection && <TableCell style={{ width: '1rem' }} />}
+      {enableSelection && <SpacerCell width="1rem" />}
 
       {footerGroup.headers.map((column) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
-      {enableColumnHiding && <TableCell />}
+      {enableColumnHiding && <SpacerCell />}
     </TableRow>
   );
 };

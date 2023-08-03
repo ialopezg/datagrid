@@ -32,3 +32,5 @@ export const ColumnsVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
     </>
   );
 };
+
+export default ColumnsVisibilityAction;

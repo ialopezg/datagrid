@@ -6,7 +6,8 @@ import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import { useDataGrid } from '../providers';
 import HeaderCell from './HeaderCell';
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
-import { ColumnsVisibilityAction } from '../actions/ColumnsVisibilityAction';
+import ColumnsVisibilityAction from '../actions/ColumnsVisibilityAction';
+import SpacerCell from '../table/SpacerCell';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup;
@@ -38,7 +39,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         enableExpandAll && !isParent ? (
           <ExpandAllRowsAction />
         ) : (
-          <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
+          <SpacerCell width={`${table.expandedDepth + 0.5}rem`} />
         )
       ) : null}
 
@@ -46,7 +47,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         !isParent ? (
           <SelectAllRowsAction />
         ) : (
-          <TableCell style={{ width: '1rem' }} />
+          <SpacerCell width="1rem" />
         )
       ) : null}
 
@@ -59,7 +60,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       ))}
 
       {enableColumnHiding && !isParent && (
-        <TableCell style={{ width: '2rem', padding: '0.75rem 0' }}>
+        <TableCell size="small" style={{ width: '2rem', padding: '0.75rem 0' }}>
           <ColumnsVisibilityAction />
         </TableCell>
       )}

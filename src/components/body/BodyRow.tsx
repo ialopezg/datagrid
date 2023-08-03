@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
@@ -7,6 +7,7 @@ import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import SelectRowAction from '../actions/SelectRowAction';
+import SpacerCell from '../table/SpacerCell';
 
 interface BodyRowProps {
   row: Row;
@@ -35,7 +36,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (
-            <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
+            <SpacerCell width={`${table.expandedDepth + 0.5}rem`} />
           ))}
 
         {enableSelection && <SelectRowAction row={row} />}
@@ -43,7 +44,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />
         ))}
-        {enableColumnHiding && <TableCell />}
+        {enableColumnHiding && <SpacerCell />}
       </TableRow>
 
       {detailPanel && <DetailPanel row={row} />}
