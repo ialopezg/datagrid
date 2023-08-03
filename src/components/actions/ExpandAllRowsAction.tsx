@@ -16,7 +16,7 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
       style={{
         padding: '0.5rem',
         paddingRight: '0',
-        width: '3rem',
+        width: `${table.expandedDepth + 2}rem`,
       }}
     >
       <IconButton
