@@ -7,6 +7,7 @@ import { HeaderGroup } from 'react-table';
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
   transition: 'opacity 0.2s',
+  marginRight: '2px',
   '&:hover': {
     opacity: 1,
   },

@@ -1,4 +1,4 @@
-import { styled, TableSortLabel } from '@mui/material';
+import { Divider, styled, TableSortLabel } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
@@ -15,14 +15,11 @@ const TableCellContent = styled('div')({
   display: 'grid',
 });
 
-const TableCellText = styled('div', {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'isLastColumn',
-})<{ isLastColumn?: boolean }>(({ theme, isLastColumn }) => ({
-  borderRight: !isLastColumn ? `solid 2px ${theme.palette.divider}` : undefined,
+const TableCellText = styled('div')({
   width: '100%',
   display: 'flex',
   justifyContent: 'space-between',
-}));
+});
 
 interface HeaderCellProps {
   column: HeaderGroup;
@@ -44,11 +41,11 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
   return (
     <TableCell
       align={isParent ? 'center' : 'left'}
-      variant='head'
+      variant="head"
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
-      <TableCellContent>
-        <TableCellText isLastColumn={isLastColumn}>
+      <TableCellContent {...column.getResizerProps()}>
+        <TableCellText>
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParent && column.canSort && (
@@ -58,7 +55,17 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
               />
             )}
           </span>
-          {!isParent && <ColumnActionsAction column={column} />}
+          <span style={{ display: 'flex' }}>
+            {!isParent && <ColumnActionsAction column={column} />}
+            {!isLastColumn && (
+              <Divider
+                flexItem
+                onDoubleClick={() => table.resetResizing()}
+                orientation="vertical"
+                style={{ borderRightWidth: '2px', borderRadius: '2px' }}
+              />
+            )}
+          </span>
         </TableCellText>
         {enableFiltering && column.canFilter && (
           <FilterTextField column={column} />

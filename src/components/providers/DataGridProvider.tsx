@@ -2,17 +2,18 @@ import React, { ReactNode } from 'react';
 import {
   useExpanded,
   useFilters,
+  useFlexLayout,
   useGlobalFilter,
   usePagination,
+  useResizeColumns,
   useRowSelect,
   useSortBy,
   useTable,
 } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
+import { showOverrideWarnings, RowHelper } from '../helpers';
 import DataGridContext from './DataGridContext';
-import { showOverrideWarnings } from '../helpers/overrideWarnings';
-import { RowHelper } from '../helpers/row.helper';
 
 interface DataGridProviderProps<D extends {}> extends DataGridProps<D> {
   children: ReactNode;
@@ -27,6 +28,8 @@ export const DataGridProvider = <D extends {}>({
 }: DataGridProviderProps<D>) => {
   const table = useTable(
     { columns, data },
+    useFlexLayout,
+    useResizeColumns,
     useFilters,
     useGlobalFilter,
     useSortBy,
