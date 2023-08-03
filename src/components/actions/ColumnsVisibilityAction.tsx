@@ -21,6 +21,8 @@ export const ColumnsVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
       <IconButton
         aria-label={localization?.hideColumns}
         onClick={onToggleMenuAction}
+        size="small"
+        style={{ margin: '0 0 0 -0.5rem' }}
         title={localization?.hideColumns}
       >
         <ViewColumnIcon />

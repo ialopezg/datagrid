@@ -30,7 +30,7 @@ export const Toolbar: FC<ToolbarProps> = () => {
     return <>{CustomToolbarComponent(table)}</>;
   }
 
-  if (!enableSearch && !title && !tableProps && !enableColumnHiding) {
+  if (!enableSearch && !title && !tableProps) {
     return null;
   }
 

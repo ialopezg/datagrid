@@ -49,8 +49,12 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
           <TableCell style={{ width: '2rem' }} />
         ))}
 
-      {headerGroup.headers.map((column) => (
-        <HeaderCell column={column} key={column.getHeaderProps().key} />
+      {headerGroup.headers.map((column, index) => (
+        <HeaderCell
+          column={column}
+          index={index}
+          key={column.getHeaderProps().key}
+        />
       ))}
       {enableColumnHiding && !isParent && <ColumnsVisibilityAction />}
     </TableRow>
