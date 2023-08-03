@@ -8,7 +8,6 @@ const meta: Meta = {
   title: 'Features/Filtering',
   component: DataGrid,
 };
-
 export default meta;
 
 const columns = [

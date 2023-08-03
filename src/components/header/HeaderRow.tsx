@@ -56,7 +56,11 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
           key={column.getHeaderProps().key}
         />
       ))}
-      {enableColumnHiding && !isParent && <ColumnsVisibilityAction />}
+      {enableColumnHiding && !isParent && (
+        <TableCell style={{ width: '2rem', padding: '0.75rem 0' }}>
+          <ColumnsVisibilityAction />
+        </TableCell>
+      )}
     </TableRow>
   );
 };

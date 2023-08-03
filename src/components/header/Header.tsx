@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TableHead } from '@mui/material';
+import { LinearProgress, TableHead } from '@mui/material';
 
 import { useDataGrid } from '../providers';
 import Pagination from '../toolbar/Pagination';
@@ -11,6 +11,7 @@ export const Header: FC<HeaderProp> = () => {
   const {
     enablePagination,
     headerProps,
+    isReloading,
     paginationPosition,
     table,
     CustomHeaderComponent,
@@ -22,6 +23,7 @@ export const Header: FC<HeaderProp> = () => {
 
   return (
     <TableHead {...headerProps}>
+      {isReloading && <LinearProgress />}
       {enablePagination &&
         ['both', 'top'].includes(String(paginationPosition)) && <Pagination />}
 

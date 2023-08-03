@@ -45,6 +45,7 @@ export interface DataGridProps<D extends {} = {}> {
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   isLoading?: boolean;
+  isReloading?: boolean;
   localization?: Localization;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
   onRowSelect?: (
