@@ -49,7 +49,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
     >
       <TableCellContent>
         <TableCellText isLastColumn={isLastColumn}>
-          <span>
+          <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParent && column.canSort && (
               <TableSortLabel

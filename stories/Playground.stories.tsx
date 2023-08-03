@@ -25,7 +25,7 @@ export const Default: Story<DataGridProps> = () => (
       { accessor: 'city' as const, Header: 'City' },
       { accessor: 'state' as const, Header: 'State' },
     ]}
-    data={[...Array(3)].map((_) => ({
+    data={[...Array(6)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       address: faker.address.streetAddress(),

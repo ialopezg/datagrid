@@ -29,6 +29,7 @@ export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
 
   const onColumnAction = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
+    e.preventDefault();
     setAnchor(e.currentTarget);
   };
 
