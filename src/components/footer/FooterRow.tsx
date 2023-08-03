@@ -15,6 +15,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     detailPanel,
     enableColumnHiding,
     enableSelection,
+    hasExpandableRows,
     table,
     CustomFooterRowComponent,
   } = useDataGrid();
@@ -29,9 +30,11 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
 
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
-      {enableSelection && <TableCell style={{ width: '2rem' }} />}
+      {(hasExpandableRows || detailPanel) && (
+        <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
+      )}
 
-      {detailPanel && <TableCell style={{ width: '2rem' }} />}
+      {enableSelection && <TableCell style={{ width: '1rem' }} />}
 
       {footerGroup.headers.map((column) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />

@@ -31,14 +31,14 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   return (
     <>
       <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
-        {enableSelection && <SelectRowAction row={row} />}
-
         {((enableRowTree && hasExpandableRows) || detailPanel) &&
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (
             <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
           ))}
+
+        {enableSelection && <SelectRowAction row={row} />}
 
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />

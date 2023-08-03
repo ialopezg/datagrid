@@ -6,7 +6,7 @@ import DataGrid, { DataGridProps } from '../../src';
 import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Features/Row',
+  title: 'Features/Selection',
   component: DataGrid,
 };
 
@@ -26,15 +26,15 @@ const data = [...Array(21)].map((_) => ({
   address: faker.address.streetAddress(),
 }));
 
-export const SelectionRow: Story<DataGridProps> = () => (
+export const SelectionEnable: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection />
 );
 
-export const SelectAllRows: Story<DataGridProps> = () => (
+export const SelectAllRowsEnabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection enableSelectAll />
 );
 
-export const OnRowSelect: Story<DataGridProps> = () => (
+export const OnRowSelectEvent: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}

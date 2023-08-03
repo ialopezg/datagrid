@@ -34,20 +34,21 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
+      {hasExpandableRows || detailPanel ? (
+        enableExpandAll && !isParent ? (
+          <ExpandAllRowsAction />
+        ) : (
+          <TableCell style={{ width: `${table.expandedDepth + 0.5}rem` }} />
+        )
+      ) : null}
+
       {enableSelection ? (
         !isParent ? (
           <SelectAllRowsAction />
         ) : (
-          <TableCell style={{ width: '2rem' }} />
+          <TableCell style={{ width: '1rem' }} />
         )
       ) : null}
-
-      {(hasExpandableRows || detailPanel) &&
-        (enableExpandAll && !isParent ? (
-          <ExpandAllRowsAction />
-        ) : (
-          <TableCell style={{ width: '2rem' }} />
-        ))}
 
       {headerGroup.headers.map((column, index) => (
         <HeaderCell
@@ -56,6 +57,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
           key={column.getHeaderProps().key}
         />
       ))}
+
       {enableColumnHiding && !isParent && (
         <TableCell style={{ width: '2rem', padding: '0.75rem 0' }}>
           <ColumnsVisibilityAction />

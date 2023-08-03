@@ -90,8 +90,12 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         Footer: 'Info',
         Header: 'Info',
         columns: [
-          { accessor: 'city' as const, Footer: 'City', Header: 'City' },
-          { accessor: 'state' as const, Footer: 'State', Header: 'State' },
+          { accessor: 'age' as const, Footer: 'Age', Header: 'Age' },
+          {
+            accessor: 'address' as const,
+            Footer: 'Address',
+            Header: 'Address',
+          },
         ],
       },
     ]}
@@ -99,24 +103,18 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       address: faker.address.streetAddress(),
-      city: faker.address.city(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
+      age: faker.datatype.number(80),
       phoneNumber: faker.phone.phoneNumber(),
+      subRows: [...Array(faker.datatype.number(2))].map((_) => ({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        age: faker.datatype.number(80),
+        address: faker.address.streetAddress(),
+      })),
     }))}
-    detailPanel={(row) => {
-      console.log(row);
-      return (
-        <div style={{ display: 'grid' }}>
-          <span>{row.original?.address}</span>
-          <span>{row.original?.city}</span>
-          <span>{row.original?.state}</span>
-          <span>{row.original?.zipCode}</span>
-        </div>
-      );
-    }}
     enableColumnActions
     enableColumnHiding
+    enableColumnReordering
     enableColumnResizing
     enableExpandAll
     enableFiltering
