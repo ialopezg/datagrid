@@ -17,7 +17,15 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
 
   return (
     <TableCell variant="body" {...cell.getCellProps()}>
-      {cell.render('Cell')}
+      {cell.isPlaceholder ? null : cell.isAggregated ? (
+        cell.render('Aggregated')
+      ) : cell.isGrouped ? (
+        <span>
+          {cell.render('Cell')} ({cell.row.subRows.length})
+        </span>
+      ) : (
+        cell.render('Cell')
+      )}
     </TableCell>
   );
 };

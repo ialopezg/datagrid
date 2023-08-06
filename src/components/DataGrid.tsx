@@ -31,6 +31,7 @@ export interface DataGridProps<D extends {} = {}> {
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
   enableColumnActions?: boolean;
+  enableColumnGrouping?: boolean;
   enableColumnHiding?: boolean;
   enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;

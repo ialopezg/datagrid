@@ -1,4 +1,5 @@
 import ClearAllIcon from '@mui/icons-material/ClearAll';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import SortIcon from '@mui/icons-material/Sort';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import MuiMenuItem from '@mui/material/MenuItem';
@@ -24,7 +25,12 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
   column,
   setAnchorEl,
 }) => {
-  const { enableColumnHiding, enableSorting, localization } = useDataGrid();
+  const {
+    enableColumnGrouping,
+    enableColumnHiding,
+    enableSorting,
+    localization,
+  } = useDataGrid();
 
   const onClearSorting = () => {
     column.clearSortBy();
@@ -46,37 +52,52 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     setAnchorEl(null);
   };
 
+  const onGroupColumnAction = () => {
+    column.toggleGroupBy();
+    setAnchorEl(null);
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
     >
-      {enableSorting && (
-        <>
-          <MenuItem disabled={!column.isSorted} onClick={onClearSorting}>
+      {enableSorting && [
+        <MenuItem disabled={!column.isSorted} key="menu-item-sort-asc" onClick={onClearSorting}>
             <ClearAllIcon /> {localization?.clearSorting}
-          </MenuItem>
+          </MenuItem>,
           <MenuItem
             disabled={column.isSorted && !column.isSortedDesc}
             onClick={onSortActionAsc}
           >
             <SortIcon /> {localization?.sortAscending}
-          </MenuItem>
+          </MenuItem>,
           <MenuItem
             disabled={column.isSorted && column.isSortedDesc}
+            key="menu-item-sort-desc"
             onClick={onSortActionDesc}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization?.sortDescending}
-          </MenuItem>
+          </MenuItem>,
           <Divider />
-        </>
-      )}
+      ]}
 
       {enableColumnHiding && (
         <MenuItem onClick={onHideColumnAction}>
           <VisibilityOffIcon /> {localization?.hideColumn}
+        </MenuItem>
+      )}
+
+      {enableColumnGrouping && column.canGroupBy && (
+        <MenuItem disabled={column.isGrouped} onClick={onGroupColumnAction}>
+          <DynamicFeedIcon /> {localization?.groupByColumn}
+        </MenuItem>
+      )}
+      {enableColumnGrouping && column.canGroupBy && (
+        <MenuItem disabled={!column.isGrouped} onClick={onGroupColumnAction}>
+          <DynamicFeedIcon /> {localization?.ungroupByColumn}
         </MenuItem>
       )}
     </Menu>

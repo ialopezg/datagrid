@@ -5,6 +5,8 @@ export interface Localization {
   expand?: string;
   expandAll?: string;
   filter?: string;
+  groupByColumn?: string;
+  ungroupByColumn?: string;
   hideColumn?: string;
   hideColumns?: string;
   search?: string;
@@ -19,6 +21,8 @@ export const defaultLocalization: Localization = {
   expand: 'Expand',
   expandAll: 'Expand all',
   filter: 'Filter',
+  groupByColumn: 'Group by column',
+  ungroupByColumn:  'Ungroup column',
   hideColumn: 'Hide column',
   hideColumns: 'Hide columns',
   search: 'Search',

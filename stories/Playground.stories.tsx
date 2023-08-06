@@ -113,6 +113,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
       })),
     }))}
     enableColumnActions
+    enableColumnGrouping
     enableColumnHiding
     enableColumnReordering
     enableColumnResizing
