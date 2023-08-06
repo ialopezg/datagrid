@@ -10,7 +10,7 @@ export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
   return (
     <TableCell style={{ width: '2rem', padding: '0.5rem' }} variant="head">
       {enableSelectAll ? (
-        <Checkbox {...table.getToggleAllPageRowsSelectedProps()} />
+        <Checkbox aria-label="" {...table.getToggleAllPageRowsSelectedProps()} />
       ) : null}
     </TableCell>
   );

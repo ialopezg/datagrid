@@ -18,6 +18,7 @@ const TableCellContent = styled('div')({
 const TableCellText = styled('div')({
   width: '100%',
   display: 'flex',
+  alignItems: 'center',
   justifyContent: 'space-between',
 });
 
@@ -52,7 +53,9 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
       {...column.getHeaderProps(column.getSortByToggleProps())}
     >
       <TableCellContent>
-        <TableCellText>
+        <TableCellText
+          style={{ justifyContent: isParent ? 'center' : undefined }}
+        >
           <span {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParent && column.canSort && (

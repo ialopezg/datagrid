@@ -1,3 +1,4 @@
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 import SortIcon from '@mui/icons-material/Sort';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import MuiMenuItem from '@mui/material/MenuItem';
@@ -25,13 +26,18 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
 }) => {
   const { enableColumnHiding, enableSorting, localization } = useDataGrid();
 
+  const onClearSorting = () => {
+    column.clearSortBy();
+    setAnchorEl(null);
+  };
+
   const onSortActionAsc = () => {
-    column.toggleSortBy(true);
+    column.toggleSortBy(false);
     setAnchorEl(null);
   };
 
   const onSortActionDesc = () => {
-    column.toggleSortBy(false);
+    column.toggleSortBy(true);
     setAnchorEl(null);
   };
 
@@ -48,10 +54,19 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     >
       {enableSorting && (
         <>
-          <MenuItem onClick={onSortActionAsc}>
+          <MenuItem disabled={!column.isSorted} onClick={onClearSorting}>
+            <ClearAllIcon /> {localization?.clearSorting}
+          </MenuItem>
+          <MenuItem
+            disabled={column.isSorted && !column.isSortedDesc}
+            onClick={onSortActionAsc}
+          >
             <SortIcon /> {localization?.sortAscending}
           </MenuItem>
-          <MenuItem onClick={onSortActionDesc}>
+          <MenuItem
+            disabled={column.isSorted && column.isSortedDesc}
+            onClick={onSortActionDesc}
+          >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization?.sortDescending}
           </MenuItem>

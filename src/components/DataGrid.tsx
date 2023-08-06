@@ -4,7 +4,7 @@ import {
   TableHeadProps,
   TablePaginationProps,
   TableProps,
-  TextFieldProps, ToolbarProps,
+  TextFieldProps, Theme, ToolbarProps,
   TypographyProps,
 } from '@mui/material';
 import {
@@ -62,6 +62,7 @@ export interface DataGridProps<D extends {} = {}> {
   showToolbar?: boolean;
   suppressOverrideWarning?: boolean;
   tableProps?: TableProps;
+  theme?: Theme;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
   toolbarProps?: ToolbarProps;

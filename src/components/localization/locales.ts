@@ -1,5 +1,6 @@
 export interface Localization {
   clear?: string;
+  clearSorting?: string;
   columnActions?: string;
   expand?: string;
   expandAll?: string;
@@ -13,6 +14,7 @@ export interface Localization {
 
 export const defaultLocalization: Localization = {
   clear: 'Clear',
+  clearSorting: 'Clear sorting',
   columnActions: 'Column actions',
   expand: 'Expand',
   expandAll: 'Expand all',
