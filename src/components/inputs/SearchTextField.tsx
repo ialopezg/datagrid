@@ -14,8 +14,7 @@ const TextField = styled(MuiTextField)({
 interface SearchTextFieldProps {}
 
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
-  const { localization, onSearchChange } = useDataGrid();
-  const { searchProps, table } = useDataGrid();
+  const { localization, onSearchChange, searchProps, table } = useDataGrid();
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChange = useAsyncDebounce((e) => {

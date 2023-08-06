@@ -18,21 +18,18 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     enableSelection,
     hasExpandableRows,
     table,
-    customFooterRowComponent,
   } = useDataGrid();
 
   if (!columns?.some((c) => c.Footer)) {
     return null;
   }
 
-  if (customFooterRowComponent) {
-    return <>{customFooterRowComponent(footerGroup, table)}</>;
-  }
-
   return (
     <TableRow {...footerGroup.getFooterGroupProps()}>
       {(hasExpandableRows || detailPanel) && (
-        <SpacerCell width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`} />
+        <SpacerCell
+          width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}
+        />
       )}
 
       {enableSelection && <SpacerCell width="1rem" />}

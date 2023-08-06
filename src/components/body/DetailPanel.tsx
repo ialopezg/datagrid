@@ -9,12 +9,7 @@ interface DetailPanelProps {
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
-  const { detailPanel, detailPanelProps, table, customDetailPanelComponent } =
-    useDataGrid();
-
-  if (customDetailPanelComponent) {
-    return <>{customDetailPanelComponent(row, table)}</>;
-  }
+  const { detailPanel, detailPanelProps, table } = useDataGrid();
 
   return (
     <TableRow {...row.getToggleRowExpandedProps()}>

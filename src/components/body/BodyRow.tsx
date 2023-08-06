@@ -22,21 +22,18 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     hasExpandableRows,
     onRowClick,
     table,
-    customBodyRowComponent,
   } = useDataGrid();
-
-  if (customBodyRowComponent) {
-    return <>{customBodyRowComponent(row, table)}</>;
-  }
 
   return (
     <>
-      <TableRow onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
+      <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
         {((enableRowTree && hasExpandableRows) || detailPanel) &&
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (
-            <SpacerCell width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`} />
+            <SpacerCell
+              width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}
+            />
           ))}
 
         {enableSelection && <SelectRowAction row={row} />}

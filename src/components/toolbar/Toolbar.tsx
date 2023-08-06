@@ -3,8 +3,8 @@ import { styled, Typography } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { SearchTextField } from '../inputs';
-import { ColumnsVisibilityAction } from '../actions/ColumnsVisibilityAction';
+import SearchTextField from '../inputs/SearchTextField';
+import ColumnsVisibilityAction from '../actions/ColumnsVisibilityAction';
 
 const StyledToolbar = styled(MuiToolbar)({
   padding: '0.5rem',
@@ -18,17 +18,12 @@ export const Toolbar: FC<ToolbarProps> = () => {
   const {
     enableColumnHiding,
     enableSearch,
-    table,
     tableProps,
     title,
     titleProps,
     toolbarProps,
-    customToolbarComponent,
   } = useDataGrid();
 
-  if (customToolbarComponent) {
-    return <>{customToolbarComponent(table)}</>;
-  }
 
   if (!enableSearch && !title && !tableProps) {
     return null;

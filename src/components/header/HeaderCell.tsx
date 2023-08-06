@@ -1,10 +1,15 @@
-import { Collapse, Divider as MuiDivider, styled, TableSortLabel } from '@mui/material';
+import {
+  Collapse,
+  Divider as MuiDivider,
+  styled,
+  TableSortLabel,
+} from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { FilterTextField } from '../inputs';
+import FilterTextField from '../inputs/FilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
 
 const TableCell = styled(MuiTableCell)({
@@ -44,12 +49,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     enableFiltering,
     showFiltersInColumnHeader,
     table,
-    customHeaderCellComponent,
   } = useDataGrid();
-
-  if (customHeaderCellComponent) {
-    return <>{customHeaderCellComponent(column, table)}</>;
-  }
 
   const isParent = (column?.columns?.length ?? 0) > 0;
 

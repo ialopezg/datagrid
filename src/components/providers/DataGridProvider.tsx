@@ -13,7 +13,7 @@ import {
 } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
-import { showOverrideWarnings, RowHelper } from '../helpers';
+import { RowHelper } from '../helpers';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {}>(
@@ -31,10 +31,6 @@ export const DataGridProvider = <D extends {}>(
     usePagination,
     useRowSelect,
   );
-
-  if (process.env.NODE_ENV !== 'production' && !props.suppressOverrideWarning) {
-    showOverrideWarnings(props);
-  }
 
   const rowOptions = RowHelper({ table });
 

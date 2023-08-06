@@ -8,15 +8,11 @@ import FooterRow from './FooterRow';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = () => {
-  const { enablePagination, paginationPosition, table, customFooterComponent } =
+  const { enablePagination, footerProps, paginationPosition, table } =
     useDataGrid();
 
-  if (customFooterComponent) {
-    return <>{customFooterComponent(table)}</>;
-  }
-
   return (
-    <TableFooter>
+    <TableFooter {...footerProps}>
       {table.footerGroups.map((footerGroup) => (
         <FooterRow
           footerGroup={footerGroup}

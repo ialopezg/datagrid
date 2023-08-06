@@ -14,12 +14,7 @@ export const Header: FC<HeaderProp> = () => {
     isFetching,
     paginationPosition,
     table,
-    customHeaderComponent,
   } = useDataGrid();
-
-  if (customHeaderComponent) {
-    return <>{customHeaderComponent(table)}</>;
-  }
 
   return (
     <TableHead {...headerProps}>

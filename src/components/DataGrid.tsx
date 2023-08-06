@@ -10,11 +10,9 @@ import {
 } from '@mui/material';
 import {
   Cell,
-  HeaderGroup,
   Row,
   TableBodyProps,
   TableCellProps,
-  TableInstance,
   TableOptions,
   UseExpandedOptions,
   UseFiltersOptions,
@@ -45,44 +43,6 @@ export interface DataGridProps<D extends {} = {}>
     UseSortByOptions<D> {
   bodyProps?: TableBodyProps;
   containerProps?: TableContainerProps;
-
-  customBodyComponent?(table: TableInstance<D>): ReactNode;
-
-  customBodyCellComponent?(cell: Cell<D>, table: TableInstance<D>): ReactNode;
-
-  customBodyRowComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
-
-  customContainerComponent?(table: TableInstance<D>): ReactNode;
-
-  customDetailPanelComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
-
-  customFooterComponent?(table: TableInstance<D>): ReactNode;
-
-  customFooterCellComponent?(
-    column: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  customFooterRowComponent?(
-    row: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  customHeaderComponent?(table: TableInstance<D>): ReactNode;
-
-  customHeaderCellComponent?(
-    column: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  customHeaderRowComponent?(
-    headerGroup: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  customPaginationComponent?(table: TableInstance<D>): ReactNode;
-
-  customToolbarComponent?: (table: TableInstance<D>) => ReactNode;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
   enableColumnActions?: boolean;
@@ -115,7 +75,6 @@ export interface DataGridProps<D extends {} = {}>
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
-  suppressOverrideWarning?: boolean;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
