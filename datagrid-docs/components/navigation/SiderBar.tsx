@@ -18,13 +18,23 @@ const List = styled(MuiList)({
   paddingTop: '80px 0',
 });
 
-const ListItem = styled(MuiListItem)({
+const ListItem = styled(MuiListItem)(({ theme }) => ({
   cursor: 'pointer',
+  fontWeight: 'bold',
   transition: 'all .2s',
   padding: '1rem',
+  color: theme.palette.primary.dark,
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',
   },
+}));
+
+const ListItemHeader = styled(MuiListItem)({
+  padding: '1rem',
+});
+
+const ListItemExamples = styled(ListItem)({
+  paddingLeft: '2rem',
 });
 
 interface SideBarProps {
@@ -47,10 +57,9 @@ const SideBar: FC<SideBarProps> = ({ open }) => {
         </Link>
         <Divider />
 
-        <Typography>Examples</Typography>
-
+        <ListItemHeader>Examples</ListItemHeader>
         <Link href="/docs/examples/basic" passHref>
-          <ListItem>Basic</ListItem>
+          <ListItemExamples>Basic</ListItemExamples>
         </Link>
       </List>
     </Drawer>

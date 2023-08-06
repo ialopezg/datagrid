@@ -6,7 +6,7 @@ const Page: NextPage = () => {
     <div>
       <Head>
         <title>Material React Table</title>
-        <meta name="description" content="Material React Table Docs" />
+        <meta name="description" content="DataGrid Docs" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       Home Page

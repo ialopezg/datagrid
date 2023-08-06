@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import '../styles/globals.css';
 
 import TopBar from '../components/navigation/TopBar';
-import SideBar from '../components/navigation/Siderbar';
+import SideBar from '../components/navigation/SiderBar';
 import Layout from '../components/Layout';
 
 const PageContainer = styled('div')({

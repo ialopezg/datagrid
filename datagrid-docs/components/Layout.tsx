@@ -2,11 +2,9 @@ import { styled } from '@mui/material';
 import React, { FC, useState } from 'react';
 
 import TopBar from './navigation/TopBar';
-import SideBar from './navigation/Siderbar';
+import SideBar from './navigation/SiderBar';
 
 const PageContainer = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
   transition: 'all .2s',
 });
 
@@ -19,7 +17,7 @@ export const Layout: FC = ({ children }) => {
       <SideBar open={open} />
 
       <PageContainer
-        style={{ padding: `100px 32px 600px ${open ? '220px' : '32px'}` }}
+        style={{ padding: `80px 32px 800px ${open ? '220px' : '32px'}` }}
       >
         {children}
       </PageContainer>

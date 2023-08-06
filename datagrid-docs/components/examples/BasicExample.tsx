@@ -27,3 +27,5 @@ export const BasicExample = () => {
 
   return <DataGrid columns={columns} data={data} />;
 };
+
+export default BasicExample;
