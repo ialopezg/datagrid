@@ -9,7 +9,7 @@ interface ExpandRowActionProps {
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
-  const { localization, table } = useDataGrid();
+  const { detailPanel, localization, table } = useDataGrid();
 
   return (
     <TableCell
@@ -19,8 +19,8 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
         padding: '0.5rem',
         paddingRight: '0',
         paddingLeft: `${row.depth + 0.5}rem`,
-        width: `${table.expandedDepth - row.depth + 2}rem`,
-    }}
+        width: `${detailPanel ? 2 : table.expandedDepth - row.depth + 2}rem`,
+      }}
     >
       <IconButton
         aria-label={localization?.expand}

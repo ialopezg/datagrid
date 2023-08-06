@@ -36,7 +36,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (
-            <SpacerCell width={`${table.expandedDepth + 0.5}rem`} />
+            <SpacerCell width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`} />
           ))}
 
         {enableSelection && <SelectRowAction row={row} />}

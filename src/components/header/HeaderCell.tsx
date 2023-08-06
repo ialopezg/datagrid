@@ -18,8 +18,13 @@ const TableCellContent = styled('div')({
 const TableCellText = styled('div')({
   width: '100%',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'space-between',
+});
+
+const CellFlexItem = styled('span')({
+  display: 'flex',
+  flexWrap: 'nowrap',
 });
 
 interface HeaderCellProps {
@@ -56,7 +61,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
         <TableCellText
           style={{ justifyContent: isParent ? 'center' : undefined }}
         >
-          <span {...column.getSortByToggleProps()}>
+          <CellFlexItem {...column.getSortByToggleProps()}>
             {column.render('Header')}
             {!isParent && column.canSort && (
               <TableSortLabel
@@ -64,8 +69,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
             )}
-          </span>
-          <span style={{ display: 'flex' }}>
+          </CellFlexItem>
+          <CellFlexItem>
             {enableColumnActions && !isParent && (
               <ColumnActionsAction column={column} />
             )}
@@ -78,7 +83,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
                 {...column.getResizerProps()}
               />
             )}
-          </span>
+          </CellFlexItem>
         </TableCellText>
         {enableFiltering && column.canFilter && (
           <Collapse in={showFiltersInColumnHeader}>

@@ -39,7 +39,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         enableExpandAll && !isParent ? (
           <ExpandAllRowsAction />
         ) : (
-          <SpacerCell width={`${table.expandedDepth + 0.5}rem`} />
+          <SpacerCell
+            width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}
+          />
         )
       ) : null}
 
