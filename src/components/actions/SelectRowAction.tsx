@@ -13,12 +13,15 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
 
   const onRowSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     row.getToggleRowSelectedProps()?.onChange?.(e);
-    onRowSelect?.(e, row.state, table.selectedFlatRows);
+    onRowSelect?.(e, row, table.selectedFlatRows);
   };
 
   return (
     <TableCell style={{ width: '2rem', padding: '0.5rem' }}>
-      <Checkbox {...row.getToggleRowSelectedProps()} onChange={onRowSelectChange} />
+      <Checkbox
+        {...row.getToggleRowSelectedProps()}
+        onChange={onRowSelectChange}
+      />
     </TableCell>
   );
 };

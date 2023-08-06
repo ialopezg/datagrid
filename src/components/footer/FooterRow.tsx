@@ -21,7 +21,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     CustomFooterRowComponent,
   } = useDataGrid();
 
-  if (!columns.some((c) => c.Footer)) {
+  if (!columns?.some((c) => c.Footer)) {
     return null;
   }
 

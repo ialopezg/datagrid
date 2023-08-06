@@ -11,7 +11,7 @@ export const Header: FC<HeaderProp> = () => {
   const {
     enablePagination,
     headerProps,
-    isReloading,
+    isFetching,
     paginationPosition,
     table,
     CustomHeaderComponent,
@@ -23,7 +23,7 @@ export const Header: FC<HeaderProp> = () => {
 
   return (
     <TableHead {...headerProps}>
-      {isReloading && <LinearProgress />}
+      {isFetching && <LinearProgress />}
       {enablePagination &&
         ['both', 'top'].includes(String(paginationPosition)) && <Pagination />}
 

@@ -4,10 +4,12 @@ import {
   TableHeadProps,
   TablePaginationProps,
   TableProps,
-  TextFieldProps, Theme, ToolbarProps,
+  TextFieldProps,
+  ToolbarProps,
   TypographyProps,
 } from '@mui/material';
 import {
+  ActionType,
   Cell,
   Column,
   HeaderGroup,
@@ -15,7 +17,8 @@ import {
   TableBodyProps,
   TableCellProps,
   TableInstance,
-  UseRowStateLocalState,
+  TableState,
+  UseTableColumnOptions,
 } from 'react-table';
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
@@ -28,6 +31,7 @@ export interface DataGridProps<D extends {} = {}> {
   columns: Column<D | {}>[];
   containerProps?: TableContainerProps;
   data: D[];
+  defaultColumn?: UseTableColumnOptions<D>;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
   enableColumnActions?: boolean;
@@ -44,16 +48,22 @@ export interface DataGridProps<D extends {} = {}> {
   enableSelection?: boolean;
   enableSorting?: boolean;
   footerProps?: TableFooterProps;
+  getRowId?: (
+    data?: Partial<Row<D>>,
+    index?: number,
+    parent?: Row<D | {}>,
+  ) => string;
+  getSubRows?: (data: Partial<Row<D>>, index: number) => Row<D>[];
   headerProps?: TableHeadProps;
+  initialState?: Partial<TableState<D>>;
   isLoading?: boolean;
-  isReloading?: boolean;
-  localization?: Localization;
+  isFetching?: boolean;
+  localization?: Partial<Localization>;
+  onCellClick?: (e: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
-  onRowSelect?: (
-    e: ChangeEvent,
-    state: UseRowStateLocalState<D, unknown>,
-    selectedRows: Row<D>[],
-  ) => void;
+  onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
+  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onRowSelect?: (e: ChangeEvent, row: Row<D>, selectedRows: Row<D>[]) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   searchProps?: TextFieldProps;
@@ -61,9 +71,14 @@ export interface DataGridProps<D extends {} = {}> {
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
+  stateReducer?: (
+    newState: TableState<D>,
+    action: ActionType,
+    previousState: TableState<D>,
+    table?: TableInstance<{} | D>,
+  ) => TableState;
   suppressOverrideWarning?: boolean;
   tableProps?: TableProps;
-  theme?: Theme;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
   toolbarProps?: ToolbarProps;
@@ -108,6 +123,7 @@ export interface DataGridProps<D extends {} = {}> {
 }
 
 export const DataGrid = <D extends {}>({
+  defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
   enableRowTree = true,
   enableSorting = true,
@@ -120,6 +136,7 @@ export const DataGrid = <D extends {}>({
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
+    defaultColumn={defaultColumn}
     enablePagination={enablePagination}
     enableRowTree={enableRowTree}
     enableSorting={enableSorting}

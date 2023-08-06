@@ -42,11 +42,10 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-
 export const Loading: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} isLoading />
 );
 
 export const Reloading: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} isReloading />
+  <DataGrid columns={columns} data={data} isFetching />
 );

@@ -24,11 +24,24 @@ export const DataGridProvider = <D extends {}>({
   columns,
   children,
   data,
+  defaultColumn,
+  getRowId,
+  getSubRows,
+  initialState,
+  stateReducer,
   suppressOverrideWarning,
   ...rest
 }: DataGridProviderProps<D>) => {
   const table = useTable(
-    { columns, data },
+    {
+      columns,
+      data,
+      defaultColumn,
+      getRowId,
+      getSubRows,
+      initialState,
+      stateReducer,
+    },
     useFlexLayout,
     useResizeColumns,
     useFilters,
@@ -50,8 +63,6 @@ export const DataGridProvider = <D extends {}>({
     <DataGridContext.Provider
       // @ts-ignore
       value={{
-        columns,
-        data,
         table,
         ...rowOptions,
         ...rest,

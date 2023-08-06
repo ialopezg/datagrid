@@ -9,14 +9,20 @@ interface BodyCellProps {
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { table, CustomBodyCellComponent } = useDataGrid();
+  const { onCellClick, table, CustomBodyCellComponent } = useDataGrid();
 
   if (CustomBodyCellComponent) {
     return <>{CustomBodyCellComponent(cell, table)}</>;
   }
 
   return (
-    <TableCell variant="body" {...cell.getCellProps()}>
+    <TableCell
+      onClick={(e) => {
+        onCellClick?.(e, cell);
+      }}
+      variant="body"
+      {...cell.getCellProps()}
+    >
       {cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (
