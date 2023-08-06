@@ -53,12 +53,8 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         )
       ) : null}
 
-      {headerGroup.headers.map((column, index) => (
-        <HeaderCell
-          column={column}
-          index={index}
-          key={column.getHeaderProps().key}
-        />
+      {headerGroup.headers.map((column) => (
+        <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
 
       {enableColumnHiding && !isParent && (

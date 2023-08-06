@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
-  title: 'Features/Column Groups',
+  title: 'Features/Header Groups',
   component: DataGrid,
 };
 

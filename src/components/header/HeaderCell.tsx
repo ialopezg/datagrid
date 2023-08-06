@@ -1,4 +1,4 @@
-import { Collapse, Divider, styled, TableSortLabel } from '@mui/material';
+import { Collapse, Divider as MuiDivider, styled, TableSortLabel } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
@@ -27,12 +27,17 @@ const CellFlexItem = styled('span')({
   flexWrap: 'nowrap',
 });
 
+const Divider = styled(MuiDivider)({
+  borderRadius: '2px',
+  borderRightWidth: '2px',
+  maxHeight: '2rem',
+});
+
 interface HeaderCellProps {
   column: HeaderGroup;
-  index: number;
 }
 
-export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
+export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
     enableColumnActions,
     enableColumnResizing,
@@ -47,9 +52,6 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
   }
 
   const isParent = (column?.columns?.length ?? 0) > 0;
-  const isLastColumn =
-    (!isParent && index === table.visibleColumns.length - 1) ||
-    (isParent && index === column.headers.length - 1);
 
   return (
     <TableCell
@@ -74,12 +76,11 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
             {enableColumnActions && !isParent && (
               <ColumnActionsAction column={column} />
             )}
-            {enableColumnResizing && !isLastColumn && (
+            {enableColumnResizing && !isParent && (
               <Divider
                 flexItem
                 onDoubleClick={() => table.resetResizing()}
                 orientation="vertical"
-                style={{ borderRightWidth: '2px', borderRadius: '2px' }}
                 {...column.getResizerProps()}
               />
             )}
