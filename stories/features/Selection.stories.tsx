@@ -25,20 +25,19 @@ const data = [...Array(21)].map((_) => ({
   address: faker.address.streetAddress(),
 }));
 
-export const SelectionEnable: Story<DataGridProps> = () => (
+export const SelectionEnableDefault: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection />
 );
 
-export const SelectAllRowsEnabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableSelection enableSelectAll />
+export const SelectAllDisabled: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} disableSelectAll enableSelection />
 );
 
-export const OnRowSelectEvent: Story<DataGridProps> = () => (
+export const OnRowSelectChange: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
     enableSelection
-    enableSelectAll
     onRowSelect={(e, row, selectedRows) => {
       console.log({ e, state: row, selectedRows });
     }}

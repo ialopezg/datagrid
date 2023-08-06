@@ -36,18 +36,24 @@ const columns = [
     Header: 'Phone Number',
   },
 ];
+const data = [...Array(8)].map((_) => ({
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  address: faker.address.streetAddress(),
+  state: faker.address.state(),
+  zipCode: faker.address.zipCode(),
+  phoneNumber: faker.phone.phoneNumber(),
+}));
 
 export const ColumnResizingEnabled: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} enableColumnResizing />
+);
+
+export const ColumnResizingCustomDefaultWidths: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
-    data={[...Array(8)].map((_) => ({
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      address: faker.address.streetAddress(),
-      state: faker.address.state(),
-      zipCode: faker.address.zipCode(),
-      phoneNumber: faker.phone.phoneNumber(),
-    }))}
+    data={data}
+    defaultColumn={{ width: 150, minWidth: 100, maxWidth: 300 }}
     enableColumnResizing
   />
 );

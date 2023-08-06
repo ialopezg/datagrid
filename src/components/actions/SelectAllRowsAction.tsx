@@ -5,11 +5,11 @@ import { useDataGrid } from '../providers';
 interface SelectAllRowsActionProps {}
 
 export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
-  const { table, enableSelectAll } = useDataGrid();
+  const { disableSelectAll, table } = useDataGrid();
 
   return (
     <TableCell style={{ width: '2rem', padding: '0.5rem' }} variant="head">
-      {enableSelectAll ? (
+      {!disableSelectAll ? (
         <Checkbox
           aria-label=""
           {...table.getToggleAllPageRowsSelectedProps()}

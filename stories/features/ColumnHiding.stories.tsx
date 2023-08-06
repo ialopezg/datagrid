@@ -47,6 +47,6 @@ export const ColumnHidingEnabled: Story<DataGridProps> = () => (
       zip: faker.address.zipCode(),
       phoneNumber: faker.phone.phoneNumber(),
     }))}
-    enableColumnHiding
+    disableColumnHiding
   />
 );

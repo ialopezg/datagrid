@@ -15,7 +15,7 @@ interface HeaderRowProps {
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
-    enableExpandAll,
+    disableExpandAll,
     enableSelection,
     hasExpandableRows,
     table,
@@ -29,7 +29,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   return (
     <TableRow {...headerGroup.getHeaderGroupProps()}>
       {hasExpandableRows || detailPanel ? (
-        enableExpandAll && !isParent ? (
+        !disableExpandAll && !isParent ? (
           <ExpandAllRowsAction />
         ) : (
           <SpacerCell

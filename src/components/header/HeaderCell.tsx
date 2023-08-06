@@ -44,7 +44,7 @@ interface HeaderCellProps {
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
-    enableColumnActions,
+    disableColumnActions,
     enableColumnResizing,
     disableFilters,
     showFilters,
@@ -73,7 +73,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
             )}
           </CellFlexItem>
           <CellFlexItem>
-            {enableColumnActions && !isParent && (
+            {!disableColumnActions && !isParent && (
               <ColumnActionsAction column={column} />
             )}
             {enableColumnResizing && !isParent && (

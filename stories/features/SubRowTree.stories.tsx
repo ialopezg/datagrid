@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
-  title: 'Features/RowTree',
+  title: 'Features/Sub Row Tree',
   component: DataGrid,
 };
 
@@ -40,11 +40,17 @@ const data = [...Array(100)].map((_) => ({
   })),
 }));
 
-export const RowTreeEnabled: Story<DataGridProps> = () => (
+export const SubRowTreeEnabledDefault: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableExpandAll
-    enablePagination={false}
+  />
+);
+
+export const SubRowTreeDisabledAll: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    disableExpandAll
   />
 );

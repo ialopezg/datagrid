@@ -38,12 +38,11 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
         </div>
       );
     }}
-    enableSearch
-    showToolbar
+    hideToolbar
   />
 );
 
-export const DetailPanelExpandAllEnabled: Story<DataGridProps> = () => (
+export const DetailPanelExpandAllDisabled: Story<DataGridProps> = () => (
   <DataGrid
     columns={[
       {
@@ -68,7 +67,7 @@ export const DetailPanelExpandAllEnabled: Story<DataGridProps> = () => (
       zipCode: faker.address.zipCode(),
       phone: faker.phone.phoneNumber(),
     }))}
-    enableExpandAll
+    disableExpandAll
     detailPanel={(row) => (
       <div style={{ display: 'grid' }}>
         <span>City: {row.original.city}</span>

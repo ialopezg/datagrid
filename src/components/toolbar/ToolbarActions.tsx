@@ -12,12 +12,12 @@ export const ToolbarActionsContainer = styled('div')({
 interface ToolbarActionsProps {}
 
 export const ToolbarActions: FC<ToolbarActionsProps> = () => {
-  const { disableFilters } = useDataGrid();
+  const { disableColumnHiding, disableFilters } = useDataGrid();
 
   return (
     <ToolbarActionsContainer>
       {!disableFilters && <FiltersVisibilityAction />}
-      <ColumnsVisibilityAction />
+      {!disableColumnHiding && <ColumnsVisibilityAction />}
     </ToolbarActionsContainer>
   );
 };

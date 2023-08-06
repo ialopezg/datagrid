@@ -27,7 +27,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
 }) => {
   const {
     enableColumnGrouping,
-    enableColumnHiding,
+    disableColumnHiding,
     disableSortBy,
     localization,
   } = useDataGrid();
@@ -63,8 +63,13 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
     >
-      {!disableSortBy && [
-        <MenuItem disabled={!column.isSorted} key="menu-item-sort-asc" onClick={onClearSorting}>
+      {!disableSortBy &&
+        column.canSort && [
+          <MenuItem
+            disabled={!column.isSorted}
+            key="menu-item-sort-asc"
+            onClick={onClearSorting}
+          >
             <ClearAllIcon /> {localization?.clearSorting}
           </MenuItem>,
           <MenuItem
@@ -81,10 +86,10 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization?.sortDescending}
           </MenuItem>,
-          <Divider />
-      ]}
+          <Divider />,
+        ]}
 
-      {enableColumnHiding && (
+      {!disableColumnHiding && (
         <MenuItem onClick={onHideColumnAction}>
           <VisibilityOffIcon /> {localization?.hideColumn}
         </MenuItem>

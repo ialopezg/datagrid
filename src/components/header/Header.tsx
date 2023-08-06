@@ -9,9 +9,9 @@ interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
   const {
-    enablePagination,
     headerProps,
     isFetching,
+    manualPagination,
     paginationPosition,
     table,
   } = useDataGrid();
@@ -19,7 +19,7 @@ export const Header: FC<HeaderProp> = () => {
   return (
     <TableHead {...headerProps}>
       {isFetching && <LinearProgress />}
-      {enablePagination &&
+      {manualPagination &&
         ['both', 'top'].includes(String(paginationPosition)) && <Pagination />}
 
       {table.headerGroups.map((headerGroup) => (

@@ -13,7 +13,7 @@ export default meta;
 const columns = [
   { accessor: 'firstName' as const, Header: 'First Name' },
   { accessor: 'lastName' as const, Header: 'Last Name' },
-  { Header: 'Gender', accessor: 'gender' },
+  { accessor: 'gender' as const, Header: 'Gender' },
   { accessor: 'address' as const, Header: 'Address' },
   { accessor: 'state' as const, Header: 'State' },
 ];
@@ -25,12 +25,10 @@ const data = [...Array(200)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const FilteringEnabled: Story<DataGridProps> = () => (
+export const FilteringEnabledDefault: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableColumnActions
     enableColumnGrouping
-    enableColumnHiding
   />
 );

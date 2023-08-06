@@ -23,8 +23,8 @@ const CircularProgressWrapper = styled('div')({
 interface BodyProps {}
 
 export const Body: FC<BodyProps> = () => {
-  const { bodyProps, enablePagination, isLoading, table } = useDataGrid();
-  const rows = enablePagination ? table.page : table.rows;
+  const { bodyProps, isLoading, manualPagination, table } = useDataGrid();
+  const rows = manualPagination ? table.rows : table.page;
 
   return (
     <TableBody {...bodyProps} {...table.getTableBodyProps()}>

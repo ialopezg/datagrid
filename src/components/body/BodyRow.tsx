@@ -14,19 +14,17 @@ interface BodyRowProps {
 }
 
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
-  const {
-    detailPanel,
-    enableRowTree,
-    enableSelection,
-    hasExpandableRows,
-    onRowClick,
-    table,
-  } = useDataGrid();
+  const { detailPanel, enableSelection, hasExpandableRows, onRowClick, table } =
+    useDataGrid();
 
   return (
     <>
-      <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...row.getRowProps()}>
-        {((enableRowTree && hasExpandableRows) || detailPanel) &&
+      <TableRow
+        hover
+        onClick={(e) => onRowClick?.(e, row)}
+        {...row.getRowProps()}
+      >
+        {(hasExpandableRows || detailPanel) &&
           (row.canExpand || detailPanel ? (
             <ExpandRowAction row={row} />
           ) : (

@@ -27,22 +27,22 @@ const data = [...Array(21)].map((_) => ({
   phone: faker.phone.phoneNumber(),
 }));
 
-export const PaginationEnabled: Story<DataGridProps> = () => (
+export const PaginationEnabledDefault: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 
-export const PaginationDisabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enablePagination={false} />
+export const PaginationDisabledOrOverriden: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} manualPagination />
 );
 
-export const PaginationOnBottom: Story<DataGridProps> = () => (
+export const PaginationPositionBottom: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 
-export const PaginationOnTop: Story<DataGridProps> = () => (
+export const PaginationPositionTop: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="top" />
 );
 
-export const PaginationOnBothToolbars: Story<DataGridProps> = () => (
+export const PaginationPositionTopAndBottom: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="both" />
 );

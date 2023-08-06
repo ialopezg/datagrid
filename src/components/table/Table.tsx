@@ -9,13 +9,13 @@ import { useDataGrid } from '../providers';
 interface TableProp {}
 
 export const Table: FC<TableProp> = () => {
-  const { showFooter, showHeader, table, tableProps } = useDataGrid();
+  const { hideFooter, hideHeader, table, tableProps } = useDataGrid();
 
   return (
     <MuiTable {...tableProps} {...table.getTableProps()}>
-      {showHeader && <Header />}
+      {!hideHeader && <Header />}
       <Body />
-      {showFooter && <Footer />}
+      {!hideFooter && <Footer />}
     </MuiTable>
   );
 };

@@ -15,10 +15,22 @@ const StyledToolbar = styled(MuiToolbar)({
 interface ToolbarProps {}
 
 export const Toolbar: FC<ToolbarProps> = () => {
-  const { disableGlobalFilter, tableProps, title, titleProps, toolbarProps } =
-    useDataGrid();
+  const {
+    disableColumnHiding,
+    disableFilters,
+    disableGlobalFilter,
+    title,
+    titleProps,
+    toolbarProps,
+  } = useDataGrid();
 
-  if (disableGlobalFilter && !title && !tableProps) {
+  if (
+    !toolbarProps &&
+    !title &&
+    disableColumnHiding &&
+    disableFilters &&
+    !disableGlobalFilter
+  ) {
     return null;
   }
 

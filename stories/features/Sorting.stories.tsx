@@ -26,7 +26,7 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const SortingEnabled: Story<DataGridProps> = () => (
+export const SortingEnabledDefault: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 

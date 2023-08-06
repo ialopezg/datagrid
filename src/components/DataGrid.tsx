@@ -44,17 +44,15 @@ export interface DataGridProps<D extends {} = {}>
   bodyProps?: TableBodyProps;
   containerProps?: TableContainerProps;
   defaultShowFilters?: boolean;
+  disableColumnActions?: boolean;
+  disableColumnHiding?: boolean;
+  disableExpandAll?: boolean;
+  disableSelectAll?: boolean;
+  disableSubRowTree?: boolean;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
-  enableColumnActions?: boolean;
   enableColumnGrouping?: boolean;
-  enableColumnHiding?: boolean;
-  enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;
-  enableExpandAll?: boolean;
-  enablePagination?: boolean;
-  enableRowTree?: boolean;
-  enableSelectAll?: boolean;
   enableSelection?: boolean;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
@@ -69,9 +67,9 @@ export interface DataGridProps<D extends {} = {}>
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   searchProps?: TextFieldProps;
-  showFooter?: boolean;
-  showHeader?: boolean;
-  showToolbar?: boolean;
+  hideFooter?: boolean;
+  hideHeader?: boolean;
+  hideToolbar?: boolean;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
@@ -80,24 +78,14 @@ export interface DataGridProps<D extends {} = {}>
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
-  enablePagination = true,
-  enableRowTree = true,
   localization = defaultLocalization,
   paginationPosition = 'bottom',
-  showFooter = true,
-  showHeader = true,
-  showToolbar = true,
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
-    enablePagination={enablePagination}
-    enableRowTree={enableRowTree}
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
-    showFooter={showFooter}
-    showHeader={showHeader}
-    showToolbar={showToolbar}
     {...rest}
   >
     <Container />

@@ -25,19 +25,19 @@ const data = [...Array(100)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const ToolbarEnabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} showToolbar />
+export const ToolbarEnabledDefault: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} />
+);
+
+export const ToolbarHidden: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} hideToolbar />
 );
 
 export const ToolbarWithTitle: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} showToolbar title="People Sample" />
-);
-
-export const ToolbarWithSearch: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    showToolbar
     title="People Sample"
+    titleProps={{ variant: 'h4' }}
   />
 );

@@ -8,7 +8,7 @@ import FooterRow from './FooterRow';
 interface FooterProps {}
 
 export const Footer: FC<FooterProps> = () => {
-  const { enablePagination, footerProps, paginationPosition, table } =
+  const { footerProps, manualPagination,  paginationPosition, table } =
     useDataGrid();
 
   return (
@@ -20,7 +20,7 @@ export const Footer: FC<FooterProps> = () => {
         />
       ))}
 
-      {enablePagination &&
+      {!manualPagination &&
         ['bottom', 'both'].includes(String(paginationPosition)) && (
           <Pagination />
         )}

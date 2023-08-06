@@ -60,9 +60,11 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
       zipCode: faker.address.zipCode(),
       phoneNumber: faker.phone.phoneNumber(),
     }))}
-    enablePagination={false}
-    showFooter={false}
-    showHeader={false}
+    disableColumnActions
+    disableColumnHiding
+    disableGlobalFilter
+    disableFilters
+    manualPagination
   />
 );
 
@@ -111,17 +113,10 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         address: faker.address.streetAddress(),
       })),
     }))}
-    enableColumnActions
     enableColumnGrouping
-    enableColumnHiding
-    enableColumnReordering
     enableColumnResizing
-    enableExpandAll
-    enablePagination
-    enableSelectAll
     enableSelection
     paginationPosition="both"
-    showToolbar
     title="People Data"
   />
 );
