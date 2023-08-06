@@ -1,4 +1,4 @@
-import { Divider, styled, TableSortLabel } from '@mui/material';
+import { Collapse, Divider, styled, TableSortLabel } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
 import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
@@ -27,7 +27,14 @@ interface HeaderCellProps {
 }
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
-  const { enableColumnActions, enableColumnResizing, enableFiltering, table, CustomHeaderCellComponent } = useDataGrid();
+  const {
+    enableColumnActions,
+    enableColumnResizing,
+    enableFiltering,
+    showFiltersInColumnHeader,
+    table,
+    CustomHeaderCellComponent,
+  } = useDataGrid();
 
   if (CustomHeaderCellComponent) {
     return <>{CustomHeaderCellComponent(column, table)}</>;
@@ -71,7 +78,9 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column, index }) => {
           </span>
         </TableCellText>
         {enableFiltering && column.canFilter && (
-          <FilterTextField column={column} />
+          <Collapse in={showFiltersInColumnHeader}>
+            <FilterTextField column={column} />
+          </Collapse>
         )}
       </TableCellContent>
     </TableCell>

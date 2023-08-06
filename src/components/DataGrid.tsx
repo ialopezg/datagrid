@@ -56,6 +56,7 @@ export interface DataGridProps<D extends {} = {}> {
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   searchProps?: TextFieldProps;
+  showFiltersInColumnHeader?: boolean;
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
@@ -110,6 +111,7 @@ export const DataGrid = <D extends {}>({
   enableSorting = true,
   localization = defaultLocalization,
   paginationPosition = 'bottom',
+  showFiltersInColumnHeader = true,
   showFooter = true,
   showHeader = true,
   showToolbar = true,
@@ -122,6 +124,7 @@ export const DataGrid = <D extends {}>({
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
     showFooter={showFooter}
+    showFiltersInColumnHeader={showFiltersInColumnHeader}
     showHeader={showHeader}
     showToolbar={showToolbar}
     {...rest}

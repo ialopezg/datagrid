@@ -7,6 +7,8 @@ export interface Localization {
   hideColumn?: string;
   hideColumns?: string;
   search?: string;
+  sortAscending?: string;
+  sortDescending?: string;
 }
 
 export const defaultLocalization: Localization = {
@@ -18,4 +20,6 @@ export const defaultLocalization: Localization = {
   hideColumn: 'Hide column',
   hideColumns: 'Hide columns',
   search: 'Search',
+  sortAscending: 'Sort ascending',
+  sortDescending: 'Sort descending',
 };

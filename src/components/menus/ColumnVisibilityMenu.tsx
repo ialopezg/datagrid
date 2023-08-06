@@ -1,8 +1,8 @@
 import {
-  Checkbox,
   FormControlLabel,
   Menu,
   MenuItem,
+  Switch,
   Typography,
 } from '@mui/material';
 import React, { FC } from 'react';
@@ -24,7 +24,7 @@ const ColumnMenuItem: FC<ColumnMenuItem> = ({ column }) => {
         {isMaxDepth ? (
           <FormControlLabel
             checked={column.isVisible}
-            control={<Checkbox />}
+            control={<Switch />}
             label={String(column.Header)}
             onChange={() => isMaxDepth && column.toggleHidden()}
           />
