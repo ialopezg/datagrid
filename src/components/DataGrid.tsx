@@ -16,6 +16,15 @@ import {
   TableCellProps,
   TableInstance,
   TableOptions,
+  UseExpandedOptions,
+  UseFiltersOptions,
+  UseGlobalFiltersOptions,
+  UseGroupByOptions,
+  UsePaginationOptions,
+  UseResizeColumnsOptions,
+  UseRowSelectOptions,
+  UseRowStateOptions,
+  UseSortByOptions,
 } from 'react-table';
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
@@ -23,7 +32,17 @@ import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 import { defaultLocalization, Localization } from './localization';
 
-export interface DataGridProps<D extends {} = {}> extends TableOptions<D> {
+export interface DataGridProps<D extends {} = {}>
+  extends TableOptions<D>,
+    UseExpandedOptions<D>,
+    UseFiltersOptions<D>,
+    UseGlobalFiltersOptions<D>,
+    UseGroupByOptions<D>,
+    UsePaginationOptions<D>,
+    UseResizeColumnsOptions<D>,
+    UseRowSelectOptions<D>,
+    UseRowStateOptions<D>,
+    UseSortByOptions<D> {
   bodyProps?: TableBodyProps;
   containerProps?: TableContainerProps;
 
