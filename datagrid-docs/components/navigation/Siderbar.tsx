@@ -1,15 +1,13 @@
-import type { NextPage } from 'next';
 import {
   Divider,
   Drawer as MuiDrawer,
-  IconButton,
   List as MuiList,
-  ListItem,
+  ListItem as MuiListItem,
   styled,
-  Toolbar,
   Typography,
 } from '@mui/material';
 import Link from 'next/link';
+import { FC } from 'react';
 
 const Drawer = styled(MuiDrawer)({
   zIndex: 1,
@@ -17,33 +15,43 @@ const Drawer = styled(MuiDrawer)({
 });
 
 const List = styled(MuiList)({
-  paddingTop: '100px',
+  paddingTop: '80px 0',
 });
 
-interface SidebarProps {
+const ListItem = styled(MuiListItem)({
+  cursor: 'pointer',
+  transition: 'all .2s',
+  padding: '1rem',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+  },
+});
+
+interface SideBarProps {
   open: boolean;
 }
 
-const SideBar: NextPage<SidebarProps> = ({ open }) => {
+const SideBar: FC<SideBarProps> = ({ open }) => {
   return (
     <Drawer open={open} variant="permanent">
       <List style={{ width: open ? '200px' : '0', transition: 'all .2s' }}>
-        <ListItem>
-          <Link href="/">Home</Link>
-        </ListItem>
+        <Link href="/" passHref>
+          <ListItem>Home</ListItem>
+        </Link>
         <Divider />
-        <ListItem>
-          <Link href="/docs/getting-started">Getting Started</Link>
-        </ListItem>
-        <ListItem>
-          <Link href="/docs/install">Install</Link>
-        </ListItem>
-        <ListItem>
-          <Typography>Examples</Typography>
-        </ListItem>
-        <ListItem>
-          <Link href="/docs/examples/basic">Basic</Link>
-        </ListItem>
+        <Link href="/docs/getting-started" passHref>
+          <ListItem>Getting Started</ListItem>
+        </Link>
+        <Link href="/docs/install" passHref>
+          <ListItem>Install</ListItem>
+        </Link>
+        <Divider />
+
+        <Typography>Examples</Typography>
+
+        <Link href="/docs/examples/basic" passHref>
+          <ListItem>Basic</ListItem>
+        </Link>
       </List>
     </Drawer>
   );

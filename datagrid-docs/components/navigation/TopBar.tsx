@@ -1,4 +1,3 @@
-import type { NextPage } from 'next';
 import {
   AppBar as MuiAppBar,
   IconButton,
@@ -8,6 +7,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import { FC } from 'react';
 
 const AppBar = styled(MuiAppBar)({
   zIndex: 2,
@@ -18,14 +18,11 @@ interface TopBarProps {
   setOpen: (value: boolean) => void;
 }
 
-const TopBar: NextPage<TopBarProps> = ({ open, setOpen }: TopBarProps) => {
+const TopBar: FC<TopBarProps> = ({ open, setOpen }: TopBarProps) => {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <IconButton
-          onClick={() => setOpen(!open)}
-          style={{ color: '#fff' }}
-        >
+        <IconButton onClick={() => setOpen(!open)} style={{ color: '#fff' }}>
           {open ? (
             <MenuOpenIcon color="inherit" />
           ) : (

@@ -6,6 +6,7 @@ import '../styles/globals.css';
 
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/Siderbar';
+import Layout from '../components/Layout';
 
 const PageContainer = styled('div')({
   display: 'flex',
@@ -13,21 +14,14 @@ const PageContainer = styled('div')({
   transition: 'all .2s',
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export const App = ({ Component, pageProps }: AppProps) => {
   const [open, setOpen] = useState(true);
 
   return (
-    <>
-      <TopBar open={open} setOpen={setOpen} />
-      <SideBar open={open} />
-
-      <PageContainer
-        style={{ padding: `100px 32px 600px ${open ? '220px' : '32px'}` }}
-      >
-        <Component {...pageProps} />
-      </PageContainer>
-    </>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 }
 
-export default MyApp;
+export default App;
