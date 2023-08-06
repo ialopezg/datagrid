@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import {
   useExpanded,
   useFilters,
@@ -34,13 +34,20 @@ export const DataGridProvider = <D extends {}>(
 
   const rowOptions = RowHelper({ table });
 
+  // ** State
+  const [showFilters, setShowFilters] = useState<boolean | undefined>(
+    props.defaultShowFilters,
+  );
+
   return (
     <DataGridContext.Provider
       value={{
-        // @ts-ignore
-        table,
         ...rowOptions,
         ...props,
+        showFilters,
+        setShowFilters,
+        // @ts-ignore
+        table,
       }}
     >
       {props.children}

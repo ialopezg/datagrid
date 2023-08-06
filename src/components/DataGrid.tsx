@@ -43,6 +43,7 @@ export interface DataGridProps<D extends {} = {}>
     UseSortByOptions<D> {
   bodyProps?: TableBodyProps;
   containerProps?: TableContainerProps;
+  defaultShowFilters?: boolean;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
   enableColumnActions?: boolean;
@@ -51,13 +52,10 @@ export interface DataGridProps<D extends {} = {}>
   enableColumnReordering?: boolean;
   enableColumnResizing?: boolean;
   enableExpandAll?: boolean;
-  enableFiltering?: boolean;
   enablePagination?: boolean;
   enableRowTree?: boolean;
-  enableSearch?: boolean;
   enableSelectAll?: boolean;
   enableSelection?: boolean;
-  enableSorting?: boolean;
   footerProps?: TableFooterProps;
   headerProps?: TableHeadProps;
   isLoading?: boolean;
@@ -71,7 +69,6 @@ export interface DataGridProps<D extends {} = {}>
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?: TablePaginationProps;
   searchProps?: TextFieldProps;
-  showFiltersInColumnHeader?: boolean;
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
@@ -85,10 +82,8 @@ export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
   enableRowTree = true,
-  enableSorting = true,
   localization = defaultLocalization,
   paginationPosition = 'bottom',
-  showFiltersInColumnHeader = true,
   showFooter = true,
   showHeader = true,
   showToolbar = true,
@@ -98,11 +93,9 @@ export default <D extends {}>({
     defaultColumn={defaultColumn}
     enablePagination={enablePagination}
     enableRowTree={enableRowTree}
-    enableSorting={enableSorting}
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
     showFooter={showFooter}
-    showFiltersInColumnHeader={showFiltersInColumnHeader}
     showHeader={showHeader}
     showToolbar={showToolbar}
     {...rest}

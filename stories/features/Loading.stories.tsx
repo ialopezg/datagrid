@@ -2,7 +2,7 @@ import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
-import { DataGrid, DataGridProps } from '../../src';
+import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
   title: 'Features/Loading',

@@ -6,7 +6,6 @@ import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
   title: 'Features/Search',
-  component: DataGrid,
 };
 
 export default meta;
@@ -27,5 +26,5 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const SearchEnabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableSearch showToolbar />
+  <DataGrid columns={columns} data={data} showToolbar />
 );

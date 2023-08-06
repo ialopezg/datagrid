@@ -37,7 +37,6 @@ export const ToolbarWithSearch: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableSearch
     showToolbar
     title="People Sample"
   />

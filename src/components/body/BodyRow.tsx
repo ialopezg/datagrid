@@ -16,7 +16,6 @@ interface BodyRowProps {
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   const {
     detailPanel,
-    enableColumnHiding,
     enableRowTree,
     enableSelection,
     hasExpandableRows,
@@ -41,7 +40,6 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />
         ))}
-        {enableColumnHiding && <SpacerCell />}
       </TableRow>
 
       {detailPanel && <DetailPanel row={row} />}

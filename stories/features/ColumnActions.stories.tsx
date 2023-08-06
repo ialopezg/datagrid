@@ -49,7 +49,5 @@ export const ColumnActionsEnabled: Story<DataGridProps> = () => (
     }))}
     enableColumnActions
     enableColumnHiding
-    enableFiltering
-    showFiltersInColumnHeader={false}
   />
 );

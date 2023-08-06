@@ -46,8 +46,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
     enableColumnActions,
     enableColumnResizing,
-    enableFiltering,
-    showFiltersInColumnHeader,
+    disableFilters,
+    showFilters,
     table,
   } = useDataGrid();
 
@@ -86,8 +86,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
             )}
           </CellFlexItem>
         </TableCellText>
-        {enableFiltering && column.canFilter && (
-          <Collapse in={showFiltersInColumnHeader}>
+        {!disableFilters && column.canFilter && (
+          <Collapse in={showFilters}>
             <FilterTextField column={column} />
           </Collapse>
         )}

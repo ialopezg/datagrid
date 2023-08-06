@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
@@ -6,7 +6,6 @@ import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import { useDataGrid } from '../providers';
 import HeaderCell from './HeaderCell';
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
-import ColumnsVisibilityAction from '../actions/ColumnsVisibilityAction';
 import SpacerCell from '../table/SpacerCell';
 
 interface HeaderRowProps {
@@ -16,7 +15,6 @@ interface HeaderRowProps {
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
-    enableColumnHiding,
     enableExpandAll,
     enableSelection,
     hasExpandableRows,
@@ -51,12 +49,6 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       {headerGroup.headers.map((column) => (
         <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
-
-      {enableColumnHiding && !isParent && (
-        <TableCell size="small" style={{ width: '2rem', padding: '0.75rem 0' }}>
-          <ColumnsVisibilityAction />
-        </TableCell>
-      )}
     </TableRow>
   );
 };

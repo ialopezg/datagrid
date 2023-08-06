@@ -7,6 +7,7 @@ import { RowOptions } from '../helpers';
 export interface DataGridContextProps<D extends {}>
   extends DataGridProps<D>,
     RowOptions {
+  setShowFilters: (value: boolean) => void;
   table: TableInstance<D>;
 }
 

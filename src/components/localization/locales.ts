@@ -12,6 +12,7 @@ export interface Localization {
   search?: string;
   sortAscending?: string;
   sortDescending?: string;
+  toggleFilters?: string;
 }
 
 export const defaultLocalization: Localization = {
@@ -28,4 +29,5 @@ export const defaultLocalization: Localization = {
   search: 'Search',
   sortAscending: 'Sort ascending',
   sortDescending: 'Sort descending',
+  toggleFilters: 'Toggle filters',
 };

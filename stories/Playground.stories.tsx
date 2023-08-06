@@ -61,7 +61,6 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
       phoneNumber: faker.phone.phoneNumber(),
     }))}
     enablePagination={false}
-    enableSorting={false}
     showFooter={false}
     showHeader={false}
   />
@@ -118,9 +117,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     enableColumnReordering
     enableColumnResizing
     enableExpandAll
-    enableFiltering
     enablePagination
-    enableSearch
     enableSelectAll
     enableSelection
     paginationPosition="both"

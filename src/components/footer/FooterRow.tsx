@@ -11,14 +11,8 @@ interface FooterRowProps {
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
-  const {
-    columns,
-    detailPanel,
-    enableColumnHiding,
-    enableSelection,
-    hasExpandableRows,
-    table,
-  } = useDataGrid();
+  const { columns, detailPanel, enableSelection, hasExpandableRows, table } =
+    useDataGrid();
 
   if (!columns?.some((c) => c.Footer)) {
     return null;
@@ -37,7 +31,6 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
       {footerGroup.headers.map((column) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
-      {enableColumnHiding && <SpacerCell />}
     </TableRow>
   );
 };
