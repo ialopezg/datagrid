@@ -5,7 +5,7 @@ import TopBar from './navigation/TopBar';
 import SideBar from './navigation/SiderBar';
 
 const PageContainer = styled('div')({
-  transition: 'all .2s',
+  transition: 'all 0.3s ease',
 });
 
 export const Layout: FC = ({ children }) => {
@@ -17,7 +17,7 @@ export const Layout: FC = ({ children }) => {
       <SideBar open={open} />
 
       <PageContainer
-        style={{ padding: `80px 32px 800px ${open ? '220px' : '32px'}` }}
+        style={{ padding: `80px 32px 800px ${open ? '260px' : '32px'}` }}
       >
         {children}
       </PageContainer>
