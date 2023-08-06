@@ -21,11 +21,11 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     enableSelection,
     hasExpandableRows,
     table,
-    CustomHeaderRowComponent,
+    customHeaderRowComponent,
   } = useDataGrid();
 
-  if (CustomHeaderRowComponent) {
-    return <>{CustomHeaderRowComponent(headerGroup, table)}</>;
+  if (customHeaderRowComponent) {
+    return <>{customHeaderRowComponent(headerGroup, table)}</>;
   }
 
   const isParent = useMemo(

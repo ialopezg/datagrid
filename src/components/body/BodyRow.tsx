@@ -22,11 +22,11 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     hasExpandableRows,
     onRowClick,
     table,
-    CustomBodyRowComponent,
+    customBodyRowComponent,
   } = useDataGrid();
 
-  if (CustomBodyRowComponent) {
-    return <>{CustomBodyRowComponent(row, table)}</>;
+  if (customBodyRowComponent) {
+    return <>{customBodyRowComponent(row, table)}</>;
   }
 
   return (

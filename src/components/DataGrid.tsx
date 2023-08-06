@@ -9,16 +9,13 @@ import {
   TypographyProps,
 } from '@mui/material';
 import {
-  ActionType,
   Cell,
-  Column,
   HeaderGroup,
   Row,
   TableBodyProps,
   TableCellProps,
   TableInstance,
-  TableState,
-  UseTableColumnOptions,
+  TableOptions,
 } from 'react-table';
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
@@ -26,12 +23,47 @@ import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 import { defaultLocalization, Localization } from './localization';
 
-export interface DataGridProps<D extends {} = {}> {
+export interface DataGridProps<D extends {} = {}> extends TableOptions<D> {
   bodyProps?: TableBodyProps;
-  columns: Column<D | {}>[];
   containerProps?: TableContainerProps;
-  data: D[];
-  defaultColumn?: UseTableColumnOptions<D>;
+
+  customBodyComponent?(table: TableInstance<D>): ReactNode;
+
+  customBodyCellComponent?(cell: Cell<D>, table: TableInstance<D>): ReactNode;
+
+  customBodyRowComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
+
+  customContainerComponent?(table: TableInstance<D>): ReactNode;
+
+  customDetailPanelComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
+
+  customFooterComponent?(table: TableInstance<D>): ReactNode;
+
+  customFooterCellComponent?(
+    column: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  customFooterRowComponent?(
+    row: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  customHeaderComponent?(table: TableInstance<D>): ReactNode;
+
+  customHeaderCellComponent?(
+    column: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  customHeaderRowComponent?(
+    headerGroup: HeaderGroup<D>,
+    table: TableInstance<D>,
+  ): ReactNode;
+
+  customPaginationComponent?(table: TableInstance<D>): ReactNode;
+
+  customToolbarComponent?: (table: TableInstance<D>) => ReactNode;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps;
   enableColumnActions?: boolean;
@@ -48,14 +80,7 @@ export interface DataGridProps<D extends {} = {}> {
   enableSelection?: boolean;
   enableSorting?: boolean;
   footerProps?: TableFooterProps;
-  getRowId?: (
-    data?: Partial<Row<D>>,
-    index?: number,
-    parent?: Row<D | {}>,
-  ) => string;
-  getSubRows?: (data: Partial<Row<D>>, index: number) => Row<D>[];
   headerProps?: TableHeadProps;
-  initialState?: Partial<TableState<D>>;
   isLoading?: boolean;
   isFetching?: boolean;
   localization?: Partial<Localization>;
@@ -71,55 +96,11 @@ export interface DataGridProps<D extends {} = {}> {
   showFooter?: boolean;
   showHeader?: boolean;
   showToolbar?: boolean;
-  stateReducer?: (
-    newState: TableState<D>,
-    action: ActionType,
-    previousState: TableState<D>,
-    table?: TableInstance<{} | D>,
-  ) => TableState;
   suppressOverrideWarning?: boolean;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
   toolbarProps?: ToolbarProps;
-
-  CustomBodyComponent?(table: TableInstance<D>): ReactNode;
-
-  CustomBodyCellComponent?(cell: Cell<D>, table: TableInstance<D>): ReactNode;
-
-  CustomBodyRowComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
-
-  CustomContainerComponent?(table: TableInstance<D>): ReactNode;
-
-  CustomDetailPanelComponent?(row: Row<D>, table: TableInstance<D>): ReactNode;
-
-  CustomFooterComponent?(table: TableInstance<D>): ReactNode;
-
-  CustomFooterCellComponent?(
-    column: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  CustomFooterRowComponent?(
-    row: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  CustomHeaderComponent?(table: TableInstance<D>): ReactNode;
-
-  CustomHeaderCellComponent?(
-    column: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  CustomHeaderRowComponent?(
-    headerGroup: HeaderGroup<D>,
-    table: TableInstance<D>,
-  ): ReactNode;
-
-  CustomPaginationComponent?(table: TableInstance<D>): ReactNode;
-
-  CustomToolbarComponent?(table: TableInstance<D>): ReactNode;
 }
 
 export const DataGrid = <D extends {}>({

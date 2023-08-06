@@ -3,16 +3,15 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
-import { Column } from 'react-table';
 
 const meta: Meta = {
-  title: 'Features/Custom Components',
+  title: 'Customization/Components',
   component: DataGrid,
 };
 
 export default meta;
 
-const columns: Column<any>[] = [
+const columns = [
   { accessor: 'firstName' as const, Header: 'First Name' },
   { accessor: 'lastName' as const, Header: 'Last Name' },
   { accessor: 'address' as const, Header: 'Address' },
@@ -32,7 +31,7 @@ export const CustomToolbar: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     showToolbar
-    CustomToolbarComponent={(_) => (
+    customToolbarComponent={(_) => (
       <div>
         <h1>Hi, Custom Toolbar</h1>
       </div>

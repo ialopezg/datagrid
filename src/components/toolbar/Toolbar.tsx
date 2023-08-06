@@ -23,11 +23,11 @@ export const Toolbar: FC<ToolbarProps> = () => {
     title,
     titleProps,
     toolbarProps,
-    CustomToolbarComponent,
+    customToolbarComponent,
   } = useDataGrid();
 
-  if (CustomToolbarComponent) {
-    return <>{CustomToolbarComponent(table)}</>;
+  if (customToolbarComponent) {
+    return <>{customToolbarComponent(table)}</>;
   }
 
   if (!enableSearch && !title && !tableProps) {

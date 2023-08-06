@@ -44,11 +44,11 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     enableFiltering,
     showFiltersInColumnHeader,
     table,
-    CustomHeaderCellComponent,
+    customHeaderCellComponent,
   } = useDataGrid();
 
-  if (CustomHeaderCellComponent) {
-    return <>{CustomHeaderCellComponent(column, table)}</>;
+  if (customHeaderCellComponent) {
+    return <>{customHeaderCellComponent(column, table)}</>;
   }
 
   const isParent = (column?.columns?.length ?? 0) > 0;

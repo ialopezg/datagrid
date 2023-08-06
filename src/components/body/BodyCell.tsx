@@ -9,10 +9,10 @@ interface BodyCellProps {
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { onCellClick, table, CustomBodyCellComponent } = useDataGrid();
+  const { onCellClick, table, customBodyCellComponent } = useDataGrid();
 
-  if (CustomBodyCellComponent) {
-    return <>{CustomBodyCellComponent(cell, table)}</>;
+  if (customBodyCellComponent) {
+    return <>{customBodyCellComponent(cell, table)}</>;
   }
 
   return (

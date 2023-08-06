@@ -18,15 +18,15 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     enableSelection,
     hasExpandableRows,
     table,
-    CustomFooterRowComponent,
+    customFooterRowComponent,
   } = useDataGrid();
 
   if (!columns?.some((c) => c.Footer)) {
     return null;
   }
 
-  if (CustomFooterRowComponent) {
-    return <>{CustomFooterRowComponent(footerGroup, table)}</>;
+  if (customFooterRowComponent) {
+    return <>{customFooterRowComponent(footerGroup, table)}</>;
   }
 
   return (

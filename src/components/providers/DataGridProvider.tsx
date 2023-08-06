@@ -32,7 +32,7 @@ export const DataGridProvider = <D extends {}>({
   suppressOverrideWarning,
   ...rest
 }: DataGridProviderProps<D>) => {
-  const table = useTable(
+  const table = useTable<D>(
     {
       columns,
       data,
@@ -61,8 +61,8 @@ export const DataGridProvider = <D extends {}>({
 
   return (
     <DataGridContext.Provider
-      // @ts-ignore
       value={{
+        // @ts-ignore
         table,
         ...rowOptions,
         ...rest,

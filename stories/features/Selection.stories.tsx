@@ -3,7 +3,6 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
-import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Selection',
@@ -12,11 +11,11 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: Column<any>[] = [
-  { accessor: 'firstName', Header: 'First Name' },
-  { accessor: 'lastName', Header: 'Last Name' },
-  { accessor: 'age', Header: 'Age' },
-  { accessor: 'address', Header: 'Address' },
+const columns = [
+  { accessor: 'firstName' as const, Header: 'First Name' },
+  { accessor: 'lastName' as const, Header: 'Last Name' },
+  { accessor: 'age' as const, Header: 'Age' },
+  { accessor: 'address' as const, Header: 'Address' },
 ];
 
 const data = [...Array(21)].map((_) => ({
@@ -40,9 +39,8 @@ export const OnRowSelectEvent: Story<DataGridProps> = () => (
     data={data}
     enableSelection
     enableSelectAll
-    onRowSelect={(e, state, selectedRows) => {
-      alert(`Rows Selected: ${selectedRows.length + 1}`);
-      console.log({ e, state, selectedRows });
+    onRowSelect={(e, row, selectedRows) => {
+      console.log({ e, state: row, selectedRows });
     }}
   />
 );

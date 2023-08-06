@@ -13,11 +13,11 @@ interface FooterCellProps {
 }
 
 export const FooterCell: FC<FooterCellProps> = ({ column }) => {
-  const { table, CustomFooterCellComponent } = useDataGrid();
+  const { table, customFooterCellComponent } = useDataGrid();
   const isParent = (column?.columns?.length ?? 0) > 0;
 
-  if (CustomFooterCellComponent) {
-    return <>{CustomFooterCellComponent(column, table)}</>;
+  if (customFooterCellComponent) {
+    return <>{customFooterCellComponent(column, table)}</>;
   }
 
   return (

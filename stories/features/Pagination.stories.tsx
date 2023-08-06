@@ -3,7 +3,6 @@ import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
-import { Column } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Pagination',
@@ -12,8 +11,8 @@ const meta: Meta = {
 
 export default meta;
 
-const columns: Column<any>[] = [
-  { accessor: 'firstName', Header: 'First Name' },
+const columns = [
+  { accessor: 'firstName' as const, Header: 'First Name' },
   { accessor: 'lastName' as const, Header: 'Last Name' },
   { accessor: 'address' as const, Header: 'Address' },
   { accessor: 'state' as const, Header: 'State' },
