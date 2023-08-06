@@ -81,7 +81,7 @@ export interface DataGridProps<D extends {} = {}>
   toolbarProps?: ToolbarProps;
 }
 
-export const DataGrid = <D extends {}>({
+export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   enablePagination = true,
   enableRowTree = true,
@@ -110,5 +110,3 @@ export const DataGrid = <D extends {}>({
     <Container />
   </DataGridProvider>
 );
-
-export default DataGrid;
