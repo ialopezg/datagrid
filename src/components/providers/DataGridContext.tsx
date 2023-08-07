@@ -8,6 +8,8 @@ export interface DataGridContextProps<D extends {}>
   extends DataGridProps<D>,
     RowOptions {
   densePadding: boolean;
+  itemForUpdate: string | null;
+  setItemForUpdate: (value: string | null) => void;
   setDensePadding: (value: boolean) => void;
   showFilters: boolean;
   setShowFilters: (value: boolean) => void;

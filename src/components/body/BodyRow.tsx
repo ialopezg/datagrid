@@ -1,4 +1,4 @@
-import { alpha, TableRow, useTheme } from '@mui/material';
+import { alpha, TableCell, TableRow, useTheme } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
@@ -7,6 +7,7 @@ import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import SelectRowAction from '../actions/SelectRowAction';
+import RowActionsAction from '../actions/RowActionsAction';
 
 interface BodyRowProps {
   row: Row;
@@ -16,6 +17,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   const {
     bodyRowProps: defaultBodyRowProps,
     detailPanel,
+    enableRowActions,
     enableSelection,
     hasExpandableRows,
     onRowClick,
@@ -41,6 +43,12 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   return (
     <>
       <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...bodyRowProps}>
+        {enableRowActions && (
+          <TableCell>
+            <RowActionsAction row={row} />
+          </TableCell>
+        )}
+
         {(hasExpandableRows || detailPanel) && <ExpandRowAction row={row} />}
 
         {enableSelection && <SelectRowAction row={row} />}

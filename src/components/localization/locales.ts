@@ -1,7 +1,10 @@
 export interface Localization {
+  actions?: string;
+  cancel?: string;
   clear?: string;
   clearSorting?: string;
   columnActions?: string;
+  edit?: string;
   expand?: string;
   expandAll?: string;
   filter?: string;
@@ -9,6 +12,8 @@ export interface Localization {
   ungroupByColumn?: string;
   hideColumn?: string;
   hideColumns?: string;
+  rowActions?: string;
+  save?: string;
   search?: string;
   sortAscending?: string;
   sortDescending?: string;
@@ -17,9 +22,12 @@ export interface Localization {
 }
 
 export const defaultLocalization: Localization = {
+  actions: 'Actions',
+  cancel: 'Cancel',
   clear: 'Clear',
   clearSorting: 'Clear sorting',
   columnActions: 'Column actions',
+  edit: 'Edit',
   expand: 'Expand',
   expandAll: 'Expand all',
   filter: 'Filter',
@@ -27,6 +35,8 @@ export const defaultLocalization: Localization = {
   ungroupByColumn: 'Ungroup column',
   hideColumn: 'Hide column',
   hideColumns: 'Hide columns',
+  rowActions: 'Row actions',
+  save: 'Save',
   search: 'Search',
   sortAscending: 'Sort ascending',
   sortDescending: 'Sort descending',

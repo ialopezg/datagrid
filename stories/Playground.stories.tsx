@@ -61,6 +61,8 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
       phoneNumber: faker.phone.phoneNumber(),
     }))}
     disableColumnActions
+    enableRowActions
+    enableRowEditing
     hideToolbarTop
     hideToolbarBottom
     manualPagination

@@ -14,6 +14,7 @@ import ColumnActionsAction from '../actions/ColumnActionsAction';
 
 const TableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
+  verticalAlign: 'text-top',
 });
 
 const TableCellContent = styled('div')({

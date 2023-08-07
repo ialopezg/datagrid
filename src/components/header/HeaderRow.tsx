@@ -1,4 +1,4 @@
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
@@ -16,9 +16,11 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
     disableExpandAll,
+    enableRowActions,
     enableSelection,
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
+    localization,
     table,
   } = useDataGrid();
 
@@ -42,6 +44,8 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerRowProps}>
+      {enableRowActions && <TableCell>{localization?.actions}</TableCell>}
+
       {hasExpandableRows || detailPanel ? (
         !disableExpandAll && !isParent ? (
           <ExpandAllRowsAction />

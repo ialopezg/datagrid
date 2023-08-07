@@ -49,13 +49,12 @@ export interface DataGridProps<D extends {} = {}>
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
-  columns: Column<D>[];
   containerProps?: TableContainerProps;
   defaultDensePadding?: boolean;
   defaultShowFilters?: boolean;
   disableColumnActions?: boolean;
-  disableDensePadding?: boolean;
   disableColumnHiding?: boolean;
+  disableDensePadding?: boolean;
   disableExpandAll?: boolean;
   disableSelectAll?: boolean;
   disableSubRowTree?: boolean;
@@ -63,6 +62,8 @@ export interface DataGridProps<D extends {} = {}>
   detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
   enableColumnGrouping?: boolean;
   enableColumnResizing?: boolean;
+  enableRowActions?: boolean;
+  enableRowEditing?: boolean;
   enableSelection?: boolean;
   footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
   footerProps?: TableFooterProps;
@@ -91,6 +92,7 @@ export interface DataGridProps<D extends {} = {}>
   ) => void;
   onGlobalFilterChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
+  onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
   onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
   onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onRowSelectChange?: (
@@ -102,6 +104,11 @@ export interface DataGridProps<D extends {} = {}>
   paginationProps?:
     | Partial<TablePaginationProps>
     | ((table: TableInstance<D>) => Partial<TablePaginationProps>);
+  rowActionMenuItems?: (
+    row: Row<D>,
+    table: TableInstance<D>,
+    onCloseMenu: () => void,
+  ) => ReactNode[];
   searchProps?: TextFieldProps;
   tableProps?: TableProps;
   title?: string | ReactNode;

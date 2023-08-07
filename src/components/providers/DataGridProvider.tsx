@@ -43,6 +43,7 @@ export const DataGridProvider = <D extends {}>(
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
+  const [itemForUpdate, setItemForUpdate] = useState<string | null>(null);
   const [showFilters, setShowFilters] = useState<boolean>(
     props.defaultShowFilters ?? false,
   );
@@ -54,6 +55,8 @@ export const DataGridProvider = <D extends {}>(
         ...props,
         densePadding,
         setDensePadding,
+        itemForUpdate,
+        setItemForUpdate,
         showFilters,
         setShowFilters,
         // @ts-ignore
