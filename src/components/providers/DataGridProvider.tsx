@@ -35,8 +35,11 @@ export const DataGridProvider = <D extends {}>(
   const rowOptions = RowHelper({ table });
 
   // ** State
-  const [showFilters, setShowFilters] = useState<boolean | undefined>(
-    props.defaultShowFilters,
+  const [densePadding, setDensePadding] = useState<boolean>(
+    props.defaultDensePadding ?? false,
+  );
+  const [showFilters, setShowFilters] = useState<boolean>(
+    props.defaultShowFilters ?? false,
   );
 
   return (
@@ -44,6 +47,8 @@ export const DataGridProvider = <D extends {}>(
       value={{
         ...rowOptions,
         ...props,
+        densePadding,
+        setDensePadding,
         showFilters,
         setShowFilters,
         // @ts-ignore

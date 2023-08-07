@@ -7,6 +7,9 @@ import { RowOptions } from '../helpers';
 export interface DataGridContextProps<D extends {}>
   extends DataGridProps<D>,
     RowOptions {
+  densePadding: boolean;
+  setDensePadding: (value: boolean) => void;
+  showFilters: boolean;
   setShowFilters: (value: boolean) => void;
   table: TableInstance<D>;
 }

@@ -13,7 +13,8 @@ interface FooterCellProps {
 }
 
 export const FooterCell: FC<FooterCellProps> = ({ column }) => {
-  const { footerCellProps: defaultFooterCellProps } = useDataGrid();
+  const { densePadding, footerCellProps: defaultFooterCellProps } =
+    useDataGrid();
   const isParent = (column?.columns?.length ?? 0) > 0;
 
   const cellProps =
@@ -24,6 +25,8 @@ export const FooterCell: FC<FooterCellProps> = ({ column }) => {
     ...cellProps,
     ...column.getFooterProps(),
     style: {
+      padding: densePadding ? '0.5rem' : '1rem',
+      transition: 'all 0.2s ease-in-out',
       ...column.getFooterProps().style,
       ...(cellProps?.style ?? {}),
     },

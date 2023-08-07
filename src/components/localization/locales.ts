@@ -12,6 +12,7 @@ export interface Localization {
   search?: string;
   sortAscending?: string;
   sortDescending?: string;
+  toggleDensePadding?: string;
   toggleFilters?: string;
 }
 
@@ -29,5 +30,6 @@ export const defaultLocalization: Localization = {
   search: 'Search',
   sortAscending: 'Sort ascending',
   sortDescending: 'Sort descending',
+  toggleDensePadding: 'Toggle dense padding',
   toggleFilters: 'Toggle filters',
 };

@@ -44,6 +44,7 @@ interface HeaderCellProps {
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
+    densePadding,
     disableColumnActions,
     disableFilters,
     enableColumnResizing,
@@ -60,6 +61,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     ...cellProps,
     ...column.getHeaderProps(),
     style: {
+      padding: densePadding ? '0.5rem' : '1rem',
+      transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
       ...column.getHeaderProps().style,
       ...(cellProps?.style ?? {}),
     },

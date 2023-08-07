@@ -50,8 +50,10 @@ export interface DataGridProps<D extends {} = {}>
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
+  defaultDensePadding?: boolean;
   defaultShowFilters?: boolean;
   disableColumnActions?: boolean;
+  disableDensePadding?: boolean;
   disableColumnHiding?: boolean;
   disableExpandAll?: boolean;
   disableSelectAll?: boolean;
@@ -75,7 +77,9 @@ export interface DataGridProps<D extends {} = {}>
     | ((headerGroup: HeaderGroup<D>) => TableRowProps);
   hideFooter?: boolean;
   hideHeader?: boolean;
-  hideToolbar?: boolean;
+  hideToolbarActions?: boolean;
+  hideToolbarBottom?: boolean;
+  hideToolbarTop?: boolean;
   isFetching?: boolean;
   isLoading?: boolean;
   localization?: Partial<Localization>;
@@ -101,19 +105,25 @@ export interface DataGridProps<D extends {} = {}>
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
-  toolbarProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
+  toolbarActionsPosition?: 'bottom' | 'top';
+  toolbarBottomProps?:
+    | ToolbarProps
+    | ((table: TableInstance<D>) => ToolbarProps);
+  toolbarTopProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
 }
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   localization = defaultLocalization,
   paginationPosition = 'bottom',
+  toolbarActionsPosition = 'top',
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
+    toolbarActionsPosition={toolbarActionsPosition}
     {...rest}
   >
     <Container />

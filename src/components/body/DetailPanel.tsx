@@ -37,6 +37,10 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
     ...detailPanelProps,
     ...row.getRowProps(),
     style: {
+      borderBottom: !row.isExpanded ? 'none' : undefined,
+      paddingBottom: row.isExpanded ? '1rem' : 0,
+      paddingTop: row.isExpanded ? '1rem' : 0,
+      transition: 'all 0.2s ease-in-out',
       ...row.getRowProps().style,
       ...(detailPanelProps?.style ?? {}),
     },

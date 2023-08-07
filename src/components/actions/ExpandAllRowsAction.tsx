@@ -7,15 +7,16 @@ import { useDataGrid } from '../providers';
 interface ExpandAllRowsActionProps {}
 
 export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
-  const { detailPanel, hasExpandedRows, localization, table } = useDataGrid();
+  const { densePadding, detailPanel, hasExpandedRows, localization, table } =
+    useDataGrid();
 
   return (
     <TableCell
       size="small"
       {...table.getToggleAllRowsExpandedProps()}
       style={{
-        padding: '0.5rem',
-        paddingRight: '0',
+        padding: densePadding ? '0' : '0.5rem 0.5rem',
+        transition: 'all 0.2s ease-in-out',
         width: `${detailPanel ? 2 : table.expandedDepth + 2}rem`,
       }}
     >

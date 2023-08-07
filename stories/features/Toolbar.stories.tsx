@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
-  title: 'Features/Toolbar',
+  title: 'Features/ToolbarBottom',
   component: DataGrid,
 };
 export default meta;
@@ -26,18 +26,39 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const ToolbarEnabledDefault: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} />
+  <DataGrid columns={columns} data={data} title="DataGrid" />
 );
 
-export const ToolbarHidden: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} hideToolbar />
+export const TopToolbarHidden: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} hideToolbarTop />
 );
 
-export const ToolbarWithTitle: Story<DataGridProps> = () => (
+export const BottomToolbarHidden: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} hideToolbarBottom />
+);
+
+export const NoToolbars: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} hideToolbarTop hideToolbarBottom />
+);
+
+export const HideToolbarActions: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} hideToolbarActions />
+);
+
+export const ToolbarActionsOnBottom: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    title="People Sample"
+    title="My People Table"
+    paginationPosition="bottom"
+  />
+);
+
+export const ToolbarWithStyledTitle: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    title="My People Table"
     titleProps={{ variant: 'h4' }}
   />
 );

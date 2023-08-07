@@ -9,7 +9,7 @@ interface BodyCellProps {
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { bodyCellProps: defaultBodyCellProps, onCellClick } = useDataGrid();
+  const { bodyCellProps: defaultBodyCellProps, densePadding, onCellClick } = useDataGrid();
 
   const bodyCellProps =
     defaultBodyCellProps instanceof Function
@@ -19,6 +19,8 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
     ...bodyCellProps,
     ...cell.getCellProps(),
     style: {
+      padding: `${densePadding ? 0.5 : 1}rem`,
+      transaction: 'all 0.2s ease-in-out',
       ...cell.getCellProps().style,
       ...(bodyCellProps?.style ?? {}),
     },

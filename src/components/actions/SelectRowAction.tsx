@@ -9,7 +9,7 @@ interface SelectRowActionProps {
 }
 
 export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
-  const { onRowSelectChange, table } = useDataGrid();
+  const { densePadding, onRowSelectChange, table } = useDataGrid();
 
   const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     row.getToggleRowSelectedProps()?.onChange?.(e);
@@ -17,7 +17,13 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
   };
 
   return (
-    <TableCell style={{ width: '2rem', padding: '0.5rem' }}>
+    <TableCell
+      style={{
+        width: '2rem',
+        padding: densePadding ? '0' : '0.6rem',
+        transition: 'all 0.2s ease-in-out',
+      }}
+    >
       <Checkbox
         {...row.getToggleRowSelectedProps()}
         onChange={onSelectChange}

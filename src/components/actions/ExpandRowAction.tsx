@@ -9,16 +9,16 @@ interface ExpandRowActionProps {
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
-  const { detailPanel, localization, table } = useDataGrid();
+  const { densePadding, detailPanel, localization, table } = useDataGrid();
 
   return (
     <TableCell
       size="small"
       {...row.getToggleRowExpandedProps()}
       style={{
-        padding: '0.5rem',
-        paddingRight: '0',
+        padding: densePadding ? '0' : '0.6rem 0',
         paddingLeft: `${row.depth + 0.5}rem`,
+        transition: 'all 0.2s ease-in-out',
         width: `${detailPanel ? 2 : table.expandedDepth - row.depth + 2}rem`,
       }}
     >

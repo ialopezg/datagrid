@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import FiltersVisibilityAction from '../actions/FiltersVisibilityAction';
 import { ColumnsVisibilityAction } from '../actions';
+import DensePaddingAction from '../actions/DensePaddingAction';
 
 export const ToolbarActionsContainer = styled('div')({
   display: 'flex',
@@ -12,12 +13,14 @@ export const ToolbarActionsContainer = styled('div')({
 interface ToolbarActionsProps {}
 
 export const ToolbarActions: FC<ToolbarActionsProps> = () => {
-  const { disableColumnHiding, disableFilters } = useDataGrid();
+  const { disableColumnHiding, disableDensePadding, disableFilters } =
+    useDataGrid();
 
   return (
     <ToolbarActionsContainer>
       {!disableFilters && <FiltersVisibilityAction />}
       {!disableColumnHiding && <ColumnsVisibilityAction />}
+      {!disableDensePadding && <DensePaddingAction />}
     </ToolbarActionsContainer>
   );
 };

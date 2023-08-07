@@ -1,3 +1,3 @@
 export * from './Pagination';
-export { default } from './Toolbar';
-export * from './Toolbar';
+export { default } from './ToolbarTop';
+export * from './ToolbarTop';

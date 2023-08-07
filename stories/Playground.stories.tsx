@@ -62,8 +62,11 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
     }))}
     disableColumnActions
     disableColumnHiding
+    disableDensePadding
     disableGlobalFilter
     disableFilters
+    hideToolbarTop
+    hideToolbarBottom
     manualPagination
   />
 );

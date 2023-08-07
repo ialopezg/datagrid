@@ -1,19 +1,21 @@
 import { Paper, TableContainer } from '@mui/material';
 import React, { FC } from 'react';
 
-import { useDataGrid } from '../providers';
 import Table from './Table';
-import Toolbar from '../toolbar';
+import { useDataGrid } from '../providers';
+import ToolbarBottom from '../toolbar/ToolbarBottom';
+import ToolbarTop from '../toolbar/ToolbarTop';
 
 interface ContainerProps {}
 
 export const Container: FC<ContainerProps> = () => {
-  const { containerProps, hideToolbar } = useDataGrid();
+  const { containerProps, hideToolbarBottom, hideToolbarTop } = useDataGrid();
 
   return (
     <TableContainer component={Paper} {...containerProps}>
-      {!hideToolbar && <Toolbar />}
+      {!hideToolbarTop && <ToolbarTop />}
       <Table />
+      {!hideToolbarBottom && <ToolbarBottom />}
     </TableContainer>
   );
 };

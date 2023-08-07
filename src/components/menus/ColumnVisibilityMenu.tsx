@@ -29,7 +29,7 @@ const ColumnMenuItem: FC<ColumnMenuItem> = ({ column }) => {
             onChange={() => isMaxDepth && column.toggleHidden()}
           />
         ) : (
-          <Typography>{column.Header}</Typography>
+          <Typography>{String(column.Header)}</Typography>
         )}
       </MenuItem>
       {column.columns?.map((c, i) => (
