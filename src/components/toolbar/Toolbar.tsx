@@ -19,13 +19,14 @@ export const Toolbar: FC<ToolbarProps> = () => {
     disableColumnHiding,
     disableFilters,
     disableGlobalFilter,
+    table,
     title,
     titleProps,
-    toolbarProps,
+    toolbarProps: defaultToolbarProps,
   } = useDataGrid();
 
   if (
-    !toolbarProps &&
+    !defaultToolbarProps &&
     !title &&
     disableColumnHiding &&
     disableFilters &&
@@ -34,9 +35,20 @@ export const Toolbar: FC<ToolbarProps> = () => {
     return null;
   }
 
+  const toolbarProps =
+    defaultToolbarProps instanceof Function
+      ? defaultToolbarProps(table)
+      : defaultToolbarProps;
+
   return (
     <StyledToolbar variant="dense" {...toolbarProps}>
-      {title ? <Typography {...titleProps}>{title}</Typography> : <span />}
+      {title ? (
+        <Typography variant="h5" {...titleProps}>
+          {title}
+        </Typography>
+      ) : (
+        <span />
+      )}
       <ToolbarActionsContainer>
         {!disableGlobalFilter && <SearchTextField />}
         <ToolbarActions />

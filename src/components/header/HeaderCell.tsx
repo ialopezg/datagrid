@@ -45,11 +45,25 @@ interface HeaderCellProps {
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
     disableColumnActions,
-    enableColumnResizing,
     disableFilters,
+    enableColumnResizing,
+    headerCellProps: defaultCellProps,
     showFilters,
     table,
   } = useDataGrid();
+
+  const cellProps =
+    defaultCellProps instanceof Function
+      ? defaultCellProps(column)
+      : defaultCellProps;
+  const headerCellProps = {
+    ...cellProps,
+    ...column.getHeaderProps(),
+    style: {
+      ...column.getHeaderProps().style,
+      ...(cellProps?.style ?? {}),
+    },
+  };
 
   const isParent = (column?.columns?.length ?? 0) > 0;
 
@@ -57,7 +71,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     <TableCell
       align={isParent ? 'center' : 'left'}
       variant="head"
-      {...column.getHeaderProps(column.getSortByToggleProps())}
+      {...headerCellProps}
     >
       <TableCellContent>
         <TableCellText

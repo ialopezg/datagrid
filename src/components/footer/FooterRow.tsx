@@ -11,15 +11,34 @@ interface FooterRowProps {
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
-  const { columns, detailPanel, enableSelection, hasExpandableRows, table } =
-    useDataGrid();
+  const {
+    columns,
+    detailPanel,
+    enableSelection,
+    footerRowProps: defaultFooterRowProps,
+    hasExpandableRows,
+    table,
+  } = useDataGrid();
 
   if (!columns?.some((c) => c.Footer)) {
     return null;
   }
 
+  const rowProps =
+    defaultFooterRowProps instanceof Function
+      ? defaultFooterRowProps(footerGroup)
+      : defaultFooterRowProps;
+  const footerRowProps = {
+    ...rowProps,
+    ...footerGroup.getFooterGroupProps(),
+    style: {
+      ...footerGroup.getFooterGroupProps()?.style,
+      ...(rowProps?.style ?? {}),
+    },
+  };
+
   return (
-    <TableRow {...footerGroup.getFooterGroupProps()}>
+    <TableRow {...footerRowProps}>
       {(hasExpandableRows || detailPanel) && (
         <SpacerCell
           width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}

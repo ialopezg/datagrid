@@ -9,12 +9,17 @@ interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
   const {
-    headerProps,
+    headerProps: defaultHeaderProps,
     isFetching,
     manualPagination,
     paginationPosition,
     table,
   } = useDataGrid();
+
+  const headerProps =
+    defaultHeaderProps instanceof Function
+      ? defaultHeaderProps(table)
+      : defaultHeaderProps;
 
   return (
     <TableHead {...headerProps}>

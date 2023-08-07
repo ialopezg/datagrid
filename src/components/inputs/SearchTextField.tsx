@@ -14,12 +14,13 @@ const TextField = styled(MuiTextField)({
 interface SearchTextFieldProps {}
 
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
-  const { localization, onSearchChange, searchProps, table } = useDataGrid();
+  const { localization, onGlobalFilterChange, searchProps, table } =
+    useDataGrid();
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChange = useAsyncDebounce((e) => {
     table.setGlobalFilter(e.target.value ?? undefined);
-    onSearchChange?.(e);
+    onGlobalFilterChange?.(e);
   }, 200);
 
   const onClearFilter = () => {

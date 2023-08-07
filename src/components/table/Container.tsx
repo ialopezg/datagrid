@@ -8,15 +8,10 @@ import Toolbar from '../toolbar';
 interface ContainerProps {}
 
 export const Container: FC<ContainerProps> = () => {
-  const { containerProps: defaultContainerProps, hideToolbar } = useDataGrid();
-
-  const containerProps = {
-    component: Paper,
-    ...defaultContainerProps,
-  };
+  const { containerProps, hideToolbar } = useDataGrid();
 
   return (
-    <TableContainer {...containerProps}>
+    <TableContainer component={Paper} {...containerProps}>
       {!hideToolbar && <Toolbar />}
       <Table />
     </TableContainer>

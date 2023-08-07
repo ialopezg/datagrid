@@ -10,10 +10,15 @@ import {
 } from '@mui/material';
 import {
   Cell,
+  Column,
+  HeaderGroup,
   Row,
   TableBodyProps,
   TableCellProps,
+  TableHeaderProps,
+  TableInstance,
   TableOptions,
+  TableRowProps,
   UseExpandedOptions,
   UseFiltersOptions,
   UseGlobalFiltersOptions,
@@ -41,7 +46,9 @@ export interface DataGridProps<D extends {} = {}>
     UseRowSelectOptions<D>,
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
+  bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
   bodyProps?: TableBodyProps;
+  bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
   defaultShowFilters?: boolean;
   disableColumnActions?: boolean;
@@ -50,30 +57,51 @@ export interface DataGridProps<D extends {} = {}>
   disableSelectAll?: boolean;
   disableSubRowTree?: boolean;
   detailPanel?: (row: Row<D>) => ReactNode;
-  detailPanelProps?: TableCellProps;
+  detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
   enableColumnGrouping?: boolean;
   enableColumnResizing?: boolean;
   enableSelection?: boolean;
+  footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
   footerProps?: TableFooterProps;
-  headerProps?: TableHeadProps;
-  isLoading?: boolean;
-  isFetching?: boolean;
-  localization?: Partial<Localization>;
-  onCellClick?: (e: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
-  onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
-  onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
-  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onRowSelect?: (e: ChangeEvent, row: Row<D>, selectedRows: Row<D>[]) => void;
-  paginationPosition?: 'bottom' | 'both' | 'top';
-  paginationProps?: TablePaginationProps;
-  searchProps?: TextFieldProps;
+  footerRowProps?:
+    | TableRowProps
+    | ((footerGroup: HeaderGroup<D>) => TableRowProps);
+  headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+  headerProps?:
+    | TableHeadProps
+    | ((table: TableInstance<D>) => TableHeaderProps);
+  headerRowProps?:
+    | TableRowProps
+    | ((headerGroup: HeaderGroup<D>) => TableRowProps);
   hideFooter?: boolean;
   hideHeader?: boolean;
   hideToolbar?: boolean;
+  isFetching?: boolean;
+  isLoading?: boolean;
+  localization?: Partial<Localization>;
+  onCellClick?: (e: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
+  onDetailPanelClick?: (
+    e: MouseEvent<HTMLTableCellElement>,
+    row: Row<D>,
+  ) => void;
+  onGlobalFilterChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
+  onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
+  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onRowSelectChange?: (
+    e: ChangeEvent,
+    row: Row<D>,
+    selectedRows: Row<D>[],
+  ) => void;
+  paginationPosition?: 'bottom' | 'both' | 'top';
+  paginationProps?:
+    | TablePaginationProps
+    | ((table: TableInstance<D>) => TablePaginationProps);
+  searchProps?: TextFieldProps;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;
-  toolbarProps?: ToolbarProps;
+  toolbarProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
 }
 
 export default <D extends {}>({

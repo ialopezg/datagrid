@@ -9,18 +9,18 @@ interface SelectRowActionProps {
 }
 
 export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
-  const { onRowSelect, table } = useDataGrid();
+  const { onRowSelectChange, table } = useDataGrid();
 
-  const onRowSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     row.getToggleRowSelectedProps()?.onChange?.(e);
-    onRowSelect?.(e, row, table.selectedFlatRows);
+    onRowSelectChange?.(e, row, table.selectedFlatRows);
   };
 
   return (
     <TableCell style={{ width: '2rem', padding: '0.5rem' }}>
       <Checkbox
         {...row.getToggleRowSelectedProps()}
-        onChange={onRowSelectChange}
+        onChange={onSelectChange}
       />
     </TableCell>
   );

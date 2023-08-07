@@ -38,7 +38,7 @@ export const OnRowSelectChange: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     enableSelection
-    onRowSelect={(e, row, selectedRows) => {
+    onRowSelectChange={(e, row, selectedRows) => {
       console.log({ e, state: row, selectedRows });
     }}
   />

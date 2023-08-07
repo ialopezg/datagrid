@@ -23,7 +23,7 @@ export const defaultLocalization: Localization = {
   expandAll: 'Expand all',
   filter: 'Filter',
   groupByColumn: 'Group by column',
-  ungroupByColumn:  'Ungroup column',
+  ungroupByColumn: 'Ungroup column',
   hideColumn: 'Hide column',
   hideColumns: 'Hide columns',
   search: 'Search',

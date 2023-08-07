@@ -6,7 +6,12 @@ import { useDataGrid } from '../providers';
 interface PaginationProps {}
 
 export const Pagination: FC<PaginationProps> = () => {
-  const { paginationProps, table } = useDataGrid();
+  const { paginationProps: defaultPaginationProps, table } = useDataGrid();
+
+  const paginationProps =
+    defaultPaginationProps instanceof Function
+      ? defaultPaginationProps(table)
+      : defaultPaginationProps;
 
   const onRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
     table.setPageSize(+e.target.value);

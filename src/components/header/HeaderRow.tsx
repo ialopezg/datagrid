@@ -18,8 +18,22 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     disableExpandAll,
     enableSelection,
     hasExpandableRows,
+    headerRowProps: defaultHeaderRowProps,
     table,
   } = useDataGrid();
+
+  const rowProps =
+    defaultHeaderRowProps instanceof Function
+      ? defaultHeaderRowProps(headerGroup)
+      : defaultHeaderRowProps;
+  const headerRowProps = {
+    ...headerGroup,
+    ...headerGroup.getHeaderGroupProps(),
+    style: {
+      ...headerGroup.getHeaderGroupProps().style,
+      ...(rowProps?.style ?? {}),
+    },
+  };
 
   const isParent = useMemo(
     () => headerGroup.headers.some((h) => (h.columns?.length ?? 0) > 0),
@@ -27,7 +41,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   );
 
   return (
-    <TableRow {...headerGroup.getHeaderGroupProps()}>
+    <TableRow {...headerRowProps}>
       {hasExpandableRows || detailPanel ? (
         !disableExpandAll && !isParent ? (
           <ExpandAllRowsAction />

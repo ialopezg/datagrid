@@ -1,12 +1,27 @@
 import { TableCell } from '@mui/material';
 import React, { CSSProperties, FC } from 'react';
+import { useDataGrid } from '../providers';
 
 interface SpacerCellProps {
   width?: CSSProperties['width'];
 }
 
 export const SpacerCell: FC<SpacerCellProps> = ({ width }) => {
-  return <TableCell style={{ width }} />;
+  const { bodyCellProps: defaultBodyCellProps } = useDataGrid();
+
+  const cellProps =
+    defaultBodyCellProps instanceof Function
+      ? defaultBodyCellProps()
+      : defaultBodyCellProps;
+  const bodyCellProps = {
+    ...cellProps,
+    style: {
+      width,
+      ...(cellProps?.style ?? {}),
+    },
+  };
+
+  return <TableCell {...bodyCellProps} />;
 };
 
 export default SpacerCell;

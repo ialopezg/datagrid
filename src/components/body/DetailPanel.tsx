@@ -9,19 +9,47 @@ interface DetailPanelProps {
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
-  const { detailPanel, detailPanelProps, table } = useDataGrid();
+  const {
+    bodyRowProps: defaultBodyRowProps,
+    detailPanel,
+    detailPanelProps: defaultDetailPanelProps,
+    onDetailPanelClick,
+    table,
+  } = useDataGrid();
+
+  const rowProps =
+    defaultBodyRowProps instanceof Function
+      ? defaultBodyRowProps(row)
+      : defaultBodyRowProps;
+  const bodyRowProps = {
+    ...rowProps,
+    ...row.getToggleRowExpandedProps(),
+    style: {
+      ...row.getToggleRowExpandedProps().style,
+      ...(rowProps?.style ?? {}),
+    },
+  }
+  const detailPanelProps =
+    defaultDetailPanelProps instanceof Function
+      ? defaultDetailPanelProps(row)
+      : defaultDetailPanelProps;
+  const bodyCellProps = {
+    ...detailPanelProps,
+    ...row.getRowProps(),
+    style: {
+      ...row.getRowProps().style,
+      ...(detailPanelProps?.style ?? {}),
+    },
+  };
 
   return (
-    <TableRow {...row.getToggleRowExpandedProps()}>
+    <TableRow {...bodyRowProps}>
       <TableCell
         colSpan={table.visibleColumns.length + 10}
-        style={{
-          borderBottom: !row.isExpanded ? 'none' : undefined,
-          paddingBottom: row.isExpanded ? '1rem' : 0,
-          paddingTop: row.isExpanded ? '1rem' : 0,
-          transition: 'all 0.2s',
+        onClick={(e) => {
+          onDetailPanelClick?.(e, row);
         }}
-        {...detailPanelProps}
+        {...bodyCellProps}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>
       </TableCell>

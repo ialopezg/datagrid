@@ -9,7 +9,20 @@ interface BodyCellProps {
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { onCellClick } = useDataGrid();
+  const { bodyCellProps: defaultBodyCellProps, onCellClick } = useDataGrid();
+
+  const bodyCellProps =
+    defaultBodyCellProps instanceof Function
+      ? defaultBodyCellProps(cell)
+      : defaultBodyCellProps;
+  const cellProps = {
+    ...bodyCellProps,
+    ...cell.getCellProps(),
+    style: {
+      ...cell.getCellProps().style,
+      ...(bodyCellProps?.style ?? {}),
+    },
+  };
 
   return (
     <TableCell
@@ -17,7 +30,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
         onCellClick?.(e, cell);
       }}
       variant="body"
-      {...cell.getCellProps()}
+      {...cellProps}
     >
       {cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
