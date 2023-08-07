@@ -22,6 +22,11 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     column.setFilter(undefined);
   };
 
+  if (column.Filter) {
+    // @ts-ignore
+    return <>{column.Filter({ column })}</>;
+  }
+
   return (
     <TextField
       margin="dense"

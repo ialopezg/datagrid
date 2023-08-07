@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
-  title: 'Features/ToolbarBottom',
+  title: 'Features/Toolbar',
   component: DataGrid,
 };
 export default meta;

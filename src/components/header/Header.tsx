@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { LinearProgress, TableHead } from '@mui/material';
+import { TableHead } from '@mui/material';
 
 import { useDataGrid } from '../providers';
 import HeaderRow from './HeaderRow';
@@ -7,7 +7,7 @@ import HeaderRow from './HeaderRow';
 interface HeaderProp {}
 
 export const Header: FC<HeaderProp> = () => {
-  const { headerProps: defaultHeaderProps, isFetching, table } = useDataGrid();
+  const { headerProps: defaultHeaderProps, table } = useDataGrid();
 
   const headerProps =
     defaultHeaderProps instanceof Function
@@ -16,8 +16,6 @@ export const Header: FC<HeaderProp> = () => {
 
   return (
     <TableHead {...headerProps}>
-      {isFetching && <LinearProgress />}
-
       {table.headerGroups.map((headerGroup) => (
         <HeaderRow
           headerGroup={headerGroup}
