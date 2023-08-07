@@ -10,6 +10,9 @@ import { setConsoleOptions, withConsole } from '@storybook/addon-console';
 export const parameters = {
   actions: { argTypesRegex: '^on.*' },
   controls: { expanded: true, sort: 'requiredFirst' },
+  darkMode: {
+    current: 'light',
+  },
 };
 
 const defaultTheme = createTheme();
@@ -19,7 +22,7 @@ const withThemeProvider = (Story, context) => (
     <MuiThemeProvider theme={defaultTheme}>
       <Story {...context} />
       <Typography variant="subtitle2" style={{ paddingTop: '2rem' }}>
-        View Source Code Below in the Story Tab or the Show Code Button (in
+        View Source Code Below in the Story Tab or Canvas or the Show Code Button (in
         Docs)
       </Typography>
     </MuiThemeProvider>

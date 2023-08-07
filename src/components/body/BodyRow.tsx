@@ -1,4 +1,4 @@
-import { TableRow } from '@mui/material';
+import { alpha, TableRow, useTheme } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
@@ -20,6 +20,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     hasExpandableRows,
     onRowClick,
   } = useDataGrid();
+  const theme = useTheme();
 
   const rowProps =
     defaultBodyRowProps instanceof Function
@@ -29,6 +30,9 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     ...rowProps,
     ...row.getRowProps(),
     style: {
+      backgroundColor: row.isSelected
+        ? alpha(theme.palette.primary.light, 0.1)
+        : 'transparent',
       ...row.getRowProps().style,
       ...(rowProps?.style ?? {}),
     },
