@@ -7,7 +7,6 @@ import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import SelectRowAction from '../actions/SelectRowAction';
-import SpacerCell from '../table/SpacerCell';
 
 interface BodyRowProps {
   row: Row;
@@ -20,7 +19,6 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     enableSelection,
     hasExpandableRows,
     onRowClick,
-    table,
   } = useDataGrid();
 
   const rowProps =
@@ -33,24 +31,13 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     style: {
       ...row.getRowProps().style,
       ...(rowProps?.style ?? {}),
-    }
+    },
   };
 
   return (
     <>
-      <TableRow
-        hover
-        onClick={(e) => onRowClick?.(e, row)}
-        {...bodyRowProps}
-      >
-        {(hasExpandableRows || detailPanel) &&
-          (row.canExpand || detailPanel ? (
-            <ExpandRowAction row={row} />
-          ) : (
-            <SpacerCell
-              width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}
-            />
-          ))}
+      <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...bodyRowProps}>
+        {(hasExpandableRows || detailPanel) && <ExpandRowAction row={row} />}
 
         {enableSelection && <SelectRowAction row={row} />}
 

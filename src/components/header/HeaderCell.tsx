@@ -30,6 +30,7 @@ const TableCellText = styled('div')({
 const CellFlexItem = styled('span')({
   display: 'flex',
   flexWrap: 'nowrap',
+  alignItems: 'center',
 });
 
 const Divider = styled(MuiDivider)({
@@ -49,6 +50,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     disableFilters,
     enableColumnResizing,
     headerCellProps: defaultCellProps,
+    localization,
     showFilters,
     table,
   } = useDataGrid();
@@ -85,6 +87,13 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
             {!isParent && column.canSort && (
               <TableSortLabel
                 active={column.isSorted}
+                aria-label={
+                  column.isSorted
+                    ? column.sortDescFirst
+                      ? localization?.clearSorting
+                      : localization?.sortDescending
+                    : localization?.sortAscending
+                }
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
             )}

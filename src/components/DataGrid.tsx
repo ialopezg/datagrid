@@ -99,8 +99,8 @@ export interface DataGridProps<D extends {} = {}>
   ) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?:
-    | TablePaginationProps
-    | ((table: TableInstance<D>) => TablePaginationProps);
+    | Partial<TablePaginationProps>
+    | ((table: TableInstance<D>) => Partial<TablePaginationProps>);
   searchProps?: TextFieldProps;
   tableProps?: TableProps;
   title?: string | ReactNode;

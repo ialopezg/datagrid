@@ -14,7 +14,6 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
   return (
     <TableCell
       size="small"
-      {...row.getToggleRowExpandedProps()}
       style={{
         padding: densePadding ? '0' : '0.6rem 0',
         paddingLeft: `${row.depth + 0.5}rem`,
@@ -23,13 +22,20 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
       }}
     >
       <IconButton
+        disabled={!row.canExpand && !detailPanel}
         aria-label={localization?.expand}
         title={localization?.expand}
+        {...row.getToggleRowExpandedProps()}
       >
         <MoreIcon
-          fontSize="small"
+          fontSize={row.canExpand || detailPanel ? 'medium' : 'small'}
           style={{
-            transform: row.isExpanded ? 'rotate(-180deg)' : 'rotate(0)',
+            transform:
+              !row.isExpanded && !detailPanel
+                ? 'rotate(-90deg)'
+                : row.isExpanded
+                ? 'rotate(-180deg)'
+                : 'rotate(0)',
             transition: 'transform 0.2s',
           }}
         />

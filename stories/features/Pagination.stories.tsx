@@ -46,3 +46,18 @@ export const PaginationPositionTop: Story<DataGridProps> = () => (
 export const PaginationPositionTopAndBottom: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="both" />
 );
+
+export const CustomizePaginationComponents: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    initialState={{ pageSize: 5 }}
+    paginationProps={{
+      rowsPerPageOptions: [5, 10, 20],
+      showFirstButton: false,
+      showLastButton: false,
+      SelectProps: { native: true },
+      labelRowsPerPage: 'Number of rows visible',
+    }}
+  />
+);
