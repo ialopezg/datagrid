@@ -14,9 +14,11 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
   const {
     columns,
     detailPanel,
+    enableRowActions,
     enableSelection,
     footerRowProps: defaultFooterRowProps,
     hasExpandableRows,
+    rowActionsColumn,
     table,
   } = useDataGrid();
 
@@ -39,6 +41,10 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
 
   return (
     <TableRow {...footerRowProps}>
+      {enableRowActions && rowActionsColumn === 'first' && (
+        <SpacerCell />
+      )}
+
       {(hasExpandableRows || detailPanel) && (
         <SpacerCell
           width={`${detailPanel ? 2 : table.expandedDepth + 0.5}rem`}
@@ -50,6 +56,10 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
       {footerGroup.headers.map((column) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
+
+      {enableRowActions && rowActionsColumn === 'last' && (
+        <SpacerCell />
+      )}
     </TableRow>
   );
 };

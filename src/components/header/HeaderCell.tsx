@@ -12,7 +12,7 @@ import { useDataGrid } from '../providers';
 import FilterTextField from '../inputs/FilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
 
-const TableCell = styled(MuiTableCell)({
+export const StyledTableCell = styled(MuiTableCell)({
   fontWeight: 'bold',
   verticalAlign: 'text-top',
 });
@@ -74,9 +74,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const isParent = (column?.columns?.length ?? 0) > 0;
 
   return (
-    <TableCell
+    <StyledTableCell
       align={isParent ? 'center' : 'left'}
-      variant="head"
       {...headerCellProps}
     >
       <TableCellContent>
@@ -119,7 +118,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
           </Collapse>
         )}
       </TableCellContent>
-    </TableCell>
+    </StyledTableCell>
   );
 };
 

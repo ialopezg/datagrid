@@ -21,6 +21,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     enableSelection,
     hasExpandableRows,
     onRowClick,
+    rowActionsColumn,
   } = useDataGrid();
   const theme = useTheme();
 
@@ -43,7 +44,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   return (
     <>
       <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...bodyRowProps}>
-        {enableRowActions && (
+        {enableRowActions && rowActionsColumn === 'first' && (
           <TableCell>
             <RowActionsAction row={row} />
           </TableCell>
@@ -56,6 +57,12 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />
         ))}
+
+        {enableRowActions && rowActionsColumn === 'last' && (
+          <TableCell>
+            <RowActionsAction row={row} />
+          </TableCell>
+        )}
       </TableRow>
 
       {detailPanel && <DetailPanel row={row} />}

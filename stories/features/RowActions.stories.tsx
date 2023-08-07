@@ -2,7 +2,7 @@ import faker from '@faker-js/faker';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ShareIcon from '@mui/icons-material/Share';
-import { MenuItem as MuiMenuItem, styled } from '@mui/material';
+import { Button, MenuItem as MuiMenuItem, styled } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
@@ -122,5 +122,104 @@ export const RowActionsAndEditingEnabled: Story<DataGridProps> = () => (
         <ShareIcon /> Share
       </MenuItem>,
     ]}
+  />
+);
+
+export const RowActionsLastColumn: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableRowActions
+    rowActionsColumn="last"
+    rowActionMenuItems={(row, _, closeMenu) => [
+      <MenuItem
+        key={1}
+        onClick={() => {
+          console.log('View Profile', row);
+          closeMenu();
+        }}
+      >
+        <AccountCircleIcon /> View Profile
+      </MenuItem>,
+      <MenuItem
+        key={2}
+        onClick={() => {
+          console.log('Remove', row);
+          closeMenu();
+        }}
+      >
+        <DeleteIcon /> Remove
+      </MenuItem>,
+      <MenuItem
+        key={3}
+        onClick={() => {
+          console.log('Share', row);
+          closeMenu();
+        }}
+      >
+        <ShareIcon /> Share
+      </MenuItem>,
+    ]}
+  />
+);
+
+export const CustomRowActionButtons: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableRowActions
+    rowActions={(row, _) => (
+      <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log('View Profile', row);
+          }}
+        >
+          View
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => {
+            console.log('Remove', row);
+          }}
+        >
+          Remove
+        </Button>
+      </div>
+    )}
+  />
+);
+
+export const CustomRowActionButtonsLastColumn: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableRowActions
+    rowActionsColumn="last"
+    rowActions={(row, _) => (
+      <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '0.5rem' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log('View Profile', row);
+          }}
+        >
+          View
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => {
+            console.log('Remove', row);
+          }}
+        >
+          Remove
+        </Button>
+      </div>
+    )}
   />
 );

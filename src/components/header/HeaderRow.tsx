@@ -1,12 +1,12 @@
-import { TableCell, TableRow } from '@mui/material';
+import { TableRow } from '@mui/material';
 import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
-import SelectAllRowsAction from '../actions/SelectAllRowsAction';
-import { useDataGrid } from '../providers';
-import HeaderCell from './HeaderCell';
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
+import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import SpacerCell from '../table/SpacerCell';
+import { useDataGrid } from '../providers';
+import HeaderCell, { StyledTableCell } from './HeaderCell';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup;
@@ -21,6 +21,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
     localization,
+    rowActionsColumn,
     table,
   } = useDataGrid();
 
@@ -44,7 +45,13 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerRowProps}>
-      {enableRowActions && <TableCell>{localization?.actions}</TableCell>}
+      {enableRowActions &&
+        rowActionsColumn === 'first' &&
+        (isParent ? (
+          <SpacerCell />
+        ) : (
+          <StyledTableCell>{localization?.actions}</StyledTableCell>
+        ))}
 
       {hasExpandableRows || detailPanel ? (
         !disableExpandAll && !isParent ? (
@@ -67,6 +74,14 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       {headerGroup.headers.map((column) => (
         <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
+
+      {enableRowActions &&
+        rowActionsColumn === 'last' &&
+        (isParent ? (
+          <SpacerCell />
+        ) : (
+          <StyledTableCell>{localization?.actions}</StyledTableCell>
+        ))}
     </TableRow>
   );
 };

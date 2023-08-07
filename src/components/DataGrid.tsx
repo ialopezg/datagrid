@@ -104,6 +104,8 @@ export interface DataGridProps<D extends {} = {}>
   paginationProps?:
     | Partial<TablePaginationProps>
     | ((table: TableInstance<D>) => Partial<TablePaginationProps>);
+  rowActions?: (row: Row<D>, table: TableInstance<D>) => ReactNode;
+  rowActionsColumn?: 'first' | 'last';
   rowActionMenuItems?: (
     row: Row<D>,
     table: TableInstance<D>,
@@ -123,12 +125,14 @@ export interface DataGridProps<D extends {} = {}>
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   localization = defaultLocalization,
+  rowActionsColumn = 'first',
   paginationPosition = 'bottom',
   toolbarActionsPosition = 'top',
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
+    rowActionsColumn={rowActionsColumn}
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
     toolbarActionsPosition={toolbarActionsPosition}

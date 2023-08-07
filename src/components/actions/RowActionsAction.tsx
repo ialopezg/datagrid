@@ -23,7 +23,7 @@ interface RowActionsActionProps {
 }
 
 export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
-  const { itemForUpdate, localization } = useDataGrid();
+  const { itemForUpdate, localization, rowActions, table } = useDataGrid();
 
   // ** State
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,8 +34,12 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
     setAnchorEl(e.currentTarget);
   };
 
+  if (rowActions) {
+    return <>{rowActions(row, table)}</>;
+  }
+
   if (row.id === itemForUpdate) {
-    return (<EditActionsAction row={row} />);
+    return <EditActionsAction row={row} />;
   }
 
   return (
