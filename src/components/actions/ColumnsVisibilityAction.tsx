@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import React, { FC, MouseEvent, useState } from 'react';
 
@@ -18,14 +18,15 @@ export const ColumnsVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
 
   return (
     <>
-      <IconButton
-        aria-label={localization?.hideColumns}
-        onClick={onToggleMenuAction}
-        size="small"
-        title={localization?.hideColumns}
-      >
-        <ViewColumnIcon />
-      </IconButton>
+      <Tooltip arrow title={localization?.hideColumns}>
+        <IconButton
+          aria-label={localization?.hideColumns}
+          onClick={onToggleMenuAction}
+          size="small"
+        >
+          <ViewColumnIcon />
+        </IconButton>
+      </Tooltip>
 
       <ColumnVisibilityMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl} />
     </>

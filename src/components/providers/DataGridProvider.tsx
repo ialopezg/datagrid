@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
+  PluginHook,
   useExpanded,
   useFilters,
   useFlexLayout,
@@ -19,9 +20,7 @@ import DataGridContext from './DataGridContext';
 export const DataGridProvider = <D extends {}>(
   props: PropsWithChildren<DataGridProps<D>>,
 ) => {
-  const table = useTable<D>(
-    props,
-    useFlexLayout,
+  const hooks: PluginHook<D>[] = [
     useResizeColumns,
     useFilters,
     useGlobalFilter,
@@ -30,7 +29,13 @@ export const DataGridProvider = <D extends {}>(
     useExpanded,
     usePagination,
     useRowSelect,
-  );
+  ];
+
+  if (props.enableColumnResizing) {
+    hooks.unshift(useFlexLayout);
+  }
+
+  const table = useTable<D>(props, ...hooks);
 
   const rowOptions = RowHelper({ table });
 
