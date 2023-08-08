@@ -12,6 +12,7 @@ export interface Localization {
   ungroupByColumn?: string;
   hideColumn?: string;
   hideColumns?: string;
+  loadingData?: string;
   rowActions?: string;
   save?: string;
   search?: string;
@@ -35,6 +36,7 @@ export const defaultLocalization: Localization = {
   ungroupByColumn: 'Ungroup column',
   hideColumn: 'Hide column',
   hideColumns: 'Hide columns',
+  loadingData: 'Loading data',
   rowActions: 'Row actions',
   save: 'Save',
   search: 'Search',

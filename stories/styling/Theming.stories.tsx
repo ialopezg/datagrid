@@ -39,9 +39,12 @@ export const DefaultTheme: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableSelection />
 );
 
-export const CustomTheme: Story<DataGridProps> = () => {
+export const CustomLightTheme: Story<DataGridProps> = () => {
   const theme = createTheme({
     palette: {
+      background: {
+        paper: '#ffffef',
+      },
       primary: {
         main: '#ff9800',
       },
@@ -60,7 +63,7 @@ export const CustomTheme: Story<DataGridProps> = () => {
   );
 };
 
-export const DarkTheme: Story<DataGridProps> = () => {
+export const CustomDarkTheme: Story<DataGridProps> = () => {
   const theme = createTheme({
     palette: {
       mode: 'dark',

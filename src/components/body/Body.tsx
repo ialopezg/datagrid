@@ -1,4 +1,4 @@
-import { alpha, CircularProgress, styled } from '@mui/material';
+import { styled } from '@mui/material';
 import MuiTableBody from '@mui/material/TableBody';
 import React, { FC } from 'react';
 
@@ -9,23 +9,11 @@ const TableBody = styled(MuiTableBody)({
   overflowY: 'hidden',
 });
 
-const CircularProgressWrapper = styled('div')(({ theme }) => ({
-  backgroundColor: alpha(theme.palette.background.paper, 0.5),
-  display: 'grid',
-  height: '100%',
-  justifyContent: 'center',
-  margin: 'auto',
-  paddingTop: '5rem',
-  position: 'fixed',
-  width: 'calc(100% - 2rem)',
-}));
-
 interface BodyProps {}
 
 export const Body: FC<BodyProps> = () => {
   const {
     bodyProps: defaultBodyProps,
-    isLoading,
     manualPagination,
     table,
   } = useDataGrid();
@@ -42,12 +30,6 @@ export const Body: FC<BodyProps> = () => {
 
   return (
     <TableBody {...bodyProps}>
-      {isLoading && (
-        <CircularProgressWrapper>
-          <CircularProgress />
-        </CircularProgressWrapper>
-      )}
-
       {rows.map((row) => {
         table.prepareRow(row);
 
