@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
-  PluginHook,
+  PluginHook, Row,
   useExpanded,
   useFilters,
   useFlexLayout,
@@ -43,7 +43,7 @@ export const DataGridProvider = <D extends {}>(
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
-  const [itemForUpdate, setItemForUpdate] = useState<string | null>(null);
+  const [itemForUpdate, setItemForUpdate] = useState<Row | null>(null);
   const [showFilters, setShowFilters] = useState<boolean>(
     props.defaultShowFilters ?? false,
   );

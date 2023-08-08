@@ -1,6 +1,5 @@
 import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
-import { Row } from 'react-table';
 import React, { useState } from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
@@ -47,27 +46,47 @@ const data = [...Array(10)].map((_) => ({
   phoneNumber: faker.phone.phoneNumber(),
 }));
 
-export const RowEditingEnabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableRowActions enableRowEditing />
-);
+export const RowEditingEnabled: Story<DataGridProps> = () => {
+  const [tableData, setTableData] = useState(() => data);
 
-export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
-  const [isSaving, setIsSaving] = useState(false);
-
-  const onSubmit = async (row: Row<any>) => {
-    setIsSaving(true);
-    console.log(row);
-    setTimeout(() => setIsSaving(false), 1500);
+  const onSubmitRowChanges = async (row: any) => {
+    tableData[+row.index] = row.values;
+    setTableData([...tableData]);
   };
 
   return (
     <DataGrid
       columns={columns}
-      data={data}
+      data={tableData}
+      onRowEditSubmit={onSubmitRowChanges}
+      enableRowActions
+      enableRowEditing
+    />
+  );
+};
+
+export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
+  const [tableData, setTableData] = useState(() => data);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const onSubmitRowChanges = async (row: any) => {
+    setIsSaving(true);
+    console.log(row);
+    setTimeout(() => {
+      tableData[+row.index] = row.values;
+      setTableData([...tableData]);
+      setIsSaving(false);
+    }, 1500);
+  };
+
+  return (
+    <DataGrid
+      columns={columns}
+      data={tableData}
       enableRowActions
       enableRowEditing
       isFetching={isSaving}
-      onRowEditSubmit={onSubmit}
+      onRowEditSubmit={onSubmitRowChanges}
     />
   );
 };

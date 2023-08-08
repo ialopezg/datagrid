@@ -3,13 +3,19 @@ import { Cell } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
+import { EditCellTextField } from '../inputs';
 
 interface BodyCellProps {
   cell: Cell;
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { bodyCellProps: defaultBodyCellProps, densePadding, onCellClick } = useDataGrid();
+  const {
+    bodyCellProps: defaultBodyCellProps,
+    densePadding,
+    itemForUpdate,
+    onCellClick,
+  } = useDataGrid();
 
   const bodyCellProps =
     defaultBodyCellProps instanceof Function
@@ -34,7 +40,9 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
       variant="body"
       {...cellProps}
     >
-      {cell.isPlaceholder ? null : cell.isAggregated ? (
+      {itemForUpdate?.id === cell.row.id ? (
+        <EditCellTextField cell={cell} />
+      ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (
         <span>

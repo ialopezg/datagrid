@@ -38,7 +38,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
     return <>{rowActions(row, table)}</>;
   }
 
-  if (row.id === itemForUpdate) {
+  if (row.id === itemForUpdate?.id) {
     return <EditActionsAction row={row} />;
   }
 

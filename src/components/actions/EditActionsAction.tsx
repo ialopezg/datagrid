@@ -16,11 +16,12 @@ interface EditActionsActionProps {
 }
 
 export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
-  const { localization, onRowEditSubmit, setItemForUpdate } = useDataGrid();
+  const { itemForUpdate, localization, onRowEditSubmit, setItemForUpdate } =
+    useDataGrid();
 
   const onSaveButtonClick = async () => {
     setItemForUpdate(null);
-    await onRowEditSubmit?.(row);
+    await onRowEditSubmit?.(itemForUpdate ?? row);
   };
 
   const onCancelButtonClick = () => {

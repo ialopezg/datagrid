@@ -24,7 +24,7 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
   } = useDataGrid();
 
   const onMenuItemClick = () => {
-    setItemForUpdate(row.id);
+    setItemForUpdate({ ...row });
     setAnchorEl(null);
   };
 

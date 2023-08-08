@@ -1,4 +1,4 @@
-import { TableInstance } from 'react-table';
+import { Row, TableInstance } from 'react-table';
 import { Context, createContext } from 'react';
 
 import { DataGridProps } from '../DataGrid';
@@ -8,8 +8,8 @@ export interface DataGridContextProps<D extends {}>
   extends DataGridProps<D>,
     RowOptions {
   densePadding: boolean;
-  itemForUpdate: string | null;
-  setItemForUpdate: (value: string | null) => void;
+  itemForUpdate: Row<D> | null;
+  setItemForUpdate: (value: Row<D> | null) => void;
   setDensePadding: (value: boolean) => void;
   showFilters: boolean;
   setShowFilters: (value: boolean) => void;
