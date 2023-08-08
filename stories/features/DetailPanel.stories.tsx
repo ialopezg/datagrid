@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/DetailPanel',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 
 export default meta;
@@ -28,7 +33,6 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
       phoneNumber: faker.phone.phoneNumber(),
     }))}
     detailPanel={(row) => {
-      console.log(row);
       return (
         <div style={{ display: 'grid' }}>
           <span>{row.original?.address}</span>
@@ -38,7 +42,6 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
         </div>
       );
     }}
-    hideToolbar
   />
 );
 

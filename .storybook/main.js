@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-storysource',
     'storybook-addon-performance/register',
     'storybook-dark-mode',
+    '@etchteam/storybook-addon-status',
   ],
   typescript: {
     check: true,

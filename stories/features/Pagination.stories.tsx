@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/Pagination',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'stable',
+    },
+  },
 };
 
 export default meta;

@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/Column Hiding',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 export default meta;
 

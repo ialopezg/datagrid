@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/Column Grouping',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'stable',
+    },
+  },
 };
 export default meta;
 

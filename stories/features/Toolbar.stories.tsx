@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/Toolbar',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'alpha',
+    },
+  },
 };
 export default meta;
 

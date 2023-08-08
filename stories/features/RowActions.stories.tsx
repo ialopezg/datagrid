@@ -16,6 +16,11 @@ const MenuItem = styled(MuiMenuItem)({
 const meta: Meta = {
   title: 'Features/Row Actions',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 export default meta;
 

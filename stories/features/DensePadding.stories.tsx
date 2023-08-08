@@ -7,6 +7,11 @@ import DataGrid, { DataGridProps } from '../../src';
 const meta: Meta = {
   title: 'Features/Dense Padding',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 export default meta;
 

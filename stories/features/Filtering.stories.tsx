@@ -8,6 +8,11 @@ import { Row } from 'react-table';
 const meta: Meta = {
   title: 'Features/Filtering',
   component: DataGrid,
+  parameters: {
+    status: {
+      type: 'beta',
+    },
+  },
 };
 export default meta;
 

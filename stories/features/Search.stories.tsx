@@ -6,6 +6,12 @@ import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
   title: 'Features/Search',
+  component: DataGrid,
+  parameters: {
+    status: {
+      type: 'stable',
+    },
+  },
 };
 
 export default meta;
