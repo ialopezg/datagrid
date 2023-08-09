@@ -8,7 +8,7 @@ import { useDataGrid } from '../providers';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding' && prop !== 'dept',
-})<{ densePadding?: boolean, depth?: number }>(({ densePadding, depth }) => ({
+})<{ densePadding?: boolean, depth: number }>(({ densePadding, depth }) => ({
   padding: densePadding ? '0' : '0.6rem',
   paddingLeft: `${depth + 0.5}rem`,
   transition: 'all 0.2s ease-in-out',
@@ -26,12 +26,7 @@ interface ExpandRowActionProps {
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
-  const {
-    densePadding,
-    detailPanel,
-    localization,
-    table,
-  } = useDataGrid();
+  const { densePadding, detailPanel, localization } = useDataGrid();
 
   return (
     <TableCell

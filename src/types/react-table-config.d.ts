@@ -114,8 +114,8 @@ declare module 'react-table' {
     disableFilters?: boolean;
     editable?: boolean;
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-    headCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
-    headCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+    headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     Edit?: ({
               cell,
               onChange,
