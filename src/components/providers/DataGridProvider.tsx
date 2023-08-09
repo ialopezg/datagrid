@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import {
-  PluginHook, Row,
+  PluginHook,
+  Row,
   useExpanded,
   useFilters,
   useFlexLayout,

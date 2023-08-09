@@ -1,9 +1,17 @@
-import { TableCell } from '@mui/material';
-import { Cell } from 'react-table';
+import MuiTableCell from '@mui/material/TableCell';
+import { Cell, TableCellProps } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { EditCellTextField } from '../inputs';
+import { BodyCellEditTextField } from '../inputs';
+import { styled } from '@mui/material';
+
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding',
+})<{ densePadding?: boolean }>(({ densePadding }) => ({
+  padding: densePadding ? '0.5rem' : '1rem',
+  transition: 'all 0.2s ease-in-out',
+}));
 
 interface BodyCellProps {
   cell: Cell;
@@ -18,30 +26,34 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   } = useDataGrid();
 
   const bodyCellProps =
-    defaultBodyCellProps instanceof Function
+    (defaultBodyCellProps instanceof Function
       ? defaultBodyCellProps(cell)
-      : defaultBodyCellProps;
-  const cellProps = {
+      : defaultBodyCellProps) as TableCellProps;
+  const columnBodyCellProps = (cell.column.bodyCellProps instanceof Function
+    ? cell.column.bodyCellProps(cell)
+    : cell.column.bodyCellProps) as TableCellProps;
+  const cellProps: TableCellProps = {
     ...bodyCellProps,
+    ...columnBodyCellProps,
     ...cell.getCellProps(),
     style: {
-      padding: `${densePadding ? 0.5 : 1}rem`,
-      transaction: 'all 0.2s ease-in-out',
       ...cell.getCellProps().style,
       ...(bodyCellProps?.style ?? {}),
+      ...(columnBodyCellProps?.style ?? {}),
     },
   };
 
   return (
     <TableCell
+      densePadding={densePadding}
       onClick={(e) => {
         onCellClick?.(e, cell);
       }}
-      variant="body"
+      variant='body'
       {...cellProps}
     >
       {itemForUpdate?.id === cell.row.id ? (
-        <EditCellTextField cell={cell} />
+        <BodyCellEditTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (

@@ -1,4 +1,7 @@
+import { TableCellProps, TextFieldProps } from '@mui/material';
+import { ChangeEvent, ReactNode } from 'react';
 import {
+  Column, HeaderGroup,
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
   UseExpandedHooks,
@@ -104,6 +107,23 @@ declare module 'react-table' {
     UseGroupByColumnOptions<D>,
     UseResizeColumnsColumnOptions<D>,
     UseSortByColumnOptions<D> {
+    bodyCellProps?:
+      | TableCellProps
+      | ((cell?: Cell<D>) => TableCellProps);
+    bodyCellEditTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
+    disableFilters?: boolean;
+    editable?: boolean;
+    footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    headCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+    headCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    Edit?: ({
+              cell,
+              onChange,
+            }: {
+      cell: Cell<D>;
+      onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    }) => ReactNode;
+    Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
   }
 
   export interface ColumnInstance<
@@ -129,3 +149,5 @@ declare module 'react-table' {
     UseRowStateRowProps<D> {
   }
 }
+
+export module 'react-table';

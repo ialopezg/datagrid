@@ -4,6 +4,7 @@ import React from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
 import { Row } from 'react-table';
+import { MenuItem, TextField } from '@mui/material';
 
 const meta: Meta = {
   title: 'Features/Filtering',
@@ -68,18 +69,31 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
         { accessor: 'firstName' as const, Header: 'First Name' },
         { accessor: 'lastName' as const, Header: 'Last Name' },
         { accessor: 'age' as const, Header: 'Age' },
-        { accessor: 'gender' as const, Header: 'Gender' },
-        { accessor: 'address' as const, Header: 'Address' },
         {
-          accessor: 'state' as const,
-          Header: 'State',
-          filter: (rows: Row<any>[], _: any, filterValue: string) =>
-            rows.filter((row) =>
-              row.values['state']
-                .toLowerCase()
-                .startsWith(filterValue.toLowerCase()),
+          accessor: 'gender' as const,
+          filter: (rows, _, filterValue) =>
+            rows.filter(
+              (row) =>
+                row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
             ),
+          Filter: ({ column }) => (
+            <TextField
+              fullWidth
+              onChange={(e) => column.setFilter(e.target.value || undefined)}
+              placeholder='Filter'
+              select
+              value={column.filterValue ?? ''}
+              variant='standard'
+            >
+              <MenuItem value=''></MenuItem>
+              <MenuItem value='Female'>Female</MenuItem>
+              <MenuItem value='Male'>Male</MenuItem>
+            </TextField>
+          ),
+          Header: 'Gender',
         },
+        { accessor: 'address' as const, Header: 'Address' },
+        { accessor: 'state' as const, Header: 'State' },
       ] as any[]
     }
     data={data}

@@ -19,6 +19,7 @@ const columns = [
   {
     Header: 'First Name',
     accessor: 'firstName' as const,
+    editable: true,
   },
   {
     Header: 'Last Name',
@@ -27,14 +28,17 @@ const columns = [
   {
     Header: 'Address',
     accessor: 'address' as const,
+    editable: true,
   },
   {
     Header: 'State',
     accessor: 'state' as const,
+    editable: true,
   },
   {
     Header: 'Phone Number',
     accessor: 'phoneNumber' as const,
+    editable: true,
   },
 ];
 
@@ -47,7 +51,7 @@ const data = [...Array(10)].map((_) => ({
 }));
 
 export const RowEditingEnabled: Story<DataGridProps> = () => {
-  const [tableData, setTableData] = useState(() => data);
+  const [tableData, setTableData] = useState(data);
 
   const onSubmitRowChanges = async (row: any) => {
     tableData[+row.index] = row.values;
@@ -66,7 +70,7 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
 };
 
 export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
-  const [tableData, setTableData] = useState(() => data);
+  const [tableData, setTableData] = useState(data);
   const [isSaving, setIsSaving] = useState(false);
 
   const onSubmitRowChanges = async (row: any) => {

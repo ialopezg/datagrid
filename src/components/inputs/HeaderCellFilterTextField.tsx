@@ -9,7 +9,7 @@ interface FilterTextFieldProps {
   column: HeaderGroup;
 }
 
-export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
+export const HeaderCellFilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   const { localization } = useDataGrid();
   const [filterValue, setFilterValue] = useState<string>('');
 
@@ -23,7 +23,6 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   };
 
   if (column.Filter) {
-    // @ts-ignore
     return <>{column.Filter({ column })}</>;
   }
 
@@ -62,4 +61,4 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   );
 };
 
-export default FilterTextField;
+export default HeaderCellFilterTextField;

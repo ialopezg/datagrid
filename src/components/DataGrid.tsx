@@ -47,6 +47,7 @@ export interface DataGridProps<D extends {} = {}>
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
+  bodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
@@ -71,6 +72,7 @@ export interface DataGridProps<D extends {} = {}>
     | TableRowProps
     | ((footerGroup: HeaderGroup<D>) => TableRowProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+  headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
   headerProps?:
     | TableHeadProps
     | ((table: TableInstance<D>) => TableHeaderProps);
@@ -122,14 +124,15 @@ export interface DataGridProps<D extends {} = {}>
   toolbarTopProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
 }
 
-export default <D extends {}>({
-  defaultColumn = { minWidth: 50, maxWidth: 1000 },
-  localization = defaultLocalization,
-  rowActionsColumn = 'first',
-  paginationPosition = 'bottom',
-  toolbarActionsPosition = 'top',
-  ...rest
-}: DataGridProps<D>) => (
+export default <D extends {}>(
+  {
+    defaultColumn = { minWidth: 50, maxWidth: 1000 },
+    localization = defaultLocalization,
+    rowActionsColumn = 'first',
+    paginationPosition = 'bottom',
+    toolbarActionsPosition = 'top',
+    ...rest
+  }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
     rowActionsColumn={rowActionsColumn}

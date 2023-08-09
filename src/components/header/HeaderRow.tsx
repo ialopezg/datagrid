@@ -1,5 +1,5 @@
 import { TableRow } from '@mui/material';
-import { HeaderGroup } from 'react-table';
+import { HeaderGroup, TableRowProps } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
@@ -14,6 +14,7 @@ interface HeaderRowProps {
 
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
+    densePadding,
     detailPanel,
     disableExpandAll,
     enableRowActions,
@@ -26,9 +27,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   } = useDataGrid();
 
   const rowProps =
-    defaultHeaderRowProps instanceof Function
+    (defaultHeaderRowProps instanceof Function
       ? defaultHeaderRowProps(headerGroup)
-      : defaultHeaderRowProps;
+      : defaultHeaderRowProps) as TableRowProps;
   const headerRowProps = {
     ...headerGroup,
     ...headerGroup.getHeaderGroupProps(),
@@ -67,7 +68,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         !isParent ? (
           <SelectAllRowsAction />
         ) : (
-          <SpacerCell width="1rem" />
+          <SpacerCell width='1rem' />
         )
       ) : null}
 
@@ -80,7 +81,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         (isParent ? (
           <SpacerCell />
         ) : (
-          <StyledTableCell>{localization?.actions}</StyledTableCell>
+          <StyledTableCell densePadding={densePadding}>
+            {localization?.actions}
+          </StyledTableCell>
         ))}
     </TableRow>
   );

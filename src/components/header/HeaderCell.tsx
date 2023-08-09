@@ -5,17 +5,21 @@ import {
   TableSortLabel,
 } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
-import { HeaderGroup } from 'react-table';
+import { HeaderGroup, TableCellProps } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import FilterTextField from '../inputs/FilterTextField';
+import HeaderCellFilterTextField from '../inputs/HeaderCellFilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
 
-export const StyledTableCell = styled(MuiTableCell)({
+export const StyledTableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding' && prop !== 'enableColumnResizing',
+})<{ densePadding?: boolean, enableColumnResizing?: boolean }>(({ densePadding, enableColumnResizing }) => ({
   fontWeight: 'bold',
   verticalAlign: 'text-top',
-});
+  padding: densePadding ? '0.5rem' : '1rem',
+  transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+}));
 
 const TableCellContent = styled('div')({
   display: 'grid',
@@ -56,18 +60,24 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     table,
   } = useDataGrid();
 
-  const cellProps =
-    defaultCellProps instanceof Function
+  const baseHeaderCellProps =
+    (defaultCellProps instanceof Function
       ? defaultCellProps(column)
-      : defaultCellProps;
+      : defaultCellProps) as TableCellProps;
+  const columnHeaderCellProps =
+    (column.headerCellProps instanceof Function
+      ? column.headerCellProps(column)
+      : column.headerCellProps) as TableCellProps;
   const headerCellProps = {
-    ...cellProps,
+    ...baseHeaderCellProps,
+    ...columnHeaderCellProps,
     ...column.getHeaderProps(),
     style: {
       padding: densePadding ? '0.5rem' : '1rem',
       transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
       ...column.getHeaderProps().style,
-      ...(cellProps?.style ?? {}),
+      ...(columnHeaderCellProps?.style ?? {}),
+      ...(baseHeaderCellProps?.style ?? {}),
     },
   };
 
@@ -76,6 +86,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   return (
     <StyledTableCell
       align={isParent ? 'center' : 'left'}
+      densePadding={densePadding}
+      enableColumnResizing={enableColumnResizing}
       {...headerCellProps}
     >
       <TableCellContent>
@@ -106,7 +118,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
               <Divider
                 flexItem
                 onDoubleClick={() => table.resetResizing()}
-                orientation="vertical"
+                orientation='vertical'
                 {...column.getResizerProps()}
               />
             )}
@@ -114,7 +126,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         </TableCellText>
         {!disableFilters && column.canFilter && (
           <Collapse in={showFilters}>
-            <FilterTextField column={column} />
+            <HeaderCellFilterTextField column={column} />
           </Collapse>
         )}
       </TableCellContent>
