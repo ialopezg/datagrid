@@ -45,7 +45,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       ...(rowProps?.style ?? {}),
     },
   };
-
+  console.log(row.values);
   return (
     <>
       <TableRow

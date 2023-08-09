@@ -109,8 +109,8 @@ declare module 'react-table' {
     UseSortByColumnOptions<D> {
     bodyCellProps?:
       | TableCellProps
-      | ((cell?: Cell<D>) => TableCellProps);
-    bodyCellEditTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
+      | ((cell: Cell<D>) => TableCellProps);
+    bodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
     disableFilters?: boolean;
     editable?: boolean;
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
@@ -149,5 +149,3 @@ declare module 'react-table' {
     UseRowStateRowProps<D> {
   }
 }
-
-export module 'react-table';
