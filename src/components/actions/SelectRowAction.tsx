@@ -17,7 +17,7 @@ interface SelectRowActionProps {
 }
 
 export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
-  const { densePadding, onRowSelectChange, table } = useDataGrid();
+  const { densePadding, localization, onRowSelectChange, table } = useDataGrid();
 
   const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     row.getToggleRowSelectedProps()?.onChange?.(e);
@@ -26,7 +26,13 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
 
   return (
     <TableCell densePadding={densePadding}>
-      <Checkbox {...row.getToggleRowSelectedProps()} onChange={onSelectChange} />
+      <Checkbox
+        inputProps={{
+          'aria-label': localization?.selectRow,
+        }}
+        onChange={onSelectChange}
+        {...row.getToggleRowSelectedProps()}
+      />
     </TableCell>
   );
 };

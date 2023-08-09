@@ -13,6 +13,9 @@ export const DensePaddingAction: FC<DensePaddingActionProps> = () => {
       <Switch
         color="default"
         checked={densePadding}
+        inputProps={{
+          'aria-label': localization?.toggleDensePadding,
+        }}
         onChange={() => setDensePadding(!densePadding)}
         size="small"
       />

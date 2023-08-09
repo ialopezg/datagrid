@@ -17,6 +17,7 @@ export interface Localization {
   save?: string;
   search?: string;
   selectAll?: string;
+  selectRow?: string;
   sortAscending?: string;
   sortDescending?: string;
   toggleDensePadding?: string;
@@ -42,6 +43,7 @@ export const defaultLocalization: Localization = {
   save: 'Save',
   search: 'Search',
   selectAll: 'Select all',
+  selectRow: 'Select row',
   sortAscending: 'Sort ascending',
   sortDescending: 'Sort descending',
   toggleDensePadding: 'Toggle dense padding',

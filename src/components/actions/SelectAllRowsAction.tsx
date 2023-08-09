@@ -20,7 +20,9 @@ export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
     <TableCell densePadding={densePadding} variant='head'>
       {!disableSelectAll ? (
         <Checkbox
-          aria-label={localization?.selectAll}
+          inputProps={{
+            'aria-label': localization?.selectAll,
+          }}
           {...table.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}

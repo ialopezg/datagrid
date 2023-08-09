@@ -1,14 +1,14 @@
-import { DataGrid } from 'datagrid';
+import { DataGrid } from '@ialopezg/datagrid';
 import React, { useMemo } from 'react';
 
 export const BasicExample = () => {
   const columns = useMemo(
     () => [
-      { Header: 'First Name', accessor: 'firstName' },
-      { Header: 'Last Name', accessor: 'lastName' },
-      { Header: 'Address', accessor: 'address' },
-      { Header: 'State', accessor: 'state' },
-      { Header: 'Phone Number', accessor: 'phoneNumber' },
+      { Header: 'First Name', accessor: 'firstName' as const },
+      { Header: 'Last Name', accessor: 'lastName' as const },
+      { Header: 'Address', accessor: 'address' as const },
+      { Header: 'State', accessor: 'state' as const },
+      { Header: 'Phone Number', accessor: 'phoneNumber' as const },
     ],
     [],
   );
