@@ -1,6 +1,16 @@
-import { Collapse, TableCell, TableRow } from '@mui/material';
+import MuiTableCell from '@mui/material/TableCell';
+import { Collapse, styled, TableCellProps, TableRow, TableRowProps } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
+
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'isExpanded',
+})<{ isExpanded?: boolean }>(({ isExpanded }) => ({
+  borderBottom: !isExpanded ? 'none' : undefined,
+  paddingBottom: isExpanded ? '1rem' : 0,
+  paddingTop: isExpanded ? '1rem' : 0,
+  transition: 'all 0.2s ease-in-out',
+}));
 
 import { useDataGrid } from '../providers';
 
@@ -20,7 +30,7 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
   const rowProps =
     defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
-      : defaultBodyRowProps;
+      : defaultBodyRowProps as TableRowProps;
   const bodyRowProps = {
     ...rowProps,
     ...row.getToggleRowExpandedProps(),
@@ -28,31 +38,26 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
       ...row.getToggleRowExpandedProps().style,
       ...(rowProps?.style ?? {}),
     },
-  }
+  };
   const detailPanelProps =
     defaultDetailPanelProps instanceof Function
       ? defaultDetailPanelProps(row)
-      : defaultDetailPanelProps;
+      : defaultDetailPanelProps as TableCellProps;
   const bodyCellProps = {
     ...detailPanelProps,
-    ...row.getRowProps(),
     style: {
-      borderBottom: !row.isExpanded ? 'none' : undefined,
-      paddingBottom: row.isExpanded ? '1rem' : 0,
-      paddingTop: row.isExpanded ? '1rem' : 0,
-      transition: 'all 0.2s ease-in-out',
-      ...row.getRowProps().style,
-      ...(detailPanelProps?.style ?? {}),
+      ...((detailPanelProps as TableRowProps)?.style ?? {}),
     },
   };
 
   return (
-    <TableRow {...bodyRowProps}>
+    <TableRow hover {...bodyRowProps}>
       <TableCell
         colSpan={table.visibleColumns.length + 10}
         onClick={(e) => {
           onDetailPanelClick?.(e, row);
         }}
+        isExpanded={row.isExpanded}
         {...bodyCellProps}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>

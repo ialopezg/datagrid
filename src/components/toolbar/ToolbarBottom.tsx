@@ -16,27 +16,13 @@ interface ToolbarBottomProps {}
 
 export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
   const {
-    disableColumnHiding,
-    disableFilters,
-    disableGlobalFilter,
     hideToolbarActions,
     manualPagination,
     paginationPosition,
     table,
-    title,
     toolbarBottomProps,
     toolbarActionsPosition,
   } = useDataGrid();
-
-  if (
-    !toolbarBottomProps &&
-    !title &&
-    disableColumnHiding &&
-    disableFilters &&
-    !disableGlobalFilter
-  ) {
-    return null;
-  }
 
   const toolbarProps =
     toolbarBottomProps instanceof Function

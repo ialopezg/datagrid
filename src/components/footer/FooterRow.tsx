@@ -1,4 +1,4 @@
-import { TableRow } from '@mui/material';
+import { TableRow, TableRowProps } from '@mui/material';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
 
@@ -29,7 +29,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
   const rowProps =
     defaultFooterRowProps instanceof Function
       ? defaultFooterRowProps(footerGroup)
-      : defaultFooterRowProps;
+      : defaultFooterRowProps as TableRowProps;
   const footerRowProps = {
     ...rowProps,
     ...footerGroup.getFooterGroupProps(),

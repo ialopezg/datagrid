@@ -1,5 +1,6 @@
-import { alpha, TableCell, TableRow, useTheme } from '@mui/material';
-import { Row } from 'react-table';
+import MuiTableRow from '@mui/material/TableRow';
+import { alpha, styled, TableCell } from '@mui/material';
+import { Row, TableRowProps } from 'react-table';
 import React, { FC } from 'react';
 
 import BodyCell from './BodyCell';
@@ -8,6 +9,14 @@ import DetailPanel from './DetailPanel';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import SelectRowAction from '../actions/SelectRowAction';
 import RowActionsAction from '../actions/RowActionsAction';
+
+const TableRow = styled(MuiTableRow, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'isSelected',
+})<{ isSelected?: boolean }>(({ isSelected, theme }) => ({
+  backgroundColor: isSelected
+    ? alpha(theme.palette.primary.light, 0.1)
+    : 'transparent',
+}));
 
 interface BodyRowProps {
   row: Row;
@@ -23,19 +32,15 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     onRowClick,
     rowActionsColumn,
   } = useDataGrid();
-  const theme = useTheme();
 
   const rowProps =
-    defaultBodyRowProps instanceof Function
+    (defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
-      : defaultBodyRowProps;
+      : defaultBodyRowProps) as TableRowProps;
   const bodyRowProps = {
     ...rowProps,
     ...row.getRowProps(),
     style: {
-      backgroundColor: row.isSelected
-        ? alpha(theme.palette.primary.light, 0.1)
-        : 'transparent',
       ...row.getRowProps().style,
       ...(rowProps?.style ?? {}),
     },
@@ -43,7 +48,12 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
 
   return (
     <>
-      <TableRow hover onClick={(e) => onRowClick?.(e, row)} {...bodyRowProps}>
+      <TableRow
+        hover
+        onClick={(e) => onRowClick?.(e, row)}
+        isSelected={row.isSelected}
+        {...bodyRowProps}
+      >
         {enableRowActions && rowActionsColumn === 'first' && (
           <TableCell>
             <RowActionsAction row={row} />

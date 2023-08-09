@@ -1,24 +1,26 @@
 import React, { FC } from 'react';
-import { Checkbox, TableCell } from '@mui/material';
+import MuiTableCell from '@mui/material/TableCell';
+import { Checkbox, styled } from '@mui/material';
 import { useDataGrid } from '../providers';
 
-interface SelectAllRowsActionProps {}
+const TableCell = styled(MuiTableCell, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding',
+})<{ densePadding?: boolean }>(({ densePadding }) => ({
+  padding: densePadding ? '0' : '0.6rem',
+  transition: 'all 0.2s ease-in-out',
+}));
+
+interface SelectAllRowsActionProps {
+}
 
 export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
-  const { densePadding, disableSelectAll, table } = useDataGrid();
+  const { densePadding, disableSelectAll, localization, table } = useDataGrid();
 
   return (
-    <TableCell
-      style={{
-        width: '2rem',
-        padding: densePadding ? '0' : '0.6rem',
-        transition: 'all 0.2s ease-in-out',
-      }}
-      variant="head"
-    >
+    <TableCell densePadding={densePadding} variant='head'>
       {!disableSelectAll ? (
         <Checkbox
-          aria-label=""
+          aria-label={localization?.selectAll}
           {...table.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}

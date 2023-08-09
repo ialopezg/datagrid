@@ -22,12 +22,11 @@ const ToolbarActionsContainer = styled('div')({
   gap: '0.5rem',
 });
 
-interface ToolbarTopProps {}
+interface ToolbarTopProps {
+}
 
 export const ToolbarTop: FC<ToolbarTopProps> = () => {
   const {
-    disableColumnHiding,
-    disableFilters,
     disableGlobalFilter,
     hideToolbarActions,
     manualPagination,
@@ -39,26 +38,16 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
     toolbarTopProps,
   } = useDataGrid();
 
-  if (
-    !toolbarTopProps &&
-    !title &&
-    disableColumnHiding &&
-    disableFilters &&
-    !disableGlobalFilter
-  ) {
-    return null;
-  }
-
   const toolbarProps =
     toolbarTopProps instanceof Function
       ? toolbarTopProps(table)
       : toolbarTopProps;
 
   return (
-    <StyledToolbar variant="dense" {...toolbarProps}>
+    <StyledToolbar variant='dense' {...toolbarProps}>
       <ToolbarTopRow>
         {title ? (
-          <Typography variant="h5" {...titleProps}>
+          <Typography variant='h5' {...titleProps}>
             {title}
           </Typography>
         ) : (
