@@ -31,9 +31,5 @@ const data = [...Array(200)].map((_) => ({
 }));
 
 export const FilteringEnabledDefault: Story<DataGridProps> = () => (
-  <DataGrid
-    columns={columns}
-    data={data}
-    enableColumnGrouping
-  />
+  <DataGrid columns={columns} data={data} enableColumnGrouping />
 );

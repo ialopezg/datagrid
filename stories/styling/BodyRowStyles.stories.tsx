@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import DataGrid , { DataGridProps } from '../../src';
+import DataGrid, { DataGridProps } from '../../src';
 import faker from '@faker-js/faker';
 
 const meta: Meta = {
@@ -73,9 +73,7 @@ export const StyleCustomStripedRows: Story<DataGridProps> = () => (
   />
 );
 
-export const ConditionallyStyleTableRow: Story<
-  DataGridProps
-> = () => (
+export const ConditionallyStyleTableRow: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}

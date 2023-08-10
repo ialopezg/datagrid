@@ -1,5 +1,5 @@
 import { TableCellProps, TextFieldProps } from '@mui/material';
-import { ChangeEvent, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
   Cell,
   Column, HeaderGroup,

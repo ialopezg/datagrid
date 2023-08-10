@@ -1,5 +1,5 @@
 import { TableRow } from '@mui/material';
-import { HeaderGroup, TableRowProps } from 'react-table';
+import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
@@ -27,9 +27,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   } = useDataGrid();
 
   const rowProps =
-    (defaultHeaderRowProps instanceof Function
+    defaultHeaderRowProps instanceof Function
       ? defaultHeaderRowProps(headerGroup)
-      : defaultHeaderRowProps) as TableRowProps;
+      : defaultHeaderRowProps;
   const headerRowProps = {
     ...headerGroup,
     ...headerGroup.getHeaderGroupProps(),
@@ -68,7 +68,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         !isParent ? (
           <SelectAllRowsAction />
         ) : (
-          <SpacerCell width='1rem' />
+          <SpacerCell width="1rem" />
         )
       ) : null}
 

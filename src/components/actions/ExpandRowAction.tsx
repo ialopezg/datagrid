@@ -4,9 +4,9 @@ import { Row } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { TableButtonCell } from '../table';
+import { ButtonCell } from '../table';
 
-const TableCell = styled(TableButtonCell, {
+const TableCell = styled(ButtonCell, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'dept',
 })<{
   depth: number;

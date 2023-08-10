@@ -53,9 +53,7 @@ export const StyleAllBodyCell: Story<DataGridProps> = () => (
   />
 );
 
-export const StyleBodyCellConditionallyIn1Column: Story<
-  DataGridProps
-> = () => (
+export const StyleBodyCellConditionallyIn1Column: Story<DataGridProps> = () => (
   <DataGrid
     columns={[
       {

@@ -12,7 +12,7 @@ export const SpacerCell: FC<SpacerCellProps> = ({ width }) => {
   const cellProps =
     defaultBodyCellProps instanceof Function
       ? defaultBodyCellProps()
-      : defaultBodyCellProps as TableCellProps;
+      : (defaultBodyCellProps as TableCellProps);
   const bodyCellProps = {
     ...cellProps,
     style: {

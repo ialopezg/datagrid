@@ -1,6 +1,6 @@
 import MuiTableRow from '@mui/material/TableRow';
 import { alpha, styled } from '@mui/material';
-import { Row, TableRowProps } from 'react-table';
+import { Row } from 'react-table';
 import React, { FC } from 'react';
 
 import BodyCell from './BodyCell';
@@ -35,11 +35,10 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     rowActionsColumn,
   } = useDataGrid();
 
-  const rowProps = (
+  const rowProps =
     defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
-      : defaultBodyRowProps
-  ) as TableRowProps;
+      : defaultBodyRowProps;
   const bodyRowProps = {
     ...rowProps,
     ...row.getRowProps(),

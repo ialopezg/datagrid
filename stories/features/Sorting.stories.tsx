@@ -13,7 +13,6 @@ const meta: Meta = {
     },
   },
 };
-
 export default meta;
 
 const columns = [
@@ -42,29 +41,31 @@ export const SortingDisabled: Story<DataGridProps> = () => (
 
 export const FilteringDisabledForCertainColumns: Story<DataGridProps> = () => (
   <DataGrid
-    columns={[
-      {
-        accessor: 'firstName' as const,
-        Header: 'First Name',
-      },
-      {
-        accessor: 'lastName' as const,
-        Header: 'Last Name',
-      },
-      {
-        accessor: 'address' as const,
-        Header: 'Address',
-      },
-      {
-        accessor: 'state' as const,
-        Header: 'State',
-      },
-      {
-        accessor: 'phoneNumber' as const,
-        Header: 'Phone Number',
-        disableSortBy: true,
-      },
-    ] as any[]}
+    columns={
+      [
+        {
+          accessor: 'firstName' as const,
+          Header: 'First Name',
+        },
+        {
+          accessor: 'lastName' as const,
+          Header: 'Last Name',
+        },
+        {
+          accessor: 'address' as const,
+          Header: 'Address',
+        },
+        {
+          accessor: 'state' as const,
+          Header: 'State',
+        },
+        {
+          accessor: 'phoneNumber' as const,
+          Header: 'Phone Number',
+          disableSortBy: true,
+        },
+      ] as any[]
+    }
     data={data}
   />
 );

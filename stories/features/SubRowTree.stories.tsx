@@ -13,7 +13,6 @@ const meta: Meta = {
     },
   },
 };
-
 export default meta;
 
 const columns = [
@@ -46,16 +45,9 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const SubRowTreeEnabledDefault: Story<DataGridProps> = () => (
-  <DataGrid
-    columns={columns}
-    data={data}
-  />
+  <DataGrid columns={columns} data={data} />
 );
 
 export const SubRowTreeDisabledAll: Story<DataGridProps> = () => (
-  <DataGrid
-    columns={columns}
-    data={data}
-    disableExpandAll
-  />
+  <DataGrid columns={columns} data={data} disableExpandAll />
 );

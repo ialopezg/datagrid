@@ -1,6 +1,6 @@
 import { styled, TableCell as MuiTableCell } from '@mui/material';
 
-export const TableButtonCell = styled(MuiTableCell, {
+export const ButtonCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'densePadding',
 })<{
   densePadding?: boolean;
@@ -10,4 +10,4 @@ export const TableButtonCell = styled(MuiTableCell, {
   transition: 'all 0.2s ease-in-out',
 }));
 
-export default TableButtonCell;
+export default ButtonCell;

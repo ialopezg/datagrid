@@ -3,7 +3,7 @@ import { IconButton, styled } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { TableButtonCell } from '../table';
+import { ButtonCell } from '../table';
 
 const ArrowRightIcon = styled(MuiArrowRightIcon, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'rotation',
@@ -17,11 +17,10 @@ const ArrowRightIcon = styled(MuiArrowRightIcon, {
 interface ExpandAllRowsActionProps {}
 
 export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
-  const { densePadding, hasExpandedRows, localization, table } =
-    useDataGrid();
+  const { densePadding, hasExpandedRows, localization, table } = useDataGrid();
 
   return (
-    <TableButtonCell
+    <ButtonCell
       size="small"
       densePadding={densePadding}
       {...table.getToggleAllRowsExpandedProps()}
@@ -35,7 +34,7 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
           rotation={table.isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0}
         />
       </IconButton>
-    </TableButtonCell>
+    </ButtonCell>
   );
 };
 

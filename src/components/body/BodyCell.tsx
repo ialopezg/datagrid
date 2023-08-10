@@ -1,5 +1,5 @@
 import MuiTableCell from '@mui/material/TableCell';
-import { Cell, TableCellProps } from 'react-table';
+import { Cell } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
@@ -26,13 +26,14 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   } = useDataGrid();
 
   const bodyCellProps =
-    (defaultBodyCellProps instanceof Function
+    defaultBodyCellProps instanceof Function
       ? defaultBodyCellProps(cell)
-      : defaultBodyCellProps) as TableCellProps;
-  const columnBodyCellProps = (cell.column.bodyCellProps instanceof Function
-    ? cell.column.bodyCellProps(cell)
-    : cell.column.bodyCellProps) as TableCellProps;
-  const cellProps: TableCellProps = {
+      : defaultBodyCellProps;
+  const columnBodyCellProps =
+    cell.column.bodyCellProps instanceof Function
+      ? cell.column.bodyCellProps(cell)
+      : cell.column.bodyCellProps;
+  const cellProps = {
     ...bodyCellProps,
     ...columnBodyCellProps,
     ...cell.getCellProps(),
@@ -49,7 +50,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
       onClick={(e) => {
         onCellClick?.(e, cell);
       }}
-      variant='body'
+      variant="body"
       {...cellProps}
     >
       {itemForUpdate?.id === cell.row.id ? (

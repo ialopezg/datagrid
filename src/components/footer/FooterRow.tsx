@@ -1,4 +1,4 @@
-import { TableRow, TableRowProps } from '@mui/material';
+import { TableRow } from '@mui/material';
 import React, { FC } from 'react';
 import { HeaderGroup } from 'react-table';
 
@@ -29,7 +29,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
   const rowProps =
     defaultFooterRowProps instanceof Function
       ? defaultFooterRowProps(footerGroup)
-      : defaultFooterRowProps as TableRowProps;
+      : defaultFooterRowProps;
   const footerRowProps = {
     ...rowProps,
     ...footerGroup.getFooterGroupProps(),
@@ -41,9 +41,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
 
   return (
     <TableRow {...footerRowProps}>
-      {enableRowActions && rowActionsColumn === 'first' && (
-        <SpacerCell />
-      )}
+      {enableRowActions && rowActionsColumn === 'first' && <SpacerCell />}
 
       {(hasExpandableRows || detailPanel) && (
         <SpacerCell
@@ -57,9 +55,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
 
-      {enableRowActions && rowActionsColumn === 'last' && (
-        <SpacerCell />
-      )}
+      {enableRowActions && rowActionsColumn === 'last' && <SpacerCell />}
     </TableRow>
   );
 };

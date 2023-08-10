@@ -1,8 +1,11 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MuiIconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
 import { HeaderGroup } from 'react-table';
+
+import ColumnActionsMenu from '../menus/ColumnActionsMenu';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -14,9 +17,6 @@ const IconButton = styled(MuiIconButton)({
     opacity: 1,
   },
 });
-
-import ColumnActionsMenu from '../menus/ColumnActionsMenu';
-import { styled } from '@mui/material';
 
 interface ColumnActionsActionProps {
   column: HeaderGroup;

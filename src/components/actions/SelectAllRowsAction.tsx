@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Checkbox } from '@mui/material';
 
 import { useDataGrid } from '../providers';
-import { TableButtonCell } from '../table';
+import { ButtonCell } from '../table';
 
 interface SelectAllRowsActionProps {}
 
@@ -10,7 +10,7 @@ export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
   const { densePadding, disableSelectAll, localization, table } = useDataGrid();
 
   return (
-    <TableButtonCell densePadding={densePadding} variant="head">
+    <ButtonCell densePadding={densePadding} variant="head">
       {!disableSelectAll ? (
         <Checkbox
           inputProps={{
@@ -19,7 +19,7 @@ export const SelectAllRowsAction: FC<SelectAllRowsActionProps> = () => {
           {...table.getToggleAllPageRowsSelectedProps()}
         />
       ) : null}
-    </TableButtonCell>
+    </ButtonCell>
   );
 };
 

@@ -1,5 +1,5 @@
 import MuiTableCell from '@mui/material/TableCell';
-import { Collapse, styled, TableCellProps, TableRow, TableRowProps } from '@mui/material';
+import { Collapse, styled, TableRow, TableRowProps } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
@@ -30,7 +30,7 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
   const rowProps =
     defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
-      : defaultBodyRowProps as TableRowProps;
+      : (defaultBodyRowProps as TableRowProps);
   const bodyRowProps = {
     ...rowProps,
     ...row.getToggleRowExpandedProps(),
@@ -42,11 +42,11 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
   const detailPanelProps =
     defaultDetailPanelProps instanceof Function
       ? defaultDetailPanelProps(row)
-      : defaultDetailPanelProps as TableCellProps;
+      : defaultDetailPanelProps;
   const bodyCellProps = {
     ...detailPanelProps,
     style: {
-      ...((detailPanelProps as TableRowProps)?.style ?? {}),
+      ...(detailPanelProps?.style ?? {}),
     },
   };
 

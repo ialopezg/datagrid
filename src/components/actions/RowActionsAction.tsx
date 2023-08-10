@@ -6,7 +6,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
 import RowActionsMenu from '../menus/RowActionsMenu';
 import EditActionsAction from './EditActionsAction';
-import { TableButtonCell } from '../table';
+import { ButtonCell } from '../table';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -37,7 +37,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   };
 
   return (
-    <TableButtonCell densePadding={densePadding}>
+    <ButtonCell densePadding={densePadding}>
       {rowActions ? (
         <>{rowActions(row, table)}</>
       ) : row.id === itemForUpdate?.id ? (
@@ -60,7 +60,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
           />
         </>
       )}
-    </TableButtonCell>
+    </ButtonCell>
   );
 };
 

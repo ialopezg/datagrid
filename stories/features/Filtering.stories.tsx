@@ -1,10 +1,10 @@
 import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
-import { Row } from 'react-table';
 import { MenuItem, TextField } from '@mui/material';
+import { Row } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering',
@@ -71,23 +71,26 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
         { accessor: 'age' as const, Header: 'Age' },
         {
           accessor: 'gender' as const,
-          filter: (rows, _, filterValue) =>
+          filter: (rows: Row<any>[], _: any, filterValue: string) =>
             rows.filter(
               (row) =>
-                row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
+                row.values['gender'].toLowerCase() ===
+                filterValue.toLowerCase(),
             ),
-          Filter: ({ column }) => (
+          Filter: ({ column }: any) => (
             <TextField
               fullWidth
-              onChange={(e) => column.setFilter(e.target.value || undefined)}
-              placeholder='Filter'
+              onChange={(e: ChangeEvent<any>) =>
+                column.setFilter(e.target.value || undefined)
+              }
+              placeholder="Filter"
               select
               value={column.filterValue ?? ''}
-              variant='standard'
+              variant="standard"
             >
-              <MenuItem value=''></MenuItem>
-              <MenuItem value='Female'>Female</MenuItem>
-              <MenuItem value='Male'>Male</MenuItem>
+              <MenuItem value=""></MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
             </TextField>
           ),
           Header: 'Gender',

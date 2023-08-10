@@ -22,8 +22,7 @@ const ToolbarActionsContainer = styled('div')({
   gap: '0.5rem',
 });
 
-interface ToolbarTopProps {
-}
+interface ToolbarTopProps {}
 
 export const ToolbarTop: FC<ToolbarTopProps> = () => {
   const {
@@ -44,10 +43,10 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
       : toolbarTopProps;
 
   return (
-    <StyledToolbar variant='dense' {...toolbarProps}>
+    <StyledToolbar variant="dense" {...toolbarProps}>
       <ToolbarTopRow>
         {title ? (
-          <Typography variant='h5' {...titleProps}>
+          <Typography variant="h5" {...titleProps}>
             {title}
           </Typography>
         ) : (

@@ -38,9 +38,7 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
       )}
 
       {!manualPagination &&
-        ['bottom', 'both'].includes(paginationPosition ?? '') && (
-          <Pagination />
-        )}
+        ['bottom', 'both'].includes(paginationPosition ?? '') && <Pagination />}
     </StyledToolbar>
   );
 };

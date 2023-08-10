@@ -51,9 +51,7 @@ export interface DataGridProps<D extends {} = {}>
     UseSortByOptions<D> {
   columns: (Column<D> & DataGridColumn<D>)[];
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  bodyCellEditTextFieldProps?:
-    | TextFieldProps
-    | ((cell: Cell<D>) => TextFieldProps);
+  editTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
@@ -78,15 +76,13 @@ export interface DataGridProps<D extends {} = {}>
     | TableRowProps
     | ((footerGroup: HeaderGroup<D>) => TableRowProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  headerCellFilterTextFieldProps?:
+  filterTextFieldProps?:
     | TextFieldProps
     | ((column: Column<D>) => TextFieldProps);
   headerProps?:
     | TableHeadProps
     | ((table: TableInstance<D>) => TableHeaderProps);
-  headerRowProps?:
-    | TableRowProps
-    | ((headerGroup: HeaderGroup<D>) => TableRowProps);
+  headerRowProps?: TableRowProps | ((row: HeaderGroup<D>) => TableRowProps);
   hideFooter?: boolean;
   hideHeader?: boolean;
   hideToolbarActions?: boolean;
@@ -96,6 +92,7 @@ export interface DataGridProps<D extends {} = {}>
   isLoading?: boolean;
   localization?: Partial<Localization>;
   onCellClick?: (e: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
+  onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
   onDetailPanelClick?: (
     e: MouseEvent<HTMLTableCellElement>,
     row: Row<D>,
@@ -104,12 +101,12 @@ export interface DataGridProps<D extends {} = {}>
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
   onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
   onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
-  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onRowSelectChange?: (
     e: ChangeEvent,
     row: Row<D>,
     selectedRows: Row<D>[],
   ) => void;
+  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   paginationPosition?: 'bottom' | 'both' | 'top';
   paginationProps?:
     | Partial<TablePaginationProps>

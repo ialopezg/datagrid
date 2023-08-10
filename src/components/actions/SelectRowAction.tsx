@@ -3,7 +3,7 @@ import { Row } from 'react-table';
 import React, { ChangeEvent, FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { TableButtonCell } from '../table';
+import { ButtonCell } from '../table';
 
 interface SelectRowActionProps {
   row: Row;
@@ -19,7 +19,7 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
   };
 
   return (
-    <TableButtonCell densePadding={densePadding}>
+    <ButtonCell densePadding={densePadding}>
       <Checkbox
         inputProps={{
           'aria-label': localization?.selectRow,
@@ -27,7 +27,7 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
         onChange={onSelectChange}
         {...row.getToggleRowSelectedProps()}
       />
-    </TableButtonCell>
+    </ButtonCell>
   );
 };
 

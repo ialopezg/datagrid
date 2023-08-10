@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 import { Cell } from 'react-table';
 import React, { ChangeEvent, FC, useState } from 'react';
+
 import { useDataGrid } from '../providers';
 
 interface EditCellTextFieldProps {
@@ -8,22 +9,18 @@ interface EditCellTextFieldProps {
 }
 
 export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
-  const {
-    bodyCellEditTextFieldProps,
-    itemForUpdate,
-    localization,
-    setItemForUpdate,
-  } = useDataGrid();
+  const { editTextFieldProps, itemForUpdate, localization, setItemForUpdate } =
+    useDataGrid();
 
   // ** State
   const [error, setError] = useState<boolean | string>(false);
 
   const textFieldProps = {
-    ...bodyCellEditTextFieldProps,
+    ...editTextFieldProps,
     ...cell.column.bodyCellEditTextFieldProps,
     style: {
       // @ts-ignore
-      ...bodyCellEditTextFieldProps?.style,
+      ...editTextFieldProps?.style,
       // @ts-ignore
       ...cell.column.bodyCellEditTextFieldProps?.style,
     },
