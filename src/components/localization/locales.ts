@@ -11,6 +11,7 @@ export interface Localization {
   filterByColumn?: string;
   groupByColumn?: string;
   ungroupByColumn?: string;
+  hideAll?: string;
   hideColumn?: string;
   hideColumns?: string;
   loadingData?: string;
@@ -19,6 +20,7 @@ export interface Localization {
   search?: string;
   selectAll?: string;
   selectRow?: string;
+  showAll?: string;
   sortByColumnAscending?: string;
   sortByColumnDescending?: string;
   toggleDensePadding?: string;
@@ -39,6 +41,7 @@ export const defaultLocalization: Localization = {
   filterByColumn: 'Filter by {column}',
   groupByColumn: 'Group by {column}',
   ungroupByColumn: 'Ungroup by {column}',
+  hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
   hideColumns: 'Hide columns',
   loadingData: 'Loading data',
@@ -47,6 +50,7 @@ export const defaultLocalization: Localization = {
   search: 'Search',
   selectAll: 'Select all',
   selectRow: 'Select row',
+  showAll: 'Show all',
   sortByColumnAscending: 'Sort by {column} ascending',
   sortByColumnDescending: 'Sort by {column} descending',
   toggleDensePadding: 'Toggle dense padding',

@@ -4,7 +4,6 @@ import { useMemo } from 'react';
 export interface RowOptions {
   hasExpandableRows: boolean;
   hasExpandedRows: boolean;
-  maxColumnDepth: number;
 }
 
 interface RowHelperProps<D extends {}> {
@@ -24,17 +23,5 @@ export const RowHelper = <D extends {}>({
     [table.rows],
   );
 
-  const maxColumnDepth = useMemo(() => {
-    let maxDepth = 1;
-
-    table.columns.forEach((c) => {
-      if (c.columns?.length) {
-        maxDepth = Math.max(maxDepth, c.columns.length);
-      }
-    });
-
-    return maxDepth - 1;
-  }, [table.columns]);
-
-  return { hasExpandableRows, hasExpandedRows, maxColumnDepth };
+  return { hasExpandableRows, hasExpandedRows };
 };
