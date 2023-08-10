@@ -1,6 +1,7 @@
 import { TableCellProps, TextFieldProps } from '@mui/material';
 import { ChangeEvent, ReactNode } from 'react';
 import {
+  Cell,
   Column, HeaderGroup,
   UseColumnOrderInstanceProps,
   UseColumnOrderState,
@@ -50,6 +51,23 @@ import {
   UseSortByOptions,
   UseSortByState,
 } from 'react-table';
+
+export interface DataGridColumn<D extends {} = {}> extends UseFiltersColumnOptions<D>,
+  UseGlobalFiltersColumnOptions<D>,
+  UseGroupByColumnOptions<D>,
+  UseResizeColumnsColumnOptions<D>,
+  UseSortByColumnOptions<D> {
+  bodyCellProps?: TableCellProps | ((cell: Cell<D>) => TableCellProps);
+  bodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
+  footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+  headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+  headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+  disableFilters?: boolean;
+  editable?: boolean;
+  validator?: (value: any) => boolean | string;
+  Edit?: ({ cell, onChange }: { cell: Cell<D> }) => ReactNode;
+  Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
+}
 
 declare module 'react-table' {
   export interface TableOptions<D extends Record<string, unknown>>
@@ -102,28 +120,7 @@ declare module 'react-table' {
 
   export interface ColumnInterface<
     D extends Record<string, unknown> = Record<string, unknown>,
-  > extends UseFiltersColumnOptions<D>,
-    UseGlobalFiltersColumnOptions<D>,
-    UseGroupByColumnOptions<D>,
-    UseResizeColumnsColumnOptions<D>,
-    UseSortByColumnOptions<D> {
-    bodyCellProps?:
-      | TableCellProps
-      | ((cell: Cell<D>) => TableCellProps);
-    bodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
-    disableFilters?: boolean;
-    editable?: boolean;
-    footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-    headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
-    headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-    Edit?: ({
-              cell,
-              onChange,
-            }: {
-      cell: Cell<D>;
-      onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    }) => ReactNode;
-    Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
+  > extends DataGridColumn {
   }
 
   export interface ColumnInstance<

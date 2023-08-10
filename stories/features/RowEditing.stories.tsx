@@ -15,33 +15,6 @@ const meta: Meta = {
 };
 export default meta;
 
-const columns = [
-  {
-    Header: 'First Name',
-    accessor: 'firstName' as const,
-    editable: true,
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName' as const,
-  },
-  {
-    Header: 'Address',
-    accessor: 'address' as const,
-    editable: true,
-  },
-  {
-    Header: 'State',
-    accessor: 'state' as const,
-    editable: true,
-  },
-  {
-    Header: 'Phone Number',
-    accessor: 'phoneNumber' as const,
-    editable: true,
-  },
-];
-
 const data = [...Array(10)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
@@ -60,7 +33,62 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
 
   return (
     <DataGrid
-      columns={columns}
+      columns={[
+        {
+          accessor: 'firstName' as const,
+          Header: 'First Name',
+          editable: true,
+          validator: (value: string) => {
+            return !value.length ? 'First name is required' : true;
+          },
+        },
+        {
+          accessor: 'lastName' as const,
+          Header: 'Last Name',
+          editable: true,
+          validator: (value: string) => {
+            return !value.length ? 'Last name is required' : true;
+          },
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+          editable: true,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+          editable: true,
+          validator: (value: string) => {
+            if (!value.length) {
+              return 'State is required';
+            }
+
+            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
+            if (!validStates.includes(value)) {
+              return 'That is not a cool state';
+            }
+
+            return true;
+          },
+        },
+        {
+          Header: 'Phone Number',
+          accessor: 'phoneNumber' as const,
+          editable: true,
+          validator: (value: string) => {
+            if (!value.length) {
+              return 'Phone number is required';
+            }
+
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) {
+              return 'Invalid phone number';
+            }
+
+            return true;
+          },
+        },
+      ]}
       data={tableData}
       onRowEditSubmit={onSubmitRowChanges}
       enableRowActions
@@ -85,7 +113,62 @@ export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
 
   return (
     <DataGrid
-      columns={columns}
+      columns={[
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+          editable: true,
+          validator: (value: string) => {
+            return !value.length ? 'First name is required' : true;
+          },
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+          editable: true,
+          validator: (value: string) => {
+            return !value.length ? 'Last name is required' : true;
+          },
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+          editable: true,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+          editable: true,
+          validator: (value: string) => {
+            if (!value.length) {
+              return 'State is required';
+            }
+
+            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
+            if (!validStates.includes(value)) {
+              return 'That is not a cool state';
+            }
+
+            return true;
+          },
+        },
+        {
+          Header: 'Phone Number',
+          accessor: 'phoneNumber' as const,
+          editable: true,
+          validator: (value: string) => {
+            if (!value.length) {
+              return 'Phone number is required';
+            }
+
+            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) {
+              return 'Invalid phone number';
+            }
+
+            return true;
+          },
+        },
+      ]}
       data={tableData}
       enableRowActions
       enableRowEditing

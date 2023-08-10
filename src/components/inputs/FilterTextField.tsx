@@ -3,13 +3,14 @@ import FilterIcon from '@mui/icons-material/FilterList';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
 import React, { FC, useState } from 'react';
+
 import { useDataGrid } from '../providers';
 
 interface FilterTextFieldProps {
   column: HeaderGroup;
 }
 
-export const HeaderCellFilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
+export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   const { localization } = useDataGrid();
   const [filterValue, setFilterValue] = useState<string>('');
 
@@ -23,7 +24,7 @@ export const HeaderCellFilterTextField: FC<FilterTextFieldProps> = ({ column }) 
   };
 
   if (column.Filter) {
-    return <>{column.Filter({ column })}</>;
+    return <>{column.Filter?.({ column })}</>;
   }
 
   return (
@@ -61,4 +62,4 @@ export const HeaderCellFilterTextField: FC<FilterTextFieldProps> = ({ column }) 
   );
 };
 
-export default HeaderCellFilterTextField;
+export default FilterTextField;

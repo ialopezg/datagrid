@@ -6,6 +6,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
 import RowActionsMenu from '../menus/RowActionsMenu';
 import EditActionsAction from './EditActionsAction';
+import { TableButtonCell } from '../table';
 
 const IconButton = styled(MuiIconButton)({
   opacity: 0.5,
@@ -23,7 +24,8 @@ interface RowActionsActionProps {
 }
 
 export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
-  const { itemForUpdate, localization, rowActions, table } = useDataGrid();
+  const { densePadding, itemForUpdate, localization, rowActions, table } =
+    useDataGrid();
 
   // ** State
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,27 +36,31 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
     setAnchorEl(e.currentTarget);
   };
 
-  if (rowActions) {
-    return <>{rowActions(row, table)}</>;
-  }
-
-  if (row.id === itemForUpdate?.id) {
-    return <EditActionsAction row={row} />;
-  }
-
   return (
-    <>
-      <IconButton
-        aria-label={localization?.rowActions}
-        onClick={onRowClick}
-        title={localization?.rowActions}
-        size="small"
-      >
-        <MoreHorizIcon />
-      </IconButton>
-
-      <RowActionsMenu anchorEl={anchorEl} row={row} setAnchorEl={setAnchorEl} />
-    </>
+    <TableButtonCell densePadding={densePadding}>
+      {rowActions ? (
+        <>{rowActions(row, table)}</>
+      ) : row.id === itemForUpdate?.id ? (
+        <EditActionsAction row={row} />
+      ) : (
+        <>
+          {' '}
+          <IconButton
+            aria-label={localization?.rowActions}
+            onClick={onRowClick}
+            title={localization?.rowActions}
+            size="small"
+          >
+            <MoreHorizIcon />
+          </IconButton>
+          <RowActionsMenu
+            anchorEl={anchorEl}
+            row={row}
+            setAnchorEl={setAnchorEl}
+          />
+        </>
+      )}
+    </TableButtonCell>
   );
 };
 

@@ -1,23 +1,17 @@
-import MuiTableCell from '@mui/material/TableCell';
-import { Checkbox, styled } from '@mui/material';
+import { Checkbox } from '@mui/material';
 import { Row } from 'react-table';
 import React, { ChangeEvent, FC } from 'react';
 
 import { useDataGrid } from '../providers';
-
-const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding',
-})<{ densePadding?: boolean }>(({ densePadding }) => ({
-  padding: densePadding ? '0' : '0.6rem',
-  transition: 'all 0.2s ease-in-out',
-}));
+import { TableButtonCell } from '../table';
 
 interface SelectRowActionProps {
   row: Row;
 }
 
 export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
-  const { densePadding, localization, onRowSelectChange, table } = useDataGrid();
+  const { densePadding, localization, onRowSelectChange, table } =
+    useDataGrid();
 
   const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     row.getToggleRowSelectedProps()?.onChange?.(e);
@@ -25,7 +19,7 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
   };
 
   return (
-    <TableCell densePadding={densePadding}>
+    <TableButtonCell densePadding={densePadding}>
       <Checkbox
         inputProps={{
           'aria-label': localization?.selectRow,
@@ -33,7 +27,7 @@ export const SelectRowAction: FC<SelectRowActionProps> = ({ row }) => {
         onChange={onSelectChange}
         {...row.getToggleRowSelectedProps()}
       />
-    </TableCell>
+    </TableButtonCell>
   );
 };
 

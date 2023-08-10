@@ -1,8 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import DataGrid, { DataGridProps } from '../../src';
 import faker from '@faker-js/faker';
-import { Cell, TableCellProps } from 'react-table';
+import { Cell } from 'react-table';
+
+import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
   title: 'Styling/Style Table Body Cells',
@@ -68,8 +69,7 @@ export const StyleBodyCellConditionallyIn1Column: Story<
       {
         Header: 'Age',
         accessor: 'age' as const,
-        //@ts-ignore
-        bodyCellProps: (cell) => ({
+        bodyCellProps: (cell: Cell<any>) => ({
           style: {
             backgroundColor:
               cell.value > 40 ? 'rgba(22, 184, 44, 0.5)' : undefined,

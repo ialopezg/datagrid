@@ -3,7 +3,7 @@ import { Cell, TableCellProps } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { BodyCellEditTextField } from '../inputs';
+import EditTextField from '../inputs/EditTextField';
 import { styled } from '@mui/material';
 
 const TableCell = styled(MuiTableCell, {
@@ -53,7 +53,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
       {...cellProps}
     >
       {itemForUpdate?.id === cell.row.id ? (
-        <BodyCellEditTextField cell={cell} />
+        <EditTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')
       ) : cell.isGrouped ? (

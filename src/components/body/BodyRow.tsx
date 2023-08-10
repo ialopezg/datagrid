@@ -1,5 +1,5 @@
 import MuiTableRow from '@mui/material/TableRow';
-import { alpha, styled, TableCell } from '@mui/material';
+import { alpha, styled } from '@mui/material';
 import { Row, TableRowProps } from 'react-table';
 import React, { FC } from 'react';
 
@@ -12,7 +12,9 @@ import RowActionsAction from '../actions/RowActionsAction';
 
 const TableRow = styled(MuiTableRow, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'isSelected',
-})<{ isSelected?: boolean }>(({ isSelected, theme }) => ({
+})<{
+  isSelected?: boolean;
+}>(({ isSelected, theme }) => ({
   backgroundColor: isSelected
     ? alpha(theme.palette.primary.light, 0.1)
     : 'transparent',
@@ -33,10 +35,11 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     rowActionsColumn,
   } = useDataGrid();
 
-  const rowProps =
-    (defaultBodyRowProps instanceof Function
+  const rowProps = (
+    defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
-      : defaultBodyRowProps) as TableRowProps;
+      : defaultBodyRowProps
+  ) as TableRowProps;
   const bodyRowProps = {
     ...rowProps,
     ...row.getRowProps(),
@@ -45,7 +48,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       ...(rowProps?.style ?? {}),
     },
   };
-  console.log(row.values);
+
   return (
     <>
       <TableRow
@@ -55,9 +58,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         {...bodyRowProps}
       >
         {enableRowActions && rowActionsColumn === 'first' && (
-          <TableCell>
-            <RowActionsAction row={row} />
-          </TableCell>
+          <RowActionsAction row={row} />
         )}
 
         {(hasExpandableRows || detailPanel) && <ExpandRowAction row={row} />}
@@ -69,9 +70,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         ))}
 
         {enableRowActions && rowActionsColumn === 'last' && (
-          <TableCell>
-            <RowActionsAction row={row} />
-          </TableCell>
+          <RowActionsAction row={row} />
         )}
       </TableRow>
 

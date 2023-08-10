@@ -28,15 +28,18 @@ import {
   UseRowSelectOptions,
   UseRowStateOptions,
   UseSortByOptions,
+  UseTableOptions,
 } from 'react-table';
 import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 import { defaultLocalization, Localization } from './localization';
+import { DataGridColumn } from '../types/react-table-config';
 
 export interface DataGridProps<D extends {} = {}>
   extends TableOptions<D>,
+    UseTableOptions<D>,
     UseExpandedOptions<D>,
     UseFiltersOptions<D>,
     UseGlobalFiltersOptions<D>,
@@ -46,8 +49,11 @@ export interface DataGridProps<D extends {} = {}>
     UseRowSelectOptions<D>,
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
+  columns: (Column<D> & DataGridColumn<D>)[];
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  bodyCellEditTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
+  bodyCellEditTextFieldProps?:
+    | TextFieldProps
+    | ((cell: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
@@ -72,7 +78,9 @@ export interface DataGridProps<D extends {} = {}>
     | TableRowProps
     | ((footerGroup: HeaderGroup<D>) => TableRowProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
+  headerCellFilterTextFieldProps?:
+    | TextFieldProps
+    | ((column: Column<D>) => TextFieldProps);
   headerProps?:
     | TableHeadProps
     | ((table: TableInstance<D>) => TableHeaderProps);
@@ -124,15 +132,14 @@ export interface DataGridProps<D extends {} = {}>
   toolbarTopProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
 }
 
-export default <D extends {}>(
-  {
-    defaultColumn = { minWidth: 50, maxWidth: 1000 },
-    localization = defaultLocalization,
-    rowActionsColumn = 'first',
-    paginationPosition = 'bottom',
-    toolbarActionsPosition = 'top',
-    ...rest
-  }: DataGridProps<D>) => (
+export default <D extends {}>({
+  defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  localization = defaultLocalization,
+  rowActionsColumn = 'first',
+  paginationPosition = 'bottom',
+  toolbarActionsPosition = 'top',
+  ...rest
+}: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
     rowActionsColumn={rowActionsColumn}
