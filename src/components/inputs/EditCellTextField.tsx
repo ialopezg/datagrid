@@ -8,18 +8,28 @@ interface EditCellTextFieldProps {
   cell: Cell;
 }
 
-export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
-  const { editTextFieldProps, itemForUpdate, localization, setItemForUpdate } =
-    useDataGrid();
+export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
+  const {
+    editCellTextFieldProps,
+    itemForUpdate,
+    localization,
+    setItemForUpdate,
+  } = useDataGrid();
 
+  const tableEditCellTextFieldProps =
+    editCellTextFieldProps instanceof Function
+      ? editCellTextFieldProps(cell)
+      : editCellTextFieldProps;
+  const columnEditCellTextFieldProps =
+    cell.column.editCellTextFieldProps instanceof Function
+      ? cell.column.editCellTextFieldProps(cell)
+      : cell.column.editCellTextFieldProps;
   const textFieldProps = {
-    ...editTextFieldProps,
-    ...cell.column.bodyCellEditTextFieldProps,
+    ...tableEditCellTextFieldProps,
+    ...columnEditCellTextFieldProps,
     style: {
-      // @ts-ignore
-      ...editTextFieldProps?.style,
-      // @ts-ignore
-      ...cell.column.bodyCellEditTextFieldProps?.style,
+      ...tableEditCellTextFieldProps?.style,
+      ...columnEditCellTextFieldProps?.style,
     },
   };
 
@@ -28,7 +38,7 @@ export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
       cell.row.values[cell.column.id] = e.target.value;
       setItemForUpdate({ ...itemForUpdate });
     }
-    cell.column.onCellEditChange?.(e, cell);
+    cell.column.onEditCellChange?.(e, cell);
   };
 
   if (cell.column.editable && cell.column.Edit) {
@@ -41,11 +51,11 @@ export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
       onChange={handleChange}
       placeholder={localization?.edit}
       onClick={(e) => e.stopPropagation()}
-      value={itemForUpdate?.values?.[cell.column.id]}
+      value={cell.value}
       variant="standard"
       {...textFieldProps}
     />
   );
 };
 
-export default EditTextField;
+export default EditCellTextField;

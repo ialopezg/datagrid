@@ -51,7 +51,7 @@ export interface DataGridProps<D extends {} = {}>
     UseSortByOptions<D> {
   columns: (Column<D> & DataGridColumn<D>)[];
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  editTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
+  editCellTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
