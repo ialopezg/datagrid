@@ -5,6 +5,7 @@ import FiltersVisibilityAction from '../actions/FiltersVisibilityAction';
 import { ColumnsVisibilityAction } from '../actions';
 import ToggleDensePaddingAction from '../actions/ToggleDensePaddingAction';
 import ToggleSearchAction from '../actions/ToggleSearchAction';
+import ToggleFullScreenAction from '../actions/ToggleFullScreenAction';
 
 export const ToolbarActionsContainer = styled('div')({
   display: 'flex',
@@ -19,6 +20,7 @@ export const ToolbarActions: FC<ToolbarActionsProps> = () => {
     disableColumnHiding,
     disableDensePadding,
     disableFilters,
+    disableFullScreen,
     disableGlobalFilter,
   } = useDataGrid();
 
@@ -28,6 +30,7 @@ export const ToolbarActions: FC<ToolbarActionsProps> = () => {
       {!disableFilters && <FiltersVisibilityAction />}
       {!disableColumnHiding && <ColumnsVisibilityAction />}
       {!disableDensePadding && <ToggleDensePaddingAction />}
+      {!disableFullScreen && <ToggleFullScreenAction />}
     </ToolbarActionsContainer>
   );
 };

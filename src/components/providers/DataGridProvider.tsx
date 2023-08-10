@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useMemo, useState } from 'react';
 import {
   PluginHook,
   Row,
@@ -15,7 +15,6 @@ import {
 } from 'react-table';
 
 import { DataGridProps } from '../DataGrid';
-import { RowHelper } from '../helpers';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {}>(
@@ -38,33 +37,45 @@ export const DataGridProvider = <D extends {}>(
 
   const table = useTable<D>(props, ...hooks);
 
-  const rowOptions = RowHelper({ table });
-
   // ** State
   const [densePadding, setDensePadding] = useState<boolean>(
     props.defaultDensePadding ?? false,
   );
   const [itemForUpdate, setItemForUpdate] = useState<Row | null>(null);
+  const [fullScreen, setFullScreen] = useState<boolean>(
+    props.defaultFullScreen ?? false,
+  );
   const [showFilters, setShowFilters] = useState<boolean>(
     props.defaultShowFilters ?? false,
   );
   const [showSearch, setShowSearch] = useState<boolean>(
     props.defaultShowSearch ?? false,
   );
+  const hasExpandableRows = useMemo(
+    () => table.rows.some((row) => row.canExpand),
+    [table.rows],
+  );
+  const hasExpandedRows = useMemo(
+    () => table.rows.some((row) => row.isExpanded),
+    [table.rows],
+  );
 
   return (
     <DataGridContext.Provider
       value={{
-        ...rowOptions,
         ...props,
         densePadding,
-        setDensePadding,
+        fullScreen,
+        hasExpandableRows,
+        hasExpandedRows,
         itemForUpdate,
+        setDensePadding,
+        setFullScreen,
         setItemForUpdate,
-        showFilters,
         setShowFilters,
-        showSearch,
         setShowSearch,
+        showFilters,
+        showSearch,
         // @ts-ignore
         table,
       }}

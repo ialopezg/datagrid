@@ -25,6 +25,7 @@ export interface Localization {
   sortByColumnDescending?: string;
   toggleDensePadding?: string;
   toggleFilters?: string;
+  toggleFullScreen?: string;
   toggleSearch?: string;
 }
 
@@ -55,5 +56,6 @@ export const defaultLocalization: Localization = {
   sortByColumnDescending: 'Sort by {column} descending',
   toggleDensePadding: 'Toggle dense padding',
   toggleFilters: 'Toggle filters',
+  toggleFullScreen: 'Toggle full screen',
   toggleSearch: 'Toggle search',
 };

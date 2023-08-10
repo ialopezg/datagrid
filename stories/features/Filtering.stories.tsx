@@ -80,6 +80,7 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
           Filter: ({ column }: any) => (
             <TextField
               fullWidth
+              margin="dense"
               onChange={(e: ChangeEvent<any>) =>
                 column.setFilter(e.target.value || undefined)
               }
@@ -88,9 +89,10 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
               value={column.filterValue ?? ''}
               variant="standard"
             >
-              <MenuItem value=""></MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="">All</MenuItem>
               <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
             </TextField>
           ),
           Header: 'Gender',

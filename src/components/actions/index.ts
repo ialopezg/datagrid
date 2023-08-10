@@ -8,4 +8,5 @@ export * from './RowActionsAction';
 export * from './SelectAllRowsAction';
 export * from './SelectRowAction';
 export * from './ToggleDensePaddingAction';
+export * from './ToggleFullScreenAction';
 export * from './ToggleSearchAction';

@@ -9,6 +9,7 @@ import ToolbarActions from './ToolbarActions';
 
 const StyledToolbar = styled(MuiToolbar)({
   display: 'grid',
+  padding: '0 0.5rem !important',
 });
 
 const ToolbarTopRow = styled('div')({

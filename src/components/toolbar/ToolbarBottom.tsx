@@ -9,6 +9,7 @@ import Pagination from './Pagination';
 const StyledToolbar = styled(MuiToolbar)({
   display: 'flex',
   justifyContent: 'space-between',
+  padding: '0 0.5rem !important',
 });
 
 interface ToolbarBottomProps {}
@@ -29,7 +30,7 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
       : toolbarBottomProps;
 
   return (
-    <StyledToolbar style={{ padding: 0 }} variant="dense" {...toolbarProps}>
+    <StyledToolbar variant="dense" {...toolbarProps}>
       {!hideToolbarActions && toolbarActionsPosition === 'bottom' ? (
         <ToolbarActions />
       ) : (

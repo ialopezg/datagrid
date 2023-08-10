@@ -1,10 +1,10 @@
+import MuiTableContainer from '@mui/material/TableContainer';
 import {
   alpha,
   CircularProgress,
   LinearProgress,
   Paper,
   styled,
-  TableContainer,
 } from '@mui/material';
 import React, { FC } from 'react';
 
@@ -12,6 +12,20 @@ import Table from './Table';
 import { useDataGrid } from '../providers';
 import ToolbarBottom from '../toolbar/ToolbarBottom';
 import ToolbarTop from '../toolbar/ToolbarTop';
+
+const TableContainer = styled(MuiTableContainer, {
+  shouldForwardProp: (prop) => prop !== 'fullScreen',
+})<{ fullScreen?: boolean; component?: any }>(({ fullScreen }) => ({
+  bottom: fullScreen ? '0' : undefined,
+  height: fullScreen ? '100%' : undefined,
+  left: fullScreen ? '0' : undefined,
+  margin: fullScreen ? '0' : undefined,
+  position: fullScreen ? 'absolute' : undefined,
+  right: fullScreen ? '0' : undefined,
+  top: fullScreen ? '0' : undefined,
+  transition: 'all 0.2s ease-in-out',
+  width: fullScreen ? '100vw' : undefined,
+}));
 
 const CircularProgressWrapper = styled('div')(({ theme }) => ({
   alignItems: 'center',
@@ -30,6 +44,7 @@ interface ContainerProps {}
 export const Container: FC<ContainerProps> = () => {
   const {
     containerProps,
+    fullScreen,
     hideToolbarBottom,
     hideToolbarTop,
     isLoading,
@@ -38,7 +53,11 @@ export const Container: FC<ContainerProps> = () => {
   } = useDataGrid();
 
   return (
-    <TableContainer component={Paper} {...containerProps}>
+    <TableContainer
+      component={Paper}
+      fullScreen={fullScreen}
+      {...containerProps}
+    >
       {!hideToolbarTop && <ToolbarTop />}
 
       {isFetching && <LinearProgress />}

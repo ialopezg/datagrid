@@ -53,6 +53,7 @@ export interface DataGridProps<D extends {} = {}>
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
   defaultDensePadding?: boolean;
+  defaultFullScreen?: boolean;
   defaultShowFilters?: boolean;
   defaultShowSearch?: boolean;
   detailPanel?: (row: Row<D>) => ReactNode;
@@ -60,6 +61,7 @@ export interface DataGridProps<D extends {} = {}>
   disableColumnActions?: boolean;
   disableColumnHiding?: boolean;
   disableDensePadding?: boolean;
+  disableFullScreen?: boolean;
   disableExpandAll?: boolean;
   disableSelectAll?: boolean;
   disableSubRowTree?: boolean;
