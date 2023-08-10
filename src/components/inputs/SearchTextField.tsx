@@ -31,6 +31,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
   return (
     <Collapse in={showSearch} orientation="horizontal">
       <TextField
+        id="datagrid-search-box"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(e.target.value);
           onSearchAction(e);

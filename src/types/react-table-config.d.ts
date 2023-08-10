@@ -59,9 +59,9 @@ export interface DataGridColumn<D extends {} = {}> extends UseFiltersColumnOptio
   UseSortByColumnOptions<D> {
   bodyCellProps?: TableCellProps | ((cell: Cell<D>) => TableCellProps);
   editCellTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
+  filterCellTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
   footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
   disableFilters?: boolean;
   editable?: boolean;
   onEditCellChange?: (e: ChangeEvent<HTMLInputElement>, cell: Cell<D>) => void;

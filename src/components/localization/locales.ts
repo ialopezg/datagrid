@@ -19,8 +19,8 @@ export interface Localization {
   search?: string;
   selectAll?: string;
   selectRow?: string;
-  sortAscending?: string;
-  sortDescending?: string;
+  sortByColumnAscending?: string;
+  sortByColumnDescending?: string;
   toggleDensePadding?: string;
   toggleFilters?: string;
   toggleSearch?: string;
@@ -37,9 +37,9 @@ export const defaultLocalization: Localization = {
   expandAll: 'Expand all',
   filter: 'Filter',
   filterByColumn: 'Filter by {column}',
-  groupByColumn: 'Group by column',
-  ungroupByColumn: 'Ungroup column',
-  hideColumn: 'Hide column',
+  groupByColumn: 'Group by {column}',
+  ungroupByColumn: 'Ungroup by {column}',
+  hideColumn: 'Hide {column} column',
   hideColumns: 'Hide columns',
   loadingData: 'Loading data',
   rowActions: 'Row actions',
@@ -47,8 +47,8 @@ export const defaultLocalization: Localization = {
   search: 'Search',
   selectAll: 'Select all',
   selectRow: 'Select row',
-  sortAscending: 'Sort ascending',
-  sortDescending: 'Sort descending',
+  sortByColumnAscending: 'Sort by {column} ascending',
+  sortByColumnDescending: 'Sort by {column} descending',
   toggleDensePadding: 'Toggle dense padding',
   toggleFilters: 'Toggle filters',
   toggleSearch: 'Toggle search',

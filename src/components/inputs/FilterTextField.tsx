@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import FilterIcon from '@mui/icons-material/FilterList';
-import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
 import React, { FC, useState } from 'react';
 
@@ -30,6 +30,12 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   return (
     <TextField
       fullWidth
+      id={`datagrid-filter-${column.id}-column`}
+      inputProps={{
+        style: {
+          textOverflow: 'ellipsis',
+        },
+      }}
       margin="dense"
       onChange={(e) => {
         setFilterValue(e.target.value);
@@ -44,21 +50,32 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
       variant="standard"
       InputProps={{
         startAdornment: (
-          <InputAdornment position="start">
-            <FilterIcon />
-          </InputAdornment>
+          <Tooltip
+            arrow
+            title={localization?.filterByColumn?.replace(
+              '{column}',
+              String(column.Header),
+            )}
+          >
+            <InputAdornment position="start">
+              <FilterIcon />
+            </InputAdornment>
+          </Tooltip>
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              aria-label={localization?.clear}
-              disabled={filterValue?.length === 0}
-              onClick={onClearFilter}
-              size="small"
-              title={localization?.clear}
-            >
-              <CloseIcon />
-            </IconButton>
+            <Tooltip arrow title={localization?.clear}>
+              <span>
+                <IconButton
+                  aria-label={localization?.clear}
+                  disabled={filterValue?.length === 0}
+                  onClick={onClearFilter}
+                  size="small"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
           </InputAdornment>
         ),
       }}

@@ -8,11 +8,23 @@ import { useDataGrid } from '../providers';
 interface ToggleSearchActionProps {}
 
 export const ToggleSearchAction: FC<ToggleSearchActionProps> = () => {
-  const { localization, setShowSearch, showSearch } = useDataGrid();
+  const { localization, searchBoxProps, setShowSearch, showSearch } =
+    useDataGrid();
+
+  const onToggleSearchBox = () => {
+    setShowSearch(!showSearch);
+    setTimeout(
+      () =>
+        document
+          .getElementById(searchBoxProps?.id ?? 'datagrid-search-box')
+          ?.focus(),
+      200,
+    );
+  };
 
   return (
     <Tooltip arrow title={localization?.toggleSearch}>
-      <IconButton onClick={() => setShowSearch(!showSearch)} size="small">
+      <IconButton onClick={onToggleSearchBox} size="small">
         {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>
     </Tooltip>

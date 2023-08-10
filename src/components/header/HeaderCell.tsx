@@ -18,27 +18,30 @@ export const StyledTableCell = styled(MuiTableCell, {
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
   ({ densePadding, enableColumnResizing }) => ({
     fontWeight: 'bold',
-    verticalAlign: 'text-top',
+    height: '100%',
     padding: densePadding ? '0.5rem' : '1rem',
     transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
+    verticalAlign: 'text-top',
   }),
 );
 
-const TableCellContent = styled('div')({
+const TableCellWrapper = styled('div')({
+  alignContent: 'space-between',
   display: 'grid',
+  height: '100%',
 });
 
-const TableCellText = styled('div')({
+const TableCellTopContent = styled('div')({
   width: '100%',
   display: 'flex',
-  alignItems: 'flex-start',
   justifyContent: 'space-between',
+  alignItems: 'flex-start',
 });
 
 const CellFlexItem = styled('span')({
+  alignItems: 'center',
   display: 'flex',
   flexWrap: 'nowrap',
-  alignItems: 'center',
 });
 
 const Divider = styled(MuiDivider)({
@@ -93,8 +96,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
       enableColumnResizing={enableColumnResizing}
       {...headerCellProps}
     >
-      <TableCellContent>
-        <TableCellText
+      <TableCellWrapper>
+        <TableCellTopContent
           style={{ justifyContent: isParent ? 'center' : undefined }}
         >
           <CellFlexItem {...column.getSortByToggleProps()}>
@@ -106,8 +109,8 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
                   column.isSorted
                     ? column.sortDescFirst
                       ? localization?.clearSorting
-                      : localization?.sortDescending
-                    : localization?.sortAscending
+                      : localization?.sortByColumnDescending
+                    : localization?.sortByColumnAscending
                 }
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
@@ -126,13 +129,13 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
               />
             )}
           </CellFlexItem>
-        </TableCellText>
+        </TableCellTopContent>
         {!disableFilters && column.canFilter && (
           <Collapse in={showFilters}>
             <FilterTextField column={column} />
           </Collapse>
         )}
-      </TableCellContent>
+      </TableCellWrapper>
     </StyledTableCell>
   );
 };
