@@ -1,5 +1,5 @@
 import MuiToolbar from '@mui/material/Toolbar';
-import { styled, Typography } from '@mui/material';
+import { styled } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
@@ -19,7 +19,7 @@ const ToolbarTopRow = styled('div')({
 
 const ToolbarActionsContainer = styled('div')({
   display: 'flex',
-  gap: '0.5rem',
+  gap: '0.5rem !important',
 });
 
 interface ToolbarTopProps {}
@@ -31,8 +31,7 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
     manualPagination,
     paginationPosition,
     table,
-    title,
-    titleProps,
+    toolbarActions,
     toolbarActionsPosition,
     toolbarTopProps,
   } = useDataGrid();
@@ -45,14 +44,7 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
   return (
     <StyledToolbar variant="dense" {...toolbarProps}>
       <ToolbarTopRow>
-        {title ? (
-          <Typography variant="h5" {...titleProps}>
-            {title}
-          </Typography>
-        ) : (
-          <span />
-        )}
-
+        {toolbarActions?.(table) ?? <span />}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <SearchTextField />}
           {!hideToolbarActions && toolbarActionsPosition === 'top' && (

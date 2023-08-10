@@ -1,4 +1,6 @@
 import faker from '@faker-js/faker';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import { Button, IconButton, Tooltip } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
@@ -31,7 +33,7 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const ToolbarEnabledDefault: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} title="DataGrid" />
+  <DataGrid columns={columns} data={data} />
 );
 
 export const TopToolbarHidden: Story<DataGridProps> = () => (
@@ -51,19 +53,90 @@ export const HideToolbarActions: Story<DataGridProps> = () => (
 );
 
 export const ToolbarActionsOnBottom: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} paginationPosition="bottom" />
+);
+
+export const CustomToolbarActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    title="My People Table"
-    paginationPosition="bottom"
+    positionToolbarActions="bottom"
+    toolbarActions={(_) => {
+      const handleCreateNewUser = () => {
+        // @ts-ignore
+        prompt('Create new user modal');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      );
+    }}
   />
 );
 
-export const ToolbarWithStyledTitle: Story<DataGridProps> = () => (
+export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
     title="My People Table"
-    titleProps={{ variant: 'h4' }}
+    muiTableTitleProps={{ variant: 'h4' }}
+    enableSelection
+    toolbarActions={(table) => {
+      const handleDeactivate = () => {
+        table.selectedFlatRows.map((row) => {
+          // @ts-ignore
+          alert('deactivating ' + row.original.firstName);
+        });
+      };
+
+      const handleActivate = () => {
+        table.selectedFlatRows.map((row) => {
+          // @ts-ignore
+          alert('activating ' + row.original.firstName);
+        });
+      };
+
+      const handleContact = () => {
+        table.selectedFlatRows.map((row) => {
+          // @ts-ignore
+          alert('contact ' + row.original.firstName);
+        });
+      };
+
+      return (
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <Button
+            color="error"
+            disabled={table.selectedFlatRows.length === 0}
+            onClick={handleDeactivate}
+            variant="contained"
+          >
+            Deactivate
+          </Button>
+          <Button
+            color="success"
+            disabled={table.selectedFlatRows.length === 0}
+            onClick={handleActivate}
+            variant="contained"
+          >
+            Activate
+          </Button>
+          <Button
+            color="info"
+            disabled={table.selectedFlatRows.length === 0}
+            onClick={handleContact}
+            variant="contained"
+          >
+            Contact
+          </Button>
+        </div>
+      );
+    }}
   />
 );

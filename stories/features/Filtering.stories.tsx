@@ -72,10 +72,10 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
         {
           accessor: 'gender' as const,
           filter: (rows: Row<any>[], _: any, filterValue: string) =>
-            rows.filter(
-              (row) =>
-                row.values['gender'].toLowerCase() ===
-                filterValue.toLowerCase(),
+            rows.filter((row) =>
+              row.values['gender']
+                .toLowerCase()
+                .startsWith(filterValue.toLowerCase()),
             ),
           Filter: ({ column }: any) => (
             <TextField

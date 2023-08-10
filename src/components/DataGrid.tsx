@@ -6,7 +6,6 @@ import {
   TableProps,
   TextFieldProps,
   ToolbarProps,
-  TypographyProps,
 } from '@mui/material';
 import {
   Cell,
@@ -36,6 +35,7 @@ import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 import { defaultLocalization, Localization } from './localization';
 import { DataGridColumn } from '../types/react-table-config';
+import table from './table';
 
 export interface DataGridProps<D extends {} = {}>
   extends TableOptions<D>,
@@ -51,7 +51,9 @@ export interface DataGridProps<D extends {} = {}>
     UseSortByOptions<D> {
   columns: (Column<D> & DataGridColumn<D>)[];
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  editCellTextFieldProps?: TextFieldProps | ((cell?: Cell<D>) => TextFieldProps);
+  editCellTextFieldProps?:
+    | TextFieldProps
+    | ((cell?: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
@@ -121,8 +123,7 @@ export interface DataGridProps<D extends {} = {}>
   ) => ReactNode[];
   searchBoxProps?: TextFieldProps;
   tableProps?: TableProps;
-  title?: string | ReactNode;
-  titleProps?: TypographyProps;
+  toolbarActions?: (table: TableInstance<D>) => ReactNode;
   toolbarActionsPosition?: 'bottom' | 'top';
   toolbarBottomProps?:
     | ToolbarProps

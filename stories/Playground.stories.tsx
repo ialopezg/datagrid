@@ -61,6 +61,7 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
       phoneNumber: faker.phone.phoneNumber(),
     }))}
     disableColumnActions
+    disableSortBy
     enableRowActions
     enableRowEditing
     hideToolbarTop
@@ -120,6 +121,5 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     enableRowActions
     enableRowEditing
     paginationPosition="both"
-    title="People Data"
   />
 );
