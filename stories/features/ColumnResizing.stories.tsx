@@ -9,7 +9,7 @@ const meta: Meta = {
   component: DataGrid,
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'proofOfConcept',
     },
   },
 };

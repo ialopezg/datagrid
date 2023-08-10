@@ -6,27 +6,19 @@ import { useDataGrid } from '../providers';
 
 interface RowActionsMenuProps {
   anchorEl: HTMLElement | null;
+  onRowEditAction: () => void;
   row: Row;
   setAnchorEl: (value: HTMLElement | null) => void;
 }
 
 export const RowActionsMenu: FC<RowActionsMenuProps> = ({
   anchorEl,
+  onRowEditAction,
   row,
   setAnchorEl,
 }) => {
-  const {
-    enableRowEditing,
-    localization,
-    rowActionMenuItems,
-    setItemForUpdate,
-    table,
-  } = useDataGrid();
-
-  const onMenuItemClick = () => {
-    setItemForUpdate({ ...row });
-    setAnchorEl(null);
-  };
+  const { enableRowEditing, localization, rowActionMenuItems, table } =
+    useDataGrid();
 
   return (
     <Menu
@@ -35,8 +27,8 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       open={!!anchorEl}
     >
       {enableRowEditing && (
-        <MenuItem onClick={onMenuItemClick}>
-          <EditIcon /> {localization?.edit}
+        <MenuItem onClick={onRowEditAction}>
+          <EditIcon /> {localization?.rowActions}
         </MenuItem>
       )}
 

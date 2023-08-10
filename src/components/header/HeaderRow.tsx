@@ -51,7 +51,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         (isParent ? (
           <SpacerCell />
         ) : (
-          <StyledTableCell>{localization?.actions}</StyledTableCell>
+          <StyledTableCell style={{ textAlign: 'center' }}>
+            {localization?.actions}
+          </StyledTableCell>
         ))}
 
       {hasExpandableRows || detailPanel ? (

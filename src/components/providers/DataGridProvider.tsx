@@ -48,6 +48,9 @@ export const DataGridProvider = <D extends {}>(
   const [showFilters, setShowFilters] = useState<boolean>(
     props.defaultShowFilters ?? false,
   );
+  const [showSearch, setShowSearch] = useState<boolean>(
+    props.defaultShowSearch ?? false,
+  );
 
   return (
     <DataGridContext.Provider
@@ -60,6 +63,8 @@ export const DataGridProvider = <D extends {}>(
         setItemForUpdate,
         showFilters,
         setShowFilters,
+        showSearch,
+        setShowSearch,
         // @ts-ignore
         table,
       }}

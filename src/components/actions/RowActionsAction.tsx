@@ -1,6 +1,7 @@
+import EditIcon from '@mui/icons-material/Edit';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MuiIconButton from '@mui/material/IconButton';
-import { styled } from '@mui/material';
+import { styled, Tooltip } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
@@ -24,8 +25,16 @@ interface RowActionsActionProps {
 }
 
 export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
-  const { densePadding, itemForUpdate, localization, rowActions, table } =
-    useDataGrid();
+  const {
+    densePadding,
+    enableRowEditing,
+    itemForUpdate,
+    localization,
+    rowActions,
+    rowActionMenuItems,
+    setItemForUpdate,
+    table,
+  } = useDataGrid();
 
   // ** State
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -36,15 +45,25 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
     setAnchorEl(e.currentTarget);
   };
 
+  const onRowEditAction = () => {
+    setItemForUpdate({ ...row });
+    setAnchorEl(null);
+  };
+
   return (
     <ButtonCell densePadding={densePadding}>
       {rowActions ? (
         <>{rowActions(row, table)}</>
       ) : row.id === itemForUpdate?.id ? (
         <EditActionsAction row={row} />
-      ) : (
+      ) : !rowActionMenuItems && enableRowEditing ? (
+        <Tooltip arrow placement="right" title={localization?.edit}>
+          <IconButton onClick={onRowEditAction}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+      ) : rowActionMenuItems ? (
         <>
-          {' '}
           <IconButton
             aria-label={localization?.rowActions}
             onClick={onRowClick}
@@ -55,11 +74,12 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
           </IconButton>
           <RowActionsMenu
             anchorEl={anchorEl}
+            onRowEditAction={onRowEditAction}
             row={row}
             setAnchorEl={setAnchorEl}
           />
         </>
-      )}
+      ) : null}
     </ButtonCell>
   );
 };

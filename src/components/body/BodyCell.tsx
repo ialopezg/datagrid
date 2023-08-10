@@ -11,6 +11,7 @@ const TableCell = styled(MuiTableCell, {
 })<{ densePadding?: boolean }>(({ densePadding }) => ({
   padding: densePadding ? '0.5rem' : '1rem',
   transition: 'all 0.2s ease-in-out',
+  whiteSpace: densePadding ? 'nowrap' : 'normal',
 }));
 
 interface BodyCellProps {

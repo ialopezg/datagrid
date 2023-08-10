@@ -57,6 +57,7 @@ export interface DataGridProps<D extends {} = {}>
   containerProps?: TableContainerProps;
   defaultDensePadding?: boolean;
   defaultShowFilters?: boolean;
+  defaultShowSearch?: boolean;
   disableColumnActions?: boolean;
   disableColumnHiding?: boolean;
   disableDensePadding?: boolean;
@@ -118,7 +119,7 @@ export interface DataGridProps<D extends {} = {}>
     table: TableInstance<D>,
     onCloseMenu: () => void,
   ) => ReactNode[];
-  searchProps?: TextFieldProps;
+  searchBoxProps?: TextFieldProps;
   tableProps?: TableProps;
   title?: string | ReactNode;
   titleProps?: TypographyProps;

@@ -51,6 +51,11 @@ export const parameters = {
         color: '#ffffff',
         description: 'This feature is getting close to stable',
       },
+      proofOfConcept: {
+        background: 'hotpink',
+        color: '#ffffff',
+        description: 'Probably broken',
+      },
       stable: {
         background: 'green',
         color: '#ffffff',
@@ -72,19 +77,19 @@ const withThemeProvider = (Story, context) => {
           variant="subtitle2"
           style={{
             paddingBottom: '2rem',
-            color: useDarkMode() ? '#aaa' : '#666',
+            color: useDarkMode() ? '#fff' : '#666',
           }}
         >
-          Toggle Dark and Light Mode in the toolbar buttons above
+          Toggle dark and light mode in the toolbar buttons above
         </Typography>
 
         <Story {...context} />
 
         <Typography
           variant="subtitle2"
-          style={{ paddingTop: '2rem', color: useDarkMode() ? '#aaa' : '#666' }}
+          style={{ paddingTop: '2rem', color: useDarkMode() ? '#fff' : '#666' }}
         >
-          View Source Code Below in the Story Tab on Canvas or the Show Code
+          View source code below in the Story tab on Canvas or the Show Code
           Button in Docs
         </Typography>
       </MuiThemeProvider>

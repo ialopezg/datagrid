@@ -13,6 +13,8 @@ export interface DataGridContextProps<D extends {}>
   setItemForUpdate: (value: Row<D> | null) => void;
   showFilters: boolean;
   setShowFilters: (value: boolean) => void;
+  showSearch: boolean;
+  setShowSearch: (value: boolean) => void;
   table: TableInstance<D>;
 }
 

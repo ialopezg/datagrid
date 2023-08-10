@@ -34,6 +34,28 @@ export const SearchEnabledDefault: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} />
 );
 
+export const ShowSearchBoxByDefault: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} defaultShowSearch />
+);
+
+export const JustASearchBox: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} defaultShowSearch hideToolbarActions />
+);
+
 export const SearchDisabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} disableGlobalFilter />
+);
+
+export const CustomizeSearchTextBox: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    defaultShowSearch
+    searchBoxProps={{
+      variant: 'outlined',
+      placeholder: 'Search 100 rows',
+      label: 'Search',
+      InputLabelProps: { shrink: true },
+    }}
+  />
 );

@@ -29,13 +29,17 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
 
   return (
     <TextField
+      fullWidth
       margin="dense"
       onChange={(e) => {
         setFilterValue(e.target.value);
         onFilterChange(e.target.value);
       }}
       onClick={(e) => e.stopPropagation()}
-      placeholder={localization?.filter}
+      placeholder={localization?.filterByColumn?.replace(
+        '{column}',
+        String(column.Header),
+      )}
       value={filterValue ?? ''}
       variant="standard"
       InputProps={{

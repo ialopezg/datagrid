@@ -8,6 +8,7 @@ export interface Localization {
   expand?: string;
   expandAll?: string;
   filter?: string;
+  filterByColumn?: string;
   groupByColumn?: string;
   ungroupByColumn?: string;
   hideColumn?: string;
@@ -22,6 +23,7 @@ export interface Localization {
   sortDescending?: string;
   toggleDensePadding?: string;
   toggleFilters?: string;
+  toggleSearch?: string;
 }
 
 export const defaultLocalization: Localization = {
@@ -34,6 +36,7 @@ export const defaultLocalization: Localization = {
   expand: 'Expand',
   expandAll: 'Expand all',
   filter: 'Filter',
+  filterByColumn: 'Filter by {column}',
   groupByColumn: 'Group by column',
   ungroupByColumn: 'Ungroup column',
   hideColumn: 'Hide column',
@@ -48,4 +51,5 @@ export const defaultLocalization: Localization = {
   sortDescending: 'Sort descending',
   toggleDensePadding: 'Toggle dense padding',
   toggleFilters: 'Toggle filters',
+  toggleSearch: 'Toggle search',
 };
