@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 import { Cell } from 'react-table';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 import { useDataGrid } from '../providers';
 
@@ -11,9 +11,6 @@ interface EditCellTextFieldProps {
 export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
   const { editTextFieldProps, itemForUpdate, localization, setItemForUpdate } =
     useDataGrid();
-
-  // ** State
-  const [error, setError] = useState<boolean | string>(false);
 
   const textFieldProps = {
     ...editTextFieldProps,
@@ -28,13 +25,10 @@ export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (itemForUpdate) {
-      setItemForUpdate({
-        ...itemForUpdate,
-        values: { ...cell.row.values, [cell.column.id]: e.target.value },
-      });
-      const err = cell.column.validator?.(e.target.value) ?? true;
-      setError(err !== true && err);
+      cell.row.values[cell.column.id] = e.target.value;
+      setItemForUpdate({ ...itemForUpdate });
     }
+    cell.column.onCellEditChange?.(e, cell);
   };
 
   if (cell.column.editable && cell.column.Edit) {
@@ -43,8 +37,6 @@ export const EditTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
 
   return (
     <TextField
-      error={!!error}
-      helperText={error}
       margin="dense"
       onChange={handleChange}
       placeholder={localization?.edit}

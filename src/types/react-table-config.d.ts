@@ -1,5 +1,5 @@
 import { TableCellProps, TextFieldProps } from '@mui/material';
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import {
   Cell,
   Column, HeaderGroup,
@@ -64,7 +64,7 @@ export interface DataGridColumn<D extends {} = {}> extends UseFiltersColumnOptio
   headerCellFilterTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
   disableFilters?: boolean;
   editable?: boolean;
-  validator?: (value: any) => boolean | string;
+  onCellEditChange?: (e: ChangeEvent<HTMLInputElement>, cell: Cell<D>) => void;
   Edit?: ({ cell, onChange }: { cell: Cell<D> }) => ReactNode;
   Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
 }

@@ -25,6 +25,7 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
   };
 
   const onCancelButtonClick = () => {
+    row.values = row.original;
     setItemForUpdate(null);
   };
 

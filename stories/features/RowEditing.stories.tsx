@@ -1,6 +1,6 @@
 import faker from '@faker-js/faker';
 import { Meta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
 
@@ -9,7 +9,7 @@ const meta: Meta = {
   component: DataGrid,
   parameters: {
     status: {
-      type: 'alpha',
+      type: 'beta',
     },
   },
 };
@@ -38,17 +38,11 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
           accessor: 'firstName' as const,
           Header: 'First Name',
           editable: true,
-          validator: (value: string) => {
-            return !value.length ? 'First name is required' : true;
-          },
         },
         {
           accessor: 'lastName' as const,
           Header: 'Last Name',
           editable: true,
-          validator: (value: string) => {
-            return !value.length ? 'Last name is required' : true;
-          },
         },
         {
           Header: 'Address',
@@ -59,40 +53,98 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
           Header: 'State',
           accessor: 'state' as const,
           editable: true,
-          validator: (value: string) => {
-            if (!value.length) {
-              return 'State is required';
-            }
+        },
+        {
+          Header: 'Phone Number',
+          accessor: 'phoneNumber' as const,
+          editable: true,
+        },
+      ]}
+      data={tableData}
+      disableColumnActions
+      onRowEditSubmit={onSubmitRowChanges}
+      enableRowActions
+      enableRowEditing
+    />
+  );
+};
 
-            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
-            if (!validStates.includes(value)) {
-              return 'That is not a cool state';
-            }
+export const RowEditingWithValidation: Story<DataGridProps> = () => {
+  const [tableData, setTableData] = useState(data);
+  const [firstNameError, setFirstNameError] = useState<string | boolean>(false);
+  const [lastNameError, setLastNameError] = useState<string | boolean>(false);
+  const [phoneNumberError, setPhoneNumberError] = useState<string | boolean>(
+    false,
+  );
 
-            return true;
+  const handleSaveRow = async (row: any) => {
+    tableData[+row.index] = row.values;
+    setTableData([...tableData]);
+  };
+
+  const validateFirstName = (value: string) => {
+    if (value.length === 0) return 'First name is required';
+    return false;
+  };
+
+  const validateLastName = (value: string) => {
+    if (value.length === 0) return 'Last name is required';
+    return false;
+  };
+
+  const validatePhoneNumber = (value: string) => {
+    if (value.length === 0) return 'Phone number is required';
+    if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/))
+      return 'Invalid phone number';
+    return false;
+  };
+
+  return (
+    <DataGrid
+      columns={[
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+          editable: true,
+          editTextFieldProps: {
+            error: !!firstNameError,
+            helperText: firstNameError,
+          },
+          onCellEditChange: (e) => {
+            setFirstNameError(validateFirstName(e.target.value));
+          },
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+          editable: true,
+          editTextFieldProps: {
+            error: !!lastNameError,
+            helperText: lastNameError,
+          },
+          onCellEditChange: (e) => {
+            setLastNameError(validateLastName(e.target.value));
           },
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
           editable: true,
-          validator: (value: string) => {
-            if (!value.length) {
-              return 'Phone number is required';
-            }
-
-            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) {
-              return 'Invalid phone number';
-            }
-
-            return true;
+          editTextFieldProps: {
+            error: !!phoneNumberError,
+            helperText: phoneNumberError,
+          },
+          onCellEditChange: (e) => {
+            setPhoneNumberError(validatePhoneNumber(e.target.value));
           },
         },
       ]}
       data={tableData}
-      onRowEditSubmit={onSubmitRowChanges}
+      onSaveRow={handleSaveRow}
+      disableColumnActions
       enableRowActions
       enableRowEditing
+      onRowEditSubmit={handleSaveRow}
     />
   );
 };
@@ -118,17 +170,11 @@ export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
           Header: 'First Name',
           accessor: 'firstName' as const,
           editable: true,
-          validator: (value: string) => {
-            return !value.length ? 'First name is required' : true;
-          },
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
           editable: true,
-          validator: (value: string) => {
-            return !value.length ? 'Last name is required' : true;
-          },
         },
         {
           Header: 'Address',
@@ -139,37 +185,15 @@ export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
           Header: 'State',
           accessor: 'state' as const,
           editable: true,
-          validator: (value: string) => {
-            if (!value.length) {
-              return 'State is required';
-            }
-
-            const validStates = ['Nebraska', 'Virginia', 'Indiana'];
-            if (!validStates.includes(value)) {
-              return 'That is not a cool state';
-            }
-
-            return true;
-          },
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
           editable: true,
-          validator: (value: string) => {
-            if (!value.length) {
-              return 'Phone number is required';
-            }
-
-            if (!value.match(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/)) {
-              return 'Invalid phone number';
-            }
-
-            return true;
-          },
         },
       ]}
       data={tableData}
+      disableColumnActions
       enableRowActions
       enableRowEditing
       isFetching={isSaving}
