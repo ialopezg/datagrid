@@ -39,7 +39,12 @@ export const ShowSearchBoxByDefault: Story<DataGridProps> = () => (
 );
 
 export const JustASearchBox: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} defaultShowSearch hideToolbarActions />
+  <DataGrid
+    columns={columns}
+    data={data}
+    defaultShowSearch
+    hideToolbarActions
+  />
 );
 
 export const SearchDisabled: Story<DataGridProps> = () => (

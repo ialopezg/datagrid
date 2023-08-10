@@ -6,7 +6,8 @@ import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
 import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
-import HeaderCell, { StyledTableCell } from './HeaderCell';
+import HeaderCell from './HeaderCell';
+import HeaderActionsCell from './HeaderActionsCell';
 
 interface HeaderRowProps {
   headerGroup: HeaderGroup;
@@ -14,14 +15,12 @@ interface HeaderRowProps {
 
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
-    densePadding,
     detailPanel,
     disableExpandAll,
     enableRowActions,
     enableSelection,
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
-    localization,
     rowActionsColumn,
     table,
   } = useDataGrid();
@@ -48,13 +47,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     <TableRow {...headerRowProps}>
       {enableRowActions &&
         rowActionsColumn === 'first' &&
-        (isParent ? (
-          <SpacerCell />
-        ) : (
-          <StyledTableCell style={{ textAlign: 'center' }}>
-            {localization?.actions}
-          </StyledTableCell>
-        ))}
+        (isParent ? <SpacerCell /> : <HeaderActionsCell />)}
 
       {hasExpandableRows || detailPanel ? (
         !disableExpandAll && !isParent ? (
@@ -80,13 +73,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
       {enableRowActions &&
         rowActionsColumn === 'last' &&
-        (isParent ? (
-          <SpacerCell />
-        ) : (
-          <StyledTableCell densePadding={densePadding}>
-            {localization?.actions}
-          </StyledTableCell>
-        ))}
+        (isParent ? <SpacerCell /> : <HeaderActionsCell />)}
     </TableRow>
   );
 };

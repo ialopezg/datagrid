@@ -33,7 +33,7 @@ const TopBar: FC<TopBarProps> = ({ open, setOpen }: TopBarProps) => {
           style={{ fontSize: '2rem', paddingLeft: '1.5rem' }}
           variant="h1"
         >
-          Material React Table
+          DataGrid
         </Typography>
       </Toolbar>
     </AppBar>

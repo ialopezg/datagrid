@@ -12,7 +12,7 @@ import { useDataGrid } from '../providers';
 import FilterTextField from '../inputs/FilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
 
-export const StyledTableCell = styled(MuiTableCell, {
+export const StyledTableHeaderCell = styled(MuiTableCell, {
   shouldForwardProp: (prop: PropertyKey) =>
     prop !== 'densePadding' && prop !== 'enableColumnResizing',
 })<{ densePadding?: boolean; enableColumnResizing?: boolean }>(
@@ -90,7 +90,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const isParent = (column?.columns?.length ?? 0) > 0;
 
   return (
-    <StyledTableCell
+    <StyledTableHeaderCell
       align={isParent ? 'center' : 'left'}
       densePadding={densePadding}
       enableColumnResizing={enableColumnResizing}
@@ -136,7 +136,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
           </Collapse>
         )}
       </TableCellWrapper>
-    </StyledTableCell>
+    </StyledTableHeaderCell>
   );
 };
 

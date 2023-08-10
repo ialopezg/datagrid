@@ -1,9 +1,12 @@
 import {
+  TableBodyProps,
+  TableCellProps,
   TableContainerProps,
   TableFooterProps,
   TableHeadProps,
   TablePaginationProps,
   TableProps,
+  TableRowProps,
   TextFieldProps,
   ToolbarProps,
 } from '@mui/material';
@@ -12,12 +15,8 @@ import {
   Column,
   HeaderGroup,
   Row,
-  TableBodyProps,
-  TableCellProps,
-  TableHeaderProps,
   TableInstance,
   TableOptions,
-  TableRowProps,
   UseExpandedOptions,
   UseFiltersOptions,
   UseGlobalFiltersOptions,
@@ -35,7 +34,6 @@ import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
 import { defaultLocalization, Localization } from './localization';
 import { DataGridColumn } from '../types/react-table-config';
-import table from './table';
 
 export interface DataGridProps<D extends {} = {}>
   extends TableOptions<D>,
@@ -49,42 +47,40 @@ export interface DataGridProps<D extends {} = {}>
     UseRowSelectOptions<D>,
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
-  columns: (Column<D> & DataGridColumn<D>)[];
+  columns: (Column<D> & DataGridColumn)[];
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  editCellTextFieldProps?:
-    | TextFieldProps
-    | ((cell?: Cell<D>) => TextFieldProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
   containerProps?: TableContainerProps;
   defaultDensePadding?: boolean;
   defaultShowFilters?: boolean;
   defaultShowSearch?: boolean;
+  detailPanel?: (row: Row<D>) => ReactNode;
+  detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
   disableColumnActions?: boolean;
   disableColumnHiding?: boolean;
   disableDensePadding?: boolean;
   disableExpandAll?: boolean;
   disableSelectAll?: boolean;
   disableSubRowTree?: boolean;
-  detailPanel?: (row: Row<D>) => ReactNode;
-  detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
+  editCellTextFieldProps?:
+    | TextFieldProps
+    | ((cell?: Cell<D>) => TextFieldProps);
   enableColumnGrouping?: boolean;
   enableColumnResizing?: boolean;
   enableRowActions?: boolean;
   enableRowEditing?: boolean;
   enableSelection?: boolean;
+  filterTextFieldProps?:
+    | TextFieldProps
+    | ((column: Column<D>) => TextFieldProps);
   footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
   footerProps?: TableFooterProps;
   footerRowProps?:
     | TableRowProps
     | ((footerGroup: HeaderGroup<D>) => TableRowProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  filterTextFieldProps?:
-    | TextFieldProps
-    | ((column: Column<D>) => TextFieldProps);
-  headerProps?:
-    | TableHeadProps
-    | ((table: TableInstance<D>) => TableHeaderProps);
+  headerProps?: TableHeadProps;
   headerRowProps?: TableRowProps | ((row: HeaderGroup<D>) => TableRowProps);
   hideFooter?: boolean;
   hideHeader?: boolean;

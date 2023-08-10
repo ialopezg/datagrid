@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import FiltersVisibilityAction from '../actions/FiltersVisibilityAction';
 import { ColumnsVisibilityAction } from '../actions';
-import DensePaddingAction from '../actions/DensePaddingAction';
+import ToggleDensePaddingAction from '../actions/ToggleDensePaddingAction';
 import ToggleSearchAction from '../actions/ToggleSearchAction';
 
 export const ToolbarActionsContainer = styled('div')({
@@ -27,7 +27,7 @@ export const ToolbarActions: FC<ToolbarActionsProps> = () => {
       {!disableGlobalFilter && <ToggleSearchAction />}
       {!disableFilters && <FiltersVisibilityAction />}
       {!disableColumnHiding && <ColumnsVisibilityAction />}
-      {!disableDensePadding && <DensePaddingAction />}
+      {!disableDensePadding && <ToggleDensePaddingAction />}
     </ToolbarActionsContainer>
   );
 };

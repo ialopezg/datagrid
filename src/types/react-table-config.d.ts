@@ -58,13 +58,14 @@ export interface DataGridColumn<D extends {} = {}> extends UseFiltersColumnOptio
   UseResizeColumnsColumnOptions<D>,
   UseSortByColumnOptions<D> {
   bodyCellProps?: TableCellProps | ((cell: Cell<D>) => TableCellProps);
+  disableFilters?: boolean;
+  editable?: boolean;
   editCellTextFieldProps?: TextFieldProps | ((cell: Cell<D>) => TextFieldProps);
   filterCellTextFieldProps?: TextFieldProps | ((column: Column<D>) => TextFieldProps);
   footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
   headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  disableFilters?: boolean;
-  editable?: boolean;
   onEditCellChange?: (e: ChangeEvent<HTMLInputElement>, cell: Cell<D>) => void;
+  onFilterChange?: (e: ChangeEvent<HTMLInputElement>, cell: Cell<D>) => void;
   Edit?: ({ cell, onChange }: { cell: Cell<D> }) => ReactNode;
   Filter?: ({ column }: { column: HeaderGroup<D> }) => ReactNode;
 }

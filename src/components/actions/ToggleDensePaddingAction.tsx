@@ -5,7 +5,7 @@ import { useDataGrid } from '../providers';
 
 interface DensePaddingActionProps {}
 
-export const DensePaddingAction: FC<DensePaddingActionProps> = () => {
+export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = () => {
   const { densePadding, localization, setDensePadding } = useDataGrid();
 
   return (
@@ -23,4 +23,4 @@ export const DensePaddingAction: FC<DensePaddingActionProps> = () => {
   );
 };
 
-export default DensePaddingAction;
+export default ToggleDensePaddingAction;

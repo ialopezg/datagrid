@@ -1,6 +1,5 @@
 export * from './ColumnActionsAction';
 export * from './ColumnsVisibilityAction';
-export * from './DensePaddingAction';
 export * from './EditActionsAction';
 export * from './ExpandAllRowsAction';
 export * from './ExpandRowAction';
@@ -8,4 +7,5 @@ export * from './FiltersVisibilityAction';
 export * from './RowActionsAction';
 export * from './SelectAllRowsAction';
 export * from './SelectRowAction';
+export * from './ToggleDensePaddingAction';
 export * from './ToggleSearchAction';
