@@ -14,7 +14,7 @@ const StyledToolbar = styled(MuiToolbar)({
 });
 
 const ToolbarTopRow = styled('div')({
-  padding: '0.5rem',
+  padding: '1rem 0.5rem',
   display: 'flex',
   justifyContent: 'space-between',
 });

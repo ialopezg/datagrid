@@ -16,7 +16,7 @@ const StyledAlert = styled(Alert, {
   position: displayAbsolute ? 'absolute' : 'relative',
   right: 0,
   top: 0,
-  width: '100%',
+  width: `calc(100% - ${displayAbsolute ? '2.5rem' : '1.5rem'})`,
   zIndex: 2,
 }));
 
@@ -56,7 +56,7 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
             {index > 0 ? localization?.thenByMessage : ''}
             <Chip
               color="secondary"
-              key={columnId}
+              key={`${index}-${columnId}`}
               label={
                 table.allColumns.find((column) => column.id === columnId)
                   ?.Header
