@@ -20,7 +20,7 @@ const TableContainer = styled(MuiTableContainer, {
   height: fullScreen ? '100%' : undefined,
   left: fullScreen ? '0' : undefined,
   margin: fullScreen ? '0' : undefined,
-  position: fullScreen ? 'absolute' : undefined,
+  position: fullScreen ? 'fixed' : undefined,
   right: fullScreen ? '0' : undefined,
   top: fullScreen ? '0' : undefined,
   transition: 'all 0.2s ease-in-out',

@@ -17,11 +17,11 @@ const PageContainer = styled('div')({
   transition: 'all 200ms ease-in-out',
 });
 
-const PageContent = styled('div')(({ theme }) => ({
+const PageContent = styled('div')({
   maxWidth: '1700px',
-  margin: '2rem auto',
+  margin: 'auto',
   transition: 'all 200ms ease-in-out',
-}));
+});
 
 export const App = ({ Component, pageProps }: AppProps) => {
   const [open, setOpen] = useState(true);
@@ -29,10 +29,10 @@ export const App = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => setDarkMode(localStorage.getItem('darkMode') === 'true'), []);
 
-  useEffect(
-    () => localStorage.setItem('darkMode', darkMode.toString()),
-    [darkMode],
-  );
+  useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? '#111' : '#fff';
+    localStorage.setItem('darkTheme', darkMode.toString());
+  }, [darkMode]);
 
   return (
     <>
@@ -51,7 +51,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
           setDarkMode={setDarkMode}
           setOpen={setOpen}
         />
-        <SideBar open={open} />
+        <SideBar navOpen={open} />
         <PageContainer
           style={{ padding: `80px 32px 800px ${open ? '260px' : '32px'}` }}
         >
