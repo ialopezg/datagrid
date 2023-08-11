@@ -1,4 +1,4 @@
-import { styled } from '@mui/material';
+import { createTheme, styled, ThemeProvider } from '@mui/material';
 import React, { FC, useState } from 'react';
 
 import TopBar from './navigation/TopBar';
@@ -10,10 +10,18 @@ const PageContainer = styled('div')({
 
 export const Layout: FC = ({ children }) => {
   const [open, setOpen] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <>
-      <TopBar open={open} setOpen={setOpen} />
+    <ThemeProvider
+      theme={createTheme({ palette: { mode: darkMode ? 'dark' : 'light' } })}
+    >
+      <TopBar
+        darkMode={darkMode}
+        open={open}
+        setDarkMode={setDarkMode}
+        setOpen={setOpen}
+      />
       <SideBar open={open} />
 
       <PageContainer
@@ -21,7 +29,7 @@ export const Layout: FC = ({ children }) => {
       >
         {children}
       </PageContainer>
-    </>
+    </ThemeProvider>
   );
 };
 

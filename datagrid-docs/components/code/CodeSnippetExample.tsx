@@ -1,5 +1,5 @@
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
-import github from 'prism-react-renderer/themes/github';
+import github from 'prism-react-renderer/themes/vsDark';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { FC, useState } from 'react';
 
@@ -35,7 +35,7 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
         <Highlight
           {...defaultProps}
           code={typeScripMode ? typeScriptCode : javaScriptCode}
-          language={typeScripMode ? 'typescript' : 'javascript'}
+          language={typeScripMode ? 'tsx' : 'jsx'}
           theme={github}
         >
           {({ className, getLineProps, getTokenProps, style, tokens }) => (
