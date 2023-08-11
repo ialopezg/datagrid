@@ -1,4 +1,4 @@
-import CodeSnippetExample from '../../code/CodeSnippetExample';
+import CodeSnippetExample from '../../mdx/CodeSnippetExample';
 import BasicExampleWidget from './BasicExample';
 
 const BasicExampleJS = require('!!raw-loader!./BasicExample.js').default;

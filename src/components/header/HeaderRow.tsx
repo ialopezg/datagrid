@@ -46,11 +46,8 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerRowProps}>
-      {showRowNumbers && isParent ? (
-        <SpacerCell />
-      ) : (
-        <StyledHeaderCell>#</StyledHeaderCell>
-      )}
+      {showRowNumbers &&
+        (!isParent ? <SpacerCell /> : <StyledHeaderCell>#</StyledHeaderCell>)}
 
       {enableRowActions &&
         rowActionsColumn === 'first' &&

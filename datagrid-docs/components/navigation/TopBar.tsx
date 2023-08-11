@@ -46,12 +46,7 @@ const TopBar: FC<TopBarProps> = ({
               <MenuIcon color="inherit" />
             )}
           </StyledIconButton>
-          <Typography
-            style={{ fontSize: '2rem', paddingLeft: '1.5rem' }}
-            variant="h1"
-          >
-            DataGrid
-          </Typography>
+          <Typography variant="h1">DataGrid</Typography>
         </Flex>
         <Flex>
           <StyledIconButton onClick={() => setDarkMode(!darkMode)}>
