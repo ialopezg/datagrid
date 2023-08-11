@@ -6,6 +6,7 @@ import { useDataGrid } from '../providers';
 import SearchTextField from '../inputs/SearchTextField';
 import Pagination from './Pagination';
 import ToolbarActions from './ToolbarActions';
+import ToolbarAlertBanner from './ToolbarAlertBanner';
 
 const StyledToolbar = styled(MuiToolbar)({
   display: 'grid',
@@ -20,20 +21,23 @@ const ToolbarTopRow = styled('div')({
 
 const ToolbarActionsContainer = styled('div')({
   display: 'flex',
-  gap: '0.5rem !important',
+  gap: '0.5rem',
+  position: 'relative',
+  zIndex: 3,
 });
 
 interface ToolbarTopProps {}
 
 export const ToolbarTop: FC<ToolbarTopProps> = () => {
   const {
+    customToolbarActions,
     disableGlobalFilter,
     hideToolbarActions,
     manualPagination,
     paginationPosition,
     table,
-    toolbarActions,
     toolbarActionsPosition,
+    toolbarAlertBannerPosition,
     toolbarTopProps,
   } = useDataGrid();
 
@@ -44,8 +48,10 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
 
   return (
     <StyledToolbar variant="dense" {...toolbarProps}>
+      {toolbarAlertBannerPosition === 'top' && <ToolbarAlertBanner />}
+
       <ToolbarTopRow>
-        {toolbarActions?.(table) ?? <span />}
+        {customToolbarActions?.(table) ?? <span />}
         <ToolbarActionsContainer>
           {!disableGlobalFilter && <SearchTextField />}
           {!hideToolbarActions && toolbarActionsPosition === 'top' && (

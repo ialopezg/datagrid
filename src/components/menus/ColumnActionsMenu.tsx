@@ -123,7 +123,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             onClick={onFilterByColumnAction}
           >
             <FilterIcon />{' '}
-            {localization?.groupByColumn?.replace(
+            {localization?.filterByColumn?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -134,7 +134,6 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
         column.canGroupBy && [
           <Divider key="datagrid-group-column-action-divider" />,
           <MenuItem
-            disabled={column.isGrouped}
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
           >

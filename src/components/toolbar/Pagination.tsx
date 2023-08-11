@@ -29,7 +29,7 @@ export const Pagination: FC<PaginationProps> = () => {
       onRowsPerPageChange={onRowsPerPageChange}
       showFirstButton={table.rows.length / table.state.pageSize > 2}
       showLastButton={table.rows.length / table.state.pageSize > 2}
-      style={{ padding: 0 }}
+      style={{ padding: 0, position: 'relative', zIndex: 2 }}
       {...paginationProps}
     />
   );

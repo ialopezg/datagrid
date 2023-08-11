@@ -1,5 +1,6 @@
 import faker from '@faker-js/faker';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
@@ -61,7 +62,7 @@ export const CustomToolbarActions: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     positionToolbarActions="bottom"
-    toolbarActions={(_) => {
+    customToolbarActions={(_) => {
       const handleCreateNewUser = () => {
         // @ts-ignore
         prompt('Create new user modal');
@@ -87,7 +88,7 @@ export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
     title="My People Table"
     muiTableTitleProps={{ variant: 'h4' }}
     enableSelection
-    toolbarActions={(table) => {
+    customToolbarActions={(table) => {
       const handleDeactivate = () => {
         table.selectedFlatRows.map((row) => {
           // @ts-ignore
@@ -135,6 +136,45 @@ export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
           >
             Contact
           </Button>
+        </div>
+      );
+    }}
+  />
+);
+
+export const ToolbarAlertBannerBottom: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableSelection
+    positionToolbarAlertBanner="bottom"
+    customToolbarActions={(table) => {
+      const handleCreateNewUser = () => {
+        // @ts-ignore
+        prompt('Create new user modal');
+      };
+      const handleRemoveUsers = () => {
+        // @ts-ignore
+        confirm('Are you sure you want to remove the selected users?');
+      };
+
+      return (
+        <div>
+          <Tooltip arrow title="Create New User">
+            <IconButton onClick={handleCreateNewUser}>
+              <AddBoxIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip arrow title="Remove Users">
+            <span>
+              <IconButton
+                disabled={table.selectedFlatRows.length === 0}
+                onClick={handleRemoveUsers}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
         </div>
       );
     }}

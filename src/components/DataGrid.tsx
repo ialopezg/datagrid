@@ -1,4 +1,5 @@
 import {
+  AlertProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -48,6 +49,7 @@ export interface DataGridProps<D extends {} = {}>
     UseRowStateOptions<D>,
     UseSortByOptions<D> {
   columns: (Column<D> & DataGridColumn)[];
+  customToolbarActions?: (table: TableInstance<D>) => ReactNode;
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
@@ -122,8 +124,11 @@ export interface DataGridProps<D extends {} = {}>
   searchBoxProps?: TextFieldProps;
   showRowNumbers?: boolean;
   tableProps?: TableProps;
-  toolbarActions?: (table: TableInstance<D>) => ReactNode;
   toolbarActionsPosition?: 'bottom' | 'top';
+  toolbarAlertBannerPosition?: 'bottom' | 'top';
+  toolbarAlertBannerProps?:
+    | AlertProps
+    | ((table: TableInstance<D>) => AlertProps);
   toolbarBottomProps?:
     | ToolbarProps
     | ((table: TableInstance<D>) => ToolbarProps);
@@ -136,6 +141,7 @@ export default <D extends {}>({
   rowActionsColumn = 'first',
   paginationPosition = 'bottom',
   toolbarActionsPosition = 'top',
+  toolbarAlertBannerPosition = 'top',
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
@@ -144,6 +150,7 @@ export default <D extends {}>({
     localization={{ ...defaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
     toolbarActionsPosition={toolbarActionsPosition}
+    toolbarAlertBannerPosition={toolbarAlertBannerPosition}
     {...rest}
   >
     <Container />

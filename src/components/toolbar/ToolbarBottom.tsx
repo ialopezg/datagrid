@@ -5,11 +5,13 @@ import React, { FC } from 'react';
 import { useDataGrid } from '../providers';
 import ToolbarActions from './ToolbarActions';
 import Pagination from './Pagination';
+import ToolbarAlertBanner from './ToolbarAlertBanner';
 
 const StyledToolbar = styled(MuiToolbar)({
   display: 'flex',
   justifyContent: 'space-between',
   padding: '0 0.5rem !important',
+  overflowY: 'hidden',
 });
 
 interface ToolbarBottomProps {}
@@ -22,6 +24,7 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
     table,
     toolbarBottomProps,
     toolbarActionsPosition,
+    toolbarAlertBannerPosition,
   } = useDataGrid();
 
   const toolbarProps =
@@ -36,6 +39,8 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
       ) : (
         <span />
       )}
+
+      {toolbarAlertBannerPosition === 'bottom' && <ToolbarAlertBanner />}
 
       {!manualPagination &&
         ['bottom', 'both'].includes(paginationPosition ?? '') && <Pagination />}

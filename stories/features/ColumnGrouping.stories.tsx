@@ -30,6 +30,15 @@ const data = [...Array(200)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const FilteringEnabledDefault: Story<DataGridProps> = () => (
+export const ColumnGroupingEnabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} enableColumnGrouping />
+);
+
+export const ColumnGroupingBannerOnBottom: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    enableColumnGrouping
+    toolbarAlertBannerPosition="bottom"
+  />
 );
