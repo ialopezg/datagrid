@@ -53,6 +53,9 @@ const SideBar: FC<SideBarProps> = ({ open }) => {
         <Link href="/docs/install" passHref>
           <ListItemLevel2>Install</ListItemLevel2>
         </Link>
+        <Link href="/docs/props" passHref>
+          <ListItemLevel2>All Props</ListItemLevel2>
+        </Link>
         <Divider />
 
         <ListItemHeader>Examples</ListItemHeader>
