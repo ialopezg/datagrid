@@ -1,4 +1,6 @@
-import { Switch, Tooltip } from '@mui/material';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
+import DensitySmallIcon from '@mui/icons-material/DensitySmall';
+import { IconButton, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
@@ -10,15 +12,13 @@ export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = () => {
 
   return (
     <Tooltip arrow title={localization?.toggleDensePadding}>
-      <Switch
-        color="default"
-        checked={densePadding}
-        inputProps={{
-          'aria-label': localization?.toggleDensePadding,
-        }}
-        onChange={() => setDensePadding(!densePadding)}
+      <IconButton
+        aria-label={localization?.toggleDensePadding}
+        onClick={() => setDensePadding(!densePadding)}
         size="small"
-      />
+      >
+        {densePadding ? <DensitySmallIcon /> : <DensityMediumIcon />}
+      </IconButton>
     </Tooltip>
   );
 };

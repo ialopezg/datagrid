@@ -1,8 +1,6 @@
 import DataGrid from '@ialopezg/datagrid';
 import React, { useMemo } from 'react';
 
-import { getMockData } from '../getMockData';
-
 export const BasicExample = () => {
   const columns = useMemo(
     () => [
