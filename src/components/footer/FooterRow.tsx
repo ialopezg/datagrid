@@ -19,6 +19,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     footerRowProps: defaultFooterRowProps,
     hasExpandableRows,
     rowActionsColumn,
+    showRowNumbers,
     table,
   } = useDataGrid();
 
@@ -41,6 +42,8 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
 
   return (
     <TableRow {...footerRowProps}>
+      {showRowNumbers && <SpacerCell />}
+
       {enableRowActions && rowActionsColumn === 'first' && <SpacerCell />}
 
       {(hasExpandableRows || detailPanel) && (

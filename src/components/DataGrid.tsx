@@ -120,6 +120,7 @@ export interface DataGridProps<D extends {} = {}>
     onCloseMenu: () => void,
   ) => ReactNode[];
   searchBoxProps?: TextFieldProps;
+  showRowNumbers?: boolean;
   tableProps?: TableProps;
   toolbarActions?: (table: TableInstance<D>) => ReactNode;
   toolbarActionsPosition?: 'bottom' | 'top';

@@ -21,7 +21,6 @@ export const DataGridProvider = <D extends {}>(
   props: PropsWithChildren<DataGridProps<D>>,
 ) => {
   const hooks: PluginHook<D>[] = [
-    useResizeColumns,
     useFilters,
     useGlobalFilter,
     useGroupBy,
@@ -32,7 +31,7 @@ export const DataGridProvider = <D extends {}>(
   ];
 
   if (props.enableColumnResizing) {
-    hooks.unshift(useFlexLayout);
+    hooks.unshift(useResizeColumns, useFlexLayout);
   }
 
   const table = useTable<D>(props, ...hooks);

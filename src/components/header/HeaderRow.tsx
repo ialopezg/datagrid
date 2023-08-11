@@ -6,7 +6,7 @@ import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
 import SelectAllRowsAction from '../actions/SelectAllRowsAction';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
-import HeaderCell from './HeaderCell';
+import HeaderCell, { StyledHeaderCell } from './HeaderCell';
 import HeaderActionsCell from './HeaderActionsCell';
 
 interface HeaderRowProps {
@@ -22,6 +22,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
     rowActionsColumn,
+    showRowNumbers,
     table,
   } = useDataGrid();
 
@@ -45,6 +46,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
   return (
     <TableRow {...headerRowProps}>
+      {showRowNumbers && <StyledHeaderCell>#</StyledHeaderCell>}
       {enableRowActions &&
         rowActionsColumn === 'first' &&
         (isParent ? <SpacerCell /> : <HeaderActionsCell />)}

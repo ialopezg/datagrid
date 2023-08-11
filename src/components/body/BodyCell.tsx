@@ -1,13 +1,12 @@
-import MuiTableCell from '@mui/material/TableCell';
+import { TableCell, styled } from '@mui/material';
 import { Cell } from 'react-table';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 import EditCellTextField from '../inputs/EditCellTextField';
-import { styled } from '@mui/material';
 
-const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'densePadding',
+export const StyledBodyCell = styled(TableCell, {
+  shouldForwardProp: (prop) => prop !== 'densePadding',
 })<{ densePadding?: boolean }>(({ densePadding }) => ({
   padding: densePadding ? '0.5rem' : '1rem',
   transition: 'all 0.2s ease-in-out',
@@ -46,7 +45,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   };
 
   return (
-    <TableCell
+    <StyledBodyCell
       densePadding={densePadding}
       onClick={(e) => {
         onCellClick?.(e, cell);
@@ -65,7 +64,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
       ) : (
         cell.render('Cell')
       )}
-    </TableCell>
+    </StyledBodyCell>
   );
 };
 

@@ -3,7 +3,7 @@ import { alpha, styled } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
 
-import BodyCell from './BodyCell';
+import BodyCell, { StyledBodyCell } from './BodyCell';
 import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
 import ExpandRowAction from '../actions/ExpandRowAction';
@@ -11,7 +11,7 @@ import SelectRowAction from '../actions/SelectRowAction';
 import RowActionsAction from '../actions/RowActionsAction';
 
 const TableRow = styled(MuiTableRow, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'isSelected',
+  shouldForwardProp: (prop) => prop !== 'isSelected',
 })<{
   isSelected?: boolean;
 }>(({ isSelected, theme }) => ({
@@ -33,6 +33,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     hasExpandableRows,
     onRowClick,
     rowActionsColumn,
+    showRowNumbers,
   } = useDataGrid();
 
   const rowProps =
@@ -56,6 +57,8 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         isSelected={row.isSelected}
         {...bodyRowProps}
       >
+        {showRowNumbers && <StyledBodyCell>{row.index + 1}</StyledBodyCell>}
+
         {enableRowActions && rowActionsColumn === 'first' && (
           <RowActionsAction row={row} />
         )}

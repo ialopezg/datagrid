@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { StyledTableHeaderCell } from './HeaderCell';
+import { StyledHeaderCell } from './HeaderCell';
 
 interface HeaderActionsCellProps {}
 
@@ -9,12 +9,12 @@ export const HeaderActionsCell: FC<HeaderActionsCellProps> = () => {
   const { densePadding, localization } = useDataGrid();
 
   return (
-    <StyledTableHeaderCell
+    <StyledHeaderCell
       densePadding={densePadding}
       style={{ textAlign: 'center' }}
     >
       {localization?.actions}
-    </StyledTableHeaderCell>
+    </StyledHeaderCell>
   );
 };
 

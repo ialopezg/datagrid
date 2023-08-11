@@ -121,5 +121,6 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     enableRowActions
     enableRowEditing
     paginationPosition="both"
+    showRowNumbers
   />
 );
