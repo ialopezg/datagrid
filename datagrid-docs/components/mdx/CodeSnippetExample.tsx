@@ -1,5 +1,7 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import {
   IconButton,
   styled,
@@ -26,6 +28,12 @@ export interface CodeSnippetExampleProps {
   Component: FC;
 }
 
+const ToggleFullCodeButton = styled(IconButton)({
+  position: 'absolute',
+  right: '5.5rem',
+  marginTop: '0.75rem',
+});
+
 export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
   typeScriptCode,
   javaScriptCode,
@@ -34,6 +42,9 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
   const theme = useTheme();
   const [typeScripMode, setTypeScriptMode] = useState<boolean>(true);
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [isFullCode, setIsFullCode] = useState<boolean>(false);
+
+  let skipCodeLine = false;
 
   useEffect(
     () => setTypeScriptMode(localStorage.getItem('typeScripMode') === 'true'),
@@ -89,13 +100,30 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
                 </CopyButton>
               </Tooltip>
+              <Tooltip
+                arrow
+                title={
+                  isFullCode
+                    ? 'Hide columns and data definitions'
+                    : 'Show columns and data definitions'
+                }
+              >
+                <ToggleFullCodeButton
+                  onClick={() => setIsFullCode(!isFullCode)}
+                >
+                  {isFullCode ? <UnfoldLessIcon /> : <UnfoldMoreIcon />}
+                </ToggleFullCodeButton>
+              </Tooltip>
 
               <pre className={className}>
                 {tokens.map((line, index) => (
                   <div
                     key={index}
                     {...getLineProps({ line, key: index })}
-                    style={style}
+                    style={{
+                      ...style,
+                      display: !isFullCode && skipCodeLine ? 'none' : 'block',
+                    }}
                   >
                     <span
                       style={{
@@ -105,9 +133,24 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
                     >
                       {index + 1}
                     </span>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
-                    ))}
+                    {line.map((token, key) => {
+                      if (
+                        token.content === '//column definitions...' ||
+                        token.content === '//data definitions...'
+                      ) {
+                        skipCodeLine = true;
+                        if (isFullCode) {
+                          return null;
+                        }
+                      } else if (token.content === '//end') {
+                        skipCodeLine = false;
+                        return null;
+                      }
+
+                      return (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      );
+                    })}
                   </div>
                 ))}
               </pre>
