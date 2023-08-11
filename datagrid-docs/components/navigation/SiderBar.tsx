@@ -19,11 +19,12 @@ const List = styled(MuiList)({
 });
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
+  color: theme.palette.primary.dark,
   cursor: 'pointer',
   fontWeight: 'bold',
-  transition: 'all .2s',
   padding: '1rem',
-  color: theme.palette.primary.dark,
+  transition: 'all 0.3s ease-in-ou',
+  whitespace: 'nowrap',
   '&:hover': {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',
   },

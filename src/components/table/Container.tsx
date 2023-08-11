@@ -37,20 +37,27 @@ const CircularProgressWrapper = styled('div')(({ theme }) => ({
   paddingTop: '5rem',
   position: 'absolute',
   width: 'calc(100% - 2rem)',
+  zIndex: 1200,
 }));
 
 interface ContainerProps {}
 
 export const Container: FC<ContainerProps> = () => {
   const {
-    containerProps,
+    containerProps: defaultContainerProps,
     fullScreen,
     hideToolbarBottom,
     hideToolbarTop,
-    isLoading,
     isFetching,
+    isLoading,
     localization,
+    table,
   } = useDataGrid();
+
+  const containerProps =
+    defaultContainerProps instanceof Function
+      ? defaultContainerProps(table)
+      : defaultContainerProps;
 
   return (
     <TableContainer

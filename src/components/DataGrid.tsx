@@ -53,7 +53,9 @@ export interface DataGridProps<D extends {} = {}>
   bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
   bodyProps?: TableBodyProps;
   bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
-  containerProps?: TableContainerProps;
+  containerProps?:
+    | TableContainerProps
+    | ((table: TableInstance<D>) => TableContainerProps);
   defaultDensePadding?: boolean;
   defaultFullScreen?: boolean;
   defaultShowFilters?: boolean;
