@@ -3,6 +3,7 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import {
+  Divider,
   IconButton,
   styled,
   ToggleButton,
@@ -18,11 +19,11 @@ import React, { FC, useEffect, useState } from 'react';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
-  right: '2.75rem',
-  marginTop: '0.75rem',
+  top: '0.5rem',
+  right: '0.5rem',
 });
 
-export interface CodeSnippetExampleProps {
+export interface SourceCodeSnippetProps {
   typeScriptCode: string;
   javaScriptCode: string;
   Component: FC;
@@ -30,11 +31,11 @@ export interface CodeSnippetExampleProps {
 
 const ToggleFullCodeButton = styled(IconButton)({
   position: 'absolute',
-  right: '5.5rem',
-  marginTop: '0.75rem',
+  top: '0.5rem',
+  right: '3.5rem',
 });
 
-export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
+export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
   typeScriptCode,
   javaScriptCode,
   Component,
@@ -73,6 +74,8 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
         margin: '1rem auto',
       }}
     >
+      <Divider />
+      <Typography variant="h4">Demo</Typography>
       <Component />
 
       <div>
@@ -94,7 +97,7 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, getLineProps, getTokenProps, style, tokens }) => (
-            <div>
+            <div style={{ position: 'relative' }}>
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={onCopyAction}>
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
@@ -162,4 +165,4 @@ export const CodeSnippetExample: FC<CodeSnippetExampleProps> = ({
   );
 };
 
-export default CodeSnippetExample;
+export default SourceCodeSnippet;

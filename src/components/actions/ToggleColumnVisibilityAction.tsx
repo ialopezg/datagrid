@@ -20,7 +20,7 @@ const MenuButtons = styled('div')({
 
 interface ColumnsVisibilityActionProps {}
 
-export const ColumnsVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
+export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
   const { localization, table } = useDataGrid();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -77,4 +77,4 @@ export const ColumnsVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
   );
 };
 
-export default ColumnsVisibilityAction;
+export default ToggleColumnVisibilityAction;

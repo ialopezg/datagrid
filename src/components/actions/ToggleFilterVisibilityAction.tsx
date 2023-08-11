@@ -7,7 +7,7 @@ import { useDataGrid } from '../providers';
 
 interface FiltersVisibilityActionProps {}
 
-export const FiltersVisibilityAction: FC<FiltersVisibilityActionProps> = () => {
+export const ToggleFilterVisibilityAction: FC<FiltersVisibilityActionProps> = () => {
   const { localization, setShowFilters, showFilters } = useDataGrid();
 
   return (
@@ -23,4 +23,4 @@ export const FiltersVisibilityAction: FC<FiltersVisibilityActionProps> = () => {
   );
 };
 
-export default FiltersVisibilityAction;
+export default ToggleFilterVisibilityAction;

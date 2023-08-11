@@ -8,22 +8,26 @@ import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/SiderBar';
 import { mdxComponents } from '../components/mdx/mdxComponents';
 import Head from 'next/head';
+import { theme } from '../styles/Theme';
 
 const PageContainer = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   minHeight: '100vh',
-  transition: 'all .2s',
+  transition: 'all 200ms ease-in-out',
 });
+
+const PageContent = styled('div')(({ theme }) => ({
+  maxWidth: '1700px',
+  margin: '2rem auto',
+  transition: 'all 200ms ease-in-out',
+}));
 
 export const App = ({ Component, pageProps }: AppProps) => {
   const [open, setOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(
-    () => setDarkMode(localStorage.getItem('darkMode') === 'true'),
-    [],
-  );
+  useEffect(() => setDarkMode(localStorage.getItem('darkMode') === 'true'), []);
 
   useEffect(
     () => localStorage.setItem('darkMode', darkMode.toString()),
@@ -40,43 +44,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider
-        theme={createTheme({
-          palette: { mode: darkMode ? 'dark' : 'light' },
-          typography: {
-            h1: {
-              fontSize: '2rem',
-              lineHeight: '3rem',
-              paddingLeft: '1.5rem',
-            },
-            h2: {
-              fontSize: '2.5rem',
-              lineHeight: '5rem',
-            },
-            h3: {
-              fontSize: '2rem',
-              lineHeight: '4rem',
-            },
-            h4: {
-              fontSize: '1.75rem',
-              lineHeight: '3rem',
-            },
-            h5: {
-              fontSize: '1.5rem',
-              lineHeight: '3rem',
-            },
-            h6: {
-              fontSize: '1.25rem',
-              lineHeight: '3rem',
-            },
-            body1: {
-              fontSize: '1rem',
-              lineHeight: '2rem',
-              marginBottom: '0.5rem',
-            },
-          },
-        })}
-      >
+      <ThemeProvider theme={createTheme(theme(darkMode))}>
         <TopBar
           darkMode={darkMode}
           open={open}
@@ -87,7 +55,9 @@ export const App = ({ Component, pageProps }: AppProps) => {
         <PageContainer
           style={{ padding: `80px 32px 800px ${open ? '260px' : '32px'}` }}
         >
-          <Component components={mdxComponents} {...pageProps} />
+          <PageContent>
+            <Component components={mdxComponents} {...pageProps} />
+          </PageContent>
         </PageContainer>
       </ThemeProvider>
     </>

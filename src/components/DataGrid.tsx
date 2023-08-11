@@ -29,7 +29,7 @@ import {
   UseSortByOptions,
   UseTableOptions,
 } from 'react-table';
-import React, { ChangeEvent, MouseEvent, ReactNode } from 'react';
+import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
@@ -60,6 +60,22 @@ export interface DataGridProps<D extends {} = {}>
   defaultFullScreen?: boolean;
   defaultShowFilters?: boolean;
   defaultShowSearch?: boolean;
+  defaultToolbarActions?: (
+    table: TableInstance<D>,
+    {
+      ToggleColumnVisibilityAction,
+      ToggleDensePaddingAction,
+      ToggleFilterVisibilityAction,
+      ToggleFullScreenAction,
+      ToggleSearchAction,
+    }: {
+      ToggleColumnVisibilityAction: FC;
+      ToggleDensePaddingAction: FC;
+      ToggleFilterVisibilityAction: FC;
+      ToggleFullScreenAction: FC;
+      ToggleSearchAction: FC;
+    },
+  ) => ReactNode;
   detailPanel?: (row: Row<D>) => ReactNode;
   detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
   disableColumnActions?: boolean;

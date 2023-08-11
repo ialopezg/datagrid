@@ -34,7 +34,7 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
     toolbarAlertBannerProps,
   } = useDataGrid();
 
-  const isMobile = useMediaQuery('(max-width:720px)');
+  const isMobile = useMediaQuery('(max-width: 720px)');
 
   const alertProps =
     toolbarAlertBannerProps instanceof Function

@@ -2,15 +2,23 @@ import Head from 'next/head';
 
 import BasicExample from '../../../components/examples/basic';
 
-## Basic Material React Table Example
 <Head>
-  <title>Material React Table - Basic Example</title>
+  <title>DataGrid - Basic Example</title>
 </Head>
 
 ## Basic Example
 
 ### View Extra Storybook **[Examples](https://ialopezg.github.com/datagrid?path=/story/prop-playground--default)**
 
-To get started creating a basic table, all you need is to provide the **columns** definitions and the table **data**.
+To get started creating a basic table, all you need to do is to provide the **columns** definitions and the table **data**.
+
+```jsx
+<DataGrid
+  columns={columns} //must be memoized
+  data={data} //must be memoized
+/>
+```
+
+> **Note:** It is very important to memoize both the columns and the data that you pass to DataGrid. Otherwise, the entire table will be re-rendered during every react render in your application, and can lead to performance issues. To learn more, checkout the [react-table docs](https://react-table.tanstack.com/docs/quick-start#getting-your-data)
 
 <BasicExample />

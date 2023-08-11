@@ -1,7 +1,7 @@
 import faker from '@faker-js/faker';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import React from 'react';
 
@@ -55,6 +55,30 @@ export const HideToolbarActions: Story<DataGridProps> = () => (
 
 export const ToolbarActionsOnBottom: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} paginationPosition="bottom" />
+);
+
+export const CustomizingDefaultToolbarActions: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    defaultToolbarActions={(_, { ToggleFullScreenAction }) => {
+      return (
+        <>
+          <ToggleFullScreenAction />
+        </>
+      );
+    }}
+  />
+);
+
+export const TableTitle: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={columns}
+    data={data}
+    customToolbarActions={(_) => {
+      return <Typography variant="h4">Table Title</Typography>;
+    }}
+  />
 );
 
 export const CustomToolbarActions: Story<DataGridProps> = () => (

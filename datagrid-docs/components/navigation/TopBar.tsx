@@ -7,9 +7,11 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import Link from 'next/link';
 import { FC } from 'react';
 
 const StyledAppBar = styled(AppBar)({
@@ -45,9 +47,11 @@ const TopBar: FC<TopBarProps> = ({
   setDarkMode,
   setOpen,
 }: TopBarProps) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
+
   return (
     <StyledAppBar position="fixed">
-      <StyledToolbar>
+      <StyledToolbar variant={isMobile ? 'dense' : 'regular'}>
         <Flex>
           <StyledIconButton
             aria-label="Open nav menu"
@@ -59,7 +63,18 @@ const TopBar: FC<TopBarProps> = ({
               <MenuIcon color="inherit" />
             )}
           </StyledIconButton>
-          <Typography variant="h1">DataGrid</Typography>
+
+          <Link href="/" passHref>
+            <Typography
+              style={{
+                cursor: 'pointer',
+                fontSize: isMobile ? '1.6rem' : undefined,
+              }}
+              variant="h1"
+            >
+              DataGrid
+            </Typography>
+          </Link>
         </Flex>
         <Flex>
           <Tooltip arrow title="Toggle Light/Dark Mode">
