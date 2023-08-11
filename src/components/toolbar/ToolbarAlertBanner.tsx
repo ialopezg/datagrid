@@ -1,5 +1,5 @@
 import { Alert, Chip, Collapse, styled, useMediaQuery } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 
 const StyledAlert = styled(Alert, {
   shouldForwardProp: (prop) =>
@@ -52,18 +52,17 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
       <span>
         {localization?.groupedBy}{' '}
         {table.state.groupBy.map((columnId, index) => (
-          <>
+          <Fragment key={`${index}-${columnId}`}>
             {index > 0 ? localization?.thenByMessage : ''}
             <Chip
               color="secondary"
-              key={`${index}-${columnId}`}
               label={
                 table.allColumns.find((column) => column.id === columnId)
                   ?.Header
               }
               onDelete={() => table.toggleGroupBy(columnId, false)}
             />
-          </>
+          </Fragment>
         ))}
       </span>
     ) : null;
