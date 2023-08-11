@@ -15,7 +15,7 @@ const Drawer = styled(MuiDrawer)({
 });
 
 const List = styled(MuiList)({
-  paddingTop: '80px 0',
+  paddingTop: '64px 0',
 });
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
@@ -36,6 +36,7 @@ const ListItemLevel2 = styled(ListItemLevel1)({
 
 const ListItemHeader = styled(MuiListItem)({
   padding: '1rem',
+  whitespace: 'nowrap',
 });
 
 interface SideBarProps {
@@ -62,6 +63,9 @@ const SideBar: FC<SideBarProps> = ({ open }) => {
         <ListItemHeader>Examples</ListItemHeader>
         <Link href="/docs/examples/basic" passHref>
           <ListItemLevel2>Basic</ListItemLevel2>
+        </Link>
+        <Link href="/docs/examples/minimal" passHref>
+          <ListItemLevel2>Minimal</ListItemLevel2>
         </Link>
       </List>
     </Drawer>

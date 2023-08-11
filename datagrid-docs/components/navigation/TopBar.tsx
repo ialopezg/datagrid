@@ -1,6 +1,13 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import { AppBar, IconButton, styled, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  IconButton,
+  styled,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { FC } from 'react';
@@ -16,10 +23,13 @@ const StyledToolbar = styled(Toolbar)({
 
 const Flex = styled('div')({
   display: 'flex',
+  alignItems: 'center',
 });
 
 const StyledIconButton = styled(IconButton)({
   color: '#fff',
+  height: '3rem',
+  width: '3rem',
 });
 
 interface TopBarProps {
@@ -39,7 +49,10 @@ const TopBar: FC<TopBarProps> = ({
     <StyledAppBar position="fixed">
       <StyledToolbar>
         <Flex>
-          <StyledIconButton onClick={() => setOpen(!open)}>
+          <StyledIconButton
+            aria-label="Open nav menu"
+            onClick={() => setOpen(!open)}
+          >
             {open ? (
               <MenuOpenIcon color="inherit" />
             ) : (
@@ -49,9 +62,11 @@ const TopBar: FC<TopBarProps> = ({
           <Typography variant="h1">DataGrid</Typography>
         </Flex>
         <Flex>
-          <StyledIconButton onClick={() => setDarkMode(!darkMode)}>
-            {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
-          </StyledIconButton>
+          <Tooltip arrow title="Toggle Light/Dark Mode">
+            <StyledIconButton onClick={() => setDarkMode(!darkMode)}>
+              {darkMode ? <DarkModeIcon /> : <LightModeIcon />}
+            </StyledIconButton>
+          </Tooltip>
         </Flex>
       </StyledToolbar>
     </StyledAppBar>
