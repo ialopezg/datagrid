@@ -1,7 +1,8 @@
 export interface Localization {
   actions?: string;
   cancel?: string;
-  clear?: string;
+  clearFilter?: string;
+  clearSearch?: string;
   clearSorting?: string;
   columnActions?: string;
   edit?: string;
@@ -14,18 +15,18 @@ export interface Localization {
   ungroupByColumn?: string;
   hideAll?: string;
   hideColumn?: string;
-  hideColumns?: string;
   loadingData?: string;
   rowActions?: string;
   save?: string;
   search?: string;
-  selectAll?: string;
+  selectAllRows?: string;
   selectionMessage?: string;
   selectRow?: string;
   showAll?: string;
   sortByColumnAscending?: string;
   sortByColumnDescending?: string;
   thenByMessage?: string;
+  toggleColumnVisibility?: string;
   toggleDensePadding?: string;
   toggleFilters?: string;
   toggleFullScreen?: string;
@@ -35,7 +36,8 @@ export interface Localization {
 export const defaultLocalization: Localization = {
   actions: 'Actions',
   cancel: 'Cancel',
-  clear: 'Clear',
+  clearFilter: 'Clear filter',
+  clearSearch: 'Clear search',
   clearSorting: 'Clear sorting',
   columnActions: 'Column actions',
   edit: 'Edit',
@@ -48,18 +50,18 @@ export const defaultLocalization: Localization = {
   ungroupByColumn: 'Ungroup by {column}',
   hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
-  hideColumns: 'Hide columns',
   loadingData: 'Loading data',
   rowActions: 'Row actions',
   save: 'Save',
   search: 'Search',
-  selectAll: 'Select all',
+  selectAllRows: 'Toggle select all rows',
   selectionMessage: '{selectedCount} of {rowCount} row(s) selected',
-  selectRow: 'Select row',
+  selectRow: 'Toggle select row',
   showAll: 'Show all',
   sortByColumnAscending: 'Sort by {column} ascending',
   sortByColumnDescending: 'Sort by {column} descending',
   thenByMessage: ', then by ',
+  toggleColumnVisibility: 'Toggle columns visibility',
   toggleDensePadding: 'Toggle dense padding',
   toggleFilters: 'Toggle filters',
   toggleFullScreen: 'Toggle full screen',

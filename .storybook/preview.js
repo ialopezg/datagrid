@@ -5,7 +5,6 @@ import {
 } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import { setConsoleOptions, withConsole } from '@storybook/addon-console';
-import { withPerformance } from 'storybook-addon-performance';
 import { useDarkMode } from 'storybook-dark-mode';
 
 export const parameters = {
@@ -103,4 +102,4 @@ setConsoleOptions({
 
 const console = (storyFn, context) => withConsole()(storyFn)(context);
 
-export const decorators = [withThemeProvider, withPerformance, console];
+export const decorators = [withThemeProvider, console];

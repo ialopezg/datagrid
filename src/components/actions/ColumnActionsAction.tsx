@@ -1,6 +1,6 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MuiIconButton from '@mui/material/IconButton';
-import { styled } from '@mui/material';
+import { styled, Tooltip } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
 import { HeaderGroup } from 'react-table';
@@ -38,15 +38,20 @@ export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
 
   return (
     <>
-      {/** Action button */}
-      <IconButton
-        aria-label={localization?.columnActions}
-        onClick={onColumnAction}
-        size="small"
+      <Tooltip
+        arrow
+        enterDelay={1000}
+        enterNextDelay={1000}
         title={localization?.columnActions}
       >
-        <MoreVertIcon />
-      </IconButton>
+        <IconButton
+          aria-label={localization?.columnActions}
+          onClick={onColumnAction}
+          size="small"
+        >
+          <MoreVertIcon />
+        </IconButton>
+      </Tooltip>
 
       {/** Menu */}
       <ColumnActionsMenu

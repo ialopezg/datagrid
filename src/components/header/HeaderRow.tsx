@@ -3,7 +3,7 @@ import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
-import SelectAllRowsAction from '../actions/SelectAllRowsAction';
+import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
 import HeaderCell, { StyledHeaderCell } from './HeaderCell';
@@ -18,6 +18,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     detailPanel,
     disableExpandAll,
     enableRowActions,
+    enableRowEditing,
     enableSelection,
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
@@ -49,7 +50,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
       {showRowNumbers &&
         (!isParent ? <SpacerCell /> : <StyledHeaderCell>#</StyledHeaderCell>)}
 
-      {enableRowActions &&
+      {(enableRowActions || enableRowEditing) &&
         rowActionsColumn === 'first' &&
         (isParent ? <SpacerCell /> : <HeaderActionsCell />)}
 
@@ -65,7 +66,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
 
       {enableSelection ? (
         !isParent ? (
-          <SelectAllRowsAction />
+          <ToggleSelectRowAction selectAll />
         ) : (
           <SpacerCell width="1rem" />
         )
@@ -75,7 +76,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
 
-      {enableRowActions &&
+      {(enableRowActions || enableRowEditing) &&
         rowActionsColumn === 'last' &&
         (isParent ? <SpacerCell /> : <HeaderActionsCell />)}
     </TableRow>

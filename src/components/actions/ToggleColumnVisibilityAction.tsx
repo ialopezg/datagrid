@@ -2,6 +2,7 @@ import {
   Button,
   Divider,
   IconButton,
+  IconButtonProps,
   Menu,
   styled,
   Tooltip,
@@ -18,9 +19,11 @@ const MenuButtons = styled('div')({
   padding: '0 0.5rem 0.5rem 0.5rem',
 });
 
-interface ColumnsVisibilityActionProps {}
+interface ColumnsVisibilityActionProps extends IconButtonProps {}
 
-export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = () => {
+export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
+  ...rest
+}) => {
   const { localization, table } = useDataGrid();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -31,11 +34,12 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ()
 
   return (
     <>
-      <Tooltip arrow title={localization?.hideColumns}>
+      <Tooltip arrow title={localization?.toggleColumnVisibility}>
         <IconButton
-          aria-label={localization?.hideColumns}
+          aria-label={localization?.toggleColumnVisibility}
           onClick={onToggleMenuAction}
           size="small"
+          {...rest}
         >
           <ViewColumnIcon />
         </IconButton>

@@ -64,10 +64,10 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <Tooltip arrow title={localization?.clear}>
+            <Tooltip arrow title={localization?.clearFilter}>
               <span>
                 <IconButton
-                  aria-label={localization?.clear}
+                  aria-label={localization?.clearFilter}
                   disabled={filterValue?.length === 0}
                   onClick={onClearFilter}
                   size="small"

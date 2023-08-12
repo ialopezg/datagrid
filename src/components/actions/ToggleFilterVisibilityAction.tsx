@@ -1,13 +1,15 @@
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { IconButton, Tooltip } from '@mui/material';
+import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 
-interface FiltersVisibilityActionProps {}
+interface FiltersVisibilityActionProps extends IconButtonProps {}
 
-export const ToggleFilterVisibilityAction: FC<FiltersVisibilityActionProps> = () => {
+export const ToggleFilterVisibilityAction: FC<FiltersVisibilityActionProps> = ({
+  ...rest
+}) => {
   const { localization, setShowFilters, showFilters } = useDataGrid();
 
   return (
@@ -16,6 +18,7 @@ export const ToggleFilterVisibilityAction: FC<FiltersVisibilityActionProps> = ()
         aria-label={localization?.toggleFilters}
         onClick={() => setShowFilters(!showFilters)}
         size="small"
+        {...rest}
       >
         {showFilters ? <FilterListOffIcon /> : <FilterListIcon />}
       </IconButton>

@@ -1,5 +1,6 @@
 import {
   AlertProps,
+  IconButtonProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -69,11 +70,11 @@ export interface DataGridProps<D extends {} = {}>
       ToggleFullScreenAction,
       ToggleSearchAction,
     }: {
-      ToggleColumnVisibilityAction: FC;
-      ToggleDensePaddingAction: FC;
-      ToggleFilterVisibilityAction: FC;
-      ToggleFullScreenAction: FC;
-      ToggleSearchAction: FC;
+      ToggleColumnVisibilityAction: FC<IconButtonProps>;
+      ToggleDensePaddingAction: FC<IconButtonProps>;
+      ToggleFilterVisibilityAction: FC<IconButtonProps>;
+      ToggleFullScreenAction: FC<IconButtonProps>;
+      ToggleSearchAction: FC<IconButtonProps>;
     },
   ) => ReactNode;
   detailPanel?: (row: Row<D>) => ReactNode;
@@ -122,6 +123,7 @@ export interface DataGridProps<D extends {} = {}>
   onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
   onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
   onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
+  onSelectAllChange?: (e: ChangeEvent, selectedRows: Row<D>[]) => void;
   onRowSelectChange?: (
     e: ChangeEvent,
     row: Row<D>,

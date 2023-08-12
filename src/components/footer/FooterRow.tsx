@@ -15,6 +15,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     columns,
     detailPanel,
     enableRowActions,
+    enableRowEditing,
     enableSelection,
     footerRowProps: defaultFooterRowProps,
     hasExpandableRows,
@@ -44,7 +45,8 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     <TableRow {...footerRowProps}>
       {showRowNumbers && <SpacerCell />}
 
-      {enableRowActions && rowActionsColumn === 'first' && <SpacerCell />}
+      {(enableRowActions || enableRowEditing) &&
+        rowActionsColumn === 'first' && <SpacerCell />}
 
       {(hasExpandableRows || detailPanel) && (
         <SpacerCell
@@ -58,7 +60,8 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
 
-      {enableRowActions && rowActionsColumn === 'last' && <SpacerCell />}
+      {(enableRowActions || enableRowEditing) &&
+        rowActionsColumn === 'last' && <SpacerCell />}
     </TableRow>
   );
 };

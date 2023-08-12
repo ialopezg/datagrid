@@ -1,13 +1,15 @@
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
-import { IconButton, Tooltip } from '@mui/material';
+import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 
-interface DensePaddingActionProps {}
+interface DensePaddingActionProps extends IconButtonProps {}
 
-export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = () => {
+export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = ({
+  ...rest
+}) => {
   const { densePadding, localization, setDensePadding } = useDataGrid();
 
   return (
@@ -16,6 +18,7 @@ export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = () => {
         aria-label={localization?.toggleDensePadding}
         onClick={() => setDensePadding(!densePadding)}
         size="small"
+        {...rest}
       >
         {densePadding ? <DensitySmallIcon /> : <DensityMediumIcon />}
       </IconButton>

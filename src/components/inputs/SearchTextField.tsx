@@ -2,10 +2,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import MuiTextField from '@mui/material/TextField';
 import { Collapse, IconButton, InputAdornment, styled } from '@mui/material';
+import { useAsyncDebounce } from 'react-table';
 import React, { ChangeEvent, FC, useState } from 'react';
 
 import { useDataGrid } from '../providers';
-import { useAsyncDebounce } from 'react-table';
 
 const TextField = styled(MuiTextField)({
   justifySelf: 'end',
@@ -14,14 +14,22 @@ const TextField = styled(MuiTextField)({
 interface SearchTextFieldProps {}
 
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
-  const { localization, onGlobalFilterChange, searchBoxProps, showSearch, table } =
-    useDataGrid();
+  const {
+    localization,
+    onGlobalFilterChange,
+    searchBoxProps,
+    showSearch,
+    table,
+  } = useDataGrid();
   const [searchValue, setSearchValue] = useState<string>('');
 
-  const onSearchAction = useAsyncDebounce((e: ChangeEvent<HTMLInputElement>) => {
-    table.setGlobalFilter(e.target.value ?? undefined);
-    onGlobalFilterChange?.(e);
-  }, 200);
+  const onSearchAction = useAsyncDebounce(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      table.setGlobalFilter(e.target.value ?? undefined);
+      onGlobalFilterChange?.(e);
+    },
+    200,
+  );
 
   const onClearFilter = () => {
     setSearchValue('');
@@ -48,11 +56,11 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                aria-label={localization?.clear}
+                aria-label={localization?.clearSorting}
                 disabled={searchValue.length === 0}
                 onClick={onClearFilter}
                 size="small"
-                title={localization?.clear}
+                title={localization?.clearSearch}
               >
                 <CloseIcon />
               </IconButton>

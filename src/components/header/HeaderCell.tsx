@@ -2,7 +2,7 @@ import {
   Collapse,
   Divider as MuiDivider,
   styled,
-  TableSortLabel,
+  TableSortLabel, Tooltip,
 } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
 import { HeaderGroup } from 'react-table';
@@ -90,6 +90,18 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
 
   const isParent = (column?.columns?.length ?? 0) > 0;
 
+  const tooltipTitle = column.isSorted
+    ? column.isSortedDesc
+      ? localization?.clearSorting
+      : localization?.sortByColumnDescending?.replace(
+          '{column}',
+          String(column.Header),
+        )
+    : localization?.sortByColumnAscending?.replace(
+        '{column}',
+        String(column.Header),
+      );
+
   return (
     <StyledHeaderCell
       align={isParent ? 'center' : 'left'}
@@ -101,20 +113,16 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         <TableCellTopContent
           style={{ justifyContent: isParent ? 'center' : undefined }}
         >
-          <CellFlexItem {...column.getSortByToggleProps()}>
+          <CellFlexItem {...column.getSortByToggleProps()} title={undefined}>
             {column.render('Header')}
             {!isParent && column.canSort && (
-              <TableSortLabel
-                active={column.isSorted}
-                aria-label={
-                  column.isSorted
-                    ? column.sortDescFirst
-                      ? localization?.clearSorting
-                      : localization?.sortByColumnDescending
-                    : localization?.sortByColumnAscending
-                }
-                direction={column.isSortedDesc ? 'desc' : 'asc'}
-              />
+              <Tooltip arrow title={tooltipTitle}>
+                <TableSortLabel
+                  active={column.isSorted}
+                  aria-label={tooltipTitle}
+                  direction={column.isSortedDesc ? 'desc' : 'asc'}
+                />
+              </Tooltip>
             )}
           </CellFlexItem>
           <CellFlexItem>
