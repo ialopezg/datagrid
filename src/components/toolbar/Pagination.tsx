@@ -30,6 +30,7 @@ export const Pagination: FC<PaginationProps> = () => {
       showFirstButton={table.rows.length / table.state.pageSize > 2}
       showLastButton={table.rows.length / table.state.pageSize > 2}
       style={{ padding: 0, position: 'relative', zIndex: 2 }}
+      SelectProps={{ style: { margin: '0 1rem 0 1ch' } }}
       {...paginationProps}
     />
   );

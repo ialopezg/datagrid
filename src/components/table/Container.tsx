@@ -6,7 +6,7 @@ import {
   Paper,
   styled,
 } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import Table from './Table';
 import { useDataGrid } from '../providers';
@@ -58,14 +58,6 @@ export const Container: FC<ContainerProps> = () => {
     defaultContainerProps instanceof Function
       ? defaultContainerProps(table)
       : defaultContainerProps;
-
-  useEffect(() => {
-    if (fullScreen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [fullScreen]);
 
   return (
     <TableContainer

@@ -12,7 +12,6 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
   const {
     editCellTextFieldProps,
     itemForUpdate,
-    localization,
     setItemForUpdate,
   } = useDataGrid();
 
@@ -49,7 +48,7 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
     <TextField
       margin="dense"
       onChange={handleChange}
-      placeholder={localization?.edit}
+      placeholder={String(cell.column.Header)}
       onClick={(e) => e.stopPropagation()}
       value={cell.value}
       variant="standard"

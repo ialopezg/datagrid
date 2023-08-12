@@ -1,5 +1,4 @@
 export * from './ColumnActionsAction';
-export * from './DensePaddingSwitch';
 export * from './EditActionsAction';
 export * from './ExpandAllRowsAction';
 export * from './ExpandRowAction';

@@ -48,7 +48,7 @@ const data = [...Array(100)].map((_) => ({
   state: faker.address.state(),
 }));
 
-export const Loading: Story<DataGridProps> = () => (
+export const SpanishLocalization: Story<DataGridProps> = () => (
   <ThemeProvider theme={createTheme({}, esES)}>
     <DataGrid
       columns={columns}
@@ -90,8 +90,4 @@ export const Loading: Story<DataGridProps> = () => (
       }}
     />
   </ThemeProvider>
-);
-
-export const Reloading: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} isFetching />
 );
