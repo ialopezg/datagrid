@@ -157,7 +157,7 @@ export interface DataGridProps<D extends {} = {}>
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
-  localization = defaultLocalization,
+  localization,
   rowActionsColumn = 'first',
   paginationPosition = 'bottom',
   toolbarActionsPosition = 'top',
