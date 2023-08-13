@@ -20,8 +20,8 @@ export const theme = (darkMode: boolean) =>
         fontWeight: 'bold',
       },
       h3: {
-        fontSize: '1.25rem',
-        lineHeight: '2rem',
+        fontSize: '2rem',
+        lineHeight: '3rem',
         marginBottom: '1rem',
       },
       h4: {

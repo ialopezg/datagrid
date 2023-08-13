@@ -18,7 +18,7 @@ const PageContainer = styled('div')({
 });
 
 const PageContent = styled('div')({
-  maxWidth: '1700px',
+  maxWidth: '1200px',
   margin: 'auto',
   transition: 'all 200ms ease-in-out',
 });

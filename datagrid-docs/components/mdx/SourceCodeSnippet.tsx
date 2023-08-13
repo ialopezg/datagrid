@@ -75,7 +75,7 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
       }}
     >
       <Divider />
-      <Typography variant="h4">Demo</Typography>
+      <Typography variant="h3">Demo</Typography>
       <Component />
 
       <div>
@@ -97,7 +97,7 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, getLineProps, getTokenProps, style, tokens }) => (
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', fontSize: '1.2em' }}>
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={onCopyAction}>
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
@@ -161,6 +161,7 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
           )}
         </Highlight>
       </div>
+      <Divider />
     </div>
   );
 };

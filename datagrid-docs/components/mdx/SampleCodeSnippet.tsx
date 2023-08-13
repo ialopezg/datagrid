@@ -1,6 +1,6 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import { useTheme, Tooltip, IconButton, styled } from '@mui/material';
+import { useTheme, Tooltip, IconButton, styled, alpha } from '@mui/material';
 import vsLight from 'prism-react-renderer/themes/github';
 import vsDark from 'prism-react-renderer/themes/vsDark';
 import Highlight, { defaultProps } from 'prism-react-renderer';
@@ -22,6 +22,19 @@ export const SampleCodeSnippet: FC<any> = (props) => {
     setTimeout(() => setIsCopied(false), 3000);
   };
 
+  if (!props.className) {
+    return (
+      <code
+        style={{
+          backgroundColor: alpha(theme.palette.primary.main, 0.1),
+          padding: '4px',
+          margin: '0 0.5ch',
+        }}
+        {...props}
+      />
+    );
+  }
+
   return (
     <Highlight
       {...defaultProps}
@@ -30,7 +43,13 @@ export const SampleCodeSnippet: FC<any> = (props) => {
       theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            position: 'relative',
+            margin: '2rem auto',
+            fontSize: '1.2em',
+          }}
+        >
           <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
             <CopyButton onClick={handleCopy}>
               {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
