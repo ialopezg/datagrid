@@ -48,6 +48,7 @@ const TopBar: FC<TopBarProps> = ({
   setDarkMode,
   setOpen,
 }: TopBarProps) => {
+  const isDesktop = useMediaQuery('(min-width: 1600px)');
   const isTablet = useMediaQuery('(max-width: 900px)');
   const isMobile = useMediaQuery('(max-width: 600px)');
 
@@ -55,27 +56,28 @@ const TopBar: FC<TopBarProps> = ({
     <StyledAppBar position="fixed">
       <StyledToolbar variant={isTablet ? 'dense' : 'regular'}>
         <Flex>
-          <StyledIconButton
-            aria-label="Open nav menu"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? (
-              <MenuOpenIcon color="inherit" />
-            ) : (
-              <MenuIcon color="inherit" />
-            )}
-          </StyledIconButton>
+          {!isDesktop && (
+            <StyledIconButton
+              aria-label="Open nav menu"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? (
+                <MenuOpenIcon color="inherit" />
+              ) : (
+                <MenuIcon color="inherit" />
+              )}
+            </StyledIconButton>
+          )}
 
           <Link href="/" passHref>
             <Typography
               style={{
                 cursor: 'pointer',
                 fontSize: isTablet ? '1.6rem' : undefined,
-                display: isMobile ? 'none' : 'inline',
               }}
               variant="h1"
             >
-              DataGrid
+              {isMobile ? 'DG' : 'DataGrid'}
             </Typography>
           </Link>
         </Flex>
@@ -90,7 +92,8 @@ const TopBar: FC<TopBarProps> = ({
                     borderRadius: '50%',
                   }}
                   src="/media/icons/github.svg"
-                 alt="Github"/>
+                  alt="Github"
+                />
               </IconButton>
             </a>
           </Tooltip>
@@ -104,7 +107,8 @@ const TopBar: FC<TopBarProps> = ({
                     borderRadius: '50%',
                   }}
                   src="/media/icons/discord.svg"
-                 alt="Discord"/>
+                  alt="Discord"
+                />
               </IconButton>
             </a>
           </Tooltip>
