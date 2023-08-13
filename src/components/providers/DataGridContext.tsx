@@ -2,6 +2,8 @@ import { Row, TableInstance } from 'react-table';
 import { Context, createContext } from 'react';
 
 import { DataGridProps } from '../DataGrid';
+import { DataGridIcons } from '../DataGridIcons';
+import { Localization } from '../localization';
 
 export interface DataGridContextProps<D extends {}>
   extends DataGridProps<D> {
@@ -9,7 +11,9 @@ export interface DataGridContextProps<D extends {}>
   fullScreen: boolean;
   hasExpandableRows: boolean;
   hasExpandedRows: boolean;
+  icons: DataGridIcons,
   itemForUpdate: Row<D> | null;
+  localization: Localization;
   setDensePadding: (value: boolean) => void;
   setFullScreen: (value: boolean) => void;
   setItemForUpdate: (value: Row<D> | null) => void;

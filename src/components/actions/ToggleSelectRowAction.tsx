@@ -43,14 +43,14 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
         enterDelay={1000}
         enterNextDelay={1000}
         title={
-          selectAll ? localization?.selectAllRows : localization?.selectRow
+          selectAll ? localization.selectAllRows : localization.selectRow
         }
       >
         <Checkbox
           inputProps={{
             'aria-label': selectAll
-              ? localization?.selectAllRows
-              : localization?.selectRow,
+              ? localization.selectAllRows
+              : localization.selectRow,
           }}
           onChange={onSelectChange}
           {...checkboxProps}

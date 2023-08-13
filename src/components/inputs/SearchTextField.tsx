@@ -1,5 +1,3 @@
-import CloseIcon from '@mui/icons-material/Close';
-import SearchIcon from '@mui/icons-material/Search';
 import MuiTextField from '@mui/material/TextField';
 import { Collapse, IconButton, InputAdornment, styled } from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
@@ -15,6 +13,7 @@ interface SearchTextFieldProps {}
 
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
   const {
+    icons: { CloseIcon, SearchIcon },
     localization,
     onGlobalFilterChange,
     searchBoxProps,
@@ -44,7 +43,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
           setSearchValue(e.target.value);
           onSearchAction(e);
         }}
-        placeholder={localization?.search}
+        placeholder={localization.search}
         value={searchValue ?? ''}
         variant="standard"
         InputProps={{
@@ -56,11 +55,11 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton
-                aria-label={localization?.clearSorting}
+                aria-label={localization.clearSearch}
                 disabled={searchValue.length === 0}
                 onClick={onClearFilter}
                 size="small"
-                title={localization?.clearSearch}
+                title={localization.clearSearch}
               >
                 <CloseIcon />
               </IconButton>

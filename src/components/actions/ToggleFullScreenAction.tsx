@@ -1,5 +1,3 @@
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
@@ -10,17 +8,22 @@ interface ToggleFullScreenActionProps extends IconButtonProps {}
 export const ToggleFullScreenAction: FC<ToggleFullScreenActionProps> = ({
   ...rest
 }) => {
-  const { fullScreen, localization, setFullScreen } = useDataGrid();
+  const {
+    fullScreen,
+    icons: { FullScreenOffIcon, FullScreenOnIcon },
+    localization,
+    setFullScreen,
+  } = useDataGrid();
 
   return (
-    <Tooltip arrow title={localization?.toggleFullScreen}>
+    <Tooltip arrow title={localization.toggleFullScreen}>
       <IconButton
-        aria-label={localization?.toggleFullScreen}
+        aria-label={localization.toggleFullScreen}
         onClick={() => setFullScreen(!fullScreen)}
         size="small"
         {...rest}
       >
-        {fullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+        {fullScreen ? <FullScreenOffIcon /> : <FullScreenOnIcon />}
       </IconButton>
     </Tooltip>
   );

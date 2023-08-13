@@ -13,7 +13,7 @@ export const HeaderActionsCell: FC<HeaderActionsCellProps> = () => {
       densePadding={densePadding}
       style={{ textAlign: 'center' }}
     >
-      {localization?.actions}
+      {localization.actions}
     </StyledHeaderCell>
   );
 };

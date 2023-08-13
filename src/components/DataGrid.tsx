@@ -34,8 +34,9 @@ import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
-import { defaultLocalization, Localization } from './localization';
+import { DefaultLocalization, Localization } from './localization';
 import { DataGridColumn } from '../types/react-table-config';
+import { DataGridIcons, DefaultDataGridIcons } from './DataGridIcons';
 
 export interface DataGridProps<D extends {} = {}>
   extends TableOptions<D>,
@@ -110,6 +111,7 @@ export interface DataGridProps<D extends {} = {}>
   hideToolbarActions?: boolean;
   hideToolbarBottom?: boolean;
   hideToolbarTop?: boolean;
+  icons?: Partial<DataGridIcons>;
   isFetching?: boolean;
   isLoading?: boolean;
   localization?: Partial<Localization>;
@@ -157,6 +159,7 @@ export interface DataGridProps<D extends {} = {}>
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  icons,
   localization,
   rowActionsColumn = 'first',
   paginationPosition = 'bottom',
@@ -166,9 +169,10 @@ export default <D extends {}>({
 }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
-    rowActionsColumn={rowActionsColumn}
-    localization={{ ...defaultLocalization, ...localization }}
+    icons={{ ...DefaultDataGridIcons, ...icons }}
+    localization={{ ...DefaultLocalization, ...localization }}
     paginationPosition={paginationPosition}
+    rowActionsColumn={rowActionsColumn}
     toolbarActionsPosition={toolbarActionsPosition}
     toolbarAlertBannerPosition={toolbarAlertBannerPosition}
     {...rest}

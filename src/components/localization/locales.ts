@@ -6,6 +6,7 @@ export interface Localization {
   clearSorting?: string;
   columnActions?: string;
   edit?: string;
+  editRow?: string;
   expand?: string;
   expandAll?: string;
   filter?: string;
@@ -33,7 +34,7 @@ export interface Localization {
   toggleSearch?: string;
 }
 
-export const defaultLocalization: Localization = {
+export const DefaultLocalization: Localization = {
   actions: 'Actions',
   cancel: 'Cancel',
   clearFilter: 'Clear filter',
@@ -41,6 +42,7 @@ export const defaultLocalization: Localization = {
   clearSorting: 'Clear sorting',
   columnActions: 'Column actions',
   edit: 'Edit',
+  editRow: 'Edit row',
   expand: 'Expand',
   expandAll: 'Expand all',
   filter: 'Filter',

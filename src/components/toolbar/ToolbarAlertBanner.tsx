@@ -43,17 +43,17 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
 
   const selectMessage =
     table.selectedFlatRows.length > 0
-      ? localization?.selectionMessage
+      ? localization.selectionMessage
           ?.replace('{selectedCount}', String(table.selectedFlatRows.length))
           ?.replace('{rowCount}', String(table.flatRows.length))
       : null;
   const groupedMessage =
     table.state.groupBy.length > 0 ? (
       <span>
-        {localization?.groupedBy}{' '}
+        {localization.groupedBy}{' '}
         {table.state.groupBy.map((columnId, index) => (
           <Fragment key={`${index}-${columnId}`}>
-            {index > 0 ? localization?.thenByMessage : ''}
+            {index > 0 ? localization.thenByMessage : ''}
             <Chip
               color="secondary"
               label={

@@ -1,8 +1,3 @@
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
-import FilterIcon from '@mui/icons-material/FilterList';
-import SortIcon from '@mui/icons-material/Sort';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import MuiMenuItem from '@mui/material/MenuItem';
 import { Divider, Menu, styled } from '@mui/material';
 import { HeaderGroup } from 'react-table';
@@ -31,6 +26,13 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     disableFilters,
     disableSortBy,
     enableColumnGrouping,
+    icons: {
+      ClearAllIcon,
+      FilteringOnIcon,
+      GroupByIcon,
+      HideColumnIcon,
+      SortIcon,
+    },
     localization,
     setShowFilters,
   } = useDataGrid();
@@ -89,7 +91,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             key="datagrid-sort-clear-column-action"
             onClick={onClearSorting}
           >
-            <ClearAllIcon /> {localization?.clearSorting}
+            <ClearAllIcon /> {localization.clearSorting}
           </MenuItem>,
           <MenuItem
             disabled={column.isSorted && !column.isSortedDesc}
@@ -97,7 +99,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             onClick={onSortActionAsc}
           >
             <SortIcon />{' '}
-            {localization?.sortByColumnAscending?.replace(
+            {localization.sortByColumnAscending?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -108,7 +110,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             onClick={onSortActionDesc}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization?.sortByColumnDescending?.replace(
+            {localization.sortByColumnDescending?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -122,8 +124,8 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             key="datagrid-filter-column-action"
             onClick={onFilterByColumnAction}
           >
-            <FilterIcon />{' '}
-            {localization?.filterByColumn?.replace(
+            <FilteringOnIcon />{' '}
+            {localization.filterByColumn?.replace(
               '{column}',
               String(column.Header),
             )}
@@ -137,8 +139,8 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
           >
-            <DynamicFeedIcon />{' '}
-            {localization?.[
+            <GroupByIcon />{' '}
+            {localization[
               column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
             ]?.replace('{column}', String(column.Header))}
           </MenuItem>,
@@ -147,8 +149,8 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       {!disableColumnHiding && [
         <Divider key="datagrid-column-hidding-column-action-divider" />,
         <MenuItem onClick={onHideColumnAction}>
-          <VisibilityOffIcon />{' '}
-          {localization?.hideColumn?.replace('{column}', String(column.Header))}
+          <HideColumnIcon />{' '}
+          {localization.hideColumn?.replace('{column}', String(column.Header))}
         </MenuItem>,
       ]}
     </Menu>

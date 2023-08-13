@@ -1,4 +1,3 @@
-import MuiExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { IconButton, styled } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
@@ -15,35 +14,33 @@ const TableCell = styled(ButtonCell, {
   textAlign: 'left',
 }));
 
-const ExpandMoreIcon = styled(MuiExpandMoreIcon, {
-  shouldForwardProp: (prop) => prop !== 'rotation',
-})<{
-  rotation?: number;
-}>(({ rotation }) => ({
-  transform: `rotate(${rotation}deg)`,
-  transition: 'transform 0.2s',
-}));
-
 interface ExpandRowActionProps {
   row: Row;
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
-  const { densePadding, detailPanel, localization } = useDataGrid();
+  const {
+    densePadding,
+    detailPanel,
+    icons: { ExpandIcon },
+    localization,
+  } = useDataGrid();
 
   return (
     <TableCell size="small" densePadding={densePadding} depth={row.depth}>
       <IconButton
-        aria-label={localization?.expand}
+        aria-label={localization.expand}
         disabled={!row.canExpand && !detailPanel}
-        title={localization?.expand}
+        title={localization.expand}
         {...row.getToggleRowExpandedProps()}
       >
-        <ExpandMoreIcon
-          fontSize={row.canExpand || detailPanel ? 'medium' : 'small'}
-          rotation={
-            !row.canExpand && !detailPanel ? -90 : row.isExpanded ? -180 : 0
-          }
+        <ExpandIcon
+          style={{
+            transform: `rotate(${
+              !row.canExpand && !detailPanel ? -90 : row.isExpanded ? -180 : 0
+            }deg)`,
+            transition: 'transform 0.2s',
+          }}
         />
       </IconButton>
     </TableCell>

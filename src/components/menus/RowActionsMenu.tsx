@@ -1,4 +1,3 @@
-import EditIcon from '@mui/icons-material/Edit';
 import { Menu, MenuItem } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
@@ -17,8 +16,13 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
   row,
   setAnchorEl,
 }) => {
-  const { enableRowEditing, localization, rowActionMenuItems, table } =
-    useDataGrid();
+  const {
+    enableRowEditing,
+    icons: { EditIcon },
+    localization,
+    rowActionMenuItems,
+    table,
+  } = useDataGrid();
 
   return (
     <Menu
@@ -28,7 +32,7 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
     >
       {enableRowEditing && (
         <MenuItem onClick={onRowEditAction}>
-          <EditIcon /> {localization?.rowActions}
+          <EditIcon /> {localization.editRow}
         </MenuItem>
       )}
 

@@ -1,5 +1,3 @@
-import CancelIcon from '@mui/icons-material/Cancel';
-import SaveIcon from '@mui/icons-material/Save';
 import { IconButton, styled, Tooltip } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
@@ -16,8 +14,13 @@ interface EditActionsActionProps {
 }
 
 export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
-  const { itemForUpdate, localization, onRowEditSubmit, setItemForUpdate } =
-    useDataGrid();
+  const {
+    icons: { CancelIcon, SaveIcon },
+    itemForUpdate,
+    localization,
+    onRowEditSubmit,
+    setItemForUpdate,
+  } = useDataGrid();
 
   const onSaveButtonClick = async () => {
     setItemForUpdate(null);
@@ -31,9 +34,9 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
 
   return (
     <EditActionsWrapper>
-      <Tooltip arrow title={localization?.cancel}>
+      <Tooltip arrow title={localization.cancel}>
         <IconButton
-          aria-label={localization?.cancel}
+          aria-label={localization.cancel}
           onClick={onCancelButtonClick}
           color="error"
         >
@@ -41,9 +44,9 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
         </IconButton>
       </Tooltip>
 
-      <Tooltip arrow title={localization?.save}>
+      <Tooltip arrow title={localization.save}>
         <IconButton
-          aria-label={localization?.save}
+          aria-label={localization.save}
           onClick={onSaveButtonClick}
           color="primary"
         >

@@ -7,7 +7,6 @@ import {
   styled,
   Tooltip,
 } from '@mui/material';
-import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { useDataGrid } from '../providers';
@@ -24,7 +23,11 @@ interface ColumnsVisibilityActionProps extends IconButtonProps {}
 export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
   ...rest
 }) => {
-  const { localization, table } = useDataGrid();
+  const {
+    localization,
+    icons: { ColumnVisibilityIcon },
+    table,
+  } = useDataGrid();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -34,14 +37,14 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
 
   return (
     <>
-      <Tooltip arrow title={localization?.toggleColumnVisibility}>
+      <Tooltip arrow title={localization.toggleColumnVisibility}>
         <IconButton
-          aria-label={localization?.toggleColumnVisibility}
+          aria-label={localization.toggleColumnVisibility}
           onClick={onToggleMenuAction}
           size="small"
           {...rest}
         >
-          <ViewColumnIcon />
+          <ColumnVisibilityIcon />
         </IconButton>
       </Tooltip>
 
@@ -58,13 +61,13 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
             }
             onClick={() => table.toggleHideAllColumns(true)}
           >
-            {localization?.hideAll}
+            {localization.hideAll}
           </Button>
           <Button
             disabled={table.getToggleHideAllColumnsProps().checked}
             onClick={() => table.toggleHideAllColumns(false)}
           >
-            {localization?.showAll}
+            {localization.showAll}
           </Button>
         </MenuButtons>
 

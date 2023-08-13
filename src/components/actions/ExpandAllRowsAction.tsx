@@ -1,23 +1,19 @@
-import MuiArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import { IconButton, styled } from '@mui/material';
+import { IconButton } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
 import { ButtonCell } from '../table';
 
-const ArrowRightIcon = styled(MuiArrowRightIcon, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'rotation',
-})<{
-  rotation?: number;
-}>(({ rotation }) => ({
-  transform: `rotate(${rotation}deg)`,
-  transition: 'transform 0.2s',
-}));
-
 interface ExpandAllRowsActionProps {}
 
 export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
-  const { densePadding, hasExpandedRows, localization, table } = useDataGrid();
+  const {
+    densePadding,
+    hasExpandedRows,
+    icons: { ExpandAllIcon },
+    localization,
+    table,
+  } = useDataGrid();
 
   return (
     <ButtonCell
@@ -26,12 +22,16 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
       {...table.getToggleAllRowsExpandedProps()}
     >
       <IconButton
-        aria-label={localization?.expandAll}
-        title={localization?.expandAll}
+        aria-label={localization.expandAll}
+        title={localization.expandAll}
       >
-        <ArrowRightIcon
-          fontSize="small"
-          rotation={table.isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0}
+        <ExpandAllIcon
+          style={{
+            transform: `rotate(${
+              table.isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0
+            }deg)`,
+            transition: 'transform 0.2s',
+          }}
         />
       </IconButton>
     </ButtonCell>

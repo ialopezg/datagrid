@@ -1,5 +1,3 @@
-import CloseIcon from '@mui/icons-material/Close';
-import FilterIcon from '@mui/icons-material/FilterList';
 import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
 import { HeaderGroup, useAsyncDebounce } from 'react-table';
 import React, { FC, useState } from 'react';
@@ -11,7 +9,10 @@ interface FilterTextFieldProps {
 }
 
 export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
-  const { localization } = useDataGrid();
+  const {
+    icons: { CloseIcon, FilteringOnIcon },
+    localization,
+  } = useDataGrid();
   const [filterValue, setFilterValue] = useState<string>('');
 
   const onFilterChange = useAsyncDebounce((value) => {
@@ -42,7 +43,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         onFilterChange(e.target.value);
       }}
       onClick={(e) => e.stopPropagation()}
-      placeholder={localization?.filterByColumn?.replace(
+      placeholder={localization.filterByColumn?.replace(
         '{column}',
         String(column.Header),
       )}
@@ -52,22 +53,22 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         startAdornment: (
           <Tooltip
             arrow
-            title={localization?.filterByColumn?.replace(
+            title={localization.filterByColumn?.replace(
               '{column}',
               String(column.Header),
             )}
           >
             <InputAdornment position="start">
-              <FilterIcon />
+              <FilteringOnIcon />
             </InputAdornment>
           </Tooltip>
         ),
         endAdornment: (
           <InputAdornment position="end">
-            <Tooltip arrow title={localization?.clearFilter}>
+            <Tooltip arrow title={localization.clearFilter}>
               <span>
                 <IconButton
-                  aria-label={localization?.clearFilter}
+                  aria-label={localization.clearFilter}
                   disabled={filterValue?.length === 0}
                   onClick={onClearFilter}
                   size="small"

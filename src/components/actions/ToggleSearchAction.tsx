@@ -1,5 +1,3 @@
-import SearchIcon from '@mui/icons-material/Search';
-import SearchOffIcon from '@mui/icons-material/SearchOff';
 import { IconButton, IconButtonProps, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
@@ -10,8 +8,13 @@ interface ToggleSearchActionProps extends IconButtonProps {}
 export const ToggleSearchAction: FC<ToggleSearchActionProps> = ({
   ...rest
 }) => {
-  const { localization, searchBoxProps, setShowSearch, showSearch } =
-    useDataGrid();
+  const {
+    icons: { SearchIcon, SearchOffIcon },
+    localization,
+    searchBoxProps,
+    setShowSearch,
+    showSearch,
+  } = useDataGrid();
 
   const onToggleSearchBox = () => {
     setShowSearch(!showSearch);
@@ -25,7 +28,7 @@ export const ToggleSearchAction: FC<ToggleSearchActionProps> = ({
   };
 
   return (
-    <Tooltip arrow title={localization?.toggleSearch}>
+    <Tooltip arrow title={localization.toggleSearch}>
       <IconButton onClick={onToggleSearchBox} size="small" {...rest}>
         {showSearch ? <SearchOffIcon /> : <SearchIcon />}
       </IconButton>

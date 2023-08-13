@@ -1,4 +1,3 @@
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MuiIconButton from '@mui/material/IconButton';
 import { styled, Tooltip } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
@@ -25,7 +24,10 @@ interface ColumnActionsActionProps {
 export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
   column,
 }) => {
-  const { localization } = useDataGrid();
+  const {
+    localization,
+    icons: { ColumnActionsIcon },
+  } = useDataGrid();
 
   // ** State
   const [anchor, setAnchor] = useState<null | HTMLElement>(null);
@@ -42,14 +44,14 @@ export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
         arrow
         enterDelay={1000}
         enterNextDelay={1000}
-        title={localization?.columnActions}
+        title={localization.columnActions}
       >
         <IconButton
-          aria-label={localization?.columnActions}
+          aria-label={localization.columnActions}
           onClick={onColumnAction}
           size="small"
         >
-          <MoreVertIcon />
+          <ColumnActionsIcon />
         </IconButton>
       </Tooltip>
 

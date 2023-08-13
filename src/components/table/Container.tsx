@@ -73,7 +73,7 @@ export const Container: FC<ContainerProps> = () => {
         <CircularProgressWrapper>
           <CircularProgress
             aria-busy="true"
-            aria-label={localization?.loadingData}
+            aria-label={localization.loadingData}
           />
         </CircularProgressWrapper>
       )}

@@ -1,7 +1,4 @@
-import EditIcon from '@mui/icons-material/Edit';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import MuiIconButton from '@mui/material/IconButton';
-import { styled, Tooltip } from '@mui/material';
+import { IconButton, styled, Tooltip } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
 import { useDataGrid } from '../providers';
@@ -9,7 +6,7 @@ import RowActionsMenu from '../menus/RowActionsMenu';
 import EditActionsAction from './EditActionsAction';
 import { ButtonCell } from '../table';
 
-const IconButton = styled(MuiIconButton)({
+const StyledIconButton = styled(IconButton)({
   opacity: 0.5,
   transition: 'opacity 0.2s',
   marginRight: '2px',
@@ -28,6 +25,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   const {
     densePadding,
     enableRowEditing,
+    icons: { EditIcon, RowActionsIcon },
     itemForUpdate,
     localization,
     rowActions,
@@ -57,21 +55,21 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
       ) : row.id === itemForUpdate?.id ? (
         <EditActionsAction row={row} />
       ) : !rowActionMenuItems && enableRowEditing ? (
-        <Tooltip arrow placement="right" title={localization?.edit}>
-          <IconButton onClick={onRowEditAction}>
+        <Tooltip arrow placement="right" title={localization.edit}>
+          <StyledIconButton onClick={onRowEditAction}>
             <EditIcon />
-          </IconButton>
+          </StyledIconButton>
         </Tooltip>
       ) : rowActionMenuItems ? (
         <>
-          <IconButton
-            aria-label={localization?.rowActions}
+          <StyledIconButton
+            aria-label={localization.rowActions}
             onClick={onRowClick}
-            title={localization?.rowActions}
+            title={localization.rowActions}
             size="small"
           >
-            <MoreHorizIcon />
-          </IconButton>
+            <RowActionsIcon />
+          </StyledIconButton>
           <RowActionsMenu
             anchorEl={anchorEl}
             onRowEditAction={onRowEditAction}
