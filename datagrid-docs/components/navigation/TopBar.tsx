@@ -83,7 +83,11 @@ const TopBar: FC<TopBarProps> = ({
         </Flex>
         <Flex>
           <Tooltip arrow title="Github">
-            <a href="https://github.com/ialopezg/datagrid" target="_blank">
+            <a
+              href="https://github.com/ialopezg/datagrid"
+              target="_blank"
+              rel="noreferrer"
+            >
               <IconButton aria-label="Github">
                 <img
                   height={30}
@@ -98,7 +102,11 @@ const TopBar: FC<TopBarProps> = ({
             </a>
           </Tooltip>
           <Tooltip arrow title="Discord">
-            <a href="https://discord.gg/ialopezg" target="_blank">
+            <a
+              href="https://discord.com/ialopezg"
+              rel="noreferrer"
+              target="_blank"
+            >
               <IconButton aria-label="Discord">
                 <img
                   height={25}
