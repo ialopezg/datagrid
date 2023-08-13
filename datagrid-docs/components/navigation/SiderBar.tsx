@@ -15,7 +15,7 @@ const Drawer = styled(MuiDrawer)({
 });
 
 const StyledList = styled(List, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== 'navOpen',
 })<{ navOpen?: boolean }>(({ navOpen }) => ({
   overflow: 'visible',
   overflowY: navOpen ? 'auto' : 'hidden',

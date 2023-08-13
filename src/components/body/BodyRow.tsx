@@ -30,7 +30,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     detailPanel,
     enableRowActions,
     enableRowEditing,
-    enableSelection,
+    enableRowSelection,
     hasExpandableRows,
     onRowClick,
     rowActionsColumn,
@@ -65,7 +65,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
 
         {(hasExpandableRows || detailPanel) && <ExpandRowAction row={row} />}
 
-        {enableSelection && <ToggleSelectRowAction row={row} />}
+        {enableRowSelection && <ToggleSelectRowAction row={row} />}
 
         {row.cells.map((cell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />

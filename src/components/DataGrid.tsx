@@ -94,7 +94,7 @@ export interface DataGridProps<D extends {} = {}>
   enableColumnResizing?: boolean;
   enableRowActions?: boolean;
   enableRowEditing?: boolean;
-  enableSelection?: boolean;
+  enableRowSelection?: boolean;
   filterTextFieldProps?:
     | TextFieldProps
     | ((column: Column<D>) => TextFieldProps);
