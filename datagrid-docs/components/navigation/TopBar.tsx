@@ -26,6 +26,7 @@ const StyledToolbar = styled(Toolbar)({
 const Flex = styled('div')({
   display: 'flex',
   alignItems: 'center',
+  gap: '0.5rem',
 });
 
 const StyledIconButton = styled(IconButton)({
@@ -47,11 +48,12 @@ const TopBar: FC<TopBarProps> = ({
   setDarkMode,
   setOpen,
 }: TopBarProps) => {
+  const isTablet = useMediaQuery('(max-width: 900px)');
   const isMobile = useMediaQuery('(max-width: 600px)');
 
   return (
     <StyledAppBar position="fixed">
-      <StyledToolbar variant={isMobile ? 'dense' : 'regular'}>
+      <StyledToolbar variant={isTablet ? 'dense' : 'regular'}>
         <Flex>
           <StyledIconButton
             aria-label="Open nav menu"
@@ -68,7 +70,8 @@ const TopBar: FC<TopBarProps> = ({
             <Typography
               style={{
                 cursor: 'pointer',
-                fontSize: isMobile ? '1.6rem' : undefined,
+                fontSize: isTablet ? '1.6rem' : undefined,
+                display: isMobile ? 'none' : 'inline',
               }}
               variant="h1"
             >
@@ -77,6 +80,34 @@ const TopBar: FC<TopBarProps> = ({
           </Link>
         </Flex>
         <Flex>
+          <Tooltip arrow title="Github">
+            <a href="https://github.com/ialopezg/datagrid" target="_blank">
+              <IconButton aria-label="Github">
+                <img
+                  height={30}
+                  style={{
+                    backgroundColor: '#fff',
+                    borderRadius: '50%',
+                  }}
+                  src="/media/icons/github.svg"
+                 alt="Github"/>
+              </IconButton>
+            </a>
+          </Tooltip>
+          <Tooltip arrow title="Discord">
+            <a href="https://discord.gg/ialopezg" target="_blank">
+              <IconButton aria-label="Discord">
+                <img
+                  height={25}
+                  style={{
+                    padding: '-3px',
+                    borderRadius: '50%',
+                  }}
+                  src="/media/icons/discord.svg"
+                 alt="Discord"/>
+              </IconButton>
+            </a>
+          </Tooltip>
           <Tooltip arrow title="Toggle Light/Dark Mode">
             <StyledIconButton onClick={() => setDarkMode(!darkMode)}>
               {darkMode ? <DarkModeIcon /> : <LightModeIcon />}

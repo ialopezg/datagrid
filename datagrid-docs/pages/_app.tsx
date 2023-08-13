@@ -1,4 +1,9 @@
-import { createTheme, styled, ThemeProvider } from '@mui/material';
+import {
+  createTheme,
+  styled,
+  ThemeProvider,
+  useMediaQuery,
+} from '@mui/material';
 import type { AppProps } from 'next/app';
 import React, { useEffect, useState } from 'react';
 
@@ -24,6 +29,8 @@ const PageContent = styled('div')({
 });
 
 export const App = ({ Component, pageProps }: AppProps) => {
+  const isTablet = useMediaQuery('(max-width: 900px)');
+
   const [open, setOpen] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -51,9 +58,13 @@ export const App = ({ Component, pageProps }: AppProps) => {
           setDarkMode={setDarkMode}
           setOpen={setOpen}
         />
-        <SideBar navOpen={open} />
+        <SideBar navOpen={open} setNavOpen={setOpen} />
         <PageContainer
-          style={{ padding: `80px 32px 800px ${open ? '260px' : '32px'}` }}
+          style={{
+            padding: `64px 32px 800px ${
+              open && !isTablet ? '280px' : '32px'
+            }`,
+          }}
         >
           <PageContent>
             <Component components={mdxComponents} {...pageProps} />

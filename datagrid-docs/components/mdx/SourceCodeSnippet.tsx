@@ -10,6 +10,7 @@ import {
   ToggleButtonGroup,
   Tooltip,
   Typography,
+  useMediaQuery,
   useTheme,
 } from '@mui/material';
 import vsDark from 'prism-react-renderer/themes/vsDark';
@@ -41,6 +42,8 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
   Component,
 }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery('(max-width: 720px)');
+
   const [typeScripMode, setTypeScriptMode] = useState<boolean>(true);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [isFullCode, setIsFullCode] = useState<boolean>(false);
@@ -97,7 +100,12 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
           theme={theme.palette.mode === 'dark' ? vsDark : vsLight}
         >
           {({ className, getLineProps, getTokenProps, style, tokens }) => (
-            <div style={{ position: 'relative', fontSize: '1.2em' }}>
+            <div
+              style={{
+                position: 'relative',
+                fontSize: isMobile ? '1em' : '1.2em',
+              }}
+            >
               <Tooltip arrow title={isCopied ? 'Copied!' : 'Copy Code'}>
                 <CopyButton onClick={onCopyAction}>
                   {isCopied ? <LibraryAddCheckIcon /> : <ContentCopyIcon />}
@@ -118,7 +126,16 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
                 </ToggleFullCodeButton>
               </Tooltip>
 
-              <pre className={className}>
+              <pre
+                className={className}
+                style={{
+                  ...style,
+                  padding: isMobile
+                    ? '3rem 0.5rem 1rem 0.5rem'
+                    : '0.5rem 0.25rem',
+                  whiteSpace: 'pre-wrap',
+                }}
+              >
                 {tokens.map((line, index) => (
                   <div
                     key={index}
@@ -128,14 +145,16 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
                       display: !isFullCode && skipCodeLine ? 'none' : 'block',
                     }}
                   >
-                    <span
-                      style={{
-                        padding: '0 12px',
-                        color: theme.palette.text.secondary,
-                      }}
-                    >
-                      {index + 1}
-                    </span>
+                    {!isMobile && (
+                      <span
+                        style={{
+                          padding: '0 12px',
+                          color: theme.palette.text.secondary,
+                        }}
+                      >
+                        {index + 1}
+                      </span>
+                    )}
                     {line.map((token, key) => {
                       if (
                         token.content === '//column definitions...' ||

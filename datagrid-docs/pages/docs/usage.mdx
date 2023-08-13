@@ -35,14 +35,8 @@ Each column definition must have at the very least, an `accessor` propery. This 
 
 ```jsx
 const columns = useMemo(() => [
-  {
-    Header: 'Name',
-    accessor: 'name',
-  },
-  {
-    Header: 'Age',
-    accessor: 'age',
-  },
+  { Header: 'Name', accessor: 'name' },
+  { Header: 'Age', accessor: 'age' },
 ], []);
 ```
 
@@ -50,51 +44,27 @@ Your data is an array of objects that have properties matching the accessors in 
 
 ```jsx
 const data = useMemo(() => [
-  {
-    name: 'John',
-    age: 30,
-  },
-  {
-    name: 'Sara',
-    age: 25,
-  },
+  { name: 'John', age: 30 },
+  { name: 'Sara', age: 25 },
 ], []);
 ```
 
 Throw it all together and you have a basic table!
 
 ```jsx
-import { useMemo } from "react";
-import MaterialReactTable from "material-react-table";
+import { useMemo } from 'react';
+import DataGrid from '@ialopezg/datagrid';
 
 export default function App() {
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Name",
-        accessor: "name"
-      },
-      {
-        Header: "Age",
-        accessor: "age"
-      }
-    ],
-    []
-  );
+  const columns = useMemo(() => [
+    { Header: 'Name', accessor: 'name' },
+    { Header: 'Age', accessor: 'age' },
+  ], []);
 
-  const data = useMemo(
-    () => [
-      {
-        name: "John",
-        age: 30
-      },
-      {
-        name: "Sara",
-        age: 25
-      }
-    ],
-    []
-  );
+  const data = useMemo(() => [
+    { name: 'John', age: 30 },
+    { name: 'Sara', age: 25 },
+  ], []);
 
   return <DataGrid columns={columns} data={data} />;
 }

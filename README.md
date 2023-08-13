@@ -23,19 +23,20 @@ View the source code and open issues at [GitHub](https://github.com/ialopezg/dat
 - [x] Filtering
 - [x] Global Search
 - [x] Header Groups
+- [x] Localization
 - [x] Pagination
 - [x] Row Actions
 - [x] Selection
 - [x] Sorting
 - [x] Toolbars
-- [x] Tree Data (Subrows)
+- [x] Tree Data (Sub rows)
 
 ### Installation
 
 1. Install Peer Dependencies (material-ui v5 and react table v7)
 
 ```bash
-npm install @mui/material @mui/icons-material @emotion/react react-table
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled react-table
 ```
 
 2. Install `datagrid`

@@ -5,6 +5,7 @@ import {
   List,
   ListItem as MuiListItem,
   styled,
+  useMediaQuery,
 } from '@mui/material';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -22,6 +23,9 @@ const StyledList = styled(List, {
   padding: '68px 0',
   transition: 'all .2s',
   width: navOpen ? '260px' : '0',
+  'media (max-width: 990px)': {
+    marginTop: '50px',
+  },
 }));
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
@@ -47,17 +51,24 @@ const ListItemHeader = styled(MuiListItem)({
 
 interface SideBarProps {
   navOpen: boolean;
+  setNavOpen: (value: boolean) => void;
 }
 
-const SideBar: FC<SideBarProps> = ({ navOpen }) => {
+const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
+  const isTablet = useMediaQuery('(max-width: 990px)');
+
   return (
-    <Drawer open={navOpen} variant="permanent">
+    <Drawer
+      onClose={() => setNavOpen(false)}
+      open={navOpen}
+      variant={isTablet ? 'temporary' : 'permanent'}
+    >
       <StyledList navOpen={navOpen}>
         <Link href="/" passHref>
           <ListItemLevel1>Home</ListItemLevel1>
         </Link>
         <Link href="/about" passHref>
-          <ListItemLevel1>About</ListItemLevel1>
+          <ListItemLevel1>About &amp; FAQ</ListItemLevel1>
         </Link>
 
         <Divider />
