@@ -1,14 +1,16 @@
-import SourceCodeSnippet from '../../mdx/SourceCodeSnippet';
-import BasicExampleWidget from './BasicExample';
+import React from 'react';
 
-const BasicExampleJS = require('!!raw-loader!./BasicExample.js').default;
-const BasicExampleTS = require('!!raw-loader!./BasicExample.tsx').default;
+import SourceCodeSnippet from '../../mdx/SourceCodeSnippet';
+import Example from './TS';
+
+const BasicExampleJS = require('!!raw-loader!./JS.js').default;
+const BasicExampleTS = require('!!raw-loader!./TS.tsx').default;
 
 const BasicExample = () => (
   <SourceCodeSnippet
     javaScriptCode={BasicExampleJS}
     typeScriptCode={BasicExampleTS}
-    Component={BasicExampleWidget}
+    Component={Example}
   />
 );
 

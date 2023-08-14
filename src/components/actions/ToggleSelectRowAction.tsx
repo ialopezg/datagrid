@@ -24,10 +24,10 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
 
   const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
+      table?.toggleAllRowsSelected?.(e.target.checked);
       onSelectAllChange?.(e, table.selectedFlatRows);
-      table.toggleAllRowsSelected(e.target.checked);
     } else if (row) {
-      row.getToggleRowSelectedProps()?.onChange?.(e);
+      row?.getToggleRowSelectedProps()?.onChange?.(e);
       onRowSelectChange?.(e, row, table.selectedFlatRows);
     }
   };

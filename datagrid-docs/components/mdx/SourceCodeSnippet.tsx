@@ -148,7 +148,8 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
                     {!isMobile && (
                       <span
                         style={{
-                          padding: '0 12px',
+                          paddingRight: '2ch',
+                          paddingLeft: `${4 - String(index + 1).length}ch`,
                           color: theme.palette.text.secondary,
                         }}
                       >

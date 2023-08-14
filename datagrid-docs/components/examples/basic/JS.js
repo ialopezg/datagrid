@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import DataGrid from '@ialopezg/datagrid';
 
-const BasicExample = () => {
+const JS = () => {
   const columns = useMemo(
     () => [
       {

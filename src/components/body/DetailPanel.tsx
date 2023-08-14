@@ -1,7 +1,9 @@
 import MuiTableCell from '@mui/material/TableCell';
-import { Collapse, styled, TableRow, TableRowProps } from '@mui/material';
+import { Collapse, styled, TableRow } from '@mui/material';
 import { Row } from 'react-table';
 import React, { FC } from 'react';
+
+import { useDataGrid } from '../providers';
 
 const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'isExpanded',
@@ -12,53 +14,45 @@ const TableCell = styled(MuiTableCell, {
   transition: 'all 0.2s ease-in-out',
 }));
 
-import { useDataGrid } from '../providers';
-
 interface DetailPanelProps {
   row: Row;
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
   const {
-    bodyRowProps: defaultBodyRowProps,
+    bodyRowProps,
     detailPanel,
-    detailPanelProps: defaultDetailPanelProps,
+    detailPanelProps,
     onDetailPanelClick,
     table,
   } = useDataGrid();
 
-  const rowProps =
-    defaultBodyRowProps instanceof Function
-      ? defaultBodyRowProps(row)
-      : (defaultBodyRowProps as TableRowProps);
-  const bodyRowProps = {
-    ...rowProps,
-    ...row.getToggleRowExpandedProps(),
+  const tableBodyRowProps =
+    bodyRowProps instanceof Function
+      ? bodyRowProps(row)
+      : bodyRowProps;
+  const tableRowProps = {
+    ...tableBodyRowProps,
+    ...row.getRowProps(),
     style: {
-      ...row.getToggleRowExpandedProps().style,
-      ...(rowProps?.style ?? {}),
+      ...row.getRowProps().style,
+      ...(tableBodyRowProps?.style ?? {}),
     },
   };
-  const detailPanelProps =
-    defaultDetailPanelProps instanceof Function
-      ? defaultDetailPanelProps(row)
-      : defaultDetailPanelProps;
-  const bodyCellProps = {
-    ...detailPanelProps,
-    style: {
-      ...(detailPanelProps?.style ?? {}),
-    },
-  };
+  const tableCellProps =
+    detailPanelProps instanceof Function
+      ? detailPanelProps(row)
+      : detailPanelProps;
 
   return (
-    <TableRow hover {...bodyRowProps}>
+    <TableRow hover {...tableRowProps}>
       <TableCell
         colSpan={table.visibleColumns.length + 10}
         onClick={(e) => {
           onDetailPanelClick?.(e, row);
         }}
         isExpanded={row.isExpanded}
-        {...bodyCellProps}
+        {...tableCellProps}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>
       </TableCell>

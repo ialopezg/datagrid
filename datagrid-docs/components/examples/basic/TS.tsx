@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import DataGrid from '@ialopezg/datagrid';
 
-const BasicExample: FC = () => {
+const TS: FC = () => {
   const columns = useMemo(
     () => [
       {
@@ -80,4 +80,4 @@ const BasicExample: FC = () => {
   return <DataGrid columns={columns} data={data} />;
 };
 
-export default BasicExample;
+export default TS;

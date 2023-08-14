@@ -4,6 +4,7 @@ import {
   ThemeProvider,
   useMediaQuery,
 } from '@mui/material';
+import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import React, { useEffect, useState } from 'react';
 
@@ -12,7 +13,6 @@ import '../styles/globals.css';
 import TopBar from '../components/navigation/TopBar';
 import SideBar from '../components/navigation/SiderBar';
 import { mdxComponents } from '../components/mdx/mdxComponents';
-import Head from 'next/head';
 import { theme } from '../styles/Theme';
 
 const PageContainer = styled('div')({
@@ -33,7 +33,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
   const isTablet = useMediaQuery('(max-width: 900px)');
 
   const [open, setOpen] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => setDarkMode(localStorage.getItem('darkMode') === 'true'), []);
 

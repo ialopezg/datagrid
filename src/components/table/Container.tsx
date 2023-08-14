@@ -6,7 +6,7 @@ import {
   Paper,
   styled,
 } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import Table from './Table';
 import { useDataGrid } from '../providers';
@@ -53,6 +53,24 @@ export const Container: FC<ContainerProps> = () => {
     localization,
     table,
   } = useDataGrid();
+  const originalBodyOverflowStyle = useRef<string | undefined>();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      originalBodyOverflowStyle.current = document?.body?.style?.overflow;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (fullScreen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow =
+          originalBodyOverflowStyle.current ?? 'auto';
+      }
+    }
+  }, [fullScreen]);
 
   const containerProps =
     defaultContainerProps instanceof Function
