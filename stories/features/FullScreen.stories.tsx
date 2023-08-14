@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import faker from '@faker-js/faker';
 import React from 'react';
+
 import DataGrid, { DataGridProps } from '../../src';
 
 const meta: Meta = {
@@ -49,7 +50,7 @@ const columns = [
       },
     ],
   },
-];
+] as any[];
 
 const data = [...Array(128)].map((_) => ({
   firstName: faker.name.firstName(),
@@ -71,5 +72,5 @@ export const DisableFullScreenToggle: Story<DataGridProps> = () => (
 );
 
 export const DefaultFullScreenOn: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} defaultFullScreen />
+  <DataGrid columns={columns} data={data} initialState={{ fullScreen: true }} />
 );

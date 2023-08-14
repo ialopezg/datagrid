@@ -1,13 +1,13 @@
 import { TableRow } from '@mui/material';
 import React, { FC } from 'react';
-import { HeaderGroup } from 'react-table';
 
+import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import FooterCell from './FooterCell';
 import SpacerCell from '../table/SpacerCell';
 
 interface FooterRowProps {
-  footerGroup: HeaderGroup;
+  footerGroup: DataGridHeaderGroup;
 }
 
 export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
@@ -16,7 +16,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     detailPanel,
     enableRowActions,
     enableRowEditing,
-    enableRowSelection,
+    enableSelection,
     footerRowProps: defaultFooterRowProps,
     hasExpandableRows,
     rowActionsColumn,
@@ -54,9 +54,9 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
         />
       )}
 
-      {enableRowSelection && <SpacerCell width="1rem" />}
+      {enableSelection && <SpacerCell width="1rem" />}
 
-      {footerGroup.headers.map((column) => (
+      {footerGroup.headers.map((column: DataGridHeaderGroup) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
       ))}
 

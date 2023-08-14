@@ -1,4 +1,4 @@
-export interface Localization {
+export interface DataGridLocalization {
   actions?: string;
   cancel?: string;
   clearFilter?: string;
@@ -34,7 +34,7 @@ export interface Localization {
   toggleSearch?: string;
 }
 
-export const DefaultLocalization: Localization = {
+export const DefaultLocalization: DataGridLocalization = {
   actions: 'Actions',
   cancel: 'Cancel',
   clearFilter: 'Clear filter',

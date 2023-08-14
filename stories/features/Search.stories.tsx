@@ -20,7 +20,7 @@ const columns = [
   { accessor: 'lastName' as const, Header: 'Last Name' },
   { accessor: 'address' as const, Header: 'Address' },
   { accessor: 'phoneNumber' as const, Header: 'Phone Number' },
-];
+] as any[];
 
 const data = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),
@@ -35,15 +35,15 @@ export const SearchEnabledDefault: Story<DataGridProps> = () => (
 );
 
 export const ShowSearchBoxByDefault: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} defaultShowSearch />
+  <DataGrid columns={columns} data={data} initialState={{ showSearch: true }} />
 );
 
 export const JustASearchBox: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    defaultShowSearch
     hideToolbarActions
+    initialState={{ showSearch: true }}
   />
 );
 
@@ -55,7 +55,7 @@ export const CustomizeSearchTextBox: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    defaultShowSearch
+    initialState={{ showSearch: true }}
     searchBoxProps={{
       variant: 'outlined',
       placeholder: 'Search 100 rows',

@@ -1,9 +1,9 @@
 import MuiIconButton from '@mui/material/IconButton';
 import { styled, Tooltip } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
-import { useDataGrid } from '../providers';
-import { HeaderGroup } from 'react-table';
 
+import { DataGridHeaderGroup } from '../DataGrid';
+import { useDataGrid } from '../providers';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
 
 const IconButton = styled(MuiIconButton)({
@@ -18,7 +18,7 @@ const IconButton = styled(MuiIconButton)({
 });
 
 interface ColumnActionsActionProps {
-  column: HeaderGroup;
+  column: DataGridHeaderGroup;
 }
 
 export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({

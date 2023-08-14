@@ -15,147 +15,312 @@ import {
 import {
   Cell,
   Column,
+  ColumnInstance,
   HeaderGroup,
   Row,
   TableInstance,
   TableOptions,
+  TableState,
+  UseColumnOrderInstanceProps,
+  UseColumnOrderState,
+  UseExpandedInstanceProps,
   UseExpandedOptions,
+  UseExpandedRowProps,
+  UseExpandedState,
+  UseFiltersColumnOptions,
+  UseFiltersColumnProps,
+  UseFiltersInstanceProps,
   UseFiltersOptions,
+  UseFiltersState,
+  UseGlobalFiltersColumnOptions,
+  UseGlobalFiltersInstanceProps,
   UseGlobalFiltersOptions,
+  UseGlobalFiltersState,
+  UseGroupByCellProps,
+  UseGroupByColumnOptions,
+  UseGroupByColumnProps,
+  UseGroupByInstanceProps,
   UseGroupByOptions,
+  UseGroupByRowProps,
+  UseGroupByState,
+  UsePaginationInstanceProps,
   UsePaginationOptions,
+  UsePaginationState,
+  UseResizeColumnsColumnProps,
   UseResizeColumnsOptions,
+  UseResizeColumnsState,
+  UseRowSelectInstanceProps,
   UseRowSelectOptions,
+  UseRowSelectRowProps,
+  UseRowSelectState,
+  UseRowStateCellProps,
+  UseRowStateInstanceProps,
   UseRowStateOptions,
+  UseRowStateRowProps,
+  UseRowStateState,
+  UseSortByColumnOptions,
+  UseSortByColumnProps,
+  UseSortByInstanceProps,
   UseSortByOptions,
+  UseSortByState,
+  UseTableHeaderGroupProps,
+  UseTableInstanceProps,
   UseTableOptions,
 } from 'react-table';
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
-import { DefaultLocalization, Localization } from './localization';
-import { DataGridColumn } from '../types/react-table-config';
+import { DefaultLocalization, DataGridLocalization } from './localization';
 import { DataGridIcons, DefaultDataGridIcons } from './DataGridIcons';
 
-export interface DataGridProps<D extends {} = {}>
-  extends TableOptions<D>,
-    UseTableOptions<D>,
-    UseExpandedOptions<D>,
-    UseFiltersOptions<D>,
-    UseGlobalFiltersOptions<D>,
-    UseGroupByOptions<D>,
-    UsePaginationOptions<D>,
-    UseResizeColumnsOptions<D>,
-    UseRowSelectOptions<D>,
-    UseRowStateOptions<D>,
-    UseSortByOptions<D> {
-  columns: (Column<D> & DataGridColumn)[];
-  customToolbarActions?: (table: TableInstance<D>) => ReactNode;
-  bodyCellProps?: TableCellProps | ((cell?: Cell<D>) => TableCellProps);
-  bodyProps?: TableBodyProps;
-  bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
-  containerProps?:
-    | TableContainerProps
-    | ((table: TableInstance<D>) => TableContainerProps);
-  defaultDensePadding?: boolean;
-  defaultFullScreen?: boolean;
-  defaultShowFilters?: boolean;
-  defaultShowSearch?: boolean;
-  defaultToolbarActions?: (
-    table: TableInstance<D>,
-    {
-      ToggleColumnVisibilityAction,
-      ToggleDensePaddingAction,
-      ToggleFilterVisibilityAction,
-      ToggleFullScreenAction,
-      ToggleSearchAction,
-    }: {
-      ToggleColumnVisibilityAction: FC<IconButtonProps>;
-      ToggleDensePaddingAction: FC<IconButtonProps>;
-      ToggleFilterVisibilityAction: FC<IconButtonProps>;
-      ToggleFullScreenAction: FC<IconButtonProps>;
-      ToggleSearchAction: FC<IconButtonProps>;
-    },
-  ) => ReactNode;
-  detailPanel?: (row: Row<D>) => ReactNode;
-  detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
-  disableColumnActions?: boolean;
-  disableColumnHiding?: boolean;
-  disableDensePadding?: boolean;
-  disableFullScreen?: boolean;
-  disableExpandAll?: boolean;
-  disableSelectAll?: boolean;
-  disableSubRowTree?: boolean;
-  editCellTextFieldProps?:
-    | TextFieldProps
-    | ((cell?: Cell<D>) => TextFieldProps);
-  enableColumnGrouping?: boolean;
-  enableColumnResizing?: boolean;
-  enableRowActions?: boolean;
-  enableRowEditing?: boolean;
-  enableRowSelection?: boolean;
-  filterTextFieldProps?:
-    | TextFieldProps
-    | ((column: Column<D>) => TextFieldProps);
-  footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  footerProps?: TableFooterProps;
-  footerRowProps?:
-    | TableRowProps
-    | ((footerGroup: HeaderGroup<D>) => TableRowProps);
-  headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-  headerProps?: TableHeadProps;
-  headerRowProps?: TableRowProps | ((row: HeaderGroup<D>) => TableRowProps);
-  hideFooter?: boolean;
-  hideHeader?: boolean;
-  hideToolbarActions?: boolean;
-  hideToolbarBottom?: boolean;
-  hideToolbarTop?: boolean;
-  icons?: Partial<DataGridIcons>;
-  isFetching?: boolean;
-  isLoading?: boolean;
-  localization?: Partial<Localization>;
-  onCellClick?: (e: MouseEvent<HTMLTableCellElement>, cell: Cell<D>) => void;
-  onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
-  onDetailPanelClick?: (
-    e: MouseEvent<HTMLTableCellElement>,
-    row: Row<D>,
-  ) => void;
-  onGlobalFilterChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
-  onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
-  onRowExpandedChange?: (e: MouseEvent<HTMLButtonElement>, row: Row<D>) => void;
-  onSelectAllChange?: (e: ChangeEvent, selectedRows: Row<D>[]) => void;
-  onRowSelectChange?: (
-    e: ChangeEvent,
-    row: Row<D>,
-    selectedRows: Row<D>[],
-  ) => void;
-  onSearchChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  paginationPosition?: 'bottom' | 'both' | 'top';
-  paginationProps?:
-    | Partial<TablePaginationProps>
-    | ((table: TableInstance<D>) => Partial<TablePaginationProps>);
-  rowActions?: (row: Row<D>, table: TableInstance<D>) => ReactNode;
-  rowActionsColumn?: 'first' | 'last';
-  rowActionMenuItems?: (
-    row: Row<D>,
-    table: TableInstance<D>,
-    onCloseMenu: () => void,
-  ) => ReactNode[];
-  searchBoxProps?: TextFieldProps;
-  showRowNumbers?: boolean;
-  tableProps?: TableProps;
-  toolbarActionsPosition?: 'bottom' | 'top';
-  toolbarAlertBannerPosition?: 'bottom' | 'top';
-  toolbarAlertBannerProps?:
-    | AlertProps
-    | ((table: TableInstance<D>) => AlertProps);
-  toolbarBottomProps?:
-    | ToolbarProps
-    | ((table: TableInstance<D>) => ToolbarProps);
-  toolbarTopProps?: ToolbarProps | ((table: TableInstance<D>) => ToolbarProps);
-}
+export type DataGridOptions<D extends {} = {}> = TableOptions<D> &
+  UseExpandedOptions<D> &
+  UseFiltersOptions<D> &
+  UseGlobalFiltersOptions<D> &
+  UseGroupByOptions<D> &
+  UsePaginationOptions<D> &
+  UseResizeColumnsOptions<D> &
+  UseRowSelectOptions<D> &
+  UseRowStateOptions<D> &
+  UseSortByOptions<D> & {};
+
+export type DataGridInstance<D extends {} = {}> = TableInstance<D> &
+  UseTableInstanceProps<D> &
+  UseColumnOrderInstanceProps<D> &
+  UseExpandedInstanceProps<D> &
+  UseFiltersInstanceProps<D> &
+  UseGlobalFiltersInstanceProps<D> &
+  UseGroupByInstanceProps<D> &
+  UsePaginationInstanceProps<D> &
+  UseRowSelectInstanceProps<D> &
+  UseRowStateInstanceProps<D> &
+  UseSortByInstanceProps<D> & {
+    columns: (Column<D> & DataGridColumnInstance<D>)[];
+    footerGroups: DataGridHeaderGroup<D>[];
+    getToggleAllRowsExpandedProps: () => void;
+    headerGroups: DataGridHeaderGroup<D>[];
+    page: DataGridRow<D>[];
+    resetResizing: () => void;
+    rows: DataGridRow<D>[];
+    state: DataGridState<D>;
+  };
+
+export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
+  UseFiltersColumnOptions<D> &
+    UseGlobalFiltersColumnOptions<D> &
+    UseGroupByColumnOptions<D> &
+    UseResizeColumnsColumnProps<D> &
+    UseSortByColumnOptions<D> & {
+      bodyCellProps?:
+        | TableCellProps
+        | ((cell: DataGridCell<D>) => TableCellProps);
+      bodyCellEditProps?:
+        | TextFieldProps
+        | ((cell: DataGridCell<D>) => TextFieldProps);
+      disableFilters?: boolean;
+      editable?: boolean;
+      footerCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      headerCellProps?:
+        | TableCellProps
+        | ((column: Column<D>) => TableCellProps);
+      headerCellEditProps?:
+        | TextFieldProps
+        | ((column: Column<D>) => TextFieldProps);
+      Edit?: ({
+        cell,
+        onChange,
+      }: {
+        cell: DataGridCell<D>;
+        onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+      }) => ReactNode;
+      onCellEditChange?: (
+        e: ChangeEvent<HTMLInputElement>,
+        cell: DataGridCell<D>,
+      ) => void;
+      onFilterChange?: (
+        e: ChangeEvent<HTMLInputElement>,
+        filterValue: any,
+      ) => void;
+      Filter?: ({ column }: { column: DataGridHeaderGroup<D> }) => ReactNode;
+      Footer?: string;
+      Header?: string;
+    };
+
+export type DataGridColumnInstance<D extends {} = {}> = ColumnInstance<D> &
+  UseFiltersColumnProps<D> &
+  UseGroupByColumnProps<D> &
+  UseResizeColumnsColumnProps<D> &
+  UseSortByColumnProps<D> & {
+    columns: DataGridColumnInstance<D>[];
+  };
+
+export type DataGridHeaderGroup<D extends {} = {}> = HeaderGroup<D> &
+  DataGridColumnInstance<D> &
+  UseTableHeaderGroupProps<D> & {
+    headers: DataGridHeaderGroup<D>[];
+  };
+
+export type DataGridRow<D extends {} = {}> = Row<D> &
+  UseExpandedRowProps<D> &
+  UseGroupByRowProps<D> &
+  UseRowSelectRowProps<D> &
+  UseRowStateRowProps<D> & {
+    cells: DataGridCell<D>[];
+  };
+
+export type DataGridCell<D extends {} = {}, _V = any> = Cell<D> &
+  UseGroupByCellProps<D> &
+  UseRowStateCellProps<D>;
+
+export type DataGridState<D extends {} = {}> = TableState<D> &
+  UseColumnOrderState<D> &
+  UseExpandedState<D> &
+  UseFiltersState<D> &
+  UseGlobalFiltersState<D> &
+  UseGroupByState<D> &
+  UsePaginationState<D> &
+  UseResizeColumnsState<D> &
+  UseRowSelectState<D> &
+  UseRowStateState<D> &
+  UseSortByState<D> & {
+    densePadding?: boolean;
+    fullScreen?: boolean;
+    showFilters?: boolean;
+    showSearch?: boolean;
+  };
+
+export type DataGridProps<D extends {} = {}> = TableOptions<D> &
+  UseTableOptions<D> &
+  UseExpandedOptions<D> &
+  UseFiltersOptions<D> &
+  UseGlobalFiltersOptions<D> &
+  UseGroupByOptions<D> &
+  UsePaginationOptions<D> &
+  UseResizeColumnsOptions<D> &
+  UseRowSelectOptions<D> &
+  UseRowStateOptions<D> &
+  UseSortByOptions<D> & {
+    bodyCellProps?:
+      | TableCellProps
+      | ((cell?: DataGridCell<D>) => TableCellProps);
+    bodyCellEditProps?:
+      | TextFieldProps
+      | ((cell?: DataGridCell<D>) => TextFieldProps);
+    bodyProps?: TableBodyProps;
+    bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
+    columns: (Column<D> & DataGridColumnInterface)[];
+    containerProps?:
+      | TableContainerProps
+      | ((table: DataGridInstance<D>) => TableContainerProps);
+    customToolbarActions?: (table: DataGridInstance<D>) => ReactNode;
+    data: D[];
+    defaultToolbarActions?: (
+      table: TableInstance<D>,
+      {
+        ToggleColumnVisibilityAction,
+        ToggleDensePaddingAction,
+        ToggleFilterVisibilityAction,
+        ToggleFullScreenAction,
+        ToggleSearchAction,
+      }: {
+        ToggleColumnVisibilityAction: FC<IconButtonProps>;
+        ToggleDensePaddingAction: FC<IconButtonProps>;
+        ToggleFilterVisibilityAction: FC<IconButtonProps>;
+        ToggleFullScreenAction: FC<IconButtonProps>;
+        ToggleSearchAction: FC<IconButtonProps>;
+      },
+    ) => ReactNode;
+    detailPanel?: (row: Row<D>) => ReactNode;
+    detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
+    disableColumnActions?: boolean;
+    disableColumnHiding?: boolean;
+    disableDensePadding?: boolean;
+    disableExpandAll?: boolean;
+    disableFullScreen?: boolean;
+    disableSelectAll?: boolean;
+    disableSubRowTree?: boolean;
+    editCellTextFieldProps?:
+      | TextFieldProps
+      | ((cell?: DataGridCell<D>) => TextFieldProps);
+    enableColumnGrouping?: boolean;
+    enableColumnResizing?: boolean;
+    enableRowActions?: boolean;
+    enableRowEditing?: boolean;
+    enableSelection?: boolean;
+    footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    footerProps?: TableFooterProps;
+    footerRowProps?:
+      | TableRowProps
+      | ((footerGroup: DataGridHeaderGroup<D>) => TableRowProps);
+    headerCelFilterProps?:
+      | TextFieldProps
+      | ((column: Column<D>) => TextFieldProps);
+    headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    headerProps?: TableHeadProps;
+    headerRowProps?:
+      | TableRowProps
+      | ((row: DataGridHeaderGroup<D>) => TableRowProps);
+    hideFooter?: boolean;
+    hideHeader?: boolean;
+    hideToolbarActions?: boolean;
+    hideToolbarBottom?: boolean;
+    hideToolbarTop?: boolean;
+    icons?: Partial<DataGridIcons>;
+    initialState?: Partial<DataGridState<D>>;
+    isFetching?: boolean;
+    isLoading?: boolean;
+    localization?: Partial<DataGridLocalization>;
+    onCellClick?: (
+      e: MouseEvent<HTMLTableCellElement>,
+      cell: DataGridCell<D>,
+    ) => void;
+    onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
+    onDetailPanelClick?: (
+      e: MouseEvent<HTMLTableCellElement>,
+      row: Row<D>,
+    ) => void;
+    onGlobalFilterChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    onRowClick?: (e: MouseEvent<HTMLTableRowElement>, row: Row<D>) => void;
+    onRowEditSubmit?: (row: Row<D>) => Promise<void> | void;
+    onRowExpandedChange?: (
+      e: MouseEvent<HTMLButtonElement>,
+      row: Row<D>,
+    ) => void;
+    onSelectAllChange?: (e: ChangeEvent, selectedRows: Row<D>[]) => void;
+    onSelectChange?: (
+      e: ChangeEvent,
+      row: Row<D>,
+      selectedRows: Row<D>[],
+    ) => void;
+    paginationPosition?: 'bottom' | 'both' | 'top';
+    paginationProps?:
+      | Partial<TablePaginationProps>
+      | ((table: DataGridInstance<D>) => Partial<TablePaginationProps>);
+    rowActions?: (row: Row<D>, table: DataGridInstance<D>) => ReactNode;
+    rowActionsColumn?: 'first' | 'last';
+    rowActionMenuItems?: (
+      row: Row<D>,
+      table: DataGridInstance<D>,
+      onCloseMenu: () => void,
+    ) => ReactNode[];
+    searchBoxProps?: TextFieldProps;
+    showRowNumbers?: boolean;
+    tableProps?: TableProps;
+    toolbarActionsPosition?: 'bottom' | 'top';
+    toolbarAlertBannerPosition?: 'bottom' | 'top';
+    toolbarAlertBannerProps?:
+      | AlertProps
+      | ((table: DataGridInstance<D>) => AlertProps);
+    toolbarBottomProps?:
+      | ToolbarProps
+      | ((table: DataGridInstance<D>) => ToolbarProps);
+    toolbarTopProps?:
+      | ToolbarProps
+      | ((table: DataGridInstance<D>) => ToolbarProps);
+  };
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },

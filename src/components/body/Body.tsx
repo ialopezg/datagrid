@@ -1,6 +1,7 @@
 import { styled } from '@mui/material';
 import MuiTableBody from '@mui/material/TableBody';
 import React, { FC } from 'react';
+import { DataGridRow } from '../DataGrid';
 
 import BodyRow from './BodyRow';
 import { useDataGrid } from '../providers';
@@ -30,7 +31,7 @@ export const Body: FC<BodyProps> = () => {
 
   return (
     <TableBody {...bodyProps}>
-      {rows.map((row) => {
+      {rows.map((row: DataGridRow) => {
         table.prepareRow(row);
 
         return <BodyRow key={row.getRowProps().key} row={row} />;

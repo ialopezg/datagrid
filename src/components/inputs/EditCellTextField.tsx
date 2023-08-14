@@ -1,11 +1,11 @@
 import { TextField } from '@mui/material';
-import { Cell } from 'react-table';
 import React, { ChangeEvent, FC } from 'react';
+import { DataGridCell } from '../DataGrid';
 
 import { useDataGrid } from '../providers';
 
 interface EditCellTextFieldProps {
-  cell: Cell;
+  cell: DataGridCell;
 }
 
 export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
@@ -20,9 +20,9 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
       ? editCellTextFieldProps(cell)
       : editCellTextFieldProps;
   const columnEditCellTextFieldProps =
-    cell.column.editCellTextFieldProps instanceof Function
-      ? cell.column.editCellTextFieldProps(cell)
-      : cell.column.editCellTextFieldProps;
+    cell.column.bodyCellEditProps instanceof Function
+      ? cell.column.bodyCellEditProps(cell)
+      : cell.column.bodyCellEditProps;
   const textFieldProps = {
     ...tableEditCellTextFieldProps,
     ...columnEditCellTextFieldProps,
@@ -37,7 +37,7 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
       cell.row.values[cell.column.id] = e.target.value;
       setItemForUpdate({ ...itemForUpdate });
     }
-    cell.column.onEditCellChange?.(e, cell);
+    cell.column.onCellEditChange?.(e, cell);
   };
 
   if (cell.column.editable && cell.column.Edit) {

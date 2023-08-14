@@ -1,7 +1,7 @@
 import { TableCell, styled } from '@mui/material';
-import { Cell } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridCell } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import EditCellTextField from '../inputs/EditCellTextField';
 
@@ -14,32 +14,32 @@ export const StyledBodyCell = styled(TableCell, {
 }));
 
 interface BodyCellProps {
-  cell: Cell;
+  cell: DataGridCell;
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   const {
-    bodyCellProps: defaultBodyCellProps,
+    bodyCellProps,
     densePadding,
     itemForUpdate,
     onCellClick,
   } = useDataGrid();
 
-  const bodyCellProps =
-    defaultBodyCellProps instanceof Function
-      ? defaultBodyCellProps(cell)
-      : defaultBodyCellProps;
+  const tableBodyCellProps =
+    bodyCellProps instanceof Function
+      ? bodyCellProps(cell)
+      : bodyCellProps;
   const columnBodyCellProps =
     cell.column.bodyCellProps instanceof Function
       ? cell.column.bodyCellProps(cell)
       : cell.column.bodyCellProps;
-  const cellProps = {
-    ...bodyCellProps,
+  const tableCellProps = {
+    ...tableBodyCellProps,
     ...columnBodyCellProps,
     ...cell.getCellProps(),
     style: {
       ...cell.getCellProps().style,
-      ...(bodyCellProps?.style ?? {}),
+      ...(tableBodyCellProps?.style ?? {}),
       ...(columnBodyCellProps?.style ?? {}),
     },
   };
@@ -51,7 +51,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
         onCellClick?.(e, cell);
       }}
       variant="body"
-      {...cellProps}
+      {...tableCellProps}
     >
       {itemForUpdate?.id === cell.row.id ? (
         <EditCellTextField cell={cell} />

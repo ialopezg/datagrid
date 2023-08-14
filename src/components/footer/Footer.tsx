@@ -1,6 +1,7 @@
 import { TableFooter } from '@mui/material';
 import React, { FC } from 'react';
 
+import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import FooterRow from './FooterRow';
 
@@ -11,7 +12,7 @@ export const Footer: FC<FooterProps> = () => {
 
   return (
     <TableFooter {...footerProps}>
-      {table.footerGroups.map((footerGroup) => (
+      {table.footerGroups.map((footerGroup: DataGridHeaderGroup) => (
         <FooterRow
           footerGroup={footerGroup}
           key={footerGroup.getFooterGroupProps().key}

@@ -1,11 +1,11 @@
 import MuiTableRow from '@mui/material/TableRow';
 import { alpha, styled } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC } from 'react';
 
 import BodyCell, { StyledBodyCell } from './BodyCell';
-import { useDataGrid } from '../providers';
 import DetailPanel from './DetailPanel';
+import { DataGridCell, DataGridRow } from '../DataGrid';
+import { useDataGrid } from '../providers';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
 import RowActionsAction from '../actions/RowActionsAction';
@@ -21,7 +21,7 @@ const TableRow = styled(MuiTableRow, {
 }));
 
 interface BodyRowProps {
-  row: Row;
+  row: DataGridRow;
 }
 
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
@@ -30,7 +30,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     detailPanel,
     enableRowActions,
     enableRowEditing,
-    enableRowSelection,
+    enableSelection,
     hasExpandableRows,
     onRowClick,
     rowActionsColumn,
@@ -65,9 +65,9 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
 
         {(hasExpandableRows || detailPanel) && <ExpandRowAction row={row} />}
 
-        {enableRowSelection && <ToggleSelectRowAction row={row} />}
+        {enableSelection && <ToggleSelectRowAction row={row} />}
 
-        {row.cells.map((cell) => (
+        {row.cells.map((cell: DataGridCell) => (
           <BodyCell cell={cell} key={cell.getCellProps().key} />
         ))}
 

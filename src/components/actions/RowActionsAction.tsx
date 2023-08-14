@@ -1,6 +1,7 @@
 import { IconButton, styled, Tooltip } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
+
+import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import RowActionsMenu from '../menus/RowActionsMenu';
 import EditActionsAction from './EditActionsAction';
@@ -18,7 +19,7 @@ const StyledIconButton = styled(IconButton)({
 });
 
 interface RowActionsActionProps {
-  row: Row;
+  row: DataGridRow;
 }
 
 export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {

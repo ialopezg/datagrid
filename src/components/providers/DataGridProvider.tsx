@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, useMemo, useState } from 'react';
 import {
   PluginHook,
-  Row,
   useExpanded,
   useFilters,
   useFlexLayout,
@@ -14,7 +13,7 @@ import {
   useTable,
 } from 'react-table';
 
-import { DataGridProps } from '../DataGrid';
+import { DataGridInstance, DataGridProps, DataGridRow } from '../DataGrid';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {}>(
@@ -34,28 +33,28 @@ export const DataGridProvider = <D extends {}>(
     hooks.unshift(useResizeColumns, useFlexLayout);
   }
 
-  const table = useTable<D>(props, ...hooks);
+  const table = useTable<D>(props, ...hooks) as DataGridInstance<D>;
 
   // ** State
   const [densePadding, setDensePadding] = useState<boolean>(
-    props.defaultDensePadding ?? false,
+    props.initialState?.densePadding ?? false,
   );
-  const [itemForUpdate, setItemForUpdate] = useState<Row | null>(null);
+  const [itemForUpdate, setItemForUpdate] = useState<DataGridRow | null>(null);
   const [fullScreen, setFullScreen] = useState<boolean>(
-    props.defaultFullScreen ?? false,
+    props.initialState?.fullScreen ?? false,
   );
   const [showFilters, setShowFilters] = useState<boolean>(
-    props.defaultShowFilters ?? false,
+    props.initialState?.showFilters ?? false,
   );
   const [showSearch, setShowSearch] = useState<boolean>(
-    props.defaultShowSearch ?? false,
+    props.initialState?.showSearch ?? false,
   );
   const hasExpandableRows = useMemo(
-    () => table.rows.some((row) => row.canExpand),
+    () => table.rows.some((row: DataGridRow<D>) => row.canExpand),
     [table.rows],
   );
   const hasExpandedRows = useMemo(
-    () => table.rows.some((row) => row.isExpanded),
+    () => table.rows.some((row: DataGridRow<D>) => row.isExpanded),
     [table.rows],
   );
 

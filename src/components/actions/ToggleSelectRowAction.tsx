@@ -1,12 +1,12 @@
 import { Checkbox, Tooltip } from '@mui/material';
-import { Row } from 'react-table';
 import React, { ChangeEvent, FC } from 'react';
+import { DataGridRow } from '../DataGrid';
 
 import { useDataGrid } from '../providers';
 import { ButtonCell } from '../table';
 
 interface SelectRowActionProps {
-  row?: Row;
+  row?: DataGridRow;
   selectAll?: boolean;
 }
 
@@ -17,18 +17,18 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
   const {
     densePadding,
     localization,
-    onRowSelectChange,
+    onSelectChange,
     onSelectAllChange,
     table,
   } = useDataGrid();
 
-  const onSelectChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onRowSelectedChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
       table?.toggleAllRowsSelected?.(e.target.checked);
       onSelectAllChange?.(e, table.selectedFlatRows);
     } else if (row) {
       row?.getToggleRowSelectedProps()?.onChange?.(e);
-      onRowSelectChange?.(e, row, table.selectedFlatRows);
+      onSelectChange?.(e, row, table.selectedFlatRows);
     }
   };
 
@@ -52,7 +52,7 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
               ? localization.selectAllRows
               : localization.selectRow,
           }}
-          onChange={onSelectChange}
+          onChange={onRowSelectedChange}
           {...checkboxProps}
           title={undefined}
         />

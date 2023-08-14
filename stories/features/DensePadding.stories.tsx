@@ -51,7 +51,6 @@ export const DefaultToDensePadding: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    defaultDensePadding
-    initialState={{ pageSize: 25 }}
+    initialState={{ pageSize: 25, densePadding: true }}
   />
 );

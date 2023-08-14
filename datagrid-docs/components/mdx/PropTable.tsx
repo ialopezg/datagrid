@@ -192,8 +192,7 @@ export const PropTable = () => {
     <DataGrid
       columns={columns}
       data={data}
-      defaultShowSearchTextField
-      defaultDensePadding
+      densePadding
       manualPagination
       hideToolbarBottom
       initialState={{
@@ -201,6 +200,7 @@ export const PropTable = () => {
         sortBy: [{ id: 'prop', desc: false }],
         hiddenColumns: ['default'],
       }}
+      showSearch
     />
   );
 };

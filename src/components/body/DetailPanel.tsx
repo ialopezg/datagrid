@@ -1,8 +1,8 @@
 import MuiTableCell from '@mui/material/TableCell';
 import { Collapse, styled, TableRow } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 const TableCell = styled(MuiTableCell, {
@@ -15,7 +15,7 @@ const TableCell = styled(MuiTableCell, {
 }));
 
 interface DetailPanelProps {
-  row: Row;
+  row: DataGridRow;
 }
 
 export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {

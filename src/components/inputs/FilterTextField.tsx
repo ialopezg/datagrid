@@ -1,11 +1,12 @@
 import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
-import { HeaderGroup, useAsyncDebounce } from 'react-table';
+import { useAsyncDebounce } from 'react-table';
 import React, { FC, useState } from 'react';
 
+import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 interface FilterTextFieldProps {
-  column: HeaderGroup;
+  column: DataGridHeaderGroup;
 }
 
 export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {

@@ -1,12 +1,13 @@
 import { Menu, MenuItem } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC } from 'react';
+
+import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 interface RowActionsMenuProps {
   anchorEl: HTMLElement | null;
   onRowEditAction: () => void;
-  row: Row;
+  row: DataGridRow;
   setAnchorEl: (value: HTMLElement | null) => void;
 }
 

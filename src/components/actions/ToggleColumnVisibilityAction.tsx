@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
+import { DataGridColumnInstance } from '../DataGrid';
 
 import { useDataGrid } from '../providers';
 import ColumnVisibilityMenu from '../menus/ColumnVisibilityMenu';
@@ -73,7 +74,7 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
 
         <Divider />
 
-        {table.columns.map((column) => (
+        {table.columns.map((column: DataGridColumnInstance) => (
           <ColumnVisibilityMenu
             column={column}
             key={`column-hide-action${column.id}`}

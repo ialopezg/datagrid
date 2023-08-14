@@ -1,7 +1,7 @@
 import { IconButton, styled } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import { ButtonCell } from '../table';
 
@@ -15,7 +15,7 @@ const TableCell = styled(ButtonCell, {
 }));
 
 interface ExpandRowActionProps {
-  row: Row;
+  row: DataGridRow;
 }
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {

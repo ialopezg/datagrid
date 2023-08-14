@@ -134,7 +134,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     }))}
     enableColumnGrouping
     enableColumnResizing
-    enableRowSelection
+    enableSelection
     enableRowActions
     enableRowEditing
     paginationPosition="both"

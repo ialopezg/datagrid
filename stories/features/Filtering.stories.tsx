@@ -1,10 +1,10 @@
 import faker from '@faker-js/faker';
+import { MenuItem, TextField } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
+import { Row } from 'react-table';
 import React, { ChangeEvent } from 'react';
 
 import DataGrid, { DataGridProps } from '../../src';
-import { MenuItem, TextField } from '@mui/material';
-import { Row } from 'react-table';
 
 const meta: Meta = {
   title: 'Features/Filtering',
@@ -24,7 +24,7 @@ const columns = [
   { accessor: 'gender' as const, Header: 'Gender' },
   { accessor: 'address' as const, Header: 'Address' },
   { accessor: 'state' as const, Header: 'State' },
-];
+] as any[];
 const data = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
@@ -39,7 +39,11 @@ export const FilteringEnabledDefault: Story<DataGridProps> = () => (
 );
 
 export const FilteringEnabledAndShown: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} defaultShowFilters />
+  <DataGrid
+    columns={columns}
+    data={data}
+    initialState={{ showFilters: true }}
+  />
 );
 
 export const FilteringDisabled: Story<DataGridProps> = () => (
@@ -58,7 +62,7 @@ export const FilteringDisabledForCertainColumns: Story<DataGridProps> = () => (
       ] as any[]
     }
     data={data}
-    defaultShowFilters
+    initialState={{ showFilters: true }}
   />
 );
 
@@ -89,7 +93,7 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
               value={column.filterValue ?? ''}
               variant="standard"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="all">All</MenuItem>
               <MenuItem value="Male">Male</MenuItem>
               <MenuItem value="Female">Female</MenuItem>
               <MenuItem value="Other">Other</MenuItem>
@@ -102,6 +106,60 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
       ] as any[]
     }
     data={data}
-    defaultShowFilters
+    initialState={{ showFilters: true }}
+  />
+);
+
+export const CustomFilterComponent: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={[
+      {
+        Header: 'First Name',
+        accessor: 'firstName' as const,
+      },
+      {
+        Header: 'Last Name',
+        accessor: 'lastName' as const,
+      },
+      {
+        Header: 'Age',
+        accessor: 'age' as const,
+      },
+      {
+        Header: 'Gender',
+        accessor: 'gender' as const,
+        Filter: ({ column }: any) => (
+          <TextField
+            onChange={(e: ChangeEvent<any>) => column.setFilter(e.target.value || undefined)}
+            select
+            value={column.filterValue ?? ''}
+            margin="dense"
+            placeholder="Filter"
+            variant="standard"
+            fullWidth
+          >
+            <MenuItem value="All">All</MenuItem>
+            <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="Female">Female</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </TextField>
+        ),
+        filter: (rows: any[], _: any, filterValue: any) =>
+          rows.filter(
+            (row) =>
+              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
+          ),
+      },
+      {
+        Header: 'Address',
+        accessor: 'address' as const,
+      },
+      {
+        Header: 'State',
+        accessor: 'state' as const,
+      },
+    ] as any[]}
+    data={data}
+    initialState={{ showFilters: true }}
   />
 );

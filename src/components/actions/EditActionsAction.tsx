@@ -1,7 +1,7 @@
 import { IconButton, styled, Tooltip } from '@mui/material';
-import { Row } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 const EditActionsWrapper = styled('div')({
@@ -10,7 +10,7 @@ const EditActionsWrapper = styled('div')({
 });
 
 interface EditActionsActionProps {
-  row: Row;
+  row: DataGridRow;
 }
 
 export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {

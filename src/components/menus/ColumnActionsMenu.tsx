@@ -1,8 +1,8 @@
 import MuiMenuItem from '@mui/material/MenuItem';
 import { Divider, Menu, styled } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 const MenuItem = styled(MuiMenuItem)({
@@ -12,7 +12,7 @@ const MenuItem = styled(MuiMenuItem)({
 
 interface ColumnActionsMenuProps {
   anchorEl: HTMLElement | null;
-  column: HeaderGroup;
+  column: DataGridHeaderGroup;
   setAnchorEl: (anchorEl: HTMLElement | null) => void;
 }
 

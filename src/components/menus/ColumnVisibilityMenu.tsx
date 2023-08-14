@@ -1,53 +1,24 @@
-import { FormControlLabel, MenuItem, Switch, Typography } from '@mui/material';
-import React, { FC } from 'react';
-import { useDataGrid } from '../providers';
+import { FormControlLabel, MenuItem, Switch } from '@mui/material';
 import { ColumnInstance } from 'react-table';
+import React, { FC } from 'react';
 
-interface ColumnMenuItem {
-  column: ColumnInstance;
+import { DataGridColumnInstance } from '../DataGrid';
+
+interface Props {
+  column: DataGridColumnInstance;
 }
 
-const ColumnMenuItem: FC<ColumnMenuItem> = ({ column }) => {
-  const { maxColumnDepth } = useDataGrid();
-
-  const isMaxDepth = column.depth === maxColumnDepth;
-
-  return (
-    <>
-      <MenuItem style={{ paddingLeft: `${column.depth + 1}rem` }}>
-        {isMaxDepth ? (
-          <FormControlLabel
-            checked={column.isVisible}
-            control={<Switch />}
-            label={String(column.Header)}
-            onChange={() => isMaxDepth && column.toggleHidden()}
-          />
-        ) : (
-          <Typography>{String(column.Header)}</Typography>
-        )}
-      </MenuItem>
-      {column.columns?.map((c, i) => (
-        <ColumnMenuItem key={`${i}-${c.id}`} column={c} />
-      ))}
-    </>
-  );
-};
-
-interface ColumnVisibilityMenuProps {
-  column: ColumnInstance;
-}
-
-export const ColumnVisibilityMenu: FC<ColumnVisibilityMenuProps> = ({
-  column,
-}) => {
-  const isParent = (column?.columns?.length ?? 0) > 0;
+export const ColumnVisibilityMenu: FC<Props> = ({ column }) => {
+  const isParentHeader = (column?.columns?.length ?? 0) > 0;
 
   const allChildColumnsVisible =
-    isParent && !!column.columns?.every((child) => child.isVisible);
+    isParentHeader &&
+    !!column.columns?.every((childColumn) => childColumn.isVisible);
+
   const switchChecked = column.isVisible ?? allChildColumnsVisible;
 
-  const onToggleColumnVisibility = (column: ColumnInstance) => {
-    if (isParent) {
+  const handleToggleColumnHidden = (column: ColumnInstance) => {
+    if (isParentHeader) {
       column?.columns?.forEach?.((childColumn) => {
         childColumn.toggleHidden(switchChecked);
       });
@@ -62,12 +33,13 @@ export const ColumnVisibilityMenu: FC<ColumnVisibilityMenuProps> = ({
         <FormControlLabel
           checked={switchChecked}
           control={<Switch />}
-          label={String(column.Header)}
-          onClick={() => onToggleColumnVisibility(column)}
+          label={column.Header as string}
+          onChange={() => handleToggleColumnHidden(column)}
         />
       </MenuItem>
-      {column.columns?.map((column, index) => (
-        <ColumnMenuItem column={column} key={`${index}-${column.id}`} />
+
+      {column.columns?.map((c: DataGridColumnInstance, i) => (
+        <ColumnVisibilityMenu key={`${i}-${c.id}`} column={c} />
       ))}
     </>
   );

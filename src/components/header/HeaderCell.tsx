@@ -5,9 +5,9 @@ import {
   TableSortLabel, Tooltip,
 } from '@mui/material';
 import MuiTableCell from '@mui/material/TableCell';
-import { HeaderGroup } from 'react-table';
 import React, { FC } from 'react';
 
+import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import FilterTextField from '../inputs/FilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
@@ -52,7 +52,7 @@ const Divider = styled(MuiDivider)({
 });
 
 interface HeaderCellProps {
-  column: HeaderGroup;
+  column: DataGridHeaderGroup;
 }
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {

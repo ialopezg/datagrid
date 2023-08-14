@@ -1,16 +1,16 @@
 import { TableRow } from '@mui/material';
-import { HeaderGroup } from 'react-table';
 import React, { FC, useMemo } from 'react';
 
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
 import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
+import { DataGridHeaderGroup } from '../DataGrid';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
 import HeaderCell, { StyledHeaderCell } from './HeaderCell';
 import HeaderActionsCell from './HeaderActionsCell';
 
 interface HeaderRowProps {
-  headerGroup: HeaderGroup;
+  headerGroup: DataGridHeaderGroup;
 }
 
 export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
@@ -19,7 +19,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     disableExpandAll,
     enableRowActions,
     enableRowEditing,
-    enableRowSelection,
+    enableSelection,
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
     rowActionsColumn,
@@ -64,7 +64,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         )
       ) : null}
 
-      {enableRowSelection ? (
+      {enableSelection ? (
         !isParent ? (
           <ToggleSelectRowAction selectAll />
         ) : (
@@ -72,7 +72,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         )
       ) : null}
 
-      {headerGroup.headers.map((column) => (
+      {headerGroup.headers.map((column: DataGridHeaderGroup) => (
         <HeaderCell column={column} key={column.getHeaderProps().key} />
       ))}
 

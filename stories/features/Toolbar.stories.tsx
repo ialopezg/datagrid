@@ -111,7 +111,7 @@ export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
     data={data}
     title="My People Table"
     muiTableTitleProps={{ variant: 'h4' }}
-    enableRowSelection
+    enableSelection
     customToolbarActions={(table) => {
       const handleDeactivate = () => {
         table.selectedFlatRows.map((row) => {
@@ -170,7 +170,7 @@ export const ToolbarAlertBannerBottom: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableRowSelection
+    enableSelection
     positionToolbarAlertBanner="bottom"
     customToolbarActions={(table) => {
       const handleCreateNewUser = () => {
