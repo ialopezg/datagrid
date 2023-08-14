@@ -42,6 +42,7 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
         </div>
       );
     }}
+    enableColumnGrouping
   />
 );
 

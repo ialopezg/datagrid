@@ -83,7 +83,11 @@ export type DataGridOptions<D extends {} = {}> = TableOptions<D> &
   UseResizeColumnsOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
-  UseSortByOptions<D> & {};
+  UseSortByOptions<D> & {
+    columns: (Column<D> | DataGridColumnInterface)[];
+    data: D[];
+    initialState?: Partial<DataGridState>;
+  };
 
 export type DataGridInstance<D extends {} = {}> = TableInstance<D> &
   UseTableInstanceProps<D> &
@@ -192,8 +196,7 @@ export type DataGridState<D extends {} = {}> = TableState<D> &
     showSearch?: boolean;
   };
 
-export type DataGridProps<D extends {} = {}> = TableOptions<D> &
-  UseTableOptions<D> &
+export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
   UseExpandedOptions<D> &
   UseFiltersOptions<D> &
   UseGlobalFiltersOptions<D> &
@@ -202,7 +205,8 @@ export type DataGridProps<D extends {} = {}> = TableOptions<D> &
   UseResizeColumnsOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
-  UseSortByOptions<D> & {
+  UseSortByOptions<D> &
+  DataGridOptions & {
     bodyCellProps?:
       | TableCellProps
       | ((cell?: DataGridCell<D>) => TableCellProps);
@@ -242,9 +246,6 @@ export type DataGridProps<D extends {} = {}> = TableOptions<D> &
     disableFullScreen?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
-    editCellTextFieldProps?:
-      | TextFieldProps
-      | ((cell?: DataGridCell<D>) => TextFieldProps);
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;
@@ -269,7 +270,6 @@ export type DataGridProps<D extends {} = {}> = TableOptions<D> &
     hideToolbarBottom?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<DataGridIcons>;
-    initialState?: Partial<DataGridState<D>>;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<DataGridLocalization>;

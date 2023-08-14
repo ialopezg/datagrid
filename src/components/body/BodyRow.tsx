@@ -75,7 +75,7 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
           rowActionsColumn === 'last' && <RowActionsAction row={row} />}
       </TableRow>
 
-      {detailPanel && <DetailPanel row={row} />}
+      {detailPanel && !row.isGrouped && <DetailPanel row={row} />}
     </>
   );
 };
