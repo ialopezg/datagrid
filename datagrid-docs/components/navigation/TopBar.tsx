@@ -90,13 +90,13 @@ const TopBar: FC<TopBarProps> = ({
             >
               <IconButton aria-label="Github">
                 <img
+                  alt="Github"
                   height={30}
                   style={{
                     backgroundColor: '#fff',
                     borderRadius: '50%',
                   }}
                   src="/media/icons/github.svg"
-                  alt="Github"
                 />
               </IconButton>
             </a>
@@ -109,13 +109,13 @@ const TopBar: FC<TopBarProps> = ({
             >
               <IconButton aria-label="Discord">
                 <img
+                  alt="Discord"
                   height={25}
                   style={{
                     padding: '-3px',
                     borderRadius: '50%',
                   }}
                   src="/media/icons/discord.svg"
-                  alt="Discord"
                 />
               </IconButton>
             </a>

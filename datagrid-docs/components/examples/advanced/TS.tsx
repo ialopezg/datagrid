@@ -1482,12 +1482,12 @@ const Example: FC = () => {
             src={row.original.avatar}
             loading="lazy"
             style={{ borderRadius: '50%' }}
-            alt={row.original.firstName}
+            alt="avatar"
           />
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              "{row.original.signatureCatchPhrase}"
+              &quot;{row.original.signatureCatchPhrase}&quot;
             </Typography>
           </div>
         </div>
