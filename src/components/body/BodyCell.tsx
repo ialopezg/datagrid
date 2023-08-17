@@ -1,34 +1,32 @@
-import { TableCell, styled } from '@mui/material';
+import { TableCell, TableCellProps } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridCell } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import EditCellTextField from '../inputs/EditCellTextField';
 
-export const StyledBodyCell = styled(TableCell, {
-  shouldForwardProp: (prop) => prop !== 'densePadding',
-})<{ densePadding?: boolean }>(({ densePadding }) => ({
-  padding: densePadding ? '0.5rem' : '1rem',
+export const tableBodyCellStyles = (densePadding: boolean) => ({
+  p: `${densePadding ? '0.5' : '1'}rem`,
   transition: 'all 0.2s ease-in-out',
   whiteSpace: densePadding ? 'nowrap' : 'normal',
-}));
+});
+
+export const actionBodyStyles = (densePadding: boolean) => ({
+  p: densePadding ? '1px' : '0.6rem',
+  textAlign: 'center',
+  transition: 'all 0.2s ease-in-out',
+});
 
 interface BodyCellProps {
   cell: DataGridCell;
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const {
-    bodyCellProps,
-    densePadding,
-    itemForUpdate,
-    onCellClick,
-  } = useDataGrid();
+  const { bodyCellProps, densePadding, itemForUpdate, onCellClick } =
+    useDataGrid();
 
   const tableBodyCellProps =
-    bodyCellProps instanceof Function
-      ? bodyCellProps(cell)
-      : bodyCellProps;
+    bodyCellProps instanceof Function ? bodyCellProps(cell) : bodyCellProps;
   const columnBodyCellProps =
     cell.column.bodyCellProps instanceof Function
       ? cell.column.bodyCellProps(cell)
@@ -39,19 +37,24 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
     ...cell.getCellProps(),
     style: {
       ...cell.getCellProps().style,
-      ...(tableBodyCellProps?.style ?? {}),
-      ...(columnBodyCellProps?.style ?? {}),
+      ...tableBodyCellProps?.style,
+      ...columnBodyCellProps?.style,
     },
   };
 
   return (
-    <StyledBodyCell
-      densePadding={densePadding}
+    <TableCell
       onClick={(e) => {
         onCellClick?.(e, cell);
       }}
       variant="body"
       {...tableCellProps}
+      sx={
+        {
+          ...tableBodyCellStyles(densePadding),
+          ...tableCellProps.sx,
+        } as TableCellProps['sx']
+      }
     >
       {itemForUpdate?.id === cell.row.id ? (
         <EditCellTextField cell={cell} />
@@ -64,7 +67,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
       ) : (
         cell.render('Cell')
       )}
-    </StyledBodyCell>
+    </TableCell>
   );
 };
 

@@ -1,13 +1,8 @@
-import MuiTextField from '@mui/material/TextField';
-import { Collapse, IconButton, InputAdornment, styled } from '@mui/material';
+import { Collapse, IconButton, InputAdornment, TextField } from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
 import React, { ChangeEvent, FC, useState } from 'react';
 
 import { useDataGrid } from '../providers';
-
-const TextField = styled(MuiTextField)({
-  justifySelf: 'end',
-});
 
 interface SearchTextFieldProps {}
 
@@ -67,6 +62,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
           ),
         }}
         {...searchBoxProps}
+        sx={{ justifySelf: 'end', ...searchBoxProps?.sx }}
       />
     </Collapse>
   );

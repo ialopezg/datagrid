@@ -37,7 +37,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     ...footerGroup.getFooterGroupProps(),
     style: {
       ...footerGroup.getFooterGroupProps()?.style,
-      ...(rowProps?.style ?? {}),
+      ...(rowProps?.style),
     },
   };
 

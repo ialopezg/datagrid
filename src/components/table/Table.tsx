@@ -21,7 +21,7 @@ export const Table: FC<TableProp> = () => {
     ...table.getTableProps(),
     style: {
       ...table.getTableProps().style,
-      ...(defaultTableProps?.style ?? {}),
+      ...(defaultTableProps?.style),
     },
   };
 

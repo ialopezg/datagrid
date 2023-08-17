@@ -1,13 +1,13 @@
-import { IconButton, styled, Tooltip } from '@mui/material';
+import { IconButton, TableCell, Tooltip } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
+import { actionBodyStyles } from '../body';
 
 import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import RowActionsMenu from '../menus/RowActionsMenu';
 import EditActionsAction from './EditActionsAction';
-import { ButtonCell } from '../table';
 
-const StyledIconButton = styled(IconButton)({
+const iconButtonStyles = {
   opacity: 0.5,
   transition: 'opacity 0.2s',
   marginRight: '2px',
@@ -16,7 +16,7 @@ const StyledIconButton = styled(IconButton)({
   '&:hover': {
     opacity: 1,
   },
-});
+};
 
 interface RowActionsActionProps {
   row: DataGridRow;
@@ -50,27 +50,32 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   };
 
   return (
-    <ButtonCell densePadding={densePadding}>
+    <TableCell sx={actionBodyStyles(densePadding)}>
       {rowActions ? (
         <>{rowActions(row, table)}</>
       ) : row.id === itemForUpdate?.id ? (
         <EditActionsAction row={row} />
       ) : !rowActionMenuItems && enableRowEditing ? (
         <Tooltip arrow placement="right" title={localization.edit}>
-          <StyledIconButton onClick={onRowEditAction}>
+          <IconButton
+            onClick={onRowEditAction}
+            sx={actionBodyStyles(densePadding)}
+          >
             <EditIcon />
-          </StyledIconButton>
+          </IconButton>
         </Tooltip>
       ) : rowActionMenuItems ? (
         <>
-          <StyledIconButton
+          <IconButton
             aria-label={localization.rowActions}
             onClick={onRowClick}
-            title={localization.rowActions}
             size="small"
+            sx={iconButtonStyles}
+            title={localization.rowActions}
           >
             <RowActionsIcon />
-          </StyledIconButton>
+          </IconButton>
+
           <RowActionsMenu
             anchorEl={anchorEl}
             onRowEditAction={onRowEditAction}
@@ -79,7 +84,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
           />
         </>
       ) : null}
-    </ButtonCell>
+    </TableCell>
   );
 };
 

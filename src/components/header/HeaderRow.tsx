@@ -1,4 +1,4 @@
-import { TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import React, { FC, useMemo } from 'react';
 
 import ExpandAllRowsAction from '../actions/ExpandAllRowsAction';
@@ -6,7 +6,7 @@ import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
 import { DataGridHeaderGroup } from '../DataGrid';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
-import HeaderCell, { StyledHeaderCell } from './HeaderCell';
+import HeaderCell, { tableHeaderCellStyles } from './HeaderCell';
 import HeaderActionsCell from './HeaderActionsCell';
 
 interface HeaderRowProps {
@@ -17,6 +17,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
     disableExpandAll,
+    densePadding,
     enableRowActions,
     enableRowEditing,
     enableSelection,
@@ -36,7 +37,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     ...headerGroup.getHeaderGroupProps(),
     style: {
       ...headerGroup.getHeaderGroupProps().style,
-      ...(rowProps?.style ?? {}),
+      ...rowProps?.style,
     },
   };
 
@@ -48,7 +49,13 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   return (
     <TableRow {...headerRowProps}>
       {showRowNumbers &&
-        (!isParent ? <SpacerCell /> : <StyledHeaderCell>#</StyledHeaderCell>)}
+        (!isParent ? (
+          <SpacerCell />
+        ) : (
+          <TableCell sx={{ ...tableHeaderCellStyles(densePadding) }}>
+            #
+          </TableCell>
+        ))}
 
       {(enableRowActions || enableRowEditing) &&
         rowActionsColumn === 'first' &&

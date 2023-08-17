@@ -1,24 +1,13 @@
-import MuiTableRow from '@mui/material/TableRow';
-import { alpha, styled } from '@mui/material';
+import { alpha, TableCell, TableRow } from '@mui/material';
 import React, { FC } from 'react';
 
-import BodyCell, { StyledBodyCell } from './BodyCell';
+import BodyCell, { tableBodyCellStyles } from './BodyCell';
 import DetailPanel from './DetailPanel';
 import { DataGridCell, DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import ExpandRowAction from '../actions/ExpandRowAction';
 import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
 import RowActionsAction from '../actions/RowActionsAction';
-
-const TableRow = styled(MuiTableRow, {
-  shouldForwardProp: (prop) => prop !== 'isSelected',
-})<{
-  isSelected?: boolean;
-}>(({ isSelected, theme }) => ({
-  backgroundColor: isSelected
-    ? alpha(theme.palette.primary.light, 0.1)
-    : 'transparent',
-}));
 
 interface BodyRowProps {
   row: DataGridRow;
@@ -27,6 +16,7 @@ interface BodyRowProps {
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   const {
     bodyRowProps: defaultBodyRowProps,
+    densePadding,
     detailPanel,
     enableRowActions,
     enableRowEditing,
@@ -41,12 +31,12 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     defaultBodyRowProps instanceof Function
       ? defaultBodyRowProps(row)
       : defaultBodyRowProps;
-  const bodyRowProps = {
+  const tableRowProps = {
     ...rowProps,
     ...row.getRowProps(),
     style: {
       ...row.getRowProps().style,
-      ...(rowProps?.style ?? {}),
+      ...rowProps?.style,
     },
   };
 
@@ -55,10 +45,20 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       <TableRow
         hover
         onClick={(e) => onRowClick?.(e, row)}
-        isSelected={row.isSelected}
-        {...bodyRowProps}
+        {...tableRowProps}
+        // @ts-ignore
+        sx={(theme) => ({
+          backgroundColor: row.isSelected
+            ? alpha(theme.palette.primary.light, 0.1)
+            : 'transparent',
+          ...tableRowProps?.sx,
+        })}
       >
-        {showRowNumbers && <StyledBodyCell>{row.index + 1}</StyledBodyCell>}
+        {showRowNumbers && (
+          <TableCell sx={{ ...tableBodyCellStyles(densePadding) }}>
+            {row.index + 1}
+          </TableCell>
+        )}
 
         {(enableRowActions || enableRowEditing) &&
           rowActionsColumn === 'first' && <RowActionsAction row={row} />}

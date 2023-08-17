@@ -1,14 +1,9 @@
-import { styled } from '@mui/material';
-import MuiTableBody from '@mui/material/TableBody';
+import { TableBody } from '@mui/material';
 import React, { FC } from 'react';
 import { DataGridRow } from '../DataGrid';
 
 import BodyRow from './BodyRow';
 import { useDataGrid } from '../providers';
-
-const TableBody = styled(MuiTableBody)({
-  overflowY: 'hidden',
-});
 
 interface BodyProps {}
 
@@ -20,17 +15,20 @@ export const Body: FC<BodyProps> = () => {
   } = useDataGrid();
   const rows = manualPagination ? table.rows : table.page;
 
-  const bodyProps = {
+  const tableBodyProps = {
     ...defaultBodyProps,
     ...table.getTableBodyProps(),
     style: {
       ...table.getTableBodyProps().style,
-      ...(defaultBodyProps?.style ?? {}),
+      ...defaultBodyProps?.style,
     },
   };
 
   return (
-    <TableBody {...bodyProps}>
+    <TableBody
+      {...tableBodyProps}
+      sx={{ overflowY: 'hidden', ...tableBodyProps.sx }}
+    >
       {rows.map((row: DataGridRow) => {
         table.prepareRow(row);
 

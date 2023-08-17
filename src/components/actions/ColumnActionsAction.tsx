@@ -1,21 +1,9 @@
-import MuiIconButton from '@mui/material/IconButton';
-import { styled, Tooltip } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import ColumnActionsMenu from '../menus/ColumnActionsMenu';
-
-const IconButton = styled(MuiIconButton)({
-  opacity: 0.5,
-  transition: 'opacity 0.2s',
-  marginRight: '2px',
-  height: '1.6rem',
-  width: '1.6rem',
-  '&:hover': {
-    opacity: 1,
-  },
-});
 
 interface ColumnActionsActionProps {
   column: DataGridHeaderGroup;
@@ -50,6 +38,16 @@ export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
           aria-label={localization.columnActions}
           onClick={onColumnAction}
           size="small"
+          sx={{
+            opacity: 0.5,
+            transition: 'opacity 0.2s',
+            marginRight: '2px',
+            height: '1.6rem',
+            width: '1.6rem',
+            '&:hover': {
+              opacity: 1,
+            },
+          }}
         >
           <ColumnActionsIcon />
         </IconButton>

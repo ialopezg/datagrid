@@ -84,7 +84,7 @@ export type DataGridOptions<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
-    columns: (Column<D> | DataGridColumnInterface)[];
+    columns: (Column<D> & DataGridColumnInterface)[];
     data: D[];
     initialState?: Partial<DataGridState>;
   };
@@ -133,13 +133,6 @@ export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
       headerCellEditProps?:
         | TextFieldProps
         | ((column: Column<D>) => TextFieldProps);
-      Edit?: ({
-        cell,
-        onChange,
-      }: {
-        cell: DataGridCell<D>;
-        onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-      }) => ReactNode;
       onCellEditChange?: (
         e: ChangeEvent<HTMLInputElement>,
         cell: DataGridCell<D>,
@@ -148,6 +141,13 @@ export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
         e: ChangeEvent<HTMLInputElement>,
         filterValue: any,
       ) => void;
+      Edit?: ({
+        cell,
+        onChange,
+      }: {
+        cell: DataGridCell<D>;
+        onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+      }) => ReactNode;
       Filter?: ({ column }: { column: DataGridHeaderGroup<D> }) => ReactNode;
       Footer?: string;
       Header?: string;
@@ -206,7 +206,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> &
-  DataGridOptions & {
+  DataGridOptions<D> & {
     bodyCellProps?:
       | TableCellProps
       | ((cell?: DataGridCell<D>) => TableCellProps);
@@ -215,12 +215,10 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
       | ((cell?: DataGridCell<D>) => TextFieldProps);
     bodyProps?: TableBodyProps;
     bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
-    columns: (Column<D> & DataGridColumnInterface)[];
     containerProps?:
       | TableContainerProps
       | ((table: DataGridInstance<D>) => TableContainerProps);
     customToolbarActions?: (table: DataGridInstance<D>) => ReactNode;
-    data: D[];
     defaultToolbarActions?: (
       table: TableInstance<D>,
       {

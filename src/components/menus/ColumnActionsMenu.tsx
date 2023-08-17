@@ -1,14 +1,13 @@
-import MuiMenuItem from '@mui/material/MenuItem';
-import { Divider, Menu, styled } from '@mui/material';
+import { Divider, Menu, MenuItem } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
-const MenuItem = styled(MuiMenuItem)({
+const menuItemStyles = {
   display: 'flex',
   gap: '0.75rem',
-});
+};
 
 interface ColumnActionsMenuProps {
   anchorEl: HTMLElement | null;
@@ -90,6 +89,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             disabled={!column.isSorted}
             key="datagrid-sort-clear-column-action"
             onClick={onClearSorting}
+            sx={menuItemStyles}
           >
             <ClearAllIcon /> {localization.clearSorting}
           </MenuItem>,
@@ -97,6 +97,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             disabled={column.isSorted && !column.isSortedDesc}
             key="datagrid-sort-asc-column-action"
             onClick={onSortActionAsc}
+            sx={menuItemStyles}
           >
             <SortIcon />{' '}
             {localization.sortByColumnAscending?.replace(
@@ -108,6 +109,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             disabled={column.isSorted && column.isSortedDesc}
             key="datagrid-sort-desc-column-action"
             onClick={onSortActionDesc}
+            sx={menuItemStyles}
           >
             <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
             {localization.sortByColumnDescending?.replace(
@@ -123,6 +125,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           <MenuItem
             key="datagrid-filter-column-action"
             onClick={onFilterByColumnAction}
+            sx={menuItemStyles}
           >
             <FilteringOnIcon />{' '}
             {localization.filterByColumn?.replace(
@@ -138,6 +141,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           <MenuItem
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
+            sx={menuItemStyles}
           >
             <GroupByIcon />{' '}
             {localization[
@@ -148,7 +152,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
 
       {!disableColumnHiding && [
         <Divider key="datagrid-column-hidding-column-action-divider" />,
-        <MenuItem onClick={onHideColumnAction}>
+        <MenuItem onClick={onHideColumnAction} sx={menuItemStyles}>
           <HideColumnIcon />{' '}
           {localization.hideColumn?.replace('{column}', String(column.Header))}
         </MenuItem>,

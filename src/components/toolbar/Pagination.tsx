@@ -6,12 +6,12 @@ import { useDataGrid } from '../providers';
 interface PaginationProps {}
 
 export const Pagination: FC<PaginationProps> = () => {
-  const { paginationProps: defaultPaginationProps, table } = useDataGrid();
+  const { paginationProps, table } = useDataGrid();
 
-  const paginationProps =
-    defaultPaginationProps instanceof Function
-      ? defaultPaginationProps(table)
-      : defaultPaginationProps;
+  const tablePaginationProps =
+    paginationProps instanceof Function
+      ? paginationProps(table)
+      : paginationProps;
 
   const onRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
     table.setPageSize(+e.target.value);
@@ -31,7 +31,13 @@ export const Pagination: FC<PaginationProps> = () => {
       showLastButton={table.rows.length / table.state.pageSize > 2}
       style={{ padding: 0, position: 'relative', zIndex: 2 }}
       SelectProps={{ style: { margin: '0 1rem 0 1ch' } }}
-      {...paginationProps}
+      {...tablePaginationProps}
+      sx={{
+        p: 0,
+        position: 'relative',
+        zIndex: 2,
+        ...tablePaginationProps?.sx,
+      }}
     />
   );
 };

@@ -1,9 +1,9 @@
-import { Checkbox, Tooltip } from '@mui/material';
+import { Checkbox, TableCell, Tooltip } from '@mui/material';
 import React, { ChangeEvent, FC } from 'react';
+import { tableBodyCellStyles } from '../body';
 import { DataGridRow } from '../DataGrid';
 
 import { useDataGrid } from '../providers';
-import { ButtonCell } from '../table';
 
 interface SelectRowActionProps {
   row?: DataGridRow;
@@ -37,7 +37,7 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
     : row?.getToggleRowSelectedProps();
 
   return (
-    <ButtonCell densePadding={densePadding}>
+    <TableCell sx={tableBodyCellStyles(densePadding)}>
       <Tooltip
         arrow
         enterDelay={1000}
@@ -57,7 +57,7 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
           title={undefined}
         />
       </Tooltip>
-    </ButtonCell>
+    </TableCell>
   );
 };
 

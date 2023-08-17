@@ -1,8 +1,8 @@
-import { IconButton } from '@mui/material';
+import { IconButton, TableCell } from '@mui/material';
 import React, { FC } from 'react';
+import { tableBodyCellStyles } from '../body';
 
 import { useDataGrid } from '../providers';
-import { ButtonCell } from '../table';
 
 interface ExpandAllRowsActionProps {}
 
@@ -16,10 +16,10 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
   } = useDataGrid();
 
   return (
-    <ButtonCell
+    <TableCell
       size="small"
-      densePadding={densePadding}
       {...table.getToggleAllRowsExpandedProps()}
+      sx={tableBodyCellStyles(densePadding)}
     >
       <IconButton
         aria-label={localization.expandAll}
@@ -34,7 +34,7 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
           }}
         />
       </IconButton>
-    </ButtonCell>
+    </TableCell>
   );
 };
 

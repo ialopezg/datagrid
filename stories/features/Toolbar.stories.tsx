@@ -85,7 +85,7 @@ export const CustomToolbarActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    positionToolbarActions="bottom"
+    toolbarActionsPosition="bottom"
     customToolbarActions={(_) => {
       const handleCreateNewUser = () => {
         // @ts-ignore
@@ -109,8 +109,6 @@ export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    title="My People Table"
-    muiTableTitleProps={{ variant: 'h4' }}
     enableSelection
     customToolbarActions={(table) => {
       const handleDeactivate = () => {
@@ -171,7 +169,7 @@ export const ToolbarAlertBannerBottom: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     enableSelection
-    positionToolbarAlertBanner="bottom"
+    toolbarAlertBannerPosition="bottom"
     customToolbarActions={(table) => {
       const handleCreateNewUser = () => {
         // @ts-ignore

@@ -29,7 +29,7 @@ export const ColumnVisibilityMenu: FC<Props> = ({ column }) => {
 
   return (
     <>
-      <MenuItem style={{ paddingLeft: `${(column.depth + 0.5) * 2}rem` }}>
+      <MenuItem sx={{ pl: `${(column.depth + 0.5) * 2}rem` }}>
         <FormControlLabel
           checked={switchChecked}
           control={<Switch />}

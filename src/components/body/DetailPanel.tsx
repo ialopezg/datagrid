@@ -1,18 +1,8 @@
-import MuiTableCell from '@mui/material/TableCell';
-import { Collapse, styled, TableRow } from '@mui/material';
+import { Collapse, TableCell, TableRow } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
-
-const TableCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'isExpanded',
-})<{ isExpanded?: boolean }>(({ isExpanded }) => ({
-  borderBottom: !isExpanded ? 'none' : undefined,
-  paddingBottom: isExpanded ? '1rem' : 0,
-  paddingTop: isExpanded ? '1rem' : 0,
-  transition: 'all 0.2s ease-in-out',
-}));
 
 interface DetailPanelProps {
   row: DataGridRow;
@@ -27,18 +17,10 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
     table,
   } = useDataGrid();
 
-  const tableBodyRowProps =
+  const tableRowProps =
     bodyRowProps instanceof Function
       ? bodyRowProps(row)
       : bodyRowProps;
-  const tableRowProps = {
-    ...tableBodyRowProps,
-    ...row.getRowProps(),
-    style: {
-      ...row.getRowProps().style,
-      ...(tableBodyRowProps?.style ?? {}),
-    },
-  };
   const tableCellProps =
     detailPanelProps instanceof Function
       ? detailPanelProps(row)
@@ -51,8 +33,14 @@ export const DetailPanel: FC<DetailPanelProps> = ({ row }) => {
         onClick={(e) => {
           onDetailPanelClick?.(e, row);
         }}
-        isExpanded={row.isExpanded}
         {...tableCellProps}
+        sx={{
+          borderBottom: !row.isExpanded ? 'none' : undefined,
+          pb: row.isExpanded ? '1rem' : 0,
+          pt: row.isExpanded ? '1rem' : 0,
+          transition: 'all 0.2s ease-in-out',
+          ...tableCellProps?.sx,
+        }}
       >
         <Collapse in={row.isExpanded}>{detailPanel?.(row)}</Collapse>
       </TableCell>

@@ -32,7 +32,10 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       open={!!anchorEl}
     >
       {enableRowEditing && (
-        <MenuItem onClick={onRowEditAction}>
+        <MenuItem
+          onClick={onRowEditAction}
+          sx={{ display: 'flex', gap: '0.75rem' }}
+        >
           <EditIcon /> {localization.editRow}
         </MenuItem>
       )}

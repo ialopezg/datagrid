@@ -1,6 +1,6 @@
 {
   "name": "@ialopezg/datagrid",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "author": "Isidro A. Lopez G.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -92,7 +92,7 @@
     "storybook-dark-mode": "^1.0.9",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.2"
   },
   "peerDependencies": {
     "@emotion/react": ">=11",

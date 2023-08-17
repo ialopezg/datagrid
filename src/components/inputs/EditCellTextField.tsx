@@ -9,16 +9,12 @@ interface EditCellTextFieldProps {
 }
 
 export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
-  const {
-    editCellTextFieldProps,
-    itemForUpdate,
-    setItemForUpdate,
-  } = useDataGrid();
+  const { bodyCellEditProps, itemForUpdate, setItemForUpdate } = useDataGrid();
 
   const tableEditCellTextFieldProps =
-    editCellTextFieldProps instanceof Function
-      ? editCellTextFieldProps(cell)
-      : editCellTextFieldProps;
+    bodyCellEditProps instanceof Function
+      ? bodyCellEditProps(cell)
+      : bodyCellEditProps;
   const columnEditCellTextFieldProps =
     cell.column.bodyCellEditProps instanceof Function
       ? cell.column.bodyCellEditProps(cell)

@@ -1,13 +1,8 @@
-import { IconButton, styled, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
-
-const EditActionsWrapper = styled('div')({
-  display: 'flex',
-  gap: '0.75rem',
-});
 
 interface EditActionsActionProps {
   row: DataGridRow;
@@ -33,7 +28,7 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
   };
 
   return (
-    <EditActionsWrapper>
+    <Box sx={{ display: 'flex', gap: '0.75rem' }}>
       <Tooltip arrow title={localization.cancel}>
         <IconButton
           aria-label={localization.cancel}
@@ -53,7 +48,7 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
           <SaveIcon />
         </IconButton>
       </Tooltip>
-    </EditActionsWrapper>
+    </Box>
   );
 };
 

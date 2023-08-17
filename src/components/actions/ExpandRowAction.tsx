@@ -1,18 +1,9 @@
-import { IconButton, styled } from '@mui/material';
+import { IconButton, TableCell } from '@mui/material';
 import React, { FC } from 'react';
+import { actionBodyStyles } from '../body';
 
 import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
-import { ButtonCell } from '../table';
-
-const TableCell = styled(ButtonCell, {
-  shouldForwardProp: (prop: PropertyKey) => prop !== 'dept',
-})<{
-  depth: number;
-}>(({ depth }) => ({
-  paddingLeft: `${depth + 0.5}rem`,
-  textAlign: 'left',
-}));
 
 interface ExpandRowActionProps {
   row: DataGridRow;
@@ -27,7 +18,14 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
   } = useDataGrid();
 
   return (
-    <TableCell size="small" densePadding={densePadding} depth={row.depth}>
+    <TableCell
+      size="small"
+      sx={{
+        ...actionBodyStyles(densePadding),
+        pl: `${row.depth + 0.5}rem`,
+        textAlign: 'left',
+      }}
+    >
       <IconButton
         aria-label={localization.expand}
         disabled={!row.canExpand && !detailPanel}

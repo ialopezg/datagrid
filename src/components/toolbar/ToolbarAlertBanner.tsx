@@ -1,24 +1,5 @@
-import { Alert, Chip, Collapse, styled, useMediaQuery } from '@mui/material';
+import { Alert, Box, Chip, Collapse, useMediaQuery } from '@mui/material';
 import React, { FC, Fragment } from 'react';
-
-const StyledAlert = styled(Alert, {
-  shouldForwardProp: (prop) =>
-    prop !== 'displayAbsolute' && prop !== 'toolbarPosition',
-})<{
-  displayAbsolute?: boolean;
-  toolbarPosition?: 'top' | 'bottom';
-}>(({ displayAbsolute, toolbarPosition }) => ({
-  borderRadius: 0,
-  fontSize: '1rem',
-  left: 0,
-  marginLeft: !displayAbsolute ? '-0.5rem' : undefined,
-  padding: toolbarPosition === 'bottom' ? '0 1rem' : '0.5rem 1.25rem',
-  position: displayAbsolute ? 'absolute' : 'relative',
-  right: 0,
-  top: 0,
-  width: `calc(100% - ${displayAbsolute ? '2.5rem' : '1.5rem'})`,
-  zIndex: 2,
-}));
 
 import { useDataGrid } from '../providers';
 
@@ -78,15 +59,29 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
       in={!!selectMessage || !!groupedMessage}
       timeout={displayAbsolute ? 0 : 200}
     >
-      <StyledAlert
+      <Alert
         color="info"
-        displayAbsolute={displayAbsolute}
         icon={false}
+        sx={{
+          borderRadius: 0,
+          fontSize: '1rem',
+          left: 0,
+          p: 0,
+          position: displayAbsolute ? 'absolute' : 'relative',
+          right: 0,
+          minHeight: '3.5rem',
+          top: 0,
+          width: '100%',
+          zIndex: 2,
+          ...alertProps?.sx,
+        }}
         {...alertProps}
       >
-        {selectMessage}
-        {groupedMessage}
-      </StyledAlert>
+        <Box sx={{ p: '0.5rem 1rem' }}>
+          {selectMessage}
+          {groupedMessage}
+        </Box>
+      </Alert>
     </Collapse>
   );
 };

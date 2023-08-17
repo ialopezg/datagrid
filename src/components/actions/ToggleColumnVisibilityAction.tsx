@@ -1,10 +1,10 @@
 import {
+  Box,
   Button,
   Divider,
   IconButton,
   IconButtonProps,
   Menu,
-  styled,
   Tooltip,
 } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
@@ -12,12 +12,6 @@ import { DataGridColumnInstance } from '../DataGrid';
 
 import { useDataGrid } from '../providers';
 import ColumnVisibilityMenu from '../menus/ColumnVisibilityMenu';
-
-const MenuButtons = styled('div')({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0 0.5rem 0.5rem 0.5rem',
-});
 
 interface ColumnsVisibilityActionProps extends IconButtonProps {}
 
@@ -54,7 +48,13 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
         open={!!anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <MenuButtons>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            p: '0 0.5rem 0.5rem 0.5rem',
+          }}
+        >
           <Button
             disabled={
               !table.getToggleHideAllColumnsProps().checked &&
@@ -70,7 +70,7 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
           >
             {localization.showAll}
           </Button>
-        </MenuButtons>
+        </Box>
 
         <Divider />
 

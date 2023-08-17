@@ -9,19 +9,18 @@ interface SpacerCellProps {
 export const SpacerCell: FC<SpacerCellProps> = ({ width }) => {
   const { bodyCellProps: defaultBodyCellProps } = useDataGrid();
 
-  const cellProps =
+  const tableCellProps =
     defaultBodyCellProps instanceof Function
       ? defaultBodyCellProps()
       : (defaultBodyCellProps as TableCellProps);
   const bodyCellProps = {
-    ...cellProps,
+    ...tableCellProps,
     style: {
-      width,
-      ...(cellProps?.style ?? {}),
+      ...tableCellProps?.style,
     },
   };
 
-  return <TableCell {...bodyCellProps} />;
+  return <TableCell {...bodyCellProps} sx={{ width, ...tableCellProps?.sx }} />;
 };
 
 export default SpacerCell;
