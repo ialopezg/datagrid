@@ -5,8 +5,6 @@ import { DataGridIcons } from '../DataGridIcons';
 import { DataGridLocalization } from '../localization';
 
 export interface DataGridContextProps<D extends {}> extends DataGridProps<D> {
-  densePadding: boolean;
-  fullScreen: boolean;
   hasExpandableRows: boolean;
   hasExpandedRows: boolean;
   icons: DataGridIcons;
@@ -17,8 +15,6 @@ export interface DataGridContextProps<D extends {}> extends DataGridProps<D> {
   setItemForUpdate: (value: DataGridRow<D> | null) => void;
   setShowFilters: (value: boolean) => void;
   setShowSearch: (value: boolean) => void;
-  showFilters: boolean;
-  showSearch: boolean;
   table: DataGridInstance<D>;
 }
 

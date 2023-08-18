@@ -8,17 +8,21 @@ interface ExpandAllRowsActionProps {}
 
 export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
   const {
-    densePadding,
     hasExpandedRows,
     icons: { ExpandAllIcon },
     localization,
-    table,
+    table: {
+      getToggleAllRowsExpandedProps,
+      isAllRowsExpanded,
+      state: { densePadding },
+    },
   } = useDataGrid();
 
   return (
     <TableCell
       size="small"
-      {...table.getToggleAllRowsExpandedProps()}
+      // @ts-ignore
+      {...getToggleAllRowsExpandedProps()}
       sx={tableBodyCellStyles(densePadding)}
     >
       <IconButton
@@ -28,7 +32,7 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
         <ExpandAllIcon
           style={{
             transform: `rotate(${
-              table.isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0
+              isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0
             }deg)`,
             transition: 'transform 0.2s',
           }}

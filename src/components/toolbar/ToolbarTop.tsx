@@ -13,7 +13,6 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
   const {
     customToolbarActions,
     disableGlobalFilter,
-    fullScreen,
     hideToolbarActions,
     manualPagination,
     paginationPosition,
@@ -41,8 +40,8 @@ export const ToolbarTop: FC<ToolbarTopProps> = () => {
           )},${alpha(theme.palette.common.white, 0.05)})`,
           display: 'grid',
           p: '0 !important',
-          position: fullScreen ? 'sticky' : undefined,
-          top: fullScreen ? '0' : undefined,
+          position: table.state.fullScreen ? 'sticky' : undefined,
+          top: table.state.fullScreen ? '0' : undefined,
           width: '100%',
           zIndex: 1,
           ...toolbarProps?.sx,

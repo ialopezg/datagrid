@@ -190,10 +190,11 @@ export type DataGridState<D extends {} = {}> = TableState<D> &
   UseRowSelectState<D> &
   UseRowStateState<D> &
   UseSortByState<D> & {
-    densePadding?: boolean;
-    fullScreen?: boolean;
-    showFilters?: boolean;
-    showSearch?: boolean;
+    currentEditingRow: DataGridRow<D> | null;
+    densePadding: boolean;
+    fullScreen: boolean;
+    showFilters: boolean;
+    showSearch: boolean;
   };
 
 export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &

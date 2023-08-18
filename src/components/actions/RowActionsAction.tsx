@@ -24,10 +24,8 @@ interface RowActionsActionProps {
 
 export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   const {
-    densePadding,
     enableRowEditing,
     icons: { EditIcon, RowActionsIcon },
-    itemForUpdate,
     localization,
     rowActions,
     rowActionMenuItems,
@@ -50,16 +48,24 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   };
 
   return (
-    <TableCell sx={actionBodyStyles(densePadding)}>
+    <TableCell sx={actionBodyStyles(table.state.densePadding)}>
       {rowActions ? (
         <>{rowActions(row, table)}</>
-      ) : row.id === itemForUpdate?.id ? (
+      ) : row.id === table.state.currentEditingRow?.id ? (
         <EditActionsAction row={row} />
       ) : !rowActionMenuItems && enableRowEditing ? (
-        <Tooltip arrow placement="right" title={localization.edit}>
+        <Tooltip
+          arrow
+          enterDelay={1000}
+          enterNextDelay={1000}
+          placement="right"
+          title={localization.edit}
+        >
           <IconButton
+            aria-label={localization.edit}
             onClick={onRowEditAction}
-            sx={actionBodyStyles(densePadding)}
+            size="small"
+            sx={actionBodyStyles(table.state.densePadding)}
           >
             <EditIcon />
           </IconButton>

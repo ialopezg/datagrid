@@ -9,7 +9,13 @@ interface EditCellTextFieldProps {
 }
 
 export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
-  const { bodyCellEditProps, itemForUpdate, setItemForUpdate } = useDataGrid();
+  const {
+    bodyCellEditProps,
+    setItemForUpdate,
+    table: {
+      state: { currentEditingRow },
+    },
+  } = useDataGrid();
 
   const tableEditCellTextFieldProps =
     bodyCellEditProps instanceof Function
@@ -29,9 +35,9 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (itemForUpdate) {
+    if (currentEditingRow) {
       cell.row.values[cell.column.id] = e.target.value;
-      setItemForUpdate({ ...itemForUpdate });
+      setItemForUpdate({ ...currentEditingRow });
     }
     cell.column.onCellEditChange?.(e, cell);
   };

@@ -9,10 +9,12 @@ export const ToggleFullScreenAction: FC<ToggleFullScreenActionProps> = ({
   ...rest
 }) => {
   const {
-    fullScreen,
     icons: { FullScreenOffIcon, FullScreenOnIcon },
     localization,
     setFullScreen,
+    table: {
+      state: { fullScreen },
+    },
   } = useDataGrid();
 
   return (

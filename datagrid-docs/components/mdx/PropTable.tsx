@@ -4,33 +4,34 @@ import React, { useMemo } from 'react';
 
 export const PropTable = () => {
   const columns = useMemo(
-    () => [
-      {
-        Header: 'Prop',
-        accessor: 'prop' as const,
-      },
-      {
-        Header: 'Type',
-        accessor: 'type' as const,
-      },
-      {
-        Header: 'Default',
-        accessor: 'default' as const,
-      },
-      {
-        Header: 'Description',
-        accessor: 'description' as const,
-      },
-      {
-        Header: 'Link to more info',
-        accessor: 'link' as const,
-        Cell: (cell: any) => (
-          <Link href={cell.value} target="_blank">
-            {cell.row.original.linkText}
-          </Link>
-        ),
-      },
-    ],
+    () =>
+      [
+        {
+          Header: 'Prop',
+          accessor: 'prop' as const,
+        },
+        {
+          Header: 'Type',
+          accessor: 'type' as const,
+        },
+        {
+          Header: 'Default',
+          accessor: 'default' as const,
+        },
+        {
+          Header: 'Description',
+          accessor: 'description' as const,
+        },
+        {
+          Header: 'Link to more info',
+          accessor: 'link' as const,
+          Cell: (cell: any) => (
+            <Link href={cell.value} target="_blank">
+              {cell.row.original.linkText}
+            </Link>
+          ),
+        },
+      ] as any[],
     [],
   );
 
@@ -192,15 +193,15 @@ export const PropTable = () => {
     <DataGrid
       columns={columns}
       data={data}
-      densePadding
       manualPagination
       hideToolbarBottom
       initialState={{
         // @ts-ignore
         sortBy: [{ id: 'prop', desc: false }],
         hiddenColumns: ['default'],
+        showSearch: true,
+        densePadding: true,
       }}
-      showSearch
     />
   );
 };

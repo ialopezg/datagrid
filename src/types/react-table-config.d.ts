@@ -15,7 +15,8 @@ import {
 
 declare module 'react-table' {
   export interface TableOptions<D extends Record<string, unknown>>
-    extends DataGridOptions<D> {}
+    extends DataGridOptions<D> {
+  }
 
   export interface Hooks<
     D extends Record<string, unknown> = Record<string, unknown>,
@@ -28,6 +29,7 @@ declare module 'react-table' {
   export interface TableInstance<
     D extends Record<string, unknown> = Record<string, unknown>,
   > extends DataGridInstance<D> {
+    rows: DataGridRow<D>[];
   }
 
   export interface TableState<

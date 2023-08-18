@@ -12,7 +12,6 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
     localization,
     onGlobalFilterChange,
     searchBoxProps,
-    showSearch,
     table,
   } = useDataGrid();
   const [searchValue, setSearchValue] = useState<string>('');
@@ -31,7 +30,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
   };
 
   return (
-    <Collapse in={showSearch} orientation="horizontal">
+    <Collapse in={table.state.showSearch} orientation="horizontal">
       <TextField
         id="datagrid-search-box"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {

@@ -48,13 +48,11 @@ interface HeaderCellProps {
 
 export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
   const {
-    densePadding,
     disableColumnActions,
     disableFilters,
     enableColumnResizing,
     headerCellProps: defaultCellProps,
     localization,
-    showFilters,
     table,
   } = useDataGrid();
 
@@ -71,7 +69,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     ...columnHeaderCellProps,
     ...column.getHeaderProps(),
     style: {
-      padding: densePadding ? '0.5rem' : '1rem',
+      padding: table.state.densePadding ? '0.5rem' : '1rem',
       transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
       ...column.getHeaderProps().style,
       ...columnHeaderCellProps?.style,
@@ -98,7 +96,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
       align={isParent ? 'center' : 'left'}
       {...tableCellProps}
       sx={{
-        ...tableHeaderCellStyles(densePadding, enableColumnResizing),
+        ...tableHeaderCellStyles(table.state.densePadding, enableColumnResizing),
         ...tableCellProps?.sx,
       }}
     >
@@ -151,7 +149,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
           </Box>
         </Box>
         {!disableFilters && column.canFilter && (
-          <Collapse in={showFilters}>
+          <Collapse in={table.state.showFilters}>
             <FilterTextField column={column} />
           </Collapse>
         )}

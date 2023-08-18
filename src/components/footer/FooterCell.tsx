@@ -9,7 +9,13 @@ interface FooterCellProps {
 }
 
 export const FooterCell: FC<FooterCellProps> = ({ column }) => {
-  const { densePadding, enableColumnResizing, footerCellProps } = useDataGrid();
+  const {
+    enableColumnResizing,
+    footerCellProps,
+    table: {
+      state: { densePadding },
+    },
+  } = useDataGrid();
   const isParent = (column?.columns?.length ?? 0) > 0;
 
   const bodyFooterCellProps =

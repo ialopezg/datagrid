@@ -11,10 +11,12 @@ interface ExpandRowActionProps {
 
 export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
   const {
-    densePadding,
     detailPanel,
     icons: { ExpandIcon },
     localization,
+    table: {
+      state: { densePadding },
+    },
   } = useDataGrid();
 
   return (

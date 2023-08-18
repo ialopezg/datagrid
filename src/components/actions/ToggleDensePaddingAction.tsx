@@ -9,10 +9,12 @@ export const ToggleDensePaddingAction: FC<DensePaddingActionProps> = ({
   ...rest
 }) => {
   const {
-    densePadding,
     icons: { DensityPaddingMediumIcon, DensityPaddingSmallIcon },
     localization,
     setDensePadding,
+    table: {
+      state: { densePadding },
+    },
   } = useDataGrid();
 
   return (

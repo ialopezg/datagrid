@@ -22,8 +22,13 @@ interface BodyCellProps {
 }
 
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
-  const { bodyCellProps, densePadding, itemForUpdate, onCellClick } =
-    useDataGrid();
+  const {
+    bodyCellProps,
+    onCellClick,
+    table: {
+      state: { currentEditingRow, densePadding },
+    },
+  } = useDataGrid();
 
   const tableBodyCellProps =
     bodyCellProps instanceof Function ? bodyCellProps(cell) : bodyCellProps;
@@ -56,7 +61,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
         } as TableCellProps['sx']
       }
     >
-      {itemForUpdate?.id === cell.row.id ? (
+      {currentEditingRow?.id === cell.row.id ? (
         <EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')

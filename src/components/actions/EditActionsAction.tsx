@@ -11,15 +11,17 @@ interface EditActionsActionProps {
 export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
   const {
     icons: { CancelIcon, SaveIcon },
-    itemForUpdate,
     localization,
     onRowEditSubmit,
     setItemForUpdate,
+    table: {
+      state: { currentEditingRow },
+    },
   } = useDataGrid();
 
   const onSaveButtonClick = async () => {
     setItemForUpdate(null);
-    await onRowEditSubmit?.(itemForUpdate ?? row);
+    await onRowEditSubmit?.(currentEditingRow ?? row);
   };
 
   const onCancelButtonClick = () => {

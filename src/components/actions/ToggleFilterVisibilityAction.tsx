@@ -12,7 +12,9 @@ export const ToggleFilterVisibilityAction: FC<FiltersVisibilityActionProps> = ({
     icons: { FilteringOffIcon, FilteringOnIcon },
     localization,
     setShowFilters,
-    showFilters,
+    table: {
+      state: { showFilters },
+    },
   } = useDataGrid();
 
   return (

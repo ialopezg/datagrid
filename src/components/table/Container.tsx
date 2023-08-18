@@ -11,13 +11,13 @@ interface ContainerProps {}
 export const Container: FC<ContainerProps> = () => {
   const {
     containerProps: defaultContainerProps,
-    fullScreen,
     hideToolbarBottom,
     hideToolbarTop,
     isFetching,
     isLoading,
     table,
   } = useDataGrid();
+  const fullScreen = table.state.fullScreen;
   const originalBodyOverflowStyle = useRef<string | undefined>();
 
   useEffect(() => {

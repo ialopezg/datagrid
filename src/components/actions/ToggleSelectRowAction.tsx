@@ -15,7 +15,6 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
   selectAll,
 }) => {
   const {
-    densePadding,
     localization,
     onSelectChange,
     onSelectAllChange,
@@ -37,7 +36,7 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
     : row?.getToggleRowSelectedProps();
 
   return (
-    <TableCell sx={tableBodyCellStyles(densePadding)}>
+    <TableCell sx={tableBodyCellStyles(table.state.densePadding)}>
       <Tooltip
         arrow
         enterDelay={1000}

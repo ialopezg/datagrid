@@ -16,7 +16,6 @@ interface BodyRowProps {
 export const BodyRow: FC<BodyRowProps> = ({ row }) => {
   const {
     bodyRowProps: defaultBodyRowProps,
-    densePadding,
     detailPanel,
     enableRowActions,
     enableRowEditing,
@@ -25,6 +24,9 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
     onRowClick,
     rowActionsColumn,
     showRowNumbers,
+    table: {
+      state: { densePadding },
+    },
   } = useDataGrid();
 
   const rowProps =
@@ -46,13 +48,14 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
         hover
         onClick={(e) => onRowClick?.(e, row)}
         {...tableRowProps}
-        // @ts-ignore
-        sx={(theme) => ({
-          backgroundColor: row.isSelected
-            ? alpha(theme.palette.primary.light, 0.1)
-            : 'transparent',
-          ...tableRowProps?.sx,
-        })}
+        sx={(theme) =>
+          ({
+            backgroundColor: row.isSelected
+              ? alpha(theme.palette.primary.light, 0.1)
+              : 'transparent',
+            ...tableRowProps?.sx,
+          } as any)
+        }
       >
         {showRowNumbers && (
           <TableCell sx={{ ...tableBodyCellStyles(densePadding) }}>

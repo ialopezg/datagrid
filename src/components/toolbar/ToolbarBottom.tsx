@@ -10,7 +10,6 @@ interface ToolbarBottomProps {}
 
 export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
   const {
-    fullScreen,
     hideToolbarActions,
     manualPagination,
     paginationPosition,
@@ -36,12 +35,12 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
             theme.palette.common.white,
             0.05,
           )},${alpha(theme.palette.common.white, 0.05)})`,
-          bottom: fullScreen ? '0' : undefined,
+          bottom: table.state.fullScreen ? '0' : undefined,
           display: 'flex',
           justifyContent: 'space-between',
           overflowY: 'hidden',
           p: '0 0.5rem !important',
-          position: fullScreen ? 'fixed' : undefined,
+          position: table.state.fullScreen ? 'fixed' : undefined,
           width: 'calc(100% - 1rem)',
           zIndex: 1,
           ...toolbarProps?.sx,

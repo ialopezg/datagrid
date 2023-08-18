@@ -33,13 +33,12 @@ export const DataGridProvider = <D extends {}>(
     hooks.unshift(useResizeColumns, useFlexLayout);
   }
 
-  const table = useTable<D>(props, ...hooks) as DataGridInstance<D>;
-
   // ** State
   const [densePadding, setDensePadding] = useState<boolean>(
     props.initialState?.densePadding ?? false,
   );
-  const [itemForUpdate, setItemForUpdate] = useState<DataGridRow | null>(null);
+  const [currentEditingRow, setCurrentEditingRow] =
+    useState<DataGridRow | null>(null);
   const [fullScreen, setFullScreen] = useState<boolean>(
     props.initialState?.fullScreen ?? false,
   );
@@ -49,6 +48,35 @@ export const DataGridProvider = <D extends {}>(
   const [showSearch, setShowSearch] = useState<boolean>(
     props.initialState?.showSearch ?? false,
   );
+
+  const table = useTable<D>(
+    {
+      ...props,
+      useControlledState: (state) =>
+        useMemo(
+          () => ({
+            ...state,
+            currentEditingRow,
+            densePadding,
+            fullScreen,
+            showFilters,
+            showSearch,
+            // @ts-ignore
+            ...props?.useControlledState?.(state),
+          }),
+          [
+            currentEditingRow,
+            densePadding,
+            fullScreen,
+            showFilters,
+            showSearch,
+            state,
+          ],
+        ),
+    },
+    ...hooks,
+  ) as DataGridInstance<D>;
+
   const hasExpandableRows = useMemo(
     () => table.rows.some((row: DataGridRow<D>) => row.canExpand),
     [table.rows],
@@ -62,18 +90,13 @@ export const DataGridProvider = <D extends {}>(
     <DataGridContext.Provider
       value={{
         ...props,
-        densePadding,
-        fullScreen,
         hasExpandableRows,
         hasExpandedRows,
-        itemForUpdate,
         setDensePadding,
         setFullScreen,
-        setItemForUpdate,
+        setCurrentEditingRow,
         setShowFilters,
         setShowSearch,
-        showFilters,
-        showSearch,
         // @ts-ignore
         table,
       }}

@@ -17,7 +17,6 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
   const {
     detailPanel,
     disableExpandAll,
-    densePadding,
     enableRowActions,
     enableRowEditing,
     enableSelection,
@@ -52,7 +51,9 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         (!isParent ? (
           <SpacerCell />
         ) : (
-          <TableCell sx={{ ...tableHeaderCellStyles(densePadding) }}>
+          <TableCell
+            sx={{ ...tableHeaderCellStyles(table.state.densePadding) }}
+          >
             #
           </TableCell>
         ))}

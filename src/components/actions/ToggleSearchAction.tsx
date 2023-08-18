@@ -13,7 +13,9 @@ export const ToggleSearchAction: FC<ToggleSearchActionProps> = ({
     localization,
     searchBoxProps,
     setShowSearch,
-    showSearch,
+    table: {
+      state: { showSearch },
+    },
   } = useDataGrid();
 
   const onToggleSearchBox = () => {

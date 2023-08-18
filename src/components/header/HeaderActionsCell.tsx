@@ -7,7 +7,12 @@ import { tableHeaderCellStyles } from './HeaderCell';
 interface HeaderActionsCellProps {}
 
 export const HeaderActionsCell: FC<HeaderActionsCellProps> = () => {
-  const { densePadding, localization } = useDataGrid();
+  const {
+    localization,
+    table: {
+      state: { densePadding },
+    },
+  } = useDataGrid();
 
   return (
     <TableCell
