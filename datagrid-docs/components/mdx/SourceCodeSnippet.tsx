@@ -9,7 +9,6 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   Tooltip,
-  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -17,6 +16,7 @@ import vsDark from 'prism-react-renderer/themes/vsDark';
 import vsLight from 'prism-react-renderer/themes/github';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { FC, useEffect, useState } from 'react';
+import LinkHeading from './LinkHeading';
 
 const CopyButton = styled(IconButton)({
   position: 'absolute',
@@ -61,7 +61,7 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
   );
 
   const onCopyAction = () => {
-    navigator.clipboard.writeText(
+    void navigator.clipboard.writeText(
       typeScripMode ? typeScriptCode : javaScriptCode,
     );
     setIsCopied(true);
@@ -78,12 +78,12 @@ export const SourceCodeSnippet: FC<SourceCodeSnippetProps> = ({
       }}
     >
       <Divider />
-      <Typography variant="h3">Demo</Typography>
+      <LinkHeading variant="h3">Demo</LinkHeading>
       <Component />
 
       <div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <Typography variant="h4">Source Code</Typography>
+          <LinkHeading variant="h4">Source Code</LinkHeading>
           <ToggleButtonGroup>
             <ToggleButton onClick={() => setTypeScriptMode(false)} value="js">
               JS

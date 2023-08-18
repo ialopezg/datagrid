@@ -2,6 +2,7 @@ import { Typography, Link } from '@mui/material';
 import Image from 'next/image';
 
 import Blockquote from './Blockquote';
+import LinkHeading from './LinkHeading';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 
 export const mdxComponents = {
@@ -10,7 +11,7 @@ export const mdxComponents = {
   blockquote: (props: any) => <Blockquote {...props} />,
   h1: (props: any) => <Typography variant="h1" {...props} />,
   h2: (props: any) => <Typography variant="h2" {...props} />,
-  h3: (props: any) => <Typography variant="h3" {...props} />,
+  h3: (props: any) => <LinkHeading variant="h3" {...props} />,
   h4: (props: any) => <Typography variant="h4" {...props} />,
   h5: (props: any) => <Typography variant="h5" {...props} />,
   h6: (props: any) => <Typography variant="h6" {...props} />,
@@ -30,7 +31,13 @@ export const mdxComponents = {
   ),
   p: (props: any) => (
     <Typography
-      style={{ maxWidth: '120ch', margin: '1.5rem 0' }}
+      sx={{
+        textAlign: {
+          xs: 'left',
+          md: 'justify',
+        },
+        m: '1.5rem 0',
+      }}
       variant="body1"
       {...props}
     />

@@ -101,7 +101,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable the column grouping feature',
-        link: '/docs/features/column-grouping',
+        link: '/docs/guides/column-grouping',
         linkText: 'DataGrid column grouping docs',
       },
       {
@@ -109,7 +109,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable the column resizing feature',
-        link: '/docs/features/column-resizing',
+        link: '/docs/guides/column-resizing',
         linkText: 'DataGrid column resizing docs',
       },
       {
@@ -117,7 +117,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row actions menu button in each row',
-        link: '/docs/features/row-actions',
+        link: '/docs/guides/row-actions',
         linkText: 'DataGrid row actions docs',
       },
       {
@@ -125,7 +125,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row edit button in each row',
-        link: '/docs/features/row-editing',
+        link: '/docs/guides/row-editing',
         linkText: 'DataGrid row editing docs',
       },
       {
@@ -133,7 +133,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Enable row selection checkboxes in each row',
-        link: '/docs/features/row-selection',
+        link: '/docs/guides/row-selection',
         linkText: 'DataGrid row selection docs',
       },
       {
@@ -174,7 +174,7 @@ export const PropTable = () => {
         type: 'DataGridIcons',
         default: null,
         description: 'Override the default Mui icons',
-        link: '/docs/features/customize-icons',
+        link: '/docs/guides/customize-icons',
         linkText: 'DataGrid customize icons docs',
       },
       {
@@ -182,7 +182,7 @@ export const PropTable = () => {
         type: 'boolean',
         default: null,
         description: 'Show row numbers in the first column',
-        link: '/docs/features/row-numbers',
+        link: '/docs/guides/row-numbers',
         linkText: 'DataGrid row numbers docs',
       },
     ],
