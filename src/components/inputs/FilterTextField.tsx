@@ -1,4 +1,10 @@
-import { IconButton, InputAdornment, TextField, Tooltip } from '@mui/material';
+import {
+  IconButton,
+  InputAdornment,
+  TextField,
+  TextFieldProps,
+  Tooltip,
+} from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
 import React, { FC, useState } from 'react';
 
@@ -24,7 +30,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   const columnTextFieldProps =
     column.headerCellFilterProps instanceof Function
       ? column.headerCellFilterProps(column)
-      : headerCellFilterProps;
+      : column.headerCellFilterProps;
   const textFieldProps = {
     ...defaultTextFieldProps,
     ...columnTextFieldProps,
@@ -32,7 +38,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
       ...defaultTextFieldProps?.style,
       ...columnTextFieldProps?.style,
     },
-  };
+  } as TextFieldProps;
 
   const [filterValue, setFilterValue] = useState<string>('');
 
@@ -109,7 +115,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           ),
         }}
         {...textFieldProps}
-        sx={{ minWidth: '6rem' }}
+        sx={{ minWidth: '6rem', ...textFieldProps?.sx }}
       />
     </Tooltip>
   );
