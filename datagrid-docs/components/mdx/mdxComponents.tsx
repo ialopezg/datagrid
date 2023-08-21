@@ -6,7 +6,13 @@ import LinkHeading from './LinkHeading';
 import { SampleCodeSnippet } from './SampleCodeSnippet';
 
 export const mdxComponents = {
-  a: (props: any) => <Link target="_blank" rel="noreferrer" {...props} />,
+  a: (props: any) => (
+    <Link
+      target={!props.href.startsWith('#') ? '_blank' : undefined}
+      rel="noreferrer"
+      {...props}
+    />
+  ),
   code: (props: any) => <SampleCodeSnippet {...props} />,
   blockquote: (props: any) => <Blockquote {...props} />,
   h1: (props: any) => <Typography variant="h1" {...props} />,

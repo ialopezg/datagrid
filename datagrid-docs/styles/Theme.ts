@@ -25,15 +25,15 @@ export const theme = (darkMode: boolean) =>
         marginBottom: '1rem',
       },
       h4: {
-        fontSize: '1.75rem',
-        lineHeight: '3rem',
+        fontSize: '1.5rem',
+        lineHeight: '2rem',
       },
       h5: {
-        fontSize: '1.5rem',
+        fontSize: '1.25rem',
         lineHeight: '3rem',
       },
       h6: {
-        fontSize: '1.25rem',
+        fontSize: '1.1rem',
         lineHeight: '3rem',
       },
       subtitle1: {
