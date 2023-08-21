@@ -15,19 +15,6 @@ const Drawer = styled(MuiDrawer)({
   position: 'relative',
 });
 
-const StyledList = styled(List, {
-  shouldForwardProp: (prop) => prop !== 'navOpen',
-})<{ navOpen?: boolean }>(({ navOpen }) => ({
-  overflow: 'visible',
-  overflowY: navOpen ? 'auto' : 'hidden',
-  padding: '68px 0',
-  transition: 'all .2s',
-  width: navOpen ? '260px' : '0',
-  'media (max-width: 990px)': {
-    marginTop: '50px',
-  },
-}));
-
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
   cursor: 'pointer',
@@ -64,7 +51,19 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
       PaperProps={{ component: 'aside' }}
       variant={isTablet ? 'temporary' : 'permanent'}
     >
-      <StyledList navOpen={navOpen}>
+      <List
+        sx={{
+          overflow: 'visible',
+          overflowY: navOpen ? 'overlay' : 'hidden',
+          mt: '64px',
+          padding: 0,
+          transition: 'all 0.2s',
+          width: navOpen ? '260px' : '0',
+          '@media (max-width: 900px)': {
+            mt: '50px',
+          },
+        }}
+      >
         <Link href="/" passHref>
           <ListItemLevel1>Home</ListItemLevel1>
         </Link>
@@ -146,7 +145,7 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
           <ListItemLevel2>Detail Panel (Expanding)</ListItemLevel2>
         </Link>
         <Link href="/docs/guides/localization" passHref>
-          <ListItemLevel2>Localization  (i18n)</ListItemLevel2>
+          <ListItemLevel2>Localization (i18n)</ListItemLevel2>
         </Link>
         <Link href="/docs/guides/row-actions" passHref>
           <ListItemLevel2>Row Actions</ListItemLevel2>
@@ -160,7 +159,7 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
         <Link href="/docs/guides/row-selection" passHref>
           <ListItemLevel2>Row Selection</ListItemLevel2>
         </Link>
-      </StyledList>
+      </List>
     </Drawer>
   );
 };
