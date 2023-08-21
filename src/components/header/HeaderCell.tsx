@@ -91,69 +91,76 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         String(column.Header),
       );
 
+  const columnHeader = String(column.render('Header'));
+
   return (
     <TableCell
       align={isParent ? 'center' : 'left'}
       {...tableCellProps}
       sx={{
-        ...tableHeaderCellStyles(table.state.densePadding, enableColumnResizing),
+        ...tableHeaderCellStyles(
+          table.state.densePadding,
+          enableColumnResizing,
+        ),
         ...tableCellProps?.sx,
       }}
     >
       <Box
-        sx={{ alignContent: 'space-between', display: 'grid', height: '100%' }}
+        sx={{
+          alignItems: 'flex-start',
+          display: 'flex',
+          justifyContent: isParent ? 'center' : 'space-between',
+          width: '100%',
+        }}
       >
         <Box
+          {...column.getSortByToggleProps()}
           sx={{
-            alignItems: 'flex-start',
+            alignItems: 'center',
             display: 'flex',
-            justifyContent: isParent ? 'center' : undefined,
-            width: '100%',
+            flexWrap: 'nowrap',
+            whiteSpace: columnHeader.length < 15 ? 'nowrap' : 'normal',
           }}
+          title={undefined}
         >
-          <Box
-            {...column.getSortByToggleProps()}
-            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
-            title={undefined}
-          >
-            {column.render('Header')}
-            {!isParent && column.canSort && (
-              <Tooltip arrow title={tooltipTitle}>
-                <TableSortLabel
-                  active={column.isSorted}
-                  aria-label={tooltipTitle}
-                  direction={column.isSortedDesc ? 'desc' : 'asc'}
-                />
-              </Tooltip>
-            )}
-          </Box>
-          <Box
-            sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}
-          >
-            {!disableColumnActions && !isParent && (
-              <ColumnActionsAction column={column} />
-            )}
-            {enableColumnResizing && !isParent && (
-              <Divider
-                flexItem
-                onDoubleClick={() => table.resetResizing()}
-                orientation="vertical"
-                {...column.getResizerProps()}
-                sx={{
-                  borderRightWidth: '2px',
-                  borderRadius: '2px',
-                  maxHeight: '2rem',
-                }}
+          {column.render('Header')}
+          {!isParent && column.canSort && (
+            <Tooltip arrow title={tooltipTitle}>
+              <TableSortLabel
+                aria-label={tooltipTitle}
+                active={column.isSorted}
+                direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
-            )}
-          </Box>
+            </Tooltip>
+          )}
         </Box>
-        {!disableFilters && column.canFilter && (
-          <Collapse in={table.state.showFilters}>
-            <FilterTextField column={column} />
-          </Collapse>
-        )}
+
+        <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'nowrap' }}>
+          {!disableColumnActions && !isParent && (
+            <ColumnActionsAction column={column} />
+          )}
+
+          {enableColumnResizing && !isParent && (
+            <Divider
+              flexItem
+              orientation="vertical"
+              onDoubleClick={() => table.resetResizing()}
+              {...column.getResizerProps()}
+              sx={{
+                borderRightWidth: '2px',
+                borderRadius: '2px',
+                maxHeight: '2rem',
+              }}
+            />
+          )}
+        </Box>
       </Box>
+
+      {!disableFilters && column.canFilter && (
+        <Collapse in={table.state.showFilters}>
+          <FilterTextField column={column} />
+        </Collapse>
+      )}
     </TableCell>
   );
 };

@@ -130,7 +130,7 @@ export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
       headerCellProps?:
         | TableCellProps
         | ((column: Column<D>) => TableCellProps);
-      headerCellEditProps?:
+      headerCellFilterProps?:
         | TextFieldProps
         | ((column: Column<D>) => TextFieldProps);
       onCellEditChange?: (
@@ -259,7 +259,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     footerRowProps?:
       | TableRowProps
       | ((footerGroup: DataGridHeaderGroup<D>) => TableRowProps);
-    headerCelFilterProps?:
+    headerCellFilterProps?:
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
     headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);

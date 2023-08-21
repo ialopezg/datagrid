@@ -103,17 +103,17 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
             Footer: 'Address',
             Header: 'Address',
           },
+          {
+            Header: 'City',
+            Footer: 'City',
+            accessor: 'city',
+          },
+          {
+            Header: 'State',
+            Footer: 'State',
+            accessor: 'state',
+          },
         ],
-      },
-      {
-        Header: 'City',
-        Footer: 'City',
-        accessor: 'city',
-      },
-      {
-        Header: 'State',
-        Footer: 'State',
-        accessor: 'state',
       },
     ]}
     data={[...Array(250)].map((_) => ({
