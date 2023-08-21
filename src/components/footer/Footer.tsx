@@ -10,8 +10,11 @@ interface FooterProps {}
 export const Footer: FC<FooterProps> = () => {
   const { footerProps, table } = useDataGrid();
 
+  const tableFooterProps =
+    footerProps instanceof Function ? footerProps(table) : footerProps;
+
   return (
-    <TableFooter {...footerProps}>
+    <TableFooter {...tableFooterProps}>
       {table.footerGroups.map((footerGroup: DataGridHeaderGroup) => (
         <FooterRow
           footerGroup={footerGroup}

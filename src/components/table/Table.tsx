@@ -16,12 +16,16 @@ export const Table: FC<TableProp> = () => {
     tableProps: defaultTableProps,
   } = useDataGrid();
 
+  const defaulProps =
+    defaultTableProps instanceof Function
+      ? defaultTableProps(table)
+      : defaultTableProps;
   const tableProps = {
-    ...defaultTableProps,
+    ...defaulProps,
     ...table.getTableProps(),
     style: {
       ...table.getTableProps().style,
-      ...(defaultTableProps?.style),
+      ...defaulProps?.style,
     },
   };
 

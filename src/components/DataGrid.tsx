@@ -214,7 +214,9 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     bodyCellEditProps?:
       | TextFieldProps
       | ((cell?: DataGridCell<D>) => TextFieldProps);
-    bodyProps?: TableBodyProps;
+    bodyProps?:
+      | TableBodyProps
+      | ((table: DataGridInstance<D>) => TableBodyProps);
     bodyRowProps?: TableRowProps | ((row: Row<D>) => TableRowProps);
     containerProps?:
       | TableContainerProps
@@ -251,7 +253,9 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     enableRowEditing?: boolean;
     enableSelection?: boolean;
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-    footerProps?: TableFooterProps;
+    footerProps?:
+      | TableFooterProps
+      | ((table: DataGridInstance<D>) => TableFooterProps);
     footerRowProps?:
       | TableRowProps
       | ((footerGroup: DataGridHeaderGroup<D>) => TableRowProps);
@@ -259,7 +263,9 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
       | TextFieldProps
       | ((column: Column<D>) => TextFieldProps);
     headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
-    headerProps?: TableHeadProps;
+    headerProps?:
+      | TableHeadProps
+      | ((table: DataGridInstance<D>) => TableHeadProps);
     headerRowProps?:
       | TableRowProps
       | ((row: DataGridHeaderGroup<D>) => TableRowProps);
@@ -307,7 +313,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     ) => ReactNode[];
     searchBoxProps?: TextFieldProps;
     showRowNumbers?: boolean;
-    tableProps?: TableProps;
+    tableProps?: TableProps | ((table: DataGridInstance<D>) => TableProps);
     toolbarActionsPosition?: 'bottom' | 'top';
     toolbarAlertBannerPosition?: 'bottom' | 'top';
     toolbarAlertBannerProps?:

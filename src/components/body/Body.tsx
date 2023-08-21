@@ -15,12 +15,16 @@ export const Body: FC<BodyProps> = () => {
   } = useDataGrid();
   const rows = manualPagination ? table.rows : table.page;
 
+  const bodyProps =
+    defaultBodyProps instanceof Function
+      ? defaultBodyProps(table)
+      : defaultBodyProps;
   const tableBodyProps = {
-    ...defaultBodyProps,
+    ...bodyProps,
     ...table.getTableBodyProps(),
     style: {
       ...table.getTableBodyProps().style,
-      ...defaultBodyProps?.style,
+      ...bodyProps?.style,
     },
   };
 

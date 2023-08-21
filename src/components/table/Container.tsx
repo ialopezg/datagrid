@@ -1,4 +1,4 @@
-import { Collapse, LinearProgress, Paper, TableContainer } from '@mui/material';
+import { Box, Collapse, LinearProgress, Paper, TableContainer } from '@mui/material';
 import React, { FC, useEffect, useRef } from 'react';
 
 import Table from './Table';
@@ -66,7 +66,9 @@ export const Container: FC<ContainerProps> = () => {
         <LinearProgress />
       </Collapse>
 
-      <Table />
+      <Box sx={{ maxWidth: '100%', overflowX: 'auto' }}>
+        <Table />
+      </Box>
 
       {!hideToolbarBottom && <ToolbarBottom />}
     </TableContainer>
