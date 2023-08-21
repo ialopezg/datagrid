@@ -8,6 +8,7 @@ export interface DataGridContextProps<D extends {}> extends DataGridProps<D> {
   hasExpandableRows: boolean;
   hasExpandedRows: boolean;
   icons: DataGridIcons;
+  idPrefix: string;
   itemForUpdate: DataGridRow<D> | null;
   localization: DataGridLocalization;
   setDensePadding: (value: boolean) => void;

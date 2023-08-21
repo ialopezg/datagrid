@@ -32,6 +32,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       HideColumnIcon,
       SortIcon,
     },
+    idPrefix,
     localization,
     setShowFilters,
   } = useDataGrid();
@@ -59,7 +60,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           .getElementById(
             // @ts-ignore
             column.filterCellTextFieldProps?.id ??
-              `datagrid-filter-${column.id}-column`,
+              `datagrid-${idPrefix}-${column.id}-filter-column`,
           )
           ?.focus(),
       200,

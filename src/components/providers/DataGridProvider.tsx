@@ -77,6 +77,10 @@ export const DataGridProvider = <D extends {}>(
     ...hooks,
   ) as DataGridInstance<D>;
 
+  const idPrefix = useMemo(
+    () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),
+    [props.idPrefix],
+  );
   const hasExpandableRows = useMemo(
     () => table.rows.some((row: DataGridRow<D>) => row.canExpand),
     [table.rows],
@@ -92,6 +96,7 @@ export const DataGridProvider = <D extends {}>(
         ...props,
         hasExpandableRows,
         hasExpandedRows,
+        idPrefix,
         setDensePadding,
         setFullScreen,
         setCurrentEditingRow,

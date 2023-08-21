@@ -10,6 +10,7 @@ export const ToggleSearchAction: FC<ToggleSearchActionProps> = ({
 }) => {
   const {
     icons: { SearchIcon, SearchOffIcon },
+    idPrefix,
     localization,
     searchBoxProps,
     setShowSearch,
@@ -23,7 +24,9 @@ export const ToggleSearchAction: FC<ToggleSearchActionProps> = ({
     setTimeout(
       () =>
         document
-          .getElementById(searchBoxProps?.id ?? 'datagrid-search-box')
+          .getElementById(
+            searchBoxProps?.id ?? `datagrid-${idPrefix}-search-box`,
+          )
           ?.focus(),
       200,
     );

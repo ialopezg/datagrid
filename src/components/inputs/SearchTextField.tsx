@@ -9,6 +9,7 @@ interface SearchTextFieldProps {}
 export const SearchTextField: FC<SearchTextFieldProps> = () => {
   const {
     icons: { CloseIcon, SearchIcon },
+    idPrefix,
     localization,
     onGlobalFilterChange,
     searchBoxProps,
@@ -32,7 +33,7 @@ export const SearchTextField: FC<SearchTextFieldProps> = () => {
   return (
     <Collapse in={table.state.showSearch} orientation="horizontal">
       <TextField
-        id="datagrid-search-box"
+        id={`datagrid-${idPrefix}-search-box`}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setSearchValue(e.target.value);
           onSearchAction(e);

@@ -14,12 +14,8 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
   row,
   selectAll,
 }) => {
-  const {
-    localization,
-    onSelectChange,
-    onSelectAllChange,
-    table,
-  } = useDataGrid();
+  const { localization, onSelectChange, onSelectAllChange, table } =
+    useDataGrid();
 
   const onRowSelectedChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (selectAll) {
@@ -41,9 +37,7 @@ export const ToggleSelectRowAction: FC<SelectRowActionProps> = ({
         arrow
         enterDelay={1000}
         enterNextDelay={1000}
-        title={
-          selectAll ? localization.selectAllRows : localization.selectRow
-        }
+        title={selectAll ? localization.selectAllRows : localization.selectRow}
       >
         <Checkbox
           inputProps={{

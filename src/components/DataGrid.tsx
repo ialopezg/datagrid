@@ -275,6 +275,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     hideToolbarBottom?: boolean;
     hideToolbarTop?: boolean;
     icons?: Partial<DataGridIcons>;
+    idPrefix?: string;
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<DataGridLocalization>;

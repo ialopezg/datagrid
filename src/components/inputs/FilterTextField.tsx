@@ -12,6 +12,7 @@ interface FilterTextFieldProps {
 export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   const {
     icons: { CloseIcon, FilteringOnIcon },
+    idPrefix,
     localization,
   } = useDataGrid();
   const [filterValue, setFilterValue] = useState<string>('');
@@ -32,7 +33,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   return (
     <TextField
       fullWidth
-      id={`datagrid-filter-${column.id}-column`}
+      id={`datagrid-${idPrefix}-${column.id}-filter-column`}
       inputProps={{
         style: {
           textOverflow: 'ellipsis',
