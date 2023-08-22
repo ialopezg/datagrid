@@ -2,6 +2,7 @@ import {
   Box,
   Collapse,
   Divider,
+  IconButton,
   styled,
   TableCell,
   TableSortLabel,
@@ -52,7 +53,9 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     disableFilters,
     enableColumnResizing,
     headerCellProps: defaultCellProps,
+    icons: { FilterAltIcon, FilterAltOffIcon },
     localization,
+    setShowFilters,
     table,
   } = useDataGrid();
 
@@ -77,7 +80,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
     },
   };
 
-  const isParent = (column?.columns?.length ?? 0) > 0;
+  const isParent = !!column?.columns?.length;
 
   const tooltipTitle = column.isSorted
     ? column.isSortedDesc
@@ -91,6 +94,13 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         String(column.Header),
       );
 
+  const filterMode = table.state.currentFilterTypes[column.id];
+  const filterTooltip = !!column.filterValue
+    ? localization.filterModeByColumn
+        .replace('{column}', String(column.Header))
+        // @ts-ignore
+        .replace('{mode}', localization[filterMode])
+    : localization.toggleFilters;
   const columnHeader = String(column.render('Header'));
 
   return (
@@ -131,6 +141,32 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
                 active={column.isSorted}
                 direction={column.isSortedDesc ? 'desc' : 'asc'}
               />
+            </Tooltip>
+          )}
+          {!isParent && column.canFilter && (
+            <Tooltip arrow title={filterTooltip}>
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowFilters(!table.state.showFilters);
+                }}
+                size="small"
+                sx={{
+                  opacity: !!column.filterValue ? 0.8 : 0,
+                  px: '2px',
+                  m: 0,
+                  transition: 'all 0.2s ease-in-out',
+                  '&:hover': {
+                    opacity: 0.8,
+                  },
+                }}
+              >
+                {table.state.showFilters && !column.filterValue ? (
+                  <FilterAltOffIcon fontSize="small" />
+                ) : (
+                  <FilterAltIcon fontSize="small" />
+                )}
+              </IconButton>
             </Tooltip>
           )}
         </Box>

@@ -85,6 +85,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         inputProps={{
           style: {
             textOverflow: 'ellipsis',
+            width: filterChipLabel ? 0 : 'auto',
           },
           title: placeholder,
         }}
@@ -147,7 +148,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         {...textFieldProps}
         sx={{
           m: '0 -0.25rem',
-          minWidth: '5rem',
+          minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           ...textFieldProps?.sx,
         }}

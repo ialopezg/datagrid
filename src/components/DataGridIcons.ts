@@ -10,6 +10,8 @@ import DensityPaddingSmallIcon from '@mui/icons-material/DensitySmall';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandIcon from '@mui/icons-material/ExpandMore';
 import ExpandAllIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 import FilteringOffIcon from '@mui/icons-material/FilterListOff';
 import FilteringOnIcon from '@mui/icons-material/FilterList';
 import FullScreenOffIcon from '@mui/icons-material/FullscreenExit';
@@ -35,6 +37,8 @@ export interface DataGridIcons {
   EditIcon: any;
   ExpandIcon: any;
   ExpandAllIcon: any;
+  FilterAltIcon: any;
+  FilterAltOffIcon: any;
   FilteringOffIcon: any;
   FilteringOnIcon: any;
   FullScreenOffIcon: any;
@@ -61,6 +65,8 @@ export const DefaultDataGridIcons: DataGridIcons = {
   EditIcon,
   ExpandIcon,
   ExpandAllIcon,
+  FilterAltIcon,
+  FilterAltOffIcon,
   FilteringOffIcon,
   FilteringOnIcon,
   FullScreenOffIcon,

@@ -18,12 +18,15 @@ export const containsFilter = (
   id: string,
   value: string | number,
 ) =>
-  rows
+{
+  console.log(id);
+  return rows
     .filter((row) => row.values[id])
     .toString()
     .toLowerCase()
     .trim()
     .includes(value.toString().toLowerCase().trim());
+}
 containsFilter.autoRemove = (value: any) => !value;
 
 export const startsWidthFilter = (

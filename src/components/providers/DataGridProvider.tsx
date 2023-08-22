@@ -67,7 +67,7 @@ export const DataGridProvider = <D extends {} = {}>(
     Object.assign(
       {},
       ...props.columns
-        .map((c) => String(c.accessor))
+        .map((c) => String(c.accessor?.toString()))
         .map((accessor) => ({
           [accessor]:
             props?.initialState?.filters?.[accessor as any] ?? 'fuzzy',

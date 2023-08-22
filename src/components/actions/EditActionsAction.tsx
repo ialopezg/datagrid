@@ -13,20 +13,20 @@ export const EditActionsAction: FC<EditActionsActionProps> = ({ row }) => {
     icons: { CancelIcon, SaveIcon },
     localization,
     onRowEditSubmit,
-    setCurrentEditRow,
+    setCurrentEditingRow,
     table: {
       state: { currentEditingRow },
     },
   } = useDataGrid();
 
   const onSaveButtonClick = async () => {
-    setCurrentEditRow(null);
+    setCurrentEditingRow(null);
     await onRowEditSubmit?.(currentEditingRow ?? row);
   };
 
   const onCancelButtonClick = () => {
     row.values = row.original;
-    setCurrentEditRow(null);
+    setCurrentEditingRow(null);
   };
 
   return (

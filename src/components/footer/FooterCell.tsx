@@ -16,7 +16,8 @@ export const FooterCell: FC<FooterCellProps> = ({ column }) => {
       state: { densePadding },
     },
   } = useDataGrid();
-  const isParent = (column?.columns?.length ?? 0) > 0;
+
+  const isParent = !!column?.columns?.length;
 
   const bodyFooterCellProps =
     footerCellProps instanceof Function

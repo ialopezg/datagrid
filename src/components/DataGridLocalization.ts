@@ -6,18 +6,19 @@ export interface DataGridLocalization {
   clearSearch: string;
   clearSorting: string;
   columnActions: string;
-  containsExact: string;
+  contains: string;
   edit: string;
   editRow: string;
   empty: string;
-  endsWith: string;
+  endsWidth: string;
   equals: string;
   expand: string;
   expandAll: string;
   filter: string;
   filterByColumn: string;
   filterMode: string;
-  fuzzyMatch: string;
+  filterModeByColumn: string;
+  fuzzy: string;
   groupByColumn: string;
   groupedBy: string;
   ungroupByColumn: string;
@@ -52,18 +53,19 @@ export const DefaultLocalization: DataGridLocalization = {
   clearSearch: 'Clear search',
   clearSorting: 'Clear sorting',
   columnActions: 'Column actions',
-  containsExact: 'Contains exact',
+  contains: 'Contains exact',
   edit: 'Edit',
   editRow: 'Edit row',
   empty: 'Empty',
-  endsWith: 'Ends with',
+  endsWidth: 'Ends with',
   equals: 'Equals',
   expand: 'Expand',
   expandAll: 'Expand all',
   filter: 'Filter',
   filterByColumn: 'Filter by {column}',
   filterMode: 'Filter mode',
-  fuzzyMatch: 'Fuzzy match',
+  filterModeByColumn: 'Filtering by {column} - ({mode})',
+  fuzzy: 'Fuzzy match',
   groupByColumn: 'Group by {column}',
   groupedBy: 'Grouped by ',
   ungroupByColumn: 'Ungroup by {column}',

@@ -71,7 +71,10 @@ import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
-import { DefaultLocalization, DataGridLocalization } from './localization';
+import {
+  DefaultLocalization,
+  DataGridLocalization,
+} from './DataGridLocalization';
 import { DataGridIcons, DefaultDataGridIcons } from './DataGridIcons';
 
 export type DataGridOptions<D extends {} = {}> = TableOptions<D> &

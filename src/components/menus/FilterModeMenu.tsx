@@ -26,12 +26,12 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
     () => [
       {
         type: 'fuzzy',
-        label: localization.fuzzyMatch,
+        label: localization.fuzzy,
         divider: false,
       },
       {
         type: 'contains',
-        label: localization.containsExact,
+        label: localization.contains,
         divider: true,
       },
       {
@@ -41,7 +41,7 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
       },
       {
         type: 'endsWidth',
-        label: localization.endsWith,
+        label: localization.endsWidth,
         divider: true,
       },
       {

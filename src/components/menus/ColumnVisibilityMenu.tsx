@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ColumnVisibilityMenu: FC<Props> = ({ column }) => {
-  const isParentHeader = (column?.columns?.length ?? 0) > 0;
+  const isParentHeader = !!column?.columns?.length;
 
   const allChildColumnsVisible =
     isParentHeader &&

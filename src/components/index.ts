@@ -4,7 +4,6 @@ export * from './footer';
 export * from './header';
 export * from './helpers';
 export * from './inputs';
-export * from './localization';
 export * from './menus';
 export * from './providers';
 export * from './table';

@@ -7,7 +7,7 @@ import {
   DataGridRow,
 } from '../DataGrid';
 import { DataGridIcons } from '../DataGridIcons';
-import { DataGridLocalization } from '../localization';
+import { DataGridLocalization } from '../DataGridLocalization';
 
 export interface DataGridContextProps<D extends {} = {}>
   extends DataGridProps<D> {
