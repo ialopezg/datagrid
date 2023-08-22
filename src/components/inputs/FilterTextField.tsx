@@ -83,9 +83,10 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         fullWidth
         id={`datagrid-${idPrefix}-${column.id}-filter-column`}
         inputProps={{
-          style: {
+          disabled: filterChipLabel,
+          sx: {
             textOverflow: 'ellipsis',
-            width: filterChipLabel ? 0 : 'auto',
+            width: filterChipLabel ? 0 : undefined,
           },
           title: placeholder,
         }}

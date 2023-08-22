@@ -1,4 +1,4 @@
-import { Menu, MenuItem, MenuList } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import React, { FC, useMemo } from 'react';
 import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
@@ -92,20 +92,22 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
       anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      MenuListProps={{
+        dense: table.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={table.state.densePadding} disablePadding>
-        {filterTypes.map(({ type, label, divider }) => (
-          <MenuItem
-            divider={divider}
-            key={type}
-            onClick={() => onFilterModeChange(type)}
-            selected={type === filterType}
-            value={type}
-          >
-            {label}
-          </MenuItem>
-        ))}
-      </MenuList>
+      {filterTypes.map(({ type, label, divider }) => (
+        <MenuItem
+          divider={divider}
+          key={type}
+          onClick={() => onFilterModeChange(type)}
+          selected={type === filterType}
+          value={type}
+        >
+          {label}
+        </MenuItem>
+      ))}
     </Menu>
   );
 };

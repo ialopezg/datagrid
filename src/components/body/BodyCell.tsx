@@ -1,4 +1,4 @@
-import { TableCell, TableCellProps } from '@mui/material';
+import { Skeleton, TableCell, TableCellProps } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridCell } from '../DataGrid';
@@ -24,6 +24,8 @@ interface BodyCellProps {
 export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   const {
     bodyCellProps,
+    bodyCellSkeletonProps,
+    isLoading,
     onCellClick,
     table: {
       state: { currentEditingRow, densePadding },
@@ -61,7 +63,14 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
         } as TableCellProps['sx']
       }
     >
-      {currentEditingRow?.id === cell.row.id ? (
+      {isLoading ? (
+        <Skeleton
+          animation="wave"
+          height={20}
+          width={Math.random() * (120 - 60) + 60}
+          {...bodyCellSkeletonProps}
+        />
+      ) : currentEditingRow?.id === cell.row.id ? (
         <EditCellTextField cell={cell} />
       ) : cell.isPlaceholder ? null : cell.isAggregated ? (
         cell.render('Aggregated')

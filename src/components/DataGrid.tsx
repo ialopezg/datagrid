@@ -1,6 +1,8 @@
 import {
   AlertProps,
   IconButtonProps,
+  LinearProgressProps,
+  SkeletonProps,
   TableBodyProps,
   TableCellProps,
   TableContainerProps,
@@ -228,6 +230,9 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     bodyCellEditProps?:
       | TextFieldProps
       | ((cell?: DataGridCell<D>) => TextFieldProps);
+    bodyCellSkeletonProps?:
+      | SkeletonProps
+      | ((cell?: DataGridCell<D>) => SkeletonProps);
     bodyProps?:
       | TableBodyProps
       | ((table: DataGridInstance<D>) => TableBodyProps);
@@ -293,6 +298,9 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<DataGridLocalization>;
+    linearProgressProps:
+      | LinearProgressProps
+      | ((table: DataGridInstance<D>) => LinearProgressProps);
     onCellClick?: (
       e: MouseEvent<HTMLTableCellElement>,
       cell: DataGridCell<D>,

@@ -1,10 +1,4 @@
-import {
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuList,
-} from '@mui/material';
+import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridRow } from '../DataGrid';
@@ -36,19 +30,21 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      MenuListProps={{
+        dense: table.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={table.state.densePadding} disablePadding>
-        {enableRowEditing && (
-          <MenuItem onClick={onRowEditAction}>
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText>{localization.editRow}</ListItemText>
-          </MenuItem>
-        )}
+      {enableRowEditing && (
+        <MenuItem onClick={onRowEditAction}>
+          <ListItemIcon>
+            <EditIcon />
+          </ListItemIcon>
+          <ListItemText>{localization.editRow}</ListItemText>
+        </MenuItem>
+      )}
 
-        {rowActionMenuItems?.(row, table, () => setAnchorEl(null)) ?? null}
-      </MenuList>
+      {rowActionMenuItems?.(row, table, () => setAnchorEl(null)) ?? null}
     </Menu>
   );
 };

@@ -15,6 +15,7 @@ export const Container: FC<ContainerProps> = () => {
     hideToolbarTop,
     isFetching,
     isLoading,
+    linearProgressProps: defaultLinearProgressProps,
     table,
   } = useDataGrid();
   const fullScreen = table.state.fullScreen;
@@ -41,6 +42,10 @@ export const Container: FC<ContainerProps> = () => {
     defaultContainerProps instanceof Function
       ? defaultContainerProps(table)
       : defaultContainerProps;
+  const linearProgressProps =
+    defaultLinearProgressProps instanceof Function
+      ? defaultLinearProgressProps(table)
+      : defaultLinearProgressProps;
 
   return (
     <TableContainer
@@ -63,7 +68,7 @@ export const Container: FC<ContainerProps> = () => {
       {!hideToolbarTop && <ToolbarTop />}
 
       <Collapse in={isFetching || isLoading} unmountOnExit>
-        <LinearProgress />
+        <LinearProgress {...linearProgressProps} />
       </Collapse>
 
       <Box sx={{ maxWidth: '100%', overflowX: 'auto' }}>

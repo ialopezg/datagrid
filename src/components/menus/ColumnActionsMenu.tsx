@@ -4,7 +4,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  MenuList,
 } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 
@@ -102,58 +101,60 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
+      MenuListProps={{
+        dense: table.state.densePadding,
+        disablePadding: true,
+      }}
     >
-      <MenuList dense={table.state.densePadding} disablePadding>
-        {!disableSortBy &&
-          column.canSort && [
-            <MenuItem
-              disabled={!column.isSorted}
-              key="datagrid-sort-clear-column-action"
-              onClick={onClearSorting}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <ClearAllIcon />
-              </ListItemIcon>
-              <ListItemText>{localization.clearSorting}</ListItemText>
-            </MenuItem>,
-            <MenuItem
-              disabled={column.isSorted && !column.isSortedDesc}
-              key="datagrid-sort-asc-column-action"
-              onClick={onSortActionAsc}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <SortIcon />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.sortByColumnAscending?.replace(
-                  '{column}',
-                  String(column.Header),
-                )}
-              </ListItemText>
-            </MenuItem>,
-            <MenuItem
-              disabled={column.isSorted && column.isSortedDesc}
-              divider={
-                !disableFilters || enableColumnGrouping || !disableColumnHiding
-              }
-              key="datagrid-sort-desc-column-action"
-              onClick={onSortActionDesc}
-              sx={commonMenuItemStyles}
-            >
-              <ListItemIcon>
-                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-              </ListItemIcon>
-              <ListItemText>
-                {localization.sortByColumnDescending?.replace(
-                  '{column}',
-                  String(column.Header),
-                )}
-              </ListItemText>
-            </MenuItem>,
-          ]}
-      </MenuList>
+      {!disableSortBy &&
+        column.canSort && [
+          <MenuItem
+            disabled={!column.isSorted}
+            key="datagrid-sort-clear-column-action"
+            onClick={onClearSorting}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <ClearAllIcon />
+            </ListItemIcon>
+            <ListItemText>{localization.clearSorting}</ListItemText>
+          </MenuItem>,
+          <MenuItem
+            disabled={column.isSorted && !column.isSortedDesc}
+            key="datagrid-sort-asc-column-action"
+            onClick={onSortActionAsc}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <SortIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.sortByColumnAscending?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
+          </MenuItem>,
+          <MenuItem
+            disabled={column.isSorted && column.isSortedDesc}
+            divider={
+              !disableFilters || enableColumnGrouping || !disableColumnHiding
+            }
+            key="datagrid-sort-desc-column-action"
+            onClick={onSortActionDesc}
+            sx={commonMenuItemStyles}
+          >
+            <ListItemIcon>
+              <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.sortByColumnDescending?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
+          </MenuItem>,
+        ]}
 
       {!disableFilters &&
         column.canFilter && [
