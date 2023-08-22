@@ -85,7 +85,7 @@ export const DefaultLocalization: DataGridLocalization = {
   thenByMessage: ', then by ',
   toggleColumnVisibility: 'Toggle columns visibility',
   toggleDensePadding: 'Toggle dense padding',
-  toggleFilters: 'Toggle filters',
+  toggleFilters: 'Show/Hide filters',
   toggleFullScreen: 'Toggle full screen',
-  toggleSearch: 'Toggle search',
+  toggleSearch: 'Show/Hide search',
 };

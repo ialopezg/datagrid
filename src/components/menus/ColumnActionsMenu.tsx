@@ -1,6 +1,4 @@
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import {
-  Divider,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -12,7 +10,12 @@ import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
-import FilterTypeMenu from './FilterTypeMenu';
+import FilterModeMenu from './FilterModeMenu';
+
+const commonMenuItemStyles = {
+  display: 'flex',
+  alignItems: 'center',
+};
 
 interface ColumnActionsMenuProps {
   anchorEl: HTMLElement | null;
@@ -31,6 +34,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     disableSortBy,
     enableColumnGrouping,
     icons: {
+      ArrowRightIcon,
       ClearAllIcon,
       FilteringOnIcon,
       GroupByIcon,
@@ -40,10 +44,12 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     idPrefix,
     localization,
     setShowFilters,
+    table,
   } = useDataGrid();
 
-  const [filterAnchorEl, setFilterAnchorEl] =
-    useState<null | HTMLElement>(null);
+  const [filterAnchorEl, setFilterAnchorEl] = useState<null | HTMLElement>(
+    null,
+  );
 
   const onFilterModeHover = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -97,13 +103,14 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
     >
-      <MenuList>
+      <MenuList dense={table.state.densePadding} disablePadding>
         {!disableSortBy &&
           column.canSort && [
             <MenuItem
               disabled={!column.isSorted}
               key="datagrid-sort-clear-column-action"
               onClick={onClearSorting}
+              sx={commonMenuItemStyles}
             >
               <ListItemIcon>
                 <ClearAllIcon />
@@ -114,6 +121,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
               disabled={column.isSorted && !column.isSortedDesc}
               key="datagrid-sort-asc-column-action"
               onClick={onSortActionAsc}
+              sx={commonMenuItemStyles}
             >
               <ListItemIcon>
                 <SortIcon />
@@ -127,8 +135,12 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             </MenuItem>,
             <MenuItem
               disabled={column.isSorted && column.isSortedDesc}
+              divider={
+                !disableFilters || enableColumnGrouping || !disableColumnHiding
+              }
               key="datagrid-sort-desc-column-action"
               onClick={onSortActionDesc}
+              sx={commonMenuItemStyles}
             >
               <ListItemIcon>
                 <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
@@ -145,10 +157,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
 
       {!disableFilters &&
         column.canFilter && [
-          <Divider key="datagrid-filter-column-action-divider" />,
           <MenuItem
+            divider={enableColumnGrouping || !disableColumnHiding}
             key="datagrid-filter-column-action"
             onClick={onFilterByColumn}
+            sx={commonMenuItemStyles}
           >
             <ListItemIcon>
               <FilteringOnIcon />
@@ -159,11 +172,16 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
                 String(column.Header),
               )}
             </ListItemText>
-            <IconButton size="small" onMouseEnter={onFilterModeHover}>
+            <IconButton
+              onClick={onFilterModeHover}
+              onMouseEnter={onFilterModeHover}
+              size="small"
+              sx={{ p: 0 }}
+            >
               <ArrowRightIcon />
             </IconButton>
           </MenuItem>,
-          <FilterTypeMenu
+          <FilterModeMenu
             anchorEl={filterAnchorEl}
             column={column}
             key="datagrid-filter-mode-column-action-menu"
@@ -174,10 +192,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
 
       {enableColumnGrouping &&
         column.canGroupBy && [
-          <Divider key="datagrid-group-column-action-divider" />,
           <MenuItem
+            divider={!disableColumnHiding}
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
+            sx={commonMenuItemStyles}
           >
             <ListItemIcon>
               <GroupByIcon />
@@ -191,8 +210,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
         ]}
 
       {!disableColumnHiding && [
-        <Divider key="datagrid-column-hidding-column-action-divider" />,
-        <MenuItem onClick={onHideColumnAction}>
+        <MenuItem
+          key="datagrid-column-visibility-action"
+          onClick={onHideColumnAction}
+          sx={commonMenuItemStyles}
+        >
           <ListItemIcon>
             <HideColumnIcon />
           </ListItemIcon>

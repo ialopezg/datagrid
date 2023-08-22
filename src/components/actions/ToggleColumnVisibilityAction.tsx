@@ -5,6 +5,7 @@ import {
   IconButton,
   IconButtonProps,
   Menu,
+  MenuList,
   Tooltip,
 } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
@@ -48,38 +49,41 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
         open={!!anchorEl}
         onClose={() => setAnchorEl(null)}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            p: '0 0.5rem 0.5rem 0.5rem',
-          }}
-        >
-          <Button
-            disabled={
-              !table.getToggleHideAllColumnsProps().checked &&
-              !table.getToggleHideAllColumnsProps().indeterminate
-            }
-            onClick={() => table.toggleHideAllColumns(true)}
+        <MenuList dense={table.state.densePadding} disablePadding>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              p: '0 0.5rem 0.5rem 0.5rem',
+            }}
           >
-            {localization.hideAll}
-          </Button>
-          <Button
-            disabled={table.getToggleHideAllColumnsProps().checked}
-            onClick={() => table.toggleHideAllColumns(false)}
-          >
-            {localization.showAll}
-          </Button>
-        </Box>
+            <Button
+              disabled={
+                !table.getToggleHideAllColumnsProps().checked &&
+                !table.getToggleHideAllColumnsProps().indeterminate
+              }
+              onClick={() => table.toggleHideAllColumns(true)}
+            >
+              {localization.hideAll}
+            </Button>
+            <Button
+              disabled={table.getToggleHideAllColumnsProps().checked}
+              onClick={() => table.toggleHideAllColumns(false)}
+            >
+              {localization.showAll}
+            </Button>
+          </Box>
 
-        <Divider />
+          <Divider />
 
-        {table.columns.map((column: DataGridColumnInstance) => (
-          <ColumnVisibilityMenu
-            column={column}
-            key={`column-hide-action${column.id}`}
-          />
-        ))}
+
+          {table.columns.map((column: DataGridColumnInstance) => (
+            <ColumnVisibilityMenu
+              column={column}
+              key={`column-hide-action${column.id}`}
+            />
+          ))}
+        </MenuList>
       </Menu>
     </>
   );

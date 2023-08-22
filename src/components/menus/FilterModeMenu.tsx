@@ -1,16 +1,16 @@
-import { Divider, Menu, MenuItem, Typography } from '@mui/material';
+import { Menu, MenuItem, MenuList } from '@mui/material';
 import React, { FC, useMemo } from 'react';
 import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 
-interface FilterTypeMenuProps {
+interface FilterModeMenuProps {
   anchorEl: HTMLElement | null;
   column: DataGridHeaderGroup;
   onSelect?: () => void;
   setAnchorEl: (value: HTMLElement | null) => void;
 }
 
-export const FilterTypeMenu: FC<FilterTypeMenuProps> = ({
+export const FilterModeMenu: FC<FilterModeMenuProps> = ({
   anchorEl,
   column,
   onSelect,
@@ -90,26 +90,24 @@ export const FilterTypeMenu: FC<FilterTypeMenuProps> = ({
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'center', horizontal: 'right' }}
-      open={!!anchorEl}
       onClose={() => setAnchorEl(null)}
+      open={!!anchorEl}
     >
-      <Typography sx={{ fontWeight: 'bold', p: '1rem', fontSize: '1.1rem' }}>
-        {localization.filterMode}
-      </Typography>
-      <Divider />
-      {filterTypes.map(({ type, label, divider }) => (
-        <MenuItem
-          divider={divider}
-          key={type}
-          onClick={() => onFilterModeChange(type)}
-          selected={type === filterType}
-          value={type}
-        >
-          {label}
-        </MenuItem>
-      ))}
+      <MenuList dense={table.state.densePadding} disablePadding>
+        {filterTypes.map(({ type, label, divider }) => (
+          <MenuItem
+            divider={divider}
+            key={type}
+            onClick={() => onFilterModeChange(type)}
+            selected={type === filterType}
+            value={type}
+          >
+            {label}
+          </MenuItem>
+        ))}
+      </MenuList>
     </Menu>
   );
 };
 
-export default FilterTypeMenu;
+export default FilterModeMenu;

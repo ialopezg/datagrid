@@ -1,3 +1,4 @@
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
@@ -22,6 +23,7 @@ import SearchOffIcon from '@mui/icons-material/SearchOff';
 import SortIcon from '@mui/icons-material/Sort';
 
 export interface DataGridIcons {
+  ArrowRightIcon: any;
   CancelIcon: any;
   ClearAllIcon: any;
   CloseIcon: any;
@@ -47,6 +49,7 @@ export interface DataGridIcons {
 }
 
 export const DefaultDataGridIcons: DataGridIcons = {
+  ArrowRightIcon,
   CancelIcon,
   ClearAllIcon,
   CloseIcon,

@@ -10,7 +10,7 @@ import { useAsyncDebounce } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
-import FilterTypeMenu from '../menus/FilterTypeMenu';
+import FilterModeMenu from '../menus/FilterModeMenu';
 import { useDataGrid } from '../providers';
 
 interface FilterTextFieldProps {
@@ -71,7 +71,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   }
 
   const filterType = table.state.currentFilterTypes[column.id];
-  const showFilterChip = ['empty', 'notEmpty'].includes(filterType);
+  const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
   const placeholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.Header),
@@ -95,7 +95,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         }}
         onClick={(e) => e.stopPropagation()}
         placeholder={
-          showFilterChip
+          filterChipLabel
             ? ''
             : localization.filterByColumn?.replace(
                 '{column}',
@@ -116,7 +116,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
                   <FilteringOnIcon />
                 </IconButton>
               </Tooltip>
-              {showFilterChip && (
+              {filterChipLabel && (
                 <Chip
                   label={
                     localization[filterType === 'empty' ? 'empty' : 'notEmpty']
@@ -126,7 +126,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
               )}
             </InputAdornment>
           ),
-          endAdornment: !showFilterChip && (
+          endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
               <Tooltip arrow placement="right" title={localization.clearFilter}>
                 <span>
@@ -145,10 +145,15 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           ),
         }}
         {...textFieldProps}
-        sx={{ minWidth: '6rem', ...textFieldProps?.sx }}
+        sx={{
+          m: '0 -0.25rem',
+          minWidth: '5rem',
+          width: 'calc(100% + 0.5rem)',
+          ...textFieldProps?.sx,
+        }}
       />
 
-      <FilterTypeMenu
+      <FilterModeMenu
         anchorEl={anchorEl}
         column={column}
         setAnchorEl={setAnchorEl}

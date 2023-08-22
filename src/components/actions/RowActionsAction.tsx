@@ -29,7 +29,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
     localization,
     rowActions,
     rowActionMenuItems,
-    setCurrentEditRow,
+    setCurrentEditingRow,
     table,
   } = useDataGrid();
 
@@ -43,7 +43,7 @@ export const RowActionsAction: FC<RowActionsActionProps> = ({ row }) => {
   };
 
   const onRowEditAction = () => {
-    setCurrentEditRow({ ...row });
+    setCurrentEditingRow({ ...row });
     setAnchorEl(null);
   };
 
