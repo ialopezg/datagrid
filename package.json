@@ -1,6 +1,6 @@
 {
   "name": "@ialopezg/datagrid",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "author": "Isidro A. Lopez G.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -58,6 +58,9 @@
       "limit": "20 KB"
     }
   ],
+  "dependencies": {
+    "match-sorter": "^6.3.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@emotion/react": "^11.8.1",

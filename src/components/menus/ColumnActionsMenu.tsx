@@ -1,13 +1,18 @@
-import { Divider, Menu, MenuItem } from '@mui/material';
-import React, { FC } from 'react';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import {
+  Divider,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  MenuList,
+} from '@mui/material';
+import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
-
-const menuItemStyles = {
-  display: 'flex',
-  gap: '0.75rem',
-};
+import FilterTypeMenu from './FilterTypeMenu';
 
 interface ColumnActionsMenuProps {
   anchorEl: HTMLElement | null;
@@ -37,6 +42,14 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     setShowFilters,
   } = useDataGrid();
 
+  const [filterAnchorEl, setFilterAnchorEl] =
+    useState<null | HTMLElement>(null);
+
+  const onFilterModeHover = (e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setFilterAnchorEl(e.currentTarget);
+  };
+
   const onClearSorting = () => {
     column.clearSortBy();
     setAnchorEl(null);
@@ -52,7 +65,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     setAnchorEl(null);
   };
 
-  const onFilterByColumnAction = () => {
+  const onFilterByColumn = () => {
     setShowFilters(true);
     setTimeout(
       () =>
@@ -84,56 +97,79 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
     >
-      {!disableSortBy &&
-        column.canSort && [
-          <MenuItem
-            disabled={!column.isSorted}
-            key="datagrid-sort-clear-column-action"
-            onClick={onClearSorting}
-            sx={menuItemStyles}
-          >
-            <ClearAllIcon /> {localization.clearSorting}
-          </MenuItem>,
-          <MenuItem
-            disabled={column.isSorted && !column.isSortedDesc}
-            key="datagrid-sort-asc-column-action"
-            onClick={onSortActionAsc}
-            sx={menuItemStyles}
-          >
-            <SortIcon />{' '}
-            {localization.sortByColumnAscending?.replace(
-              '{column}',
-              String(column.Header),
-            )}
-          </MenuItem>,
-          <MenuItem
-            disabled={column.isSorted && column.isSortedDesc}
-            key="datagrid-sort-desc-column-action"
-            onClick={onSortActionDesc}
-            sx={menuItemStyles}
-          >
-            <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />{' '}
-            {localization.sortByColumnDescending?.replace(
-              '{column}',
-              String(column.Header),
-            )}
-          </MenuItem>,
-        ]}
+      <MenuList>
+        {!disableSortBy &&
+          column.canSort && [
+            <MenuItem
+              disabled={!column.isSorted}
+              key="datagrid-sort-clear-column-action"
+              onClick={onClearSorting}
+            >
+              <ListItemIcon>
+                <ClearAllIcon />
+              </ListItemIcon>
+              <ListItemText>{localization.clearSorting}</ListItemText>
+            </MenuItem>,
+            <MenuItem
+              disabled={column.isSorted && !column.isSortedDesc}
+              key="datagrid-sort-asc-column-action"
+              onClick={onSortActionAsc}
+            >
+              <ListItemIcon>
+                <SortIcon />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.sortByColumnAscending?.replace(
+                  '{column}',
+                  String(column.Header),
+                )}
+              </ListItemText>
+            </MenuItem>,
+            <MenuItem
+              disabled={column.isSorted && column.isSortedDesc}
+              key="datagrid-sort-desc-column-action"
+              onClick={onSortActionDesc}
+            >
+              <ListItemIcon>
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              </ListItemIcon>
+              <ListItemText>
+                {localization.sortByColumnDescending?.replace(
+                  '{column}',
+                  String(column.Header),
+                )}
+              </ListItemText>
+            </MenuItem>,
+          ]}
+      </MenuList>
 
       {!disableFilters &&
         column.canFilter && [
           <Divider key="datagrid-filter-column-action-divider" />,
           <MenuItem
             key="datagrid-filter-column-action"
-            onClick={onFilterByColumnAction}
-            sx={menuItemStyles}
+            onClick={onFilterByColumn}
           >
-            <FilteringOnIcon />{' '}
-            {localization.filterByColumn?.replace(
-              '{column}',
-              String(column.Header),
-            )}
+            <ListItemIcon>
+              <FilteringOnIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization.filterByColumn?.replace(
+                '{column}',
+                String(column.Header),
+              )}
+            </ListItemText>
+            <IconButton size="small" onMouseEnter={onFilterModeHover}>
+              <ArrowRightIcon />
+            </IconButton>
           </MenuItem>,
+          <FilterTypeMenu
+            anchorEl={filterAnchorEl}
+            column={column}
+            key="datagrid-filter-mode-column-action-menu"
+            setAnchorEl={setFilterAnchorEl}
+            onSelect={onFilterByColumn}
+          />,
         ]}
 
       {enableColumnGrouping &&
@@ -142,20 +178,30 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           <MenuItem
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
-            sx={menuItemStyles}
           >
-            <GroupByIcon />{' '}
-            {localization[
-              column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
-            ]?.replace('{column}', String(column.Header))}
+            <ListItemIcon>
+              <GroupByIcon />
+            </ListItemIcon>
+            <ListItemText>
+              {localization[
+                column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
+              ]?.replace('{column}', String(column.Header))}
+            </ListItemText>
           </MenuItem>,
         ]}
 
       {!disableColumnHiding && [
         <Divider key="datagrid-column-hidding-column-action-divider" />,
-        <MenuItem onClick={onHideColumnAction} sx={menuItemStyles}>
-          <HideColumnIcon />{' '}
-          {localization.hideColumn?.replace('{column}', String(column.Header))}
+        <MenuItem onClick={onHideColumnAction}>
+          <ListItemIcon>
+            <HideColumnIcon />
+          </ListItemIcon>
+          <ListItemText>
+            {localization.hideColumn?.replace(
+              '{column}',
+              String(column.Header),
+            )}
+          </ListItemText>
         </MenuItem>,
       ]}
     </Menu>

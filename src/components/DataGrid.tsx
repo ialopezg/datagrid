@@ -179,6 +179,16 @@ export type DataGridCell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D>;
 
+export type DataGridFilterType =
+  | 'contains'
+  | 'empty'
+  | 'endsWidth'
+  | 'equals'
+  | 'fuzzy'
+  | 'notEmpty'
+  | 'notEquals'
+  | 'startsWidth';
+
 export type DataGridState<D extends {} = {}> = TableState<D> &
   UseColumnOrderState<D> &
   UseExpandedState<D> &
@@ -191,6 +201,7 @@ export type DataGridState<D extends {} = {}> = TableState<D> &
   UseRowStateState<D> &
   UseSortByState<D> & {
     currentEditingRow: DataGridRow<D> | null;
+    currentFilterTypes: { [key: string]: DataGridFilterType };
     densePadding: boolean;
     fullScreen: boolean;
     showFilters: boolean;

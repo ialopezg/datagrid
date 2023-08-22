@@ -11,7 +11,7 @@ interface EditCellTextFieldProps {
 export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
   const {
     bodyCellEditProps,
-    setItemForUpdate,
+    setCurrentEditRow,
     table: {
       state: { currentEditingRow },
     },
@@ -37,7 +37,7 @@ export const EditCellTextField: FC<EditCellTextFieldProps> = ({ cell }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (currentEditingRow) {
       cell.row.values[cell.column.id] = e.target.value;
-      setItemForUpdate({ ...currentEditingRow });
+      setCurrentEditRow({ ...currentEditingRow });
     }
     cell.column.onCellEditChange?.(e, cell);
   };

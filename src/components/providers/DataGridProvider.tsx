@@ -13,10 +13,16 @@ import {
   useTable,
 } from 'react-table';
 
-import { DataGridInstance, DataGridProps, DataGridRow } from '../DataGrid';
+import {
+  DataGridFilterType,
+  DataGridInstance,
+  DataGridProps,
+  DataGridRow,
+} from '../DataGrid';
+import { defaultFilters } from '../helpers';
 import DataGridContext from './DataGridContext';
 
-export const DataGridProvider = <D extends {}>(
+export const DataGridProvider = <D extends {} = {}>(
   props: PropsWithChildren<DataGridProps<D>>,
 ) => {
   const hooks: PluginHook<D>[] = [
@@ -38,7 +44,7 @@ export const DataGridProvider = <D extends {}>(
     props.initialState?.densePadding ?? false,
   );
   const [currentEditingRow, setCurrentEditingRow] =
-    useState<DataGridRow | null>(null);
+    useState<DataGridRow<D> | null>(null);
   const [fullScreen, setFullScreen] = useState<boolean>(
     props.initialState?.fullScreen ?? false,
   );
@@ -48,15 +54,50 @@ export const DataGridProvider = <D extends {}>(
   const [showSearch, setShowSearch] = useState<boolean>(
     props.initialState?.showSearch ?? false,
   );
+  const filterTypes = useMemo<Partial<{ [key in DataGridFilterType]: any }>>(
+    () => ({
+      ...defaultFilters,
+      ...props.filterTypes,
+    }),
+    [props.filterTypes],
+  );
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: DataGridFilterType;
+  }>(() =>
+    Object.assign(
+      {},
+      ...props.columns
+        .map((c) => String(c.accessor))
+        .map((accessor) => ({
+          [accessor]:
+            props?.initialState?.filters?.[accessor as any] ?? 'fuzzy',
+        })),
+    ),
+  );
 
-  const table = useTable<D>(
+  const columns = useMemo(
+    () =>
+      props.columns.map((column) => {
+        column.filter =
+          filterTypes[currentFilterTypes[String(column.accessor)]];
+
+        return column;
+      }),
+    [props.columns, filterTypes, currentFilterTypes],
+  );
+
+  const table = useTable(
     {
       ...props,
+      columns,
+      // @ts-ignore
+      filterTypes,
       useControlledState: (state) =>
         useMemo(
           () => ({
             ...state,
             currentEditingRow,
+            currentFilterTypes,
             densePadding,
             fullScreen,
             showFilters,
@@ -66,6 +107,7 @@ export const DataGridProvider = <D extends {}>(
           }),
           [
             currentEditingRow,
+            currentFilterTypes,
             densePadding,
             fullScreen,
             showFilters,
@@ -99,7 +141,9 @@ export const DataGridProvider = <D extends {}>(
         idPrefix,
         setDensePadding,
         setFullScreen,
+        // @ts-ignore
         setCurrentEditingRow,
+        setCurrentFilterTypes,
         setShowFilters,
         setShowSearch,
         // @ts-ignore

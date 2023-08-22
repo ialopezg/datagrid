@@ -1,4 +1,5 @@
 import {
+  Chip,
   IconButton,
   InputAdornment,
   TextField,
@@ -6,9 +7,10 @@ import {
   Tooltip,
 } from '@mui/material';
 import { useAsyncDebounce } from 'react-table';
-import React, { FC, useState } from 'react';
+import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
+import FilterTypeMenu from '../menus/FilterTypeMenu';
 import { useDataGrid } from '../providers';
 
 interface FilterTextFieldProps {
@@ -21,6 +23,8 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     icons: { CloseIcon, FilteringOnIcon },
     idPrefix,
     localization,
+    setCurrentFilterTypes,
+    table,
   } = useDataGrid();
 
   const defaultTextFieldProps =
@@ -41,6 +45,11 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   } as TextFieldProps;
 
   const [filterValue, setFilterValue] = useState<string>('');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const onFilterModeClick = (e: MouseEvent<HTMLElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
 
   const onFilterChange = useAsyncDebounce((value) => {
     column.setFilter(value ?? undefined);
@@ -51,20 +60,25 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     column.setFilter(undefined);
   };
 
+  const onDeleteFilterModeChip = () => {
+    setFilterValue('');
+    column.setFilter(undefined);
+    setCurrentFilterTypes((prev) => ({ ...prev, [column.id]: 'fuzzy' }));
+  };
+
   if (column.Filter) {
     return <>{column.Filter?.({ column })}</>;
   }
 
+  const filterType = table.state.currentFilterTypes[column.id];
+  const showFilterChip = ['empty', 'notEmpty'].includes(filterType);
+  const placeholder = localization.filterByColumn?.replace(
+    '{column}',
+    String(column.Header),
+  );
+
   return (
-    <Tooltip
-      arrow
-      enterDelay={1000}
-      enterNextDelay={1000}
-      title={localization.filterByColumn?.replace(
-        '{column}',
-        String(column.Header),
-      )}
-    >
+    <>
       <TextField
         fullWidth
         id={`datagrid-${idPrefix}-${column.id}-filter-column`}
@@ -72,31 +86,47 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           style: {
             textOverflow: 'ellipsis',
           },
+          title: placeholder,
         }}
-        margin="dense"
+        margin="none"
         onChange={(e) => {
           setFilterValue(e.target.value);
           onFilterChange(e.target.value);
         }}
         onClick={(e) => e.stopPropagation()}
-        placeholder={localization.filterByColumn?.replace(
-          '{column}',
-          String(column.Header),
-        )}
+        placeholder={
+          showFilterChip
+            ? ''
+            : localization.filterByColumn?.replace(
+                '{column}',
+                String(column.Header),
+              )
+        }
         value={filterValue ?? ''}
         variant="standard"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <IconButton
-                size="small"
-                sx={{ height: '1.75rem', width: '1.75rem' }}
-              >
-                <FilteringOnIcon />
-              </IconButton>
+              <Tooltip arrow title={localization.changeFilterMode}>
+                <IconButton
+                  onClick={onFilterModeClick}
+                  size="small"
+                  sx={{ height: '1.75rem', width: '1.75rem' }}
+                >
+                  <FilteringOnIcon />
+                </IconButton>
+              </Tooltip>
+              {showFilterChip && (
+                <Chip
+                  label={
+                    localization[filterType === 'empty' ? 'empty' : 'notEmpty']
+                  }
+                  onDelete={onDeleteFilterModeChip}
+                />
+              )}
             </InputAdornment>
           ),
-          endAdornment: (
+          endAdornment: !showFilterChip && (
             <InputAdornment position="end">
               <Tooltip arrow placement="right" title={localization.clearFilter}>
                 <span>
@@ -117,7 +147,13 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         {...textFieldProps}
         sx={{ minWidth: '6rem', ...textFieldProps?.sx }}
       />
-    </Tooltip>
+
+      <FilterTypeMenu
+        anchorEl={anchorEl}
+        column={column}
+        setAnchorEl={setAnchorEl}
+      />
+    </>
   );
 };
 

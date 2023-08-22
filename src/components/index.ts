@@ -2,6 +2,7 @@ export * from './actions';
 export * from './body';
 export * from './footer';
 export * from './header';
+export * from './helpers';
 export * from './inputs';
 export * from './localization';
 export * from './menus';
