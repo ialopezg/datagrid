@@ -1,7 +1,9 @@
 import { Menu, MenuItem } from '@mui/material';
 import React, { FC, useMemo } from 'react';
+
 import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
+import { commonMenuItemStyles } from './ColumnActionsMenu';
 
 interface FilterModeMenuProps {
   anchorEl: HTMLElement | null;
@@ -103,6 +105,7 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
           key={type}
           onClick={() => onFilterModeChange(type)}
           selected={type === filterType}
+          sx={commonMenuItemStyles}
           value={type}
         >
           {label}

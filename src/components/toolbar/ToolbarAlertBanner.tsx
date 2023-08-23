@@ -37,10 +37,10 @@ export const ToolbarAlertBanner: FC<ToolbarAlertBannerProps> = () => {
             {index > 0 ? localization.thenByMessage : ''}
             <Chip
               color="secondary"
-              label={
+              label={String(
                 table.allColumns.find((column) => column.id === columnId)
-                  ?.Header
-              }
+                  ?.Header,
+              )}
               onDelete={() => table.toggleGroupBy(columnId, false)}
             />
           </Fragment>

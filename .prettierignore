@@ -1,7 +1,7 @@
 dist
 storybook-static
 node_modules
-types
+src/components/types
 *.json
 .next
 *.md

@@ -298,7 +298,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     isFetching?: boolean;
     isLoading?: boolean;
     localization?: Partial<DataGridLocalization>;
-    linearProgressProps:
+    linearProgressProps?:
       | LinearProgressProps
       | ((table: DataGridInstance<D>) => LinearProgressProps);
     onCellClick?: (

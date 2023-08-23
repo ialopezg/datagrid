@@ -1,18 +1,20 @@
-import {
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
 import FilterModeMenu from './FilterModeMenu';
 
-const commonMenuItemStyles = {
+export const commonMenuItemStyles = {
+  py: '5px',
+  my: 0,
+  justifyContent: 'space-between',
+  alignItems: 'center',
+};
+
+export const commonListItemStyles = {
   display: 'flex',
+  gap: '0.75rem',
   alignItems: 'center',
 };
 
@@ -112,28 +114,26 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             disabled={!column.isSorted}
             key="datagrid-sort-clear-column-action"
             onClick={onClearSorting}
-            sx={commonMenuItemStyles}
+            sx={commonListItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <ClearAllIcon />
-            </ListItemIcon>
-            <ListItemText>{localization.clearSorting}</ListItemText>
+              {localization.clearSorting}
+            </Box>
           </MenuItem>,
           <MenuItem
             disabled={column.isSorted && !column.isSortedDesc}
             key="datagrid-sort-asc-column-action"
             onClick={onSortActionAsc}
-            sx={commonMenuItemStyles}
+            sx={commonListItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <SortIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization.sortByColumnAscending?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
           </MenuItem>,
           <MenuItem
             disabled={column.isSorted && column.isSortedDesc}
@@ -142,17 +142,15 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             }
             key="datagrid-sort-desc-column-action"
             onClick={onSortActionDesc}
-            sx={commonMenuItemStyles}
+            sx={commonListItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
-            </ListItemIcon>
-            <ListItemText>
               {localization.sortByColumnDescending?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
           </MenuItem>,
         ]}
 
@@ -162,17 +160,15 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             divider={enableColumnGrouping || !disableColumnHiding}
             key="datagrid-filter-column-action"
             onClick={onFilterByColumn}
-            sx={commonMenuItemStyles}
+            sx={commonListItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <FilteringOnIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization.filterByColumn?.replace(
                 '{column}',
                 String(column.Header),
               )}
-            </ListItemText>
+            </Box>
             <IconButton
               onClick={onFilterModeHover}
               onMouseEnter={onFilterModeHover}
@@ -197,16 +193,14 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             divider={!disableColumnHiding}
             key="datagrid-group-column-action"
             onClick={onGroupColumnAction}
-            sx={commonMenuItemStyles}
+            sx={commonListItemStyles}
           >
-            <ListItemIcon>
+            <Box sx={commonListItemStyles}>
               <GroupByIcon />
-            </ListItemIcon>
-            <ListItemText>
               {localization[
                 column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
               ]?.replace('{column}', String(column.Header))}
-            </ListItemText>
+            </Box>
           </MenuItem>,
         ]}
 
@@ -214,17 +208,15 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
         <MenuItem
           key="datagrid-column-visibility-action"
           onClick={onHideColumnAction}
-          sx={commonMenuItemStyles}
+          sx={commonListItemStyles}
         >
-          <ListItemIcon>
+          <Box sx={commonListItemStyles}>
             <HideColumnIcon />
-          </ListItemIcon>
-          <ListItemText>
             {localization.hideColumn?.replace(
               '{column}',
               String(column.Header),
             )}
-          </ListItemText>
+          </Box>
         </MenuItem>,
       ]}
     </Menu>

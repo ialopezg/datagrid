@@ -3,6 +3,7 @@ import { ColumnInstance } from 'react-table';
 import React, { FC } from 'react';
 
 import { DataGridColumnInstance } from '../DataGrid';
+import { commonMenuItemStyles } from './ColumnActionsMenu';
 
 interface Props {
   column: DataGridColumnInstance;
@@ -29,11 +30,14 @@ export const ColumnVisibilityMenu: FC<Props> = ({ column }) => {
 
   return (
     <>
-      <MenuItem sx={{ pl: `${(column.depth + 0.5) * 2}rem` }}>
+      <MenuItem
+        sx={{ ...commonMenuItemStyles, pl: `${(column.depth + 0.5) * 2}rem` }}
+      >
         <FormControlLabel
+          componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
           checked={switchChecked}
           control={<Switch />}
-          label={column.Header as string}
+          label={String(column.Header)}
           onChange={() => handleToggleColumnHidden(column)}
         />
       </MenuItem>

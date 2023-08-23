@@ -11,7 +11,7 @@ import {
   DataGridColumnInterface, DataGridInstance, DataGridOptions,
   DataGridRow,
   DataGridState,
-} from '../components';
+} from '../index';
 
 declare module 'react-table' {
   export interface TableOptions<D extends Record<string, unknown>>

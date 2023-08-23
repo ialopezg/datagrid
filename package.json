@@ -1,6 +1,6 @@
 {
   "name": "@ialopezg/datagrid",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Isidro A. Lopez G.",
   "license": "MIT",
   "main": "dist/index.js",
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "analyze": "size-limit --why",
-    "build": "tsdx build",
+    "build": "tsdx build && size-limit  && rm -rf datagrid-docs/node_modules/@ialopezg/datagrid/dist  && cp -r dist datagrid-docs/node_modules/@ialopezg/datagrid/ && cp -r src datagrid-docs/node_modules/@ialopezg/datagrid/ && cp -r package.json datagrid-docs/node_modules/@ialopezg/datagrid/package.json",
     "build-storybook": "build-storybook",
     "format": "prettier -w",
     "lint": "tsdx lint",
@@ -40,8 +40,7 @@
     "size": "size-limit",
     "start": "tsdx watch",
     "storybook": "start-storybook -p 6006",
-    "test": "tsdx test --passWithNoTests",
-    "upgrade": "ncu -u && npm install"
+    "test": "tsdx test --passWithNoTests"
   },
   "husky": {
     "hooks": {

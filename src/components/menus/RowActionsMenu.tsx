@@ -1,8 +1,9 @@
-import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridRow } from '../DataGrid';
 import { useDataGrid } from '../providers';
+import { commonMenuItemStyles } from './ColumnActionsMenu';
 
 interface RowActionsMenuProps {
   anchorEl: HTMLElement | null;
@@ -36,11 +37,9 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       }}
     >
       {enableRowEditing && (
-        <MenuItem onClick={onRowEditAction}>
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          <ListItemText>{localization.editRow}</ListItemText>
+        <MenuItem onClick={onRowEditAction} sx={commonMenuItemStyles}>
+          <EditIcon />
+          {localization.editRow}
         </MenuItem>
       )}
 

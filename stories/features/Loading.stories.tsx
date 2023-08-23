@@ -47,7 +47,7 @@ const data = [...Array(100)].map((_) => ({
 }));
 
 export const Loading: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} isLoading />
+  <DataGrid columns={columns} data={[]} isLoading />
 );
 
 export const Reloading: Story<DataGridProps> = () => (
