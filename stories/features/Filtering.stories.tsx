@@ -50,13 +50,56 @@ export const FilteringDisabled: Story<DataGridProps> = () => (
   <DataGrid columns={columns} data={data} disableFilters />
 );
 
+export const FilterTypes: Story<DataGridProps> = () => (
+  <DataGrid
+    columns={
+      [
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+        },
+        {
+          Header: 'Age',
+          accessor: 'age' as const,
+          filter: 'startsWith',
+        },
+        {
+          Header: 'Gender',
+          accessor: 'gender' as const,
+          filterSelectOptions: ['Male', 'Female', 'Other'],
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+          filterSelectOptions: [
+            { text: 'CA', value: 'California' },
+            { text: 'TX', value: 'Texas' },
+            { text: 'NY', value: 'New York' },
+            { text: 'FL', value: 'Florida' },
+          ],
+        },
+      ] as any[]
+    }
+    data={data}
+    initialState={{ showFilters: true }}
+  />
+);
+
 export const FilteringDisabledForCertainColumns: Story<DataGridProps> = () => (
   <DataGrid
     columns={
       [
         { accessor: 'firstName' as const, Header: 'First Name' },
         { accessor: 'lastName' as const, Header: 'Last Name' },
-        { accessor: 'age' as const, Header: 'Age', disableFilters: true },
+        { accessor: 'age' as const, Header: 'Age' },
         { accessor: 'gender' as const, Header: 'Gender' },
         { accessor: 'address' as const, Header: 'Address' },
       ] as any[]
@@ -112,53 +155,58 @@ export const CustomFilterFunction: Story<DataGridProps> = () => (
 
 export const CustomFilterComponent: Story<DataGridProps> = () => (
   <DataGrid
-    columns={[
-      {
-        Header: 'First Name',
-        accessor: 'firstName' as const,
-      },
-      {
-        Header: 'Last Name',
-        accessor: 'lastName' as const,
-      },
-      {
-        Header: 'Age',
-        accessor: 'age' as const,
-      },
-      {
-        Header: 'Gender',
-        accessor: 'gender' as const,
-        Filter: ({ column }: any) => (
-          <TextField
-            onChange={(e: ChangeEvent<any>) => column.setFilter(e.target.value || undefined)}
-            select
-            value={column.filterValue ?? ''}
-            margin="dense"
-            placeholder="Filter"
-            variant="standard"
-            fullWidth
-          >
-            <MenuItem value="All">All</MenuItem>
-            <MenuItem value="Male">Male</MenuItem>
-            <MenuItem value="Female">Female</MenuItem>
-            <MenuItem value="Other">Other</MenuItem>
-          </TextField>
-        ),
-        filter: (rows: any[], _: any, filterValue: any) =>
-          rows.filter(
-            (row) =>
-              row.values['gender'].toLowerCase() === filterValue.toLowerCase(),
+    columns={
+      [
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+        },
+        {
+          Header: 'Age',
+          accessor: 'age' as const,
+        },
+        {
+          Header: 'Gender',
+          accessor: 'gender' as const,
+          Filter: ({ column }: any) => (
+            <TextField
+              onChange={(e: ChangeEvent<any>) =>
+                column.setFilter(e.target.value || undefined)
+              }
+              select
+              value={column.filterValue ?? ''}
+              margin="dense"
+              placeholder="Filter"
+              variant="standard"
+              fullWidth
+            >
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Male">Male</MenuItem>
+              <MenuItem value="Female">Female</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </TextField>
           ),
-      },
-      {
-        Header: 'Address',
-        accessor: 'address' as const,
-      },
-      {
-        Header: 'State',
-        accessor: 'state' as const,
-      },
-    ] as any[]}
+          filter: (rows: any[], _: any, filterValue: any) =>
+            rows.filter(
+              (row) =>
+                row.values['gender'].toLowerCase() ===
+                filterValue.toLowerCase(),
+            ),
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+        },
+      ] as any[]
+    }
     data={data}
     initialState={{ showFilters: true }}
   />

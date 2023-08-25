@@ -3,7 +3,12 @@ import React, { FC, useMemo } from 'react';
 
 import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
-import { commonMenuItemStyles } from './ColumnActionsMenu';
+
+const commonMenuItemStyles = {
+  py: '6px',
+  my: 0,
+  alignItems: 'center',
+};
 
 interface FilterModeMenuProps {
   anchorEl: HTMLElement | null;
@@ -81,7 +86,7 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
       }),
     );
 
-    if (['empty', 'notEmpty'].includes(value)) {
+    if (['empty', 'notEmpty'].includes(value.toString())) {
       column.setFilter(' ');
     }
 
@@ -99,10 +104,10 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
         disablePadding: true,
       }}
     >
-      {filterTypes.map(({ type, label, divider }) => (
+      {filterTypes.map(({ type, label, divider }, index) => (
         <MenuItem
           divider={divider}
-          key={type}
+          key={index}
           onClick={() => onFilterModeChange(type)}
           selected={type === filterType}
           sx={commonMenuItemStyles}

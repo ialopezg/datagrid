@@ -17,7 +17,12 @@ export const HeaderActionsCell: FC<HeaderActionsCellProps> = () => {
   return (
     <TableCell
       style={{ textAlign: 'center' }}
-      sx={{ ...tableHeaderCellStyles(densePadding), textAlign: 'center' }}
+      sx={{
+        ...tableHeaderCellStyles(densePadding),
+        textAlign: 'center',
+        maxWidth: '4rem',
+        width: '4rem',
+      }}
     >
       {localization.actions}
     </TableCell>

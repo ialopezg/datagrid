@@ -1,6 +1,17 @@
 import { matchSorter } from 'match-sorter';
 
-import { DataGridRow } from '../DataGrid';
+import { DataGridRow } from './DataGrid';
+
+export const fuzzySearch = (
+  rows: DataGridRow[],
+  ids: string[],
+  value: string | number,
+) =>
+  matchSorter(rows, value.toString().trim(), {
+    keys: ids.map((id) => `values.${id}`),
+    sorter: (rankedItems) => rankedItems,
+  });
+fuzzySearch.autoRemove = (val: any) => !val;
 
 export const fuzzyFilter = (
   rows: DataGridRow[],
@@ -17,16 +28,14 @@ export const containsFilter = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
-) =>
-{
-  console.log(id);
+) => {
   return rows
     .filter((row) => row.values[id])
     .toString()
     .toLowerCase()
     .trim()
     .includes(value.toString().toLowerCase().trim());
-}
+};
 containsFilter.autoRemove = (value: any) => !value;
 
 export const startsWidthFilter = (

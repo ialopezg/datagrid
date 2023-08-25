@@ -115,7 +115,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
           },
         ],
       },
-    ]}
+    ] as any[]}
     data={[...Array(250)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),

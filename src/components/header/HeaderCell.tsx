@@ -94,12 +94,10 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         String(column.Header),
       );
 
-  const filterMode = table.state.currentFilterTypes[column.id];
   const filterTooltip = !!column.filterValue
     ? localization.filterModeByColumn
         .replace('{column}', String(column.Header))
-        // @ts-ignore
-        .replace('{mode}', localization[filterMode])
+        .replace('{mode}', column.filterValue)
     : localization.toggleFilters;
   const columnHeader = String(column.render('Header'));
 

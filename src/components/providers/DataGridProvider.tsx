@@ -19,7 +19,7 @@ import {
   DataGridProps,
   DataGridRow,
 } from '../DataGrid';
-import { defaultFilters } from '../helpers';
+import { defaultFilters } from '../DataGridFilters';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {} = {}>(
@@ -66,12 +66,12 @@ export const DataGridProvider = <D extends {} = {}>(
   }>(() =>
     Object.assign(
       {},
-      ...props.columns
-        .map((c) => String(c.accessor?.toString()))
-        .map((accessor) => ({
-          [accessor]:
-            props?.initialState?.filters?.[accessor as any] ?? 'fuzzy',
-        })),
+      ...props.columns.map((c) => ({
+        [c.accessor as string]:
+          c.filter ??
+          props?.initialState?.filters?.[c.accessor as any] ??
+          (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
+      })),
     ),
   );
 
@@ -100,6 +100,7 @@ export const DataGridProvider = <D extends {} = {}>(
             currentFilterTypes,
             densePadding,
             fullScreen,
+            globalFilterValue: 'fuzzy',
             showFilters,
             showSearch,
             // @ts-ignore

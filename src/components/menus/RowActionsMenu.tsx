@@ -31,10 +31,7 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       anchorEl={anchorEl}
       onClose={() => setAnchorEl(null)}
       open={!!anchorEl}
-      MenuListProps={{
-        dense: table.state.densePadding,
-        disablePadding: true,
-      }}
+      MenuListProps={{ dense: table.state.densePadding }}
     >
       {enableRowEditing && (
         <MenuItem onClick={onRowEditAction} sx={commonMenuItemStyles}>

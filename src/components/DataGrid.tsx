@@ -17,7 +17,7 @@ import {
 import {
   Cell,
   Column,
-  ColumnInstance,
+  ColumnInstance, FilterType,
   HeaderGroup,
   Row,
   TableInstance,
@@ -129,6 +129,8 @@ export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
         | ((cell: DataGridCell<D>) => TextFieldProps);
       disableFilters?: boolean;
       editable?: boolean;
+      filter?: DataGridFilterType | string | FilterType<D>;
+      filterSelectOptions?: (string | { text: string, value: string })[];
       footerCellProps?:
         | TableCellProps
         | ((column: Column<D>) => TableCellProps);

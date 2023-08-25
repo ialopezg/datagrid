@@ -28,7 +28,7 @@ const columns = [
     Header: 'Address',
     accessor: 'address' as const,
   },
-];
+] as any[];
 const data = [...Array(21)].map((_) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
@@ -80,7 +80,7 @@ export const StyleBodyCellConditionallyIn1Column: Story<DataGridProps> = () => (
         Header: 'Address',
         accessor: 'address' as const,
       },
-    ]}
+    ] as any[]}
     data={data}
   />
 );
@@ -124,7 +124,7 @@ export const CustomCellRender: Story<DataGridProps> = () => (
         Header: 'Address',
         accessor: 'address' as const,
       },
-    ]}
+    ] as any[]}
     data={data}
   />
 );

@@ -2,6 +2,7 @@ import {
   Chip,
   IconButton,
   InputAdornment,
+  MenuItem,
   TextField,
   TextFieldProps,
   Tooltip,
@@ -44,7 +45,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     },
   } as TextFieldProps;
 
-  const [filterValue, setFilterValue] = useState<string>('');
+  const [filterValue, setFilterValue] = useState<string>(column.filterValue);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const onFilterModeClick = (e: MouseEvent<HTMLElement>) => {
@@ -71,6 +72,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   }
 
   const filterType = table.state.currentFilterTypes[column.id];
+  const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
   const placeholder = localization.filterByColumn?.replace(
     '{column}',
@@ -90,6 +92,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           },
           title: placeholder,
         }}
+        label={isSelectFilter && !filterValue ? placeholder : undefined}
         margin="none"
         onChange={(e) => {
           setFilterValue(e.target.value);
@@ -97,17 +100,20 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         }}
         onClick={(e) => e.stopPropagation()}
         placeholder={
-          filterChipLabel
-            ? ''
-            : localization.filterByColumn?.replace(
-                '{column}',
-                String(column.Header),
-              )
+          filterChipLabel || isSelectFilter ? undefined : placeholder
         }
-        value={filterValue ?? ''}
+        select={isSelectFilter}
+        value={column.filterValue ?? ''}
         variant="standard"
+        InputLabelProps={{
+          shrink: false,
+          sx: {
+            maxWidth: 'calc(100% - 2.5rem)',
+          },
+          title: placeholder,
+        }}
         InputProps={{
-          startAdornment: (
+          startAdornment: !isSelectFilter && (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeFilterMode}>
                 <IconButton
@@ -130,11 +136,16 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           ),
           endAdornment: !filterChipLabel && (
             <InputAdornment position="end">
-              <Tooltip arrow placement="right" title={localization.clearFilter}>
+              <Tooltip
+                arrow
+                disableHoverListener={isSelectFilter}
+                placement="right"
+                title={localization.clearFilter}
+              >
                 <span>
                   <IconButton
                     aria-label={localization.clearFilter}
-                    disabled={filterValue?.length === 0}
+                    disabled={!filterValue?.length}
                     onClick={onClearFilter}
                     size="small"
                     sx={{ height: '1.75rem', width: '1.75rem' }}
@@ -151,9 +162,34 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           m: '0 -0.25rem',
           minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
+          mt: isSelectFilter && !filterValue ? '-1rem' : undefined,
+          '& .MuiSelect-icon': { mr: '1.5rem' },
           ...textFieldProps?.sx,
         }}
-      />
+      >
+        {isSelectFilter && (
+          <MenuItem divider disabled={!filterValue} value="">
+            {localization.clearFilter}
+          </MenuItem>
+        )}
+        {column?.filterSelectOptions?.map((option) => {
+          let value;
+          let text;
+          if (typeof option === 'string') {
+            value = option;
+            text = option;
+          } else if (typeof option === 'object') {
+            value = option.value;
+            text = option.text;
+          }
+
+          return (
+            <MenuItem key={value} value={value}>
+              {text}
+            </MenuItem>
+          );
+        })}
+      </TextField>
 
       <FilterModeMenu
         anchorEl={anchorEl}

@@ -49,7 +49,6 @@ export const ToggleColumnVisibilityAction: FC<ColumnsVisibilityActionProps> = ({
         onClose={() => setAnchorEl(null)}
         MenuListProps={{
           dense: table.state.densePadding,
-          disablePadding: true,
         }}
       >
         <Box
