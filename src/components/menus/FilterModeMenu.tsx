@@ -1,11 +1,20 @@
 import { Menu, MenuItem } from '@mui/material';
 import React, { FC, useMemo } from 'react';
 
+import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
 import {
-  DATAGRID_FILTER_TYPE,
-  DataGridFilterType,
-  DataGridHeaderGroup,
-} from '../DataGrid';
+  containsFilter,
+  emptyFilter,
+  endsWidthFilter,
+  equalsFilter,
+  fuzzyFilter,
+  greaterThanFilter,
+  lessThanFilter,
+  notEmptyFilter,
+  notEqualsFilter,
+  startsWidthFilter,
+} from '../DataGridFilters';
+import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
 import { useDataGrid } from '../providers';
 
 const commonMenuItemStyles = {
@@ -33,47 +42,68 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
     type: DATAGRID_FILTER_TYPE;
     label: string;
     divider: boolean;
+    fn: Function;
   }[] = useMemo(
     () => [
       {
         type: DATAGRID_FILTER_TYPE.FUZZY,
         label: localization.fuzzy,
         divider: false,
+        fn: fuzzyFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.CONTAINS,
         label: localization.contains,
         divider: true,
+        fn: containsFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.STARTS_WITH,
         label: localization.startsWidth,
         divider: false,
+        fn: startsWidthFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.ENDS_WITH,
         label: localization.endsWidth,
         divider: true,
+        fn: endsWidthFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.EQUALS,
         label: localization.equals,
         divider: false,
+        fn: equalsFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.NOT_EQUALS,
         label: localization.notEquals,
         divider: true,
+        fn: notEqualsFilter,
+      },
+      {
+        type: DATAGRID_FILTER_TYPE.GREATER_THAN,
+        label: localization.greaterThan,
+        divider: false,
+        fn: greaterThanFilter,
+      },
+      {
+        type: DATAGRID_FILTER_TYPE.LESS_THAN,
+        label: localization.lessThan,
+        divider: true,
+        fn: lessThanFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.EMPTY,
         label: localization.empty,
         divider: false,
+        fn: emptyFilter,
       },
       {
         type: DATAGRID_FILTER_TYPE.NOT_EMPTY,
         label: localization.notEmpty,
         divider: false,
+        fn: notEmptyFilter,
       },
     ],
     [],
@@ -112,12 +142,12 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
         disablePadding: true,
       }}
     >
-      {filterTypes.map(({ type, label, divider }, index) => (
+      {filterTypes.map(({ type, label, divider, fn }, index) => (
         <MenuItem
           divider={divider}
           key={index}
           onClick={() => onFilterModeChange(type)}
-          selected={type === filterType}
+          selected={type === filterType || fn === filterType}
           sx={commonMenuItemStyles}
           value={type}
         >

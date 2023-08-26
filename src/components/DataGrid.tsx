@@ -70,6 +70,7 @@ import {
   UseTableOptions,
 } from 'react-table';
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
+import { DATAGRID_FILTER_TYPE } from './DataGridFilterType';
 
 import DataGridProvider from './providers/DataGridProvider';
 import Container from './table/Container';
@@ -185,17 +186,6 @@ export type DataGridRow<D extends {} = {}> = Row<D> &
 export type DataGridCell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D>;
-
-export enum DATAGRID_FILTER_TYPE {
-  CONTAINS = 'contains',
-  EMPTY = 'empty',
-  ENDS_WITH = 'endsWidth',
-  EQUALS = 'equals',
-  FUZZY = 'fuzzy',
-  NOT_EMPTY = 'notEmpty',
-  NOT_EQUALS = 'notEquals',
-  STARTS_WITH = 'startsWidth',
-}
 
 export type DataGridFilterType = DATAGRID_FILTER_TYPE | Function;
 

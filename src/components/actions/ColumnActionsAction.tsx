@@ -32,6 +32,7 @@ export const ColumnActionsAction: FC<ColumnActionsActionProps> = ({
         arrow
         enterDelay={1000}
         enterNextDelay={1000}
+        placement="top"
         title={localization.columnActions}
       >
         <IconButton

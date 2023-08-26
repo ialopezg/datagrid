@@ -14,13 +14,13 @@ import {
 } from 'react-table';
 
 import {
-  DATAGRID_FILTER_TYPE,
   DataGridFilterType,
   DataGridInstance,
   DataGridProps,
   DataGridRow,
 } from '../DataGrid';
 import { defaultFilters } from '../DataGridFilters';
+import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {} = {}>(
@@ -62,12 +62,27 @@ export const DataGridProvider = <D extends {} = {}>(
     }),
     [props.filterTypes],
   );
-  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-    [key: string]: DataGridFilterType;
-  }>(() =>
-    Object.assign(
+  const getInitialFilterTypeState = () => {
+    let lowestLevelColumns: any[] = props.columns;
+    let currentColumns: any[] = props.columns;
+    while (
+      !!currentColumns.length &&
+      currentColumns.some((col) => col.columns)
+    ) {
+      const nextColumns = currentColumns
+        .filter((col) => !!col.columns)
+        .map((col) => col.columns)
+        .flat();
+      if (nextColumns.every((col) => !col.columns)) {
+        lowestLevelColumns = [...lowestLevelColumns, ...nextColumns];
+      }
+      currentColumns = nextColumns;
+    }
+    lowestLevelColumns = lowestLevelColumns.filter((col) => !col.columns);
+
+    return Object.assign(
       {},
-      ...props.columns.map((c) => ({
+      ...lowestLevelColumns.map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
@@ -75,8 +90,12 @@ export const DataGridProvider = <D extends {} = {}>(
             ? DATAGRID_FILTER_TYPE.EQUALS
             : DATAGRID_FILTER_TYPE.FUZZY),
       })),
-    ),
-  );
+    );
+  };
+
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: DataGridFilterType;
+  }>(() => getInitialFilterTypeState());
 
   const columns = useMemo(
     () =>
@@ -92,7 +111,7 @@ export const DataGridProvider = <D extends {} = {}>(
       }),
     [props.columns, filterTypes, currentFilterTypes],
   );
-  console.log('columns', columns);
+
   const table = useTable(
     {
       ...props,

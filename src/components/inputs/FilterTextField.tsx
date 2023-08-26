@@ -10,7 +10,8 @@ import {
 import { useAsyncDebounce } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
 
-import { DATAGRID_FILTER_TYPE, DataGridHeaderGroup } from '../DataGrid';
+import { DataGridHeaderGroup } from '../DataGrid';
+import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
 import FilterModeMenu from '../menus/FilterModeMenu';
 import { useDataGrid } from '../providers';
 

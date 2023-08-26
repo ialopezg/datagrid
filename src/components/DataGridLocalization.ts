@@ -19,11 +19,13 @@ export interface DataGridLocalization {
   filterMode: string;
   filterModeByColumn: string;
   fuzzy: string;
+  greaterThan: string;
   groupByColumn: string;
   groupedBy: string;
   ungroupByColumn: string;
   hideAll: string;
   hideColumn: string;
+  lessThan: string;
   loadingData: string;
   notEmpty: string;
   notEquals: string;
@@ -66,11 +68,13 @@ export const DefaultLocalization: DataGridLocalization = {
   filterMode: 'Filter mode',
   filterModeByColumn: 'Filtering by {column} - ({mode})',
   fuzzy: 'Fuzzy match',
+  greaterThan: 'Greater than',
   groupByColumn: 'Group by {column}',
   groupedBy: 'Grouped by ',
   ungroupByColumn: 'Ungroup by {column}',
   hideAll: 'Hide all',
   hideColumn: 'Hide {column} column',
+  lessThan: 'Less than',
   loadingData: 'Loading data',
   notEmpty: 'Not empty',
   notEquals: 'Not equals',

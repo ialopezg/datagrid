@@ -69,11 +69,11 @@ export const equalsFilter = (
   id: string,
   value: string | number,
 ) =>
-  rows
-    .filter((row) => row.values[id])
-    .toString()
-    .toLowerCase()
-    .trim() === value.toString().toLowerCase().trim();
+  rows.filter(
+    (row) =>
+      row.values[id].toString().toLowerCase().trim() ===
+      value.toString().toLowerCase().trim(),
+  );
 equalsFilter.autoRemove = (value: any) => !value;
 
 export const notEqualsFilter = (
@@ -95,6 +95,32 @@ export const emptyFilter = (
 ) => rows.filter((row) => !row.values[id].toString().toLowerCase().trim);
 emptyFilter.autoRemove = (value: any) => !value;
 
+export const greaterThanFilter = (
+  rows: DataGridRow[],
+  id: string,
+  value: string | number,
+) =>
+  rows.filter((row) =>
+    !isNaN(+value) && !isNaN(+row.values[id])
+      ? +row.values[id] > +value
+      : row.values[id].toString().toLowerCase().trim() >
+        value.toString().toLowerCase().trim(),
+  );
+greaterThanFilter.autoRemove = (value: any) => !value;
+
+export const lessThanFilter = (
+  rows: DataGridRow[],
+  id: string,
+  value: string | number,
+) =>
+  rows.filter((row) =>
+    !isNaN(+value) && !isNaN(+row.values[id])
+      ? +row.values[id] < +value
+      : row.values[id].toString().toLowerCase().trim() <
+        value.toString().toLowerCase().trim(),
+  );
+lessThanFilter.autoRemove = (value: any) => !value;
+
 export const notEmptyFilter = (
   rows: DataGridRow[],
   id: string,
@@ -108,6 +134,8 @@ export const defaultFilters = {
   endsWith: endsWidthFilter,
   equals: equalsFilter,
   fuzzy: fuzzyFilter,
+  greaterThan: greaterThanFilter,
+  lessThan: lessThanFilter,
   notEmpty: notEmptyFilter,
   notEquals: notEqualsFilter,
   startsWidth: startsWidthFilter,
