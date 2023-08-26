@@ -186,15 +186,18 @@ export type DataGridCell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
   UseRowStateCellProps<D>;
 
-export type DataGridFilterType =
-  | 'contains'
-  | 'empty'
-  | 'endsWidth'
-  | 'equals'
-  | 'fuzzy'
-  | 'notEmpty'
-  | 'notEquals'
-  | 'startsWidth';
+export enum DATAGRID_FILTER_TYPE {
+  CONTAINS = 'contains',
+  EMPTY = 'empty',
+  ENDS_WITH = 'endsWidth',
+  EQUALS = 'equals',
+  FUZZY = 'fuzzy',
+  NOT_EMPTY = 'notEmpty',
+  NOT_EQUALS = 'notEquals',
+  STARTS_WITH = 'startsWidth',
+}
+
+export type DataGridFilterType = DATAGRID_FILTER_TYPE | Function;
 
 export type DataGridState<D extends {} = {}> = TableState<D> &
   UseColumnOrderState<D> &

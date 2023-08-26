@@ -14,6 +14,7 @@ import {
 } from 'react-table';
 
 import {
+  DATAGRID_FILTER_TYPE,
   DataGridFilterType,
   DataGridInstance,
   DataGridProps,
@@ -54,7 +55,7 @@ export const DataGridProvider = <D extends {} = {}>(
   const [showSearch, setShowSearch] = useState<boolean>(
     props.initialState?.showSearch ?? false,
   );
-  const filterTypes = useMemo<Partial<{ [key in DataGridFilterType]: any }>>(
+  const filterTypes = useMemo<Partial<{ [key in DATAGRID_FILTER_TYPE]: any }>>(
     () => ({
       ...defaultFilters,
       ...props.filterTypes,
@@ -70,7 +71,9 @@ export const DataGridProvider = <D extends {} = {}>(
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
-          (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
+          (!!c.filterSelectOptions
+            ? DATAGRID_FILTER_TYPE.EQUALS
+            : DATAGRID_FILTER_TYPE.FUZZY),
       })),
     ),
   );
@@ -79,19 +82,24 @@ export const DataGridProvider = <D extends {} = {}>(
     () =>
       props.columns.map((column) => {
         column.filter =
-          filterTypes[currentFilterTypes[String(column.accessor)]];
+          filterTypes[
+            currentFilterTypes[
+              column.accessor as string
+            ] as DATAGRID_FILTER_TYPE
+          ];
 
         return column;
       }),
     [props.columns, filterTypes, currentFilterTypes],
   );
-
+  console.log('columns', columns);
   const table = useTable(
     {
       ...props,
       columns,
       // @ts-ignore
       filterTypes,
+      globalFilterValue: DATAGRID_FILTER_TYPE.FUZZY,
       useControlledState: (state) =>
         useMemo(
           () => ({
@@ -100,7 +108,6 @@ export const DataGridProvider = <D extends {} = {}>(
             currentFilterTypes,
             densePadding,
             fullScreen,
-            globalFilterValue: 'fuzzy',
             showFilters,
             showSearch,
             // @ts-ignore
@@ -140,11 +147,11 @@ export const DataGridProvider = <D extends {} = {}>(
         hasExpandableRows,
         hasExpandedRows,
         idPrefix,
-        setDensePadding,
-        setFullScreen,
         // @ts-ignore
         setCurrentEditingRow,
         setCurrentFilterTypes,
+        setDensePadding,
+        setFullScreen,
         setShowFilters,
         setShowSearch,
         // @ts-ignore

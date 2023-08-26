@@ -1,7 +1,11 @@
 import { Menu, MenuItem } from '@mui/material';
 import React, { FC, useMemo } from 'react';
 
-import { DataGridFilterType, DataGridHeaderGroup } from '../DataGrid';
+import {
+  DATAGRID_FILTER_TYPE,
+  DataGridFilterType,
+  DataGridHeaderGroup,
+} from '../DataGrid';
 import { useDataGrid } from '../providers';
 
 const commonMenuItemStyles = {
@@ -26,48 +30,48 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
   const { localization, setCurrentFilterTypes, table } = useDataGrid();
 
   const filterTypes: {
-    type: DataGridFilterType;
+    type: DATAGRID_FILTER_TYPE;
     label: string;
     divider: boolean;
   }[] = useMemo(
     () => [
       {
-        type: 'fuzzy',
+        type: DATAGRID_FILTER_TYPE.FUZZY,
         label: localization.fuzzy,
         divider: false,
       },
       {
-        type: 'contains',
+        type: DATAGRID_FILTER_TYPE.CONTAINS,
         label: localization.contains,
         divider: true,
       },
       {
-        type: 'startsWidth',
+        type: DATAGRID_FILTER_TYPE.STARTS_WITH,
         label: localization.startsWidth,
         divider: false,
       },
       {
-        type: 'endsWidth',
+        type: DATAGRID_FILTER_TYPE.ENDS_WITH,
         label: localization.endsWidth,
         divider: true,
       },
       {
-        type: 'equals',
+        type: DATAGRID_FILTER_TYPE.EQUALS,
         label: localization.equals,
         divider: false,
       },
       {
-        type: 'notEquals',
+        type: DATAGRID_FILTER_TYPE.NOT_EQUALS,
         label: localization.notEquals,
         divider: true,
       },
       {
-        type: 'empty',
+        type: DATAGRID_FILTER_TYPE.EMPTY,
         label: localization.empty,
         divider: false,
       },
       {
-        type: 'notEmpty',
+        type: DATAGRID_FILTER_TYPE.NOT_EMPTY,
         label: localization.notEmpty,
         divider: false,
       },
@@ -77,7 +81,7 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
 
   const filterType = table.state.currentFilterTypes[column.id];
 
-  const onFilterModeChange = (value: DataGridFilterType) => {
+  const onFilterModeChange = (value: DATAGRID_FILTER_TYPE) => {
     setAnchorEl(null);
     setCurrentFilterTypes(
       (prevState: { [key: string]: DataGridFilterType }) => ({
@@ -86,7 +90,11 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
       }),
     );
 
-    if (['empty', 'notEmpty'].includes(value.toString())) {
+    if (
+      [DATAGRID_FILTER_TYPE.EMPTY, DATAGRID_FILTER_TYPE.NOT_EMPTY].includes(
+        value,
+      )
+    ) {
       column.setFilter(' ');
     }
 

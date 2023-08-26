@@ -99,9 +99,13 @@ export const FilteringDisabledForCertainColumns: Story<DataGridProps> = () => (
       [
         { accessor: 'firstName' as const, Header: 'First Name' },
         { accessor: 'lastName' as const, Header: 'Last Name' },
-        { accessor: 'age' as const, Header: 'Age' },
+        { accessor: 'age' as const, Header: 'Age', disableFilters: true },
         { accessor: 'gender' as const, Header: 'Gender' },
-        { accessor: 'address' as const, Header: 'Address' },
+        {
+          accessor: 'address' as const,
+          Header: 'Address',
+          disableFilters: true,
+        },
       ] as any[]
     }
     data={data}

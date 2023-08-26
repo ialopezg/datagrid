@@ -10,7 +10,7 @@ import {
 import { useAsyncDebounce } from 'react-table';
 import React, { FC, MouseEvent, useState } from 'react';
 
-import { DataGridHeaderGroup } from '../DataGrid';
+import { DATAGRID_FILTER_TYPE, DataGridHeaderGroup } from '../DataGrid';
 import FilterModeMenu from '../menus/FilterModeMenu';
 import { useDataGrid } from '../providers';
 
@@ -64,7 +64,10 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
   const onDeleteFilterModeChip = () => {
     setFilterValue('');
     column.setFilter(undefined);
-    setCurrentFilterTypes((prev) => ({ ...prev, [column.id]: 'fuzzy' }));
+    setCurrentFilterTypes((prev) => ({
+      ...prev,
+      [column.id]: DATAGRID_FILTER_TYPE.FUZZY,
+    }));
   };
 
   if (column.Filter) {
@@ -73,7 +76,12 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
 
   const filterType = table.state.currentFilterTypes[column.id];
   const isSelectFilter = !!column.filterSelectOptions;
-  const filterChipLabel = ['empty', 'notEmpty'].includes(filterType);
+  const isCustomFilter = filterType instanceof Function;
+  const filterChipLabel =
+    !isCustomFilter &&
+    [DATAGRID_FILTER_TYPE.EMPTY, DATAGRID_FILTER_TYPE.NOT_EMPTY].includes(
+      filterType as DATAGRID_FILTER_TYPE,
+    );
   const placeholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.Header),
@@ -116,13 +124,15 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           startAdornment: !isSelectFilter && (
             <InputAdornment position="start">
               <Tooltip arrow title={localization.changeFilterMode}>
-                <IconButton
-                  onClick={onFilterModeClick}
-                  size="small"
-                  sx={{ height: '1.75rem', width: '1.75rem' }}
-                >
-                  <FilteringOnIcon />
-                </IconButton>
+                <span>
+                  <IconButton
+                    onClick={onFilterModeClick}
+                    size="small"
+                    sx={{ height: '1.75rem', width: '1.75rem' }}
+                  >
+                    <FilteringOnIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
               {filterChipLabel && (
                 <Chip
