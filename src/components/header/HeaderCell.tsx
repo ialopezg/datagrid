@@ -3,12 +3,10 @@ import {
   Collapse,
   Divider,
   IconButton,
-  styled,
   TableCell,
   TableSortLabel,
   Tooltip,
 } from '@mui/material';
-import MuiTableCell from '@mui/material/TableCell';
 import React, { FC } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
@@ -16,7 +14,7 @@ import { useDataGrid } from '../providers';
 import FilterTextField from '../inputs/FilterTextField';
 import ColumnActionsAction from '../actions/ColumnActionsAction';
 
-export const tableHeaderCellStyles = (
+export const commonTableHeaderCellStyles = (
   densePadding: boolean,
   enableColumnResizing?: boolean,
 ) => ({
@@ -27,21 +25,6 @@ export const tableHeaderCellStyles = (
   transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
   verticalAlign: 'text-top',
 });
-
-export const StyledHeaderCell = styled(MuiTableCell, {
-  shouldForwardProp: (prop: PropertyKey) =>
-    prop !== 'densePadding' && prop !== 'enableColumnResizing',
-})<{
-  densePadding?: boolean;
-  enableColumnResizing?: boolean;
-}>(({ densePadding, enableColumnResizing }) => ({
-  fontWeight: 'bold',
-  height: '100%',
-  padding: densePadding ? '0.5rem' : '1rem',
-  paddingTop: densePadding ? '0.75rem' : '1.25rem',
-  transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
-  verticalAlign: 'text-top',
-}));
 
 interface HeaderCellProps {
   column: DataGridHeaderGroup;
@@ -94,10 +77,15 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         String(column.Header),
       );
 
+  const filterType = table.state.currentFilterTypes[column.id];
   const filterTooltip = !!column.filterValue
     ? localization.filterModeByColumn
         .replace('{column}', String(column.Header))
-        .replace('{mode}', column.filterValue)
+        .replace(
+          '{filterType}',
+          filterType instanceof Function ? '' : localization[filterType],
+        )
+        .replace('{filterValue}', column.filterValue)
     : localization.toggleFilters;
   const columnHeader = String(column.render('Header'));
 
@@ -106,7 +94,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
       align={isParent ? 'center' : 'left'}
       {...tableCellProps}
       sx={{
-        ...tableHeaderCellStyles(
+        ...commonTableHeaderCellStyles(
           table.state.densePadding,
           enableColumnResizing,
         ),

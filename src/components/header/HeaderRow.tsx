@@ -6,7 +6,7 @@ import ToggleSelectRowAction from '../actions/ToggleSelectRowAction';
 import { DataGridHeaderGroup } from '../DataGrid';
 import SpacerCell from '../table/SpacerCell';
 import { useDataGrid } from '../providers';
-import HeaderCell, { tableHeaderCellStyles } from './HeaderCell';
+import HeaderCell, { commonTableHeaderCellStyles } from './HeaderCell';
 import HeaderActionsCell from './HeaderActionsCell';
 
 interface HeaderRowProps {
@@ -52,7 +52,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
           <SpacerCell />
         ) : (
           <TableCell
-            sx={{ ...tableHeaderCellStyles(table.state.densePadding) }}
+            sx={{ ...commonTableHeaderCellStyles(table.state.densePadding) }}
           >
             #
           </TableCell>

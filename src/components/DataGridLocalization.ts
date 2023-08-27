@@ -35,6 +35,7 @@ export interface DataGridLocalization {
   selectionMessage: string;
   selectRow: string;
   showAll: string;
+  showAllColumns: string;
   sortByColumnAscending: string;
   sortByColumnDescending: string;
   startsWidth: string;
@@ -63,8 +64,8 @@ export const DefaultLocalization: DataGridLocalization = {
   expandAll: 'Expand all',
   filter: 'Filter',
   filterByColumn: 'Filter by {column}',
-  filterMode: 'Filter mode',
-  filterModeByColumn: 'Filtering by {column} - ({mode})',
+  filterMode: 'Filter mode: {filterType}',
+  filterModeByColumn: 'Filtering by {column} - {filterType} ({filterValue})',
   fuzzy: 'Fuzzy match',
   greaterThan: 'Greater than',
   groupByColumn: 'Group by {column}',
@@ -83,6 +84,7 @@ export const DefaultLocalization: DataGridLocalization = {
   selectionMessage: '{selectedCount} of {rowCount} row(s) selected',
   selectRow: 'Toggle select row',
   showAll: 'Show all',
+  showAllColumns: 'Show all columns',
   sortByColumnAscending: 'Sort by {column} ascending',
   sortByColumnDescending: 'Sort by {column} descending',
   startsWidth: 'Starts width',

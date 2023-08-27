@@ -82,7 +82,10 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     !isCustomFilter &&
     [DATAGRID_FILTER_TYPE.EMPTY, DATAGRID_FILTER_TYPE.NOT_EMPTY].includes(
       filterType as DATAGRID_FILTER_TYPE,
-    );
+    )
+      // @ts-ignore
+      ? localization[filterType]
+      : '';
   const placeholder = localization.filterByColumn?.replace(
     '{column}',
     String(column.Header),
@@ -92,7 +95,11 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     <>
       <TextField
         fullWidth
-        id={`datagrid-${idPrefix}-${column.id}-filter-column`}
+        helperText={
+          filterType instanceof Function
+            ? ''
+            : localization.filterMode.replace('{filterType}', filterType)
+        }
         inputProps={{
           disabled: filterChipLabel,
           sx: {
@@ -101,6 +108,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           },
           title: placeholder,
         }}
+        id={`datagrid-${idPrefix}-${column.id}-filter-column`}
         label={isSelectFilter && !filterValue ? placeholder : undefined}
         margin="none"
         onChange={(e) => {
@@ -114,6 +122,9 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         select={isSelectFilter}
         value={column.filterValue ?? ''}
         variant="standard"
+        FormHelperTextProps={{
+          sx: { fontSize: '0.6rem', lineHeight: '0.8rem' },
+        }}
         InputLabelProps={{
           shrink: false,
           sx: {
@@ -137,9 +148,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
               </Tooltip>
               {filterChipLabel && (
                 <Chip
-                  label={
-                    localization[filterType === 'empty' ? 'empty' : 'notEmpty']
-                  }
+                  label={filterChipLabel}
                   onDelete={onDeleteFilterModeChip}
                 />
               )}
@@ -170,7 +179,8 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
         }}
         {...textFieldProps}
         sx={{
-          m: '0 -0.25rem',
+          m: '-0.25rem',
+          p: 0,
           minWidth: !filterChipLabel ? '5rem' : 'auto',
           width: 'calc(100% + 0.5rem)',
           mt: isSelectFilter && !filterValue ? '-1rem' : undefined,

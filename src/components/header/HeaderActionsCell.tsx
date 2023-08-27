@@ -2,7 +2,7 @@ import { TableCell } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
-import { tableHeaderCellStyles } from './HeaderCell';
+import { commonTableHeaderCellStyles } from './HeaderCell';
 
 interface HeaderActionsCellProps {}
 
@@ -18,7 +18,7 @@ export const HeaderActionsCell: FC<HeaderActionsCellProps> = () => {
     <TableCell
       style={{ textAlign: 'center' }}
       sx={{
-        ...tableHeaderCellStyles(densePadding),
+        ...commonTableHeaderCellStyles(densePadding),
         textAlign: 'center',
         maxWidth: '4rem',
         width: '4rem',

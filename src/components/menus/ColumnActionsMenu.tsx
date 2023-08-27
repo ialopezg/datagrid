@@ -113,6 +113,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     setChildColumnsAnchor(e.currentTarget);
   };
 
+  const onShowAllColumns = () => {
+    table.toggleHideAllColumns(false);
+    setAnchorEl(null);
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -245,12 +250,13 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
         </MenuItem>,
         <MenuItem
           key="datagrid-child-column-visibility-column-action"
+          onClick={onShowAllColumns}
           sx={commonMenuItemStyles}
         >
           <Box sx={commonListItemStyles}>
             <ColumnVisibilityIcon />
 
-            {localization.toggleColumnVisibility}
+            {localization.showAllColumns}
           </Box>
           {!column.filterSelectOptions && (
             <IconButton
