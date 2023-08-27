@@ -77,13 +77,11 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
 
   const filterType = table.state.currentFilterTypes[column.id];
   const isSelectFilter = !!column.filterSelectOptions;
-  const isCustomFilter = filterType instanceof Function;
   const filterChipLabel =
-    !isCustomFilter &&
+    !(filterType instanceof Function) &&
     [DATAGRID_FILTER_TYPE.EMPTY, DATAGRID_FILTER_TYPE.NOT_EMPTY].includes(
       filterType as DATAGRID_FILTER_TYPE,
     )
-      // @ts-ignore
       ? localization[filterType]
       : '';
   const placeholder = localization.filterByColumn?.replace(
