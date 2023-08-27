@@ -84,7 +84,7 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
 
   const tooltipTitle = column.isSorted
     ? column.isSortedDesc
-      ? localization.clearSorting
+      ? localization.clearSort
       : localization.sortByColumnDescending?.replace(
           '{column}',
           String(column.Header),

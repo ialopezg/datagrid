@@ -130,7 +130,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           >
             <Box sx={commonListItemStyles}>
               <ClearAllIcon />
-              {localization.clearSorting}
+              {localization.clearSort}
             </Box>
           </MenuItem>,
           <MenuItem

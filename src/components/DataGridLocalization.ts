@@ -4,11 +4,10 @@ export interface DataGridLocalization {
   changeFilterMode: string;
   clearFilter: string;
   clearSearch: string;
-  clearSorting: string;
+  clearSort: string;
   columnActions: string;
   contains: string;
   edit: string;
-  editRow: string;
   empty: string;
   endsWidth: string;
   equals: string;
@@ -53,11 +52,10 @@ export const DefaultLocalization: DataGridLocalization = {
   changeFilterMode: 'Change filter mode',
   clearFilter: 'Clear filter',
   clearSearch: 'Clear search',
-  clearSorting: 'Clear sorting',
+  clearSort: 'Clear sorting',
   columnActions: 'Column actions',
   contains: 'Contains exact',
   edit: 'Edit',
-  editRow: 'Edit row',
   empty: 'Empty',
   endsWidth: 'Ends with',
   equals: 'Equals',

@@ -11,19 +11,15 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
     hasExpandedRows,
     icons: { ExpandAllIcon },
     localization,
-    table: {
-      getToggleAllRowsExpandedProps,
-      isAllRowsExpanded,
-      state: { densePadding },
-    },
+    table,
   } = useDataGrid();
 
   return (
     <TableCell
       size="small"
       // @ts-ignore
-      {...getToggleAllRowsExpandedProps()}
-      sx={tableBodyCellStyles(densePadding)}
+      {...table.getToggleAllRowsExpandedProps()}
+      sx={tableBodyCellStyles(table.state.densePadding)}
     >
       <IconButton
         aria-label={localization.expandAll}
@@ -32,7 +28,7 @@ export const ExpandAllRowsAction: FC<ExpandAllRowsActionProps> = () => {
         <ExpandAllIcon
           style={{
             transform: `rotate(${
-              isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0
+              table.isAllRowsExpanded ? -180 : hasExpandedRows ? -90 : 0
             }deg)`,
             transition: 'transform 0.2s',
           }}

@@ -36,7 +36,7 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       {enableRowEditing && (
         <MenuItem onClick={onRowEditAction} sx={commonMenuItemStyles}>
           <EditIcon />
-          {localization.editRow}
+          {localization.edit}
         </MenuItem>
       )}
 

@@ -51,6 +51,7 @@ const data = [...Array(100)].map((_) => ({
 export const SpanishLocalization: Story<DataGridProps> = () => (
   <ThemeProvider theme={createTheme({}, esES)}>
     <DataGrid
+      // @ts-ignore
       columns={columns}
       data={data}
       enableColumnGrouping
@@ -60,7 +61,7 @@ export const SpanishLocalization: Story<DataGridProps> = () => (
         actions: 'Acciones',
         columnActions: 'Acciones de columna',
         clearFilter: 'Quitar filtro',
-        clearSorting: 'Quitar filtro',
+        clearSort: 'Quitar filtro',
         clearSearch: 'Limpiar búsqueda',
         edit: 'Editar',
         groupByColumn: 'Agrupar por {column}',
