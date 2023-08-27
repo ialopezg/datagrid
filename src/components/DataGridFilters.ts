@@ -134,6 +134,7 @@ export const defaultFilters = {
   endsWith: endsWidthFilter,
   equals: equalsFilter,
   fuzzy: fuzzyFilter,
+  globalFuzzy: fuzzySearch,
   greaterThan: greaterThanFilter,
   lessThan: lessThanFilter,
   notEmpty: notEmptyFilter,

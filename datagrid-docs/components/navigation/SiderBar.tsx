@@ -1,7 +1,7 @@
 import {
   alpha,
   Divider,
-  Drawer as MuiDrawer,
+  Drawer,
   List,
   ListItem as MuiListItem,
   styled,
@@ -9,11 +9,6 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { FC } from 'react';
-
-const Drawer = styled(MuiDrawer)({
-  zIndex: 1,
-  position: 'relative',
-});
 
 const ListItemLevel1 = styled(MuiListItem)(({ theme }) => ({
   color: theme.palette.primary.dark,
@@ -50,6 +45,10 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
       open={navOpen}
       PaperProps={{ component: 'aside' }}
       variant={isTablet ? 'temporary' : 'permanent'}
+      sx={{
+        zIndex: 1,
+        position: 'relative',
+      }}
     >
       <List
         sx={{
@@ -58,7 +57,7 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
           mt: '64px',
           padding: 0,
           transition: 'all 0.2s',
-          width: navOpen ? '260px' : '0',
+          width: navOpen ? '260px' : 0,
           '@media (max-width: 900px)': {
             mt: '50px',
           },

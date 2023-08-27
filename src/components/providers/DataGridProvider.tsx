@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useMemo, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import {
   PluginHook,
   useExpanded,
@@ -62,7 +67,7 @@ export const DataGridProvider = <D extends {} = {}>(
     }),
     [props.filterTypes],
   );
-  const getInitialFilterTypeState = () => {
+  const findLowestLevelColumns = useCallback(() => {
     let lowestLevelColumns: any[] = props.columns;
     let currentColumns: any[] = props.columns;
     while (
@@ -78,11 +83,16 @@ export const DataGridProvider = <D extends {} = {}>(
       }
       currentColumns = nextColumns;
     }
-    lowestLevelColumns = lowestLevelColumns.filter((col) => !col.columns);
 
-    return Object.assign(
+    return lowestLevelColumns.filter((col) => !col.columns);
+  }, [props.columns]);
+
+  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
+    [key: string]: DataGridFilterType;
+  }>(() =>
+    Object.assign(
       {},
-      ...lowestLevelColumns.map((c) => ({
+      ...findLowestLevelColumns().map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
@@ -90,16 +100,12 @@ export const DataGridProvider = <D extends {} = {}>(
             ? DATAGRID_FILTER_TYPE.EQUALS
             : DATAGRID_FILTER_TYPE.FUZZY),
       })),
-    );
-  };
-
-  const [currentFilterTypes, setCurrentFilterTypes] = useState<{
-    [key: string]: DataGridFilterType;
-  }>(() => getInitialFilterTypeState());
+    ),
+  );
 
   const columns = useMemo(
     () =>
-      props.columns.map((column) => {
+      findLowestLevelColumns().map((column) => {
         column.filter =
           filterTypes[
             currentFilterTypes[
@@ -118,7 +124,7 @@ export const DataGridProvider = <D extends {} = {}>(
       columns,
       // @ts-ignore
       filterTypes,
-      globalFilterValue: DATAGRID_FILTER_TYPE.FUZZY,
+      globalFilterValue: props.globalFilter ?? 'globalFuzzy',
       useControlledState: (state) =>
         useMemo(
           () => ({
