@@ -1,51 +1,69 @@
-import { FormControlLabel, MenuItem, Switch } from '@mui/material';
-import { ColumnInstance } from 'react-table';
+import { Box, Button, Divider, Menu } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridColumnInstance } from '../DataGrid';
-import { commonMenuItemStyles } from './ColumnActionsMenu';
+import { useDataGrid } from '../providers';
+import ColumnVisibilityMenuItems from './ColumnVisibilityMenuItems';
 
 interface Props {
-  column: DataGridColumnInstance;
+  anchorEl: HTMLElement | null;
+  isSubMenu?: boolean;
+  setAnchorEl: (value: HTMLElement | null) => void;
 }
 
-export const ColumnVisibilityMenu: FC<Props> = ({ column }) => {
-  const isParentHeader = !!column?.columns?.length;
-
-  const allChildColumnsVisible =
-    isParentHeader &&
-    !!column.columns?.every((childColumn) => childColumn.isVisible);
-
-  const switchChecked = column.isVisible ?? allChildColumnsVisible;
-
-  const handleToggleColumnHidden = (column: ColumnInstance) => {
-    if (isParentHeader) {
-      column?.columns?.forEach?.((childColumn) => {
-        childColumn.toggleHidden(switchChecked);
-      });
-    } else {
-      column.toggleHidden();
-    }
-  };
+export const ColumnVisibilityMenu: FC<Props> = ({
+  anchorEl,
+  isSubMenu,
+  setAnchorEl,
+}) => {
+  const { localization, table } = useDataGrid();
 
   return (
-    <>
-      <MenuItem
-        sx={{ ...commonMenuItemStyles, pl: `${(column.depth + 0.5) * 2}rem` }}
+    <Menu
+      anchorEl={anchorEl}
+      open={!!anchorEl}
+      onClose={() => setAnchorEl(null)}
+      MenuListProps={{
+        dense: table.state.densePadding,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: isSubMenu ? 'center' : 'space-between',
+          p: '0.5rem',
+          pt: 0,
+        }}
       >
-        <FormControlLabel
-          componentsProps={{ typography: { sx: { marginBottom: 0 } } }}
-          checked={switchChecked}
-          control={<Switch />}
-          label={String(column.Header)}
-          onChange={() => handleToggleColumnHidden(column)}
-        />
-      </MenuItem>
+        {!isSubMenu && (
+          <Button
+            disabled={
+              !table.getToggleHideAllColumnsProps().checked &&
+              !table.getToggleHideAllColumnsProps().indeterminate
+            }
+            onClick={() => table.toggleHideAllColumns(true)}
+          >
+            {localization.hideAll}
+          </Button>
+        )}
+        <Button
+          disabled={table.getToggleHideAllColumnsProps().checked}
+          onClick={() => table.toggleHideAllColumns(false)}
+        >
+          {localization.showAll}
+        </Button>
+      </Box>
 
-      {column.columns?.map((c: DataGridColumnInstance, i) => (
-        <ColumnVisibilityMenu key={`${i}-${c.id}`} column={c} />
+      <Divider />
+
+      {table.columns?.map((c: DataGridColumnInstance, index) => (
+        <ColumnVisibilityMenuItems
+          column={c}
+          isSubMenu={isSubMenu}
+          key={`${index}-${c.id}`}
+        />
       ))}
-    </>
+    </Menu>
   );
 };
 

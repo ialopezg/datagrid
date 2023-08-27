@@ -252,7 +252,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
         ToggleSearchAction: FC<IconButtonProps>;
       },
     ) => ReactNode;
-    detailPanel?: (row: Row<D>) => ReactNode;
+    detailPanel?: (row: DataGridRow<D>) => ReactNode;
     detailPanelProps?: TableCellProps | ((row: Row<D>) => TableCellProps);
     disableColumnActions?: boolean;
     disableColumnHiding?: boolean;

@@ -18,6 +18,7 @@ export default meta;
 
 export const DetailPanelEnabled: Story<DataGridProps> = () => (
   <DataGrid
+    // @ts-ignore
     columns={[
       { accessor: 'firstName' as const, Header: 'First Name' },
       { accessor: 'lastName' as const, Header: 'Last Name' },
@@ -48,6 +49,7 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
 
 export const DetailPanelExpandAllDisabled: Story<DataGridProps> = () => (
   <DataGrid
+    // @ts-ignore
     columns={[
       {
         Header: 'First Name',

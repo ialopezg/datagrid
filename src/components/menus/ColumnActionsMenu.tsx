@@ -3,6 +3,7 @@ import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
+import ColumnVisibilityMenu from './ColumnVisibilityMenu';
 import FilterModeMenu from './FilterModeMenu';
 
 export const commonMenuItemStyles = {
@@ -42,6 +43,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
       GroupByIcon,
       HideColumnIcon,
       SortIcon,
+      ColumnVisibilityIcon,
     },
     idPrefix,
     localization,
@@ -52,6 +54,8 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
   const [filterAnchorEl, setFilterAnchorEl] = useState<null | HTMLElement>(
     null,
   );
+  const [childColumnsAnchor, setChildColumnsAnchor] =
+    useState<null | HTMLElement>(null);
 
   const onFilterModeHover = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
@@ -102,6 +106,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
   const onGroupColumnAction = () => {
     column.toggleGroupBy();
     setAnchorEl(null);
+  };
+
+  const onColumnMenuOpen = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setChildColumnsAnchor(e.currentTarget);
   };
 
   return (
@@ -234,6 +243,32 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             )}
           </Box>
         </MenuItem>,
+        <MenuItem
+          key="datagrid-child-column-visibility-column-action"
+          sx={commonMenuItemStyles}
+        >
+          <Box sx={commonListItemStyles}>
+            <ColumnVisibilityIcon />
+
+            {localization.toggleColumnVisibility}
+          </Box>
+          {!column.filterSelectOptions && (
+            <IconButton
+              onClick={onColumnMenuOpen}
+              onMouseEnter={onColumnMenuOpen}
+              size="small"
+              sx={{ p: 0 }}
+            >
+              <ArrowRightIcon />
+            </IconButton>
+          )}
+        </MenuItem>,
+        <ColumnVisibilityMenu
+          anchorEl={childColumnsAnchor}
+          isSubMenu
+          key="datagrid-child-column-visibility-items-column-action"
+          setAnchorEl={setChildColumnsAnchor}
+        />,
       ]}
     </Menu>
   );
