@@ -26,6 +26,7 @@ import {
   DataGridRow,
 } from '../DataGrid';
 import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
+import { findLowestLevelCols } from '../DataGridUtils';
 import DataGridContext from './DataGridContext';
 
 export const DataGridProvider = <D extends {} = {}>(
@@ -60,29 +61,13 @@ export const DataGridProvider = <D extends {} = {}>(
   const [showSearch, setShowSearch] = useState<boolean>(
     props.initialState?.showSearch ?? false,
   );
-  const findLowestLevelCols = useCallback(() => {
-    let lowestLevelColumns: any[] = props.columns;
-    let currentCols: any[] = props.columns;
-    while (!!currentCols.length && currentCols.some((col) => col.columns)) {
-      const nextCols = currentCols
-        .filter((col) => !!col.columns)
-        .map((col) => col.columns)
-        .flat();
-      if (nextCols.every((col) => !col.columns)) {
-        lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
-      }
-      currentCols = nextCols;
-    }
-
-    return lowestLevelColumns.filter((col) => !col.columns);
-  }, [props.columns]);
 
   const [currentFilterTypes, setCurrentFilterTypes] = useState<{
     [key: string]: DataGridFilterType;
   }>(() =>
     Object.assign(
       {},
-      ...findLowestLevelCols().map((c) => ({
+      ...findLowestLevelCols(props.columns).map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
@@ -119,13 +104,13 @@ export const DataGridProvider = <D extends {} = {}>(
       !props.isLoading || !!props.data.length
         ? props.data
         : [...Array(10)].map((_) =>
-          Object.assign(
-            {},
-            ...findLowestLevelCols().map((c) => ({
-              [c.accessor as string]: null,
-            })),
+            Object.assign(
+              {},
+              ...findLowestLevelCols(props.columns).map((c) => ({
+                [c.accessor as string]: null,
+              })),
+            ),
           ),
-        ),
     [props.data, props.isLoading],
   );
 

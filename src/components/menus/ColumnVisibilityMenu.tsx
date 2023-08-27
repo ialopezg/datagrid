@@ -41,14 +41,20 @@ export const ColumnVisibilityMenu: FC<Props> = ({
               !table.getToggleHideAllColumnsProps().checked &&
               !table.getToggleHideAllColumnsProps().indeterminate
             }
-            onClick={() => table.toggleHideAllColumns(true)}
+            onClick={() => {
+              table.toggleHideAllColumns(true);
+              setAnchorEl(null);
+            }}
           >
             {localization.hideAll}
           </Button>
         )}
         <Button
           disabled={table.getToggleHideAllColumnsProps().checked}
-          onClick={() => table.toggleHideAllColumns(false)}
+          onClick={() => {
+            table.toggleHideAllColumns(false);
+            setAnchorEl(null);
+          }}
         >
           {localization.showAll}
         </Button>

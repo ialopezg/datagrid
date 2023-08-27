@@ -29,10 +29,7 @@ export const Body: FC<BodyProps> = () => {
   };
 
   return (
-    <TableBody
-      {...tableBodyProps}
-      sx={{ overflowY: 'hidden', ...tableBodyProps.sx }}
-    >
+    <TableBody {...tableBodyProps} sx={{ ...tableBodyProps?.sx }}>
       {rows.map((row: DataGridRow) => {
         table.prepareRow(row);
 

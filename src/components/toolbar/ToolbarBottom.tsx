@@ -1,10 +1,12 @@
-import { alpha, Toolbar } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import React, { FC } from 'react';
 
 import { useDataGrid } from '../providers';
+import LinearProgressBar from '../table/LinearProgressBar';
 import ToolbarActions from './ToolbarActions';
 import Pagination from './Pagination';
 import ToolbarAlertBanner from './ToolbarAlertBanner';
+import { commonToolbarStyles } from './ToolbarTop';
 
 interface ToolbarBottomProps {}
 
@@ -30,33 +32,30 @@ export const ToolbarBottom: FC<ToolbarBottomProps> = () => {
       {...toolbarProps}
       sx={(theme) =>
         ({
-          backgroundColor: theme.palette.background.default,
-          backgroundImage: `linear-gradient(${alpha(
-            theme.palette.common.white,
-            0.05,
-          )},${alpha(theme.palette.common.white, 0.05)})`,
           bottom: table.state.fullScreen ? '0' : undefined,
-          display: 'flex',
-          justifyContent: 'space-between',
-          overflowY: 'hidden',
-          p: '0 0.5rem !important',
           position: table.state.fullScreen ? 'fixed' : undefined,
-          width: 'calc(100% - 1rem)',
-          zIndex: 1,
+          ...commonToolbarStyles(theme, table),
           ...toolbarProps?.sx,
         } as any)
       }
     >
-      {!hideToolbarActions && toolbarActionsPosition === 'bottom' ? (
-        <ToolbarActions />
-      ) : (
-        <span />
-      )}
+      <LinearProgressBar />
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}
+      >
+        {!hideToolbarActions && toolbarActionsPosition === 'bottom' ? (
+          <ToolbarActions />
+        ) : (
+          <span />
+        )}
 
-      {toolbarAlertBannerPosition === 'bottom' && <ToolbarAlertBanner />}
+        {toolbarAlertBannerPosition === 'bottom' && <ToolbarAlertBanner />}
 
-      {!manualPagination &&
-        ['bottom', 'both'].includes(paginationPosition ?? '') && <Pagination />}
+        {!manualPagination &&
+          ['bottom', 'both'].includes(paginationPosition ?? '') && (
+            <Pagination />
+          )}
+      </Box>
     </Toolbar>
   );
 };

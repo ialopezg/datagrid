@@ -98,6 +98,11 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
     setAnchorEl(null);
   };
 
+  const onShowAllColumns = () => {
+    table.toggleHideAllColumns(false);
+    setAnchorEl(null);
+  };
+
   const onHideColumnAction = () => {
     column.toggleHidden();
     setAnchorEl(null);
@@ -111,11 +116,6 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
   const onColumnMenuOpen = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     setChildColumnsAnchor(e.currentTarget);
-  };
-
-  const onShowAllColumns = () => {
-    table.toggleHideAllColumns(false);
-    setAnchorEl(null);
   };
 
   return (
