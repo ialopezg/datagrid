@@ -1,4 +1,10 @@
-import { Box, Collapse, LinearProgress, Paper, TableContainer } from '@mui/material';
+import {
+  Box,
+  Collapse,
+  LinearProgress,
+  Paper,
+  TableContainer,
+} from '@mui/material';
 import React, { FC, useEffect, useRef } from 'react';
 
 import Table from './Table';
@@ -25,7 +31,7 @@ export const Container: FC<ContainerProps> = () => {
     if (typeof window !== 'undefined') {
       originalBodyOverflowStyle.current = document?.body?.style?.overflow;
     }
-  }, []);
+  }, [typeof window !== 'undefined']);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

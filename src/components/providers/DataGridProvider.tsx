@@ -114,11 +114,28 @@ export const DataGridProvider = <D extends {} = {}>(
     [props.columns, applyFiltersToColumns],
   );
 
+  const data = useMemo(
+    () =>
+      !props.isLoading || !!props.data.length
+        ? props.data
+        : [...Array(10)].map((_) =>
+          Object.assign(
+            {},
+            ...findLowestLevelCols().map((c) => ({
+              [c.accessor as string]: null,
+            })),
+          ),
+        ),
+    [props.data, props.isLoading],
+  );
+
   const table = useTable(
     // @ts-ignore
     {
       ...props,
+      // @ts-ignore
       columns,
+      data,
       useControlledState: (state) =>
         useMemo(
           () => ({

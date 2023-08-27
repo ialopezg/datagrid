@@ -1,8 +1,8 @@
-import DataGrid from '@ialopezg/datagrid';
+import DataGrid from 'dist';
 import { Typography } from '@mui/material';
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
-const Example = () => {
+const Example: FC = () => {
   const columns = useMemo(
     () => [
       {
@@ -10,15 +10,15 @@ const Example = () => {
         columns: [
           {
             Header: 'First Name',
-            accessor: 'firstName',
+            accessor: 'firstName' as const,
           },
           {
             Header: 'Last Name',
-            accessor: 'lastName',
+            accessor: 'lastName' as const,
           },
           {
             Header: 'Email',
-            accessor: 'email',
+            accessor: 'email' as const,
           },
         ],
       },
@@ -27,15 +27,15 @@ const Example = () => {
         columns: [
           {
             Header: 'Job Title',
-            accessor: 'jobTitle',
+            accessor: 'jobTitle' as const,
           },
           {
             Header: 'Salary',
-            accessor: 'salary',
+            accessor: 'salary' as const,
           },
           {
             Header: 'Start Date',
-            accessor: 'startDate',
+            accessor: 'startDate' as const,
           },
         ],
       },
@@ -1478,11 +1478,11 @@ const Example = () => {
           }}
         >
           <img
-            alt="avatar"
             height={200}
             src={row.original.avatar}
             loading="lazy"
             style={{ borderRadius: '50%' }}
+            alt="avatar"
           />
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>

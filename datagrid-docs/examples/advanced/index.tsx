@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SourceCodeSnippet from '../../mdx/SourceCodeSnippet';
+import SourceCodeSnippet from '../../components/mdx/SourceCodeSnippet';
 import Example from './TS';
 
 const JS = require('!!raw-loader!./JS.js').default;

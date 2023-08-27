@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import DataGrid from '@ialopezg/datagrid';
+import DataGrid from 'dist';
 
 const TS: FC = () => {
   const columns = useMemo(

@@ -93,7 +93,7 @@ export type DataGridOptions<D extends {} = {}> = TableOptions<D> &
   UseRowSelectOptions<D> &
   UseRowStateOptions<D> &
   UseSortByOptions<D> & {
-    columns: (Column<D> & DataGridColumnInterface)[];
+    columns: DataGridColumnInterface[];
     data: D[];
     initialState?: Partial<DataGridState>;
   };
@@ -125,14 +125,14 @@ export type DataGridColumnInterface<D extends {} = {}> = ColumnInterface<D> &
   UseGroupByColumnOptions<D> &
   UseResizeColumnsColumnProps<D> &
   UseSortByColumnOptions<D> & {
-    accessor: string;
+    accessor?: string;
     bodyCellProps?:
       | TableCellProps
       | ((cell: DataGridCell<D>) => TableCellProps);
     bodyCellEditProps?:
       | TextFieldProps
       | ((cell: DataGridCell<D>) => TextFieldProps);
-    columns?: (Column<D> & DataGridColumnInterface<D>)[];
+    columns?: DataGridColumnInterface<D>[];
     disableFilters?: boolean;
     editable?: boolean;
     filter?: DataGridFilterType | string | FilterType<D>;
@@ -143,7 +143,7 @@ export type DataGridColumnInterface<D extends {} = {}> = ColumnInterface<D> &
           value: string;
         }
     )[];
-    filterTypes: DATAGRID_FILTER_TYPE[];
+    filterTypes?: (DATAGRID_FILTER_TYPE | string)[];
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     headerCellFilterProps?:
@@ -369,8 +369,11 @@ export default <D extends {}>({
   ...rest
 }: DataGridProps<D>) => (
   <DataGridProvider
+    // @ts-ignore
     defaultColumn={defaultColumn}
+    // @ts-ignore
     filterTypes={{ defaultFilters, ...filterTypes }}
+    // @ts-ignore
     globalFilter={globalFilter}
     icons={{ ...DefaultDataGridIcons, ...icons }}
     localization={{ ...DefaultLocalization, ...localization }}

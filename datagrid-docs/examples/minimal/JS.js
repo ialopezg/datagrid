@@ -1,4 +1,4 @@
-import DataGrid from '@ialopezg/datagrid';
+import DataGrid from 'dist';
 import React, { useMemo } from 'react';
 
 export const BasicExample = () => {
