@@ -17,7 +17,9 @@ import {
 import {
   Cell,
   Column,
-  ColumnInstance, FilterType,
+  ColumnInstance,
+  ColumnInterface,
+  FilterType,
   HeaderGroup,
   Row,
   TableInstance,
@@ -70,6 +72,7 @@ import {
   UseTableOptions,
 } from 'react-table';
 import React, { ChangeEvent, FC, MouseEvent, ReactNode } from 'react';
+import { defaultFilters } from './DataGridFilters';
 import { DATAGRID_FILTER_TYPE } from './DataGridFilterType';
 
 import DataGridProvider from './providers/DataGridProvider';
@@ -116,57 +119,60 @@ export type DataGridInstance<D extends {} = {}> = TableInstance<D> &
     state: DataGridState<D>;
   };
 
-export type DataGridColumnInterface<D extends {} = {}> = // ColumnInterface<D> &
+export type DataGridColumnInterface<D extends {} = {}> = ColumnInterface<D> &
   UseFiltersColumnOptions<D> &
-    UseGlobalFiltersColumnOptions<D> &
-    UseGroupByColumnOptions<D> &
-    UseResizeColumnsColumnProps<D> &
-    UseSortByColumnOptions<D> & {
-      bodyCellProps?:
-        | TableCellProps
-        | ((cell: DataGridCell<D>) => TableCellProps);
-      bodyCellEditProps?:
-        | TextFieldProps
-        | ((cell: DataGridCell<D>) => TextFieldProps);
-      disableFilters?: boolean;
-      editable?: boolean;
-      filter?: DataGridFilterType | string | FilterType<D>;
-      filterSelectOptions?: (string | { text: string, value: string })[];
-      footerCellProps?:
-        | TableCellProps
-        | ((column: Column<D>) => TableCellProps);
-      headerCellProps?:
-        | TableCellProps
-        | ((column: Column<D>) => TableCellProps);
-      headerCellFilterProps?:
-        | TextFieldProps
-        | ((column: Column<D>) => TextFieldProps);
-      onCellEditChange?: (
-        e: ChangeEvent<HTMLInputElement>,
-        cell: DataGridCell<D>,
-      ) => void;
-      onFilterChange?: (
-        e: ChangeEvent<HTMLInputElement>,
-        filterValue: any,
-      ) => void;
-      Edit?: ({
-        cell,
-        onChange,
-      }: {
-        cell: DataGridCell<D>;
-        onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-      }) => ReactNode;
-      Filter?: ({ column }: { column: DataGridHeaderGroup<D> }) => ReactNode;
-      Footer?: string;
-      Header?: string;
-    };
+  UseGlobalFiltersColumnOptions<D> &
+  UseGroupByColumnOptions<D> &
+  UseResizeColumnsColumnProps<D> &
+  UseSortByColumnOptions<D> & {
+    accessor: string;
+    bodyCellProps?:
+      | TableCellProps
+      | ((cell: DataGridCell<D>) => TableCellProps);
+    bodyCellEditProps?:
+      | TextFieldProps
+      | ((cell: DataGridCell<D>) => TextFieldProps);
+    columns?: (Column<D> & DataGridColumnInterface<D>)[];
+    disableFilters?: boolean;
+    editable?: boolean;
+    filter?: DataGridFilterType | string | FilterType<D>;
+    filterSelectOptions?: (
+      | string
+      | {
+          text: string;
+          value: string;
+        }
+    )[];
+    filterTypes: DATAGRID_FILTER_TYPE[];
+    footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    headerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
+    headerCellFilterProps?:
+      | TextFieldProps
+      | ((column: Column<D>) => TextFieldProps);
+    onCellEditChange?: (
+      e: ChangeEvent<HTMLInputElement>,
+      cell: DataGridCell<D>,
+    ) => void;
+    onFilterChange?: (e: ChangeEvent<HTMLInputElement>, value: any) => void;
+    Edit?: ({
+      cell,
+      onChange,
+    }: {
+      cell: DataGridCell<D>;
+      onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    }) => ReactNode;
+    Filter?: ({ column }: { column: DataGridHeaderGroup<D> }) => ReactNode;
+    Footer?: string;
+    Header?: string;
+  };
 
 export type DataGridColumnInstance<D extends {} = {}> = ColumnInstance<D> &
   UseFiltersColumnProps<D> &
   UseGroupByColumnProps<D> &
   UseResizeColumnsColumnProps<D> &
-  UseSortByColumnProps<D> & {
-    columns: DataGridColumnInstance<D>[];
+  UseSortByColumnProps<D> &
+  DataGridColumnInterface<D> & {
+    columns?: DataGridColumnInstance<D>[];
   };
 
 export type DataGridHeaderGroup<D extends {} = {}> = HeaderGroup<D> &
@@ -185,7 +191,9 @@ export type DataGridRow<D extends {} = {}> = Row<D> &
 
 export type DataGridCell<D extends {} = {}, _V = any> = Cell<D> &
   UseGroupByCellProps<D> &
-  UseRowStateCellProps<D>;
+  UseRowStateCellProps<D> & {
+    column: DataGridColumnInstance<D>;
+  };
 
 export type DataGridFilterType = DATAGRID_FILTER_TYPE | Function;
 
@@ -201,7 +209,9 @@ export type DataGridState<D extends {} = {}> = TableState<D> &
   UseRowStateState<D> &
   UseSortByState<D> & {
     currentEditingRow: DataGridRow<D> | null;
-    currentFilterTypes: { [key: string]: DataGridFilterType };
+    currentFilterTypes: {
+      [key: string]: DataGridFilterType;
+    };
     densePadding: boolean;
     fullScreen: boolean;
     showFilters: boolean;
@@ -266,6 +276,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     enableRowActions?: boolean;
     enableRowEditing?: boolean;
     enableSelection?: boolean;
+    filterTypes?: { [key in DATAGRID_FILTER_TYPE]: any };
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     footerProps?:
       | TableFooterProps
@@ -347,6 +358,8 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
 
 export default <D extends {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
+  filterTypes,
+  globalFilter = 'fuzzy',
   icons,
   localization,
   rowActionsColumn = 'first',
@@ -357,6 +370,8 @@ export default <D extends {}>({
 }: DataGridProps<D>) => (
   <DataGridProvider
     defaultColumn={defaultColumn}
+    filterTypes={{ defaultFilters, ...filterTypes }}
+    globalFilter={globalFilter}
     icons={{ ...DefaultDataGridIcons, ...icons }}
     localization={{ ...DefaultLocalization, ...localization }}
     paginationPosition={paginationPosition}

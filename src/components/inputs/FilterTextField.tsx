@@ -136,6 +136,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
               <Tooltip arrow title={localization.changeFilterMode}>
                 <span>
                   <IconButton
+                    aria-label={localization.changeFilterMode}
                     onClick={onFilterModeClick}
                     size="small"
                     sx={{ height: '1.75rem', width: '1.75rem' }}

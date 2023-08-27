@@ -4,11 +4,13 @@ import { DataGridRow } from './DataGrid';
 
 export const fuzzySearch = (
   rows: DataGridRow[],
-  ids: string[],
+  ids: string[] | string,
   value: string | number,
 ) =>
   matchSorter(rows, value.toString().trim(), {
-    keys: ids.map((id) => `values.${id}`),
+    keys: Array.isArray(ids)
+      ? ids.map((id) => `values.${id}`)
+      : [`values.${ids}`],
     sorter: (rankedItems) => rankedItems,
   });
 fuzzySearch.autoRemove = (val: any) => !val;

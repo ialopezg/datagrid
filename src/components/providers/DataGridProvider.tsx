@@ -19,12 +19,12 @@ import {
 } from 'react-table';
 
 import {
+  DataGridColumnInterface,
   DataGridFilterType,
   DataGridInstance,
   DataGridProps,
   DataGridRow,
 } from '../DataGrid';
-import { defaultFilters } from '../DataGridFilters';
 import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
 import DataGridContext from './DataGridContext';
 
@@ -60,28 +60,18 @@ export const DataGridProvider = <D extends {} = {}>(
   const [showSearch, setShowSearch] = useState<boolean>(
     props.initialState?.showSearch ?? false,
   );
-  const filterTypes = useMemo<Partial<{ [key in DATAGRID_FILTER_TYPE]: any }>>(
-    () => ({
-      ...defaultFilters,
-      ...props.filterTypes,
-    }),
-    [props.filterTypes],
-  );
-  const findLowestLevelColumns = useCallback(() => {
+  const findLowestLevelCols = useCallback(() => {
     let lowestLevelColumns: any[] = props.columns;
-    let currentColumns: any[] = props.columns;
-    while (
-      !!currentColumns.length &&
-      currentColumns.some((col) => col.columns)
-    ) {
-      const nextColumns = currentColumns
+    let currentCols: any[] = props.columns;
+    while (!!currentCols.length && currentCols.some((col) => col.columns)) {
+      const nextCols = currentCols
         .filter((col) => !!col.columns)
         .map((col) => col.columns)
         .flat();
-      if (nextColumns.every((col) => !col.columns)) {
-        lowestLevelColumns = [...lowestLevelColumns, ...nextColumns];
+      if (nextCols.every((col) => !col.columns)) {
+        lowestLevelColumns = [...lowestLevelColumns, ...nextCols];
       }
-      currentColumns = nextColumns;
+      currentCols = nextCols;
     }
 
     return lowestLevelColumns.filter((col) => !col.columns);
@@ -92,39 +82,43 @@ export const DataGridProvider = <D extends {} = {}>(
   }>(() =>
     Object.assign(
       {},
-      ...findLowestLevelColumns().map((c) => ({
+      ...findLowestLevelCols().map((c) => ({
         [c.accessor as string]:
           c.filter ??
           props?.initialState?.filters?.[c.accessor as any] ??
-          (!!c.filterSelectOptions
-            ? DATAGRID_FILTER_TYPE.EQUALS
-            : DATAGRID_FILTER_TYPE.FUZZY),
+          (!!c.filterSelectOptions ? 'equals' : 'fuzzy'),
       })),
     ),
   );
 
-  const columns = useMemo(
-    () =>
-      findLowestLevelColumns().map((column) => {
-        column.filter =
-          filterTypes[
-            currentFilterTypes[
-              column.accessor as string
-            ] as DATAGRID_FILTER_TYPE
-          ];
-
+  const applyFiltersToColumns = useCallback(
+    (cols: DataGridColumnInterface[]) =>
+      cols.map((column) => {
+        if (column.columns) {
+          applyFiltersToColumns(column.columns);
+        } else {
+          column.filter =
+            props?.filterTypes?.[
+              currentFilterTypes[
+                column.accessor as string
+              ] as DATAGRID_FILTER_TYPE
+            ];
+        }
         return column;
       }),
-    [props.columns, filterTypes, currentFilterTypes],
+    [currentFilterTypes, props.filterTypes],
+  );
+
+  const columns = useMemo(
+    () => applyFiltersToColumns(props.columns),
+    [props.columns, applyFiltersToColumns],
   );
 
   const table = useTable(
+    // @ts-ignore
     {
       ...props,
       columns,
-      // @ts-ignore
-      filterTypes,
-      globalFilterValue: props.globalFilter ?? 'globalFuzzy',
       useControlledState: (state) =>
         useMemo(
           () => ({
@@ -150,7 +144,7 @@ export const DataGridProvider = <D extends {} = {}>(
         ),
     },
     ...hooks,
-  ) as DataGridInstance<D>;
+  ) as unknown as DataGridInstance<D>;
 
   const idPrefix = useMemo(
     () => props.idPrefix ?? Math.random().toString(36).substring(2, 9),

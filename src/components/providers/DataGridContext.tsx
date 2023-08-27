@@ -6,11 +6,13 @@ import {
   DataGridProps,
   DataGridRow,
 } from '../DataGrid';
+import { DATAGRID_FILTER_TYPE } from '../DataGridFilterType';
 import { DataGridIcons } from '../DataGridIcons';
 import { DataGridLocalization } from '../DataGridLocalization';
 
 export interface DataGridContextProps<D extends {} = {}>
   extends DataGridProps<D> {
+  filterTypes: { [key in DATAGRID_FILTER_TYPE]: any };
   hasExpandableRows: boolean;
   hasExpandedRows: boolean;
   icons: DataGridIcons;
