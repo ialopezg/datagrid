@@ -75,6 +75,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
     return <>{column.Filter?.({ column })}</>;
   }
 
+  const filterId = `datagrid-${idPrefix}-${column.id}-filter-column`;
   const filterType = table.state.currentFilterTypes[column.id];
   const isSelectFilter = !!column.filterSelectOptions;
   const filterChipLabel =
@@ -94,9 +95,19 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
       <TextField
         fullWidth
         helperText={
-          filterType instanceof Function
-            ? ''
-            : localization.filterMode.replace('{filterType}', filterType)
+          <label htmlFor={filterId}>
+            {filterType instanceof Function
+              ? localization.filterMode.replace(
+                  '{filterType}',
+                  // @ts-ignore
+                  localization[filterType] ?? '',
+                ) ?? ''
+              : localization.filterMode.replace(
+                  '{filterType}',
+                  // @ts-ignore
+                  localization[filterType],
+                )}
+          </label>
         }
         inputProps={{
           disabled: filterChipLabel,
@@ -106,7 +117,7 @@ export const FilterTextField: FC<FilterTextFieldProps> = ({ column }) => {
           },
           title: placeholder,
         }}
-        id={`datagrid-${idPrefix}-${column.id}-filter-column`}
+        id={filterId}
         label={isSelectFilter && !filterValue ? placeholder : undefined}
         margin="none"
         onChange={(e) => {

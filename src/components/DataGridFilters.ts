@@ -2,7 +2,7 @@ import { matchSorter } from 'match-sorter';
 
 import { DataGridRow } from './DataGrid';
 
-export const fuzzySearch = (
+export const fuzzy = (
   rows: DataGridRow[],
   ids: string[] | string,
   value: string | number,
@@ -13,20 +13,9 @@ export const fuzzySearch = (
       : [`values.${ids}`],
     sorter: (rankedItems) => rankedItems,
   });
-fuzzySearch.autoRemove = (val: any) => !val;
+fuzzy.autoRemove = (val: any) => !val;
 
-export const fuzzyFilter = (
-  rows: DataGridRow[],
-  id: string,
-  value: string | number,
-) =>
-  matchSorter(rows, value.toString().trim(), {
-    keys: [`values.${id}`],
-    sorter: (rankedItems) => rankedItems,
-  });
-fuzzyFilter.autoRemove = (value: any) => !value;
-
-export const containsFilter = (
+export const contains = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -38,9 +27,9 @@ export const containsFilter = (
     .trim()
     .includes(value.toString().toLowerCase().trim());
 };
-containsFilter.autoRemove = (value: any) => !value;
+contains.autoRemove = (value: any) => !value;
 
-export const startsWidthFilter = (
+export const startsWidth = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -51,9 +40,9 @@ export const startsWidthFilter = (
     .toLowerCase()
     .trim()
     .startsWith(value.toString().toLowerCase().trim());
-startsWidthFilter.autoRemove = (value: any) => !value;
+startsWidth.autoRemove = (value: any) => !value;
 
-export const endsWidthFilter = (
+export const endsWidth = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -64,9 +53,9 @@ export const endsWidthFilter = (
     .toLowerCase()
     .trim()
     .endsWith(value.toString().toLowerCase().trim());
-endsWidthFilter.autoRemove = (value: any) => !value;
+endsWidth.autoRemove = (value: any) => !value;
 
-export const equalsFilter = (
+export const equals = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -76,9 +65,9 @@ export const equalsFilter = (
       row.values[id].toString().toLowerCase().trim() ===
       value.toString().toLowerCase().trim(),
   );
-equalsFilter.autoRemove = (value: any) => !value;
+equals.autoRemove = (value: any) => !value;
 
-export const notEqualsFilter = (
+export const notEquals = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -88,16 +77,16 @@ export const notEqualsFilter = (
     .toString()
     .toLowerCase()
     .trim() !== value.toString().toLowerCase().trim();
-notEqualsFilter.autoRemove = (value: any) => !value;
+notEquals.autoRemove = (value: any) => !value;
 
-export const emptyFilter = (
+export const empty = (
   rows: DataGridRow[],
   id: string,
   _value: string | number,
 ) => rows.filter((row) => !row.values[id].toString().toLowerCase().trim);
-emptyFilter.autoRemove = (value: any) => !value;
+empty.autoRemove = (value: any) => !value;
 
-export const greaterThanFilter = (
+export const greaterThan = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -108,9 +97,9 @@ export const greaterThanFilter = (
       : row.values[id].toString().toLowerCase().trim() >
         value.toString().toLowerCase().trim(),
   );
-greaterThanFilter.autoRemove = (value: any) => !value;
+greaterThan.autoRemove = (value: any) => !value;
 
-export const lessThanFilter = (
+export const lessThan = (
   rows: DataGridRow[],
   id: string,
   value: string | number,
@@ -121,25 +110,24 @@ export const lessThanFilter = (
       : row.values[id].toString().toLowerCase().trim() <
         value.toString().toLowerCase().trim(),
   );
-lessThanFilter.autoRemove = (value: any) => !value;
+lessThan.autoRemove = (value: any) => !value;
 
-export const notEmptyFilter = (
+export const notEmpty = (
   rows: DataGridRow[],
   id: string,
   _value: string | number,
 ) => rows.filter((row) => !!row.values[id].toString().toLowerCase().trim);
-notEmptyFilter.autoRemove = (value: any) => !value;
+notEmpty.autoRemove = (value: any) => !value;
 
 export const defaultFilters = {
-  contains: containsFilter,
-  empty: emptyFilter,
-  endsWith: endsWidthFilter,
-  equals: equalsFilter,
-  fuzzy: fuzzyFilter,
-  globalFuzzy: fuzzySearch,
-  greaterThan: greaterThanFilter,
-  lessThan: lessThanFilter,
-  notEmpty: notEmptyFilter,
-  notEquals: notEqualsFilter,
-  startsWidth: startsWidthFilter,
+  contains,
+  empty,
+  endsWidth,
+  equals,
+  fuzzy,
+  greaterThan,
+  lessThan,
+  notEmpty,
+  notEquals,
+  startsWidth,
 };

@@ -95,6 +95,9 @@ const SideBar: FC<SideBarProps> = ({ navOpen, setNavOpen }) => {
         <Link href="/docs/examples/advanced" passHref>
           <ListItemLevel2>Advanced Example</ListItemLevel2>
         </Link>
+        <Link href="/docs/examples/remote" passHref>
+          <ListItemLevel2>Remote Data Example</ListItemLevel2>
+        </Link>
 
         <Divider />
 

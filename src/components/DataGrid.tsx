@@ -356,7 +356,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
       | ((table: DataGridInstance<D>) => ToolbarProps);
   };
 
-export default <D extends {}>({
+export default <D extends {} = {}>({
   defaultColumn = { minWidth: 50, maxWidth: 1000 },
   filterTypes,
   globalFilter = 'fuzzy',

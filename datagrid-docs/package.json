@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@ialopezg/datagrid": "../",
+    "@ialopezg/datagrid": "github:ialopezg/datagrid",
     "@mdx-js/loader": "^2.0.0",
     "@mdx-js/react": "^2.0.0",
     "@mui/icons-material": "^5.5.0",
