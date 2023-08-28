@@ -49,6 +49,8 @@ export const Example = () => {
       { Header: 'Username', accessor: 'username' as const },
       { Header: 'Email', accessor: 'email' as const },
       { Header: 'Address', accessor: 'address' as const },
+      { Header: 'City', accessor: 'city' as const },
+      { Header: 'Zip Code', accessor: 'zipcode' as const },
     ],
     [],
   );
@@ -61,6 +63,8 @@ export const Example = () => {
         username: rd.username,
         email: rd.email,
         address: rd.address.street,
+        city: rd.address.city,
+        zipcode: rd.address.zipcode,
       })) ?? [],
     [remoteData],
   );

@@ -1,4 +1,4 @@
-import { alpha, TableCell, TableRow } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
 import React, { FC } from 'react';
 
 import BodyCell, { tableBodyCellStyles } from './BodyCell';
@@ -47,15 +47,8 @@ export const BodyRow: FC<BodyRowProps> = ({ row }) => {
       <TableRow
         hover
         onClick={(e) => onRowClick?.(e, row)}
+        selected={row.isSelected}
         {...tableRowProps}
-        sx={(theme) =>
-          ({
-            backgroundColor: row.isSelected
-              ? alpha(theme.palette.primary.light, 0.1)
-              : 'transparent',
-            ...tableRowProps?.sx,
-          } as any)
-        }
       >
         {showRowNumbers && (
           <TableCell sx={{ ...tableBodyCellStyles(densePadding) }}>
