@@ -1,5 +1,5 @@
 import { IconButton, TableCell } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import { actionBodyStyles } from '../body';
 
 import { DataGridRow } from '../DataGrid';
@@ -14,10 +14,17 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
     detailPanel,
     icons: { ExpandIcon },
     localization,
+    onRowExpandedChange,
     table: {
       state: { densePadding },
     },
   } = useDataGrid();
+
+  const onRowExpand = (e: MouseEvent<HTMLButtonElement>) => {
+    // @ts-ignore
+    row.getToggleRowExpandedProps()?.onClick(e);
+    onRowExpandedChange?.(e, row);
+  };
 
   return (
     <TableCell
@@ -33,6 +40,7 @@ export const ExpandRowAction: FC<ExpandRowActionProps> = ({ row }) => {
         disabled={!row.canExpand && !detailPanel}
         title={localization.expand}
         {...row.getToggleRowExpandedProps()}
+        onClick={onRowExpand}
       >
         <ExpandIcon
           style={{

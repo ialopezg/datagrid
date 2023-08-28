@@ -3,6 +3,7 @@ import { ColumnInstance } from 'react-table';
 import React, { FC } from 'react';
 
 import { DataGridColumnInstance } from '../DataGrid';
+import { useDataGrid } from '../providers';
 import { commonMenuItemStyles } from './ColumnActionsMenu';
 
 interface ColumnVisibilityMenuItemsProps {
@@ -14,6 +15,8 @@ export const ColumnVisibilityMenuItems: FC<ColumnVisibilityMenuItemsProps> = ({
   column,
   isSubMenu,
 }) => {
+  const { onColumnHide, table } = useDataGrid();
+
   const isParent = !!column?.columns?.length;
   const allChildColumnsVisible =
     isParent && !!column?.columns?.every((c) => c.isVisible);
@@ -27,6 +30,8 @@ export const ColumnVisibilityMenuItems: FC<ColumnVisibilityMenuItemsProps> = ({
     } else {
       column.toggleHidden();
     }
+
+    onColumnHide?.(column, table.state.hiddenColumns);
   };
 
   return (

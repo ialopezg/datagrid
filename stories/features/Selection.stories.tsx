@@ -30,18 +30,18 @@ const data = [...Array(21)].map((_) => ({
 }));
 
 export const SelectionEnableDefault: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableSelection />
+  <DataGrid columns={columns} data={data} enableRowSelection />
 );
 
 export const SelectAllDisabled: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} disableSelectAll enableSelection />
+  <DataGrid columns={columns} data={data} disableSelectAll enableRowSelection />
 );
 
 export const OnRowSelectChange: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableSelection
+    enableRowSelection
     onSelectChange={(e, row, selectedRows) => {
       console.log({ e, state: row, selectedRows });
     }}

@@ -36,7 +36,7 @@ const data = [...Array(21)].map((_) => ({
 }));
 
 export const DefaultTheme: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableSelection />
+  <DataGrid columns={columns} data={data} enableRowSelection />
 );
 
 export const CustomLightTheme: Story<DataGridProps> = () => {
@@ -57,7 +57,7 @@ export const CustomLightTheme: Story<DataGridProps> = () => {
   return (
     <Emotion10ThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <DataGrid columns={columns} data={data} enableSelection />
+        <DataGrid columns={columns} data={data} enableRowSelection />
       </ThemeProvider>
     </Emotion10ThemeProvider>
   );
@@ -78,7 +78,7 @@ export const CustomDarkTheme: Story<DataGridProps> = () => {
   return (
     <Emotion10ThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <DataGrid columns={columns} data={data} enableSelection />
+        <DataGrid columns={columns} data={data} enableRowSelection />
       </ThemeProvider>
     </Emotion10ThemeProvider>
   );

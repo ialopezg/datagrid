@@ -19,7 +19,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
     disableExpandAll,
     enableRowActions,
     enableRowEditing,
-    enableSelection,
+    enableRowSelection,
     hasExpandableRows,
     headerRowProps: defaultHeaderRowProps,
     rowActionsColumn,
@@ -72,7 +72,7 @@ export const HeaderRow: FC<HeaderRowProps> = ({ headerGroup }) => {
         )
       ) : null}
 
-      {enableSelection ? (
+      {enableRowSelection ? (
         !isParent ? (
           <ToggleSelectRowAction selectAll />
         ) : (

@@ -275,7 +275,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;
     enableRowEditing?: boolean;
-    enableSelection?: boolean;
+    enableRowSelection?: boolean;
     filterTypes?: { [key in DATAGRID_FILTER_TYPE]: any };
     footerCellProps?: TableCellProps | ((column: Column<D>) => TableCellProps);
     footerProps?:
@@ -311,7 +311,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
       e: MouseEvent<HTMLTableCellElement>,
       cell: DataGridCell<D>,
     ) => void;
-    onColumnHide?: (column: Column<D>, visibleColumns: Column<D>[]) => void;
+    onColumnHide?: (column: Column<D>, hiddenColumns?: string[]) => void;
     onDetailPanelClick?: (
       e: MouseEvent<HTMLTableCellElement>,
       row: Row<D>,

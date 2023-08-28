@@ -16,7 +16,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
     detailPanel,
     enableRowActions,
     enableRowEditing,
-    enableSelection,
+    enableRowSelection,
     footerRowProps: defaultFooterRowProps,
     hasExpandableRows,
     rowActionsColumn,
@@ -54,7 +54,7 @@ export const FooterRow: FC<FooterRowProps> = ({ footerGroup }) => {
         />
       )}
 
-      {enableSelection && <SpacerCell width="1rem" />}
+      {enableRowSelection && <SpacerCell width="1rem" />}
 
       {footerGroup.headers.map((column: DataGridHeaderGroup) => (
         <FooterCell column={column} key={column.getHeaderProps().key} />
