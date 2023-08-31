@@ -61,7 +61,7 @@ export const CustomizingDefaultToolbarActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    defaultToolbarActions={(_, { ToggleFullScreenAction }) => {
+    toolbarDefaultActions={(_, { ToggleFullScreenAction }) => {
       return (
         <>
           <ToggleFullScreenAction />
@@ -75,7 +75,7 @@ export const TableTitle: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    customToolbarActions={(_) => {
+    toolbarCustomActions={(_) => {
       return <Typography variant="h4">Table Title</Typography>;
     }}
   />
@@ -86,7 +86,7 @@ export const CustomToolbarActions: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     toolbarActionsPosition="bottom"
-    customToolbarActions={(_) => {
+    toolbarCustomActions={(_) => {
       const handleCreateNewUser = () => {
         // @ts-ignore
         prompt('Create new user modal');
@@ -109,8 +109,8 @@ export const CustomToolbarSelectionActions: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableRowSelection
-    customToolbarActions={(table) => {
+    enableSelection
+    toolbarCustomActions={(table) => {
       const handleDeactivate = () => {
         table.selectedFlatRows.map((row) => {
           // @ts-ignore
@@ -168,9 +168,9 @@ export const ToolbarAlertBannerBottom: Story<DataGridProps> = () => (
   <DataGrid
     columns={columns}
     data={data}
-    enableRowSelection
+    enableSelection
     toolbarAlertBannerPosition="bottom"
-    customToolbarActions={(table) => {
+    toolbarCustomActions={(table) => {
       const handleCreateNewUser = () => {
         // @ts-ignore
         prompt('Create new user modal');

@@ -35,13 +35,13 @@ export const Example = () => {
 
   const data = useMemo(
     () =>
-      remoteData.map((rd) => ({
-        name: rd.name,
-        username: rd.username,
-        email: rd.email,
-        address: rd.address.street,
-        city: rd.address.city,
-        zipcode: rd.address.zipcode,
+      remoteData.map((user) => ({
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        address: user.address.street,
+        city: user.address.city,
+        zipcode: user.address.zipcode,
       })) ?? [],
     [remoteData],
   );

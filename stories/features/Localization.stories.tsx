@@ -56,7 +56,7 @@ export const SpanishLocalization: Story<DataGridProps> = () => (
       data={data}
       enableColumnGrouping
       enableRowEditing
-      enableRowSelection
+      enableSelection
       localization={{
         actions: 'Acciones',
         columnActions: 'Acciones de columna',

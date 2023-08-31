@@ -37,29 +37,25 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
     <DataGrid
       columns={[
         {
-          accessor: 'firstName' as const,
           Header: 'First Name',
-          editable: true,
+          accessor: 'firstName' as const,
         },
         {
           accessor: 'lastName' as const,
           Header: 'Last Name',
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
+          disableEditing: true,
         },
       ]}
       data={tableData}
@@ -142,26 +138,24 @@ export const RowEditingCustomizeInput: Story<DataGridProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
 
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
-          editCellTextFieldProps: (cell: Cell) => ({
+          bodyCellEditProps: (cell: Cell) => ({
             children: usStates.map((state) => (
-              <MenuItem key={state} value={state}>{state}</MenuItem>
+              <MenuItem key={state} value={state}>
+                {state}
+              </MenuItem>
             )),
             select: true,
             value: cell.value,
@@ -170,7 +164,6 @@ export const RowEditingCustomizeInput: Story<DataGridProps> = () => {
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
         },
       ]}
       data={tableData}
@@ -219,36 +212,33 @@ export const RowEditingWithValidation: Story<DataGridProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
-          editCellTextFieldProps: {
+          bodyCellEditProps: {
             error: !!firstNameError,
             helperText: firstNameError,
           },
-          onEditCellChange: (e: ChangeEvent<any>) => {
+          onCellEditChange: (e: ChangeEvent<any>) => {
             setFirstNameError(validateFirstName(e.target.value));
           },
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
-          editCellTextFieldProps: {
+          bodyCellEditProps: {
             error: !!lastNameError,
             helperText: lastNameError,
           },
-          onEditCellChange: (e: ChangeEvent<any>) => {
+          onCellEditChange: (e: ChangeEvent<any>) => {
             setLastNameError(validateLastName(e.target.value));
           },
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
-          editCellTextFieldProps: {
+          bodyCellEditProps: {
             error: !!phoneNumberError,
             helperText: phoneNumberError,
           },
-          onEditCellChange: (e: ChangeEvent<any>) => {
+          onCellEditChange: (e: ChangeEvent<any>) => {
             setPhoneNumberError(validatePhoneNumber(e.target.value));
           },
         },
@@ -283,27 +273,22 @@ export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
         {
           Header: 'First Name',
           accessor: 'firstName' as const,
-          editable: true,
         },
         {
           Header: 'Last Name',
           accessor: 'lastName' as const,
-          editable: true,
         },
         {
           Header: 'Address',
           accessor: 'address' as const,
-          editable: true,
         },
         {
           Header: 'State',
           accessor: 'state' as const,
-          editable: true,
         },
         {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
-          editable: true,
         },
       ]}
       data={tableData}

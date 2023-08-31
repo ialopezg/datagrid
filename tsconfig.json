@@ -1,29 +1,29 @@
 {
+  "include": [
+    "src",
+    "src/@types"
+  ],
   "compilerOptions": {
-    "module": "ESNext",
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "jsx": "react",
     "lib": [
       "dom",
       "esnext"
     ],
-    "importHelpers": true,
-    "declaration": true,
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitReturns": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "rootDir": "./src",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "sourceMap": true,
+    "strict": true,
     "target": "ES6"
-  },
-  "include": [
-    "src",
-    "src/components/types"
-  ]
+  }
 }

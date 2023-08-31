@@ -134,7 +134,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
     }))}
     enableColumnGrouping
     enableColumnResizing
-    enableRowSelection
+    enableSelection
     enableRowActions
     enableRowEditing
     paginationPosition="both"
@@ -168,7 +168,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         <ShareIcon /> Share
       </MenuItem>,
     ]}
-    customToolbarActions={(table) => {
+    toolbarCustomActions={(table) => {
       const handleDeactivate = () => {
         table.selectedFlatRows.map((row) => {
           console.log('deactivating ' + row.original);

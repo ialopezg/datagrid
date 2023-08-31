@@ -56,7 +56,7 @@ export const CustomizeSearchTextBox: Story<DataGridProps> = () => (
     columns={columns}
     data={data}
     initialState={{ showSearch: true }}
-    searchBoxProps={{
+    searchTextFieldProps={{
       variant: 'outlined',
       placeholder: 'Search 100 rows',
       label: 'Search',

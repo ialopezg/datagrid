@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import DataGrid from '../../../src/components/DataGrid';
+
+import DataGrid from '../../../src';
 
 interface User {
   id: number;
@@ -57,14 +58,14 @@ export const Example = () => {
 
   const data = useMemo(
     () =>
-      remoteData.map((rd) => ({
-        id: rd.id,
-        name: rd.name,
-        username: rd.username,
-        email: rd.email,
-        address: rd.address.street,
-        city: rd.address.city,
-        zipcode: rd.address.zipcode,
+      remoteData.map((user) => ({
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        address: user.address.street,
+        city: user.address.city,
+        zipcode: user.address.zipcode,
       })) ?? [],
     [remoteData],
   );

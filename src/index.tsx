@@ -1,2 +1,2 @@
-export * from './components';
-export { default } from './components/DataGrid';
+export * from './DataGrid';
+export { default } from './DataGrid';

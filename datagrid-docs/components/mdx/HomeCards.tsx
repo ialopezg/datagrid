@@ -1,4 +1,4 @@
-import { alpha, Card, Stack, useTheme } from '@mui/material';
+import { alpha, Card, CardContent, Stack, useTheme } from '@mui/material';
 import Image from 'next/image';
 
 const cardData = [
@@ -13,7 +13,7 @@ const cardData = [
     alt: 'Quality',
   },
   {
-    text: 'Fully customizable with a variety of options',
+    text: 'Great defaults, with customization treated as top priority',
     image: '/media/customizable.svg',
     alt: 'Customizable',
   },
@@ -23,7 +23,7 @@ const cardData = [
     alt: 'Easy Opt-out',
   },
   {
-    text: 'Efficient bundle size (currently < 12kb gzipped)',
+    text: 'Efficient bundle size (currently < 20kb gzipped)',
     image: '/media/efficient.svg',
     alt: 'Easy Opt-out',
   },
@@ -33,7 +33,7 @@ export const HomeCards = () => {
   const theme = useTheme();
 
   return (
-    <Stack sx={{ mt: '2rem', gap: '1rem' }}>
+    <Stack sx={{ mt: '1rem', gap: '1rem' }}>
       {cardData.map((cd, index) => (
         <Card
           key={index}
@@ -48,7 +48,7 @@ export const HomeCards = () => {
         >
           <Image src={cd.image} alt={cd.text} height={50} width={50} />
 
-          {cd.text}
+          <CardContent>{cd.text}</CardContent>
         </Card>
       ))}
     </Stack>
