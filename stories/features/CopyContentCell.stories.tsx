@@ -5,7 +5,7 @@ import React from 'react';
 import DataGrid, { DataGridProps } from './../../src';
 
 const meta: Meta = {
-  title: 'Features/CopyCellContent',
+  title: 'Features/Copy Cell Content',
   component: DataGrid,
   parameters: {
     status: {

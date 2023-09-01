@@ -44,68 +44,72 @@ export const FilterModeMenu: FC<FilterModeMenuProps> = ({
     divider: boolean;
     fn: Function;
   }[] = useMemo(
-    () => [
-      {
-        type: DATAGRID_FILTER_TYPE.FUZZY,
-        label: localization.fuzzy,
-        divider: false,
-        fn: fuzzy,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.CONTAINS,
-        label: localization.contains,
-        divider: true,
-        fn: contains,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.STARTS_WITH,
-        label: localization.startsWidth,
-        divider: false,
-        fn: startsWidth,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.ENDS_WITH,
-        label: localization.endsWidth,
-        divider: true,
-        fn: endsWidth,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.EQUALS,
-        label: localization.equals,
-        divider: false,
-        fn: equals,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.NOT_EQUALS,
-        label: localization.notEquals,
-        divider: true,
-        fn: notEquals,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.GREATER_THAN,
-        label: localization.greaterThan,
-        divider: false,
-        fn: greaterThan,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.LESS_THAN,
-        label: localization.lessThan,
-        divider: true,
-        fn: lessThan,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.EMPTY,
-        label: localization.empty,
-        divider: false,
-        fn: empty,
-      },
-      {
-        type: DATAGRID_FILTER_TYPE.NOT_EMPTY,
-        label: localization.notEmpty,
-        divider: false,
-        fn: notEmpty,
-      },
-    ],
+    () =>
+      [
+        {
+          type: DATAGRID_FILTER_TYPE.FUZZY,
+          label: localization.fuzzy,
+          divider: false,
+          fn: fuzzy,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.CONTAINS,
+          label: localization.contains,
+          divider: true,
+          fn: contains,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.STARTS_WITH,
+          label: localization.startsWidth,
+          divider: false,
+          fn: startsWidth,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.ENDS_WITH,
+          label: localization.endsWidth,
+          divider: true,
+          fn: endsWidth,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.EQUALS,
+          label: localization.equals,
+          divider: false,
+          fn: equals,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.NOT_EQUALS,
+          label: localization.notEquals,
+          divider: true,
+          fn: notEquals,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.GREATER_THAN,
+          label: localization.greaterThan,
+          divider: false,
+          fn: greaterThan,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.LESS_THAN,
+          label: localization.lessThan,
+          divider: true,
+          fn: lessThan,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.EMPTY,
+          label: localization.empty,
+          divider: false,
+          fn: empty,
+        },
+        {
+          type: DATAGRID_FILTER_TYPE.NOT_EMPTY,
+          label: localization.notEmpty,
+          divider: false,
+          fn: notEmpty,
+        },
+      ].filter(
+        (filter) =>
+          !column.filterTypes || column.filterTypes.includes(filter.type),
+      ),
     [],
   );
 

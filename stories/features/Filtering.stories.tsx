@@ -93,6 +93,47 @@ export const FilterTypes: Story<DataGridProps> = () => (
   />
 );
 
+export const DisabledSomeFilterTypesForCertainColumns: Story<
+  DataGridProps
+> = () => (
+  <DataGrid
+    columns={
+      [
+        {
+          Header: 'First Name',
+          accessor: 'firstName' as const,
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName' as const,
+          filterTypes: ['startsWith', 'endsWith'],
+          filter: 'startsWith',
+        },
+        {
+          Header: 'Age',
+          accessor: 'age' as const,
+        },
+        {
+          Header: 'Gender',
+          accessor: 'gender' as const,
+          filterTypes: ['equals', 'notEquals'],
+          filter: 'equals',
+        },
+        {
+          Header: 'Address',
+          accessor: 'address' as const,
+        },
+        {
+          Header: 'State',
+          accessor: 'state' as const,
+        },
+      ] as any[]
+    }
+    data={data}
+    initialState={{ showFilters: true }}
+  />
+);
+
 export const FilteringDisabledForCertainColumns: Story<DataGridProps> = () => (
   <DataGrid
     columns={
