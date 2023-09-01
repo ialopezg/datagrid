@@ -1,7 +1,6 @@
 import DataGrid from '@ialopezg/datagrid';
-import { MenuItem } from '@mui/base';
 import { AccountCircle, Send } from '@mui/icons-material';
-import { ListItemIcon, Typography } from '@mui/material';
+import { ListItemIcon, Typography, MenuItem } from '@mui/material';
 import React, { FC, useMemo, useState } from 'react';
 
 const Example: FC = () => {
@@ -1511,6 +1510,7 @@ const Example: FC = () => {
             // View profile logic...
             onCloseMenu();
           }}
+          sx={{ m: 0 }}
         >
           <ListItemIcon>
             <AccountCircle />
@@ -1523,6 +1523,7 @@ const Example: FC = () => {
             // Send email logic...
             onCloseMenu();
           }}
+          sx={{ m: 0 }}
         >
           <ListItemIcon>
             <Send />

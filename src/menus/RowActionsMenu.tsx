@@ -1,4 +1,4 @@
-import { Box, Menu, MenuItem } from '@mui/material';
+import { Box, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React, { FC } from 'react';
 
 import { DataGridRow } from '../DataGrid';
@@ -39,7 +39,9 @@ export const RowActionsMenu: FC<RowActionsMenuProps> = ({
       {enableRowEditing && (
         <MenuItem onClick={onRowEditAction} sx={commonMenuItemStyles}>
           <Box sx={commonListItemStyles}>
-            <EditIcon />
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
             {localization.edit}
           </Box>
         </MenuItem>

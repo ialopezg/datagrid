@@ -18,12 +18,11 @@ export default meta;
 
 export const DetailPanelEnabled: Story<DataGridProps> = () => (
   <DataGrid
-    // @ts-ignore
     columns={[
       { accessor: 'firstName' as const, Header: 'First Name' },
       { accessor: 'lastName' as const, Header: 'Last Name' },
       { accessor: 'address' as const, Header: 'Address' },
-    ]}
+    ] as any[]}
     data={[...Array(5)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -49,21 +48,20 @@ export const DetailPanelEnabled: Story<DataGridProps> = () => (
 
 export const DetailPanelExpandAllDisabled: Story<DataGridProps> = () => (
   <DataGrid
-    // @ts-ignore
     columns={[
       {
         Header: 'First Name',
-        accessor: 'firstName',
+        accessor: 'firstName' as const,
       },
       {
         Header: 'Last Name',
-        accessor: 'lastName',
+        accessor: 'lastName' as const,
       },
       {
         Header: 'Address',
-        accessor: 'address',
+        accessor: 'address' as const,
       },
-    ]}
+    ] as any[]}
     data={[...Array(5)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),

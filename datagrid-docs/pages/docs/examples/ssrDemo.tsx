@@ -67,6 +67,7 @@ const Example: FC<Props> = ({ data }) => {
     [],
   );
 
+  // @ts-ignore
   return <DataGrid columns={columns} data={data} />;
 };
 

@@ -1,4 +1,4 @@
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import React, { FC, MouseEvent, useState } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
@@ -15,7 +15,6 @@ export const commonMenuItemStyles = {
 
 export const commonListItemStyles = {
   display: 'flex',
-  gap: '0.75rem',
   alignItems: 'center',
 };
 
@@ -134,7 +133,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonListItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <ClearAllIcon />
+              <ListItemIcon>
+                <ClearAllIcon />
+              </ListItemIcon>
               {localization.clearSort}
             </Box>
           </MenuItem>,
@@ -145,6 +146,7 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonListItemStyles}
           >
             <Box sx={commonListItemStyles}>
+              <ListItemIcon></ListItemIcon>
               <SortIcon />
               {localization.sortByColumnAscending?.replace(
                 '{column}',
@@ -162,7 +164,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonListItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              <ListItemIcon>
+                <SortIcon style={{ transform: 'rotate(180deg) scaleX(-1)' }} />
+              </ListItemIcon>
               {localization.sortByColumnDescending?.replace(
                 '{column}',
                 String(column.Header),
@@ -180,7 +184,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonMenuItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <FilteringOffIcon />
+              <ListItemIcon>
+                <FilteringOffIcon />
+              </ListItemIcon>
               {localization?.clearFilter}
             </Box>
           </MenuItem>,
@@ -191,7 +197,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonListItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <FilteringOnIcon />
+              <ListItemIcon>
+                <FilteringOnIcon />
+              </ListItemIcon>
               {localization.filterByColumn?.replace(
                 '{column}',
                 String(column.Header),
@@ -226,7 +234,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
             sx={commonListItemStyles}
           >
             <Box sx={commonListItemStyles}>
-              <GroupByIcon />
+              <ListItemIcon>
+                <GroupByIcon />
+              </ListItemIcon>
               {localization[
                 column.isGrouped ? 'ungroupByColumn' : 'groupByColumn'
               ]?.replace('{column}', String(column.Header))}
@@ -241,7 +251,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           sx={commonListItemStyles}
         >
           <Box sx={commonListItemStyles}>
-            <HideColumnIcon />
+            <ListItemIcon>
+              <HideColumnIcon />
+            </ListItemIcon>
             {localization.hideColumn?.replace(
               '{column}',
               String(column.Header),
@@ -254,7 +266,9 @@ export const ColumnActionsMenu: FC<ColumnActionsMenuProps> = ({
           sx={commonMenuItemStyles}
         >
           <Box sx={commonListItemStyles}>
-            <ColumnVisibilityIcon />
+            <ListItemIcon>
+              <ColumnVisibilityIcon />
+            </ListItemIcon>
 
             {localization.showAllColumns}
           </Box>

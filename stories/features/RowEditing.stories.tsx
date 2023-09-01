@@ -57,7 +57,7 @@ export const RowEditingEnabled: Story<DataGridProps> = () => {
           accessor: 'phoneNumber' as const,
           disableEditing: true,
         },
-      ]}
+      ] as any[]}
       data={tableData}
       disableColumnActions
       onRowEditSubmit={onSubmitRowChanges}
@@ -165,12 +165,12 @@ export const RowEditingCustomizeInput: Story<DataGridProps> = () => {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
         },
-      ]}
+      ] as any[]}
       data={tableData}
       disableColumnActions
       enableRowActions
       enableRowEditing
-      muiTableBodyCellEditTextFieldProps={{ variant: 'outlined' }}
+      bodyCellEditProps={{ variant: 'outlined' }}
       onRowEditSubmit={handleSaveRow}
     />
   );
@@ -242,9 +242,8 @@ export const RowEditingWithValidation: Story<DataGridProps> = () => {
             setPhoneNumberError(validatePhoneNumber(e.target.value));
           },
         },
-      ]}
+      ] as any[]}
       data={tableData}
-      onSaveRow={handleSaveRow}
       disableColumnActions
       enableRowActions
       enableRowEditing
@@ -290,7 +289,7 @@ export const RowEditingEnabledAsync: Story<DataGridProps> = () => {
           Header: 'Phone Number',
           accessor: 'phoneNumber' as const,
         },
-      ]}
+      ] as any[]}
       data={tableData}
       disableColumnActions
       enableRowActions
