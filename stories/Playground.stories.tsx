@@ -28,7 +28,7 @@ export const Default: Story<DataGridProps> = () => (
       },
       { accessor: 'city' as const, Header: 'City' },
       { accessor: 'state' as const, Header: 'State' },
-    ]}
+    ] as any[]}
     data={[...Array(6)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -54,7 +54,7 @@ export const MinimumFeatures: Story<DataGridProps> = () => (
       },
       { accessor: 'city' as const, Header: 'City' },
       { accessor: 'state' as const, Header: 'State' },
-    ]}
+    ] as any[]}
     data={[...Array(6)].map((_) => ({
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -107,11 +107,13 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
             Header: 'City',
             Footer: 'City',
             accessor: 'city',
+            disableCopy: true,
           },
           {
             Header: 'State',
             Footer: 'State',
             accessor: 'state',
+            disableCopy: true,
           },
         ],
       },
@@ -132,6 +134,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         state: faker.address.state(),
       })),
     }))}
+    enableCellCopy
     enableColumnGrouping
     enableColumnResizing
     enableSelection

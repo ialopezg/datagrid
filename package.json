@@ -1,6 +1,6 @@
 {
   "name": "@ialopezg/datagrid",
-  "version": "1.0.31",
+  "version": "1.1.0",
   "author": "Isidro A. Lopez G.",
   "license": "MIT",
   "main": "dist/index.js",

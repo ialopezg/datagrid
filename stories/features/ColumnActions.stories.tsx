@@ -40,7 +40,8 @@ const columns = [
     accessor: 'phoneNumber' as const,
     Header: 'Phone Number',
   },
-];
+] as any[];
+
 const data = [...Array(100)].map((_) => ({
   firstName: faker.name.firstName(),
   middleName: faker.name.firstName(),

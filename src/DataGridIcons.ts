@@ -4,6 +4,8 @@ import ClearAllIcon from '@mui/icons-material/ClearAll';
 import CloseIcon from '@mui/icons-material/Close';
 import ColumnVisibilityIcon from '@mui/icons-material/ViewColumn';
 import ColumnActionsIcon from '@mui/icons-material/MoreVert';
+import CopyIcon from '@mui/icons-material/ContentCopy';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CollapseIcon from '@mui/icons-material/ExpandLess';
 import DensityPaddingMediumIcon from '@mui/icons-material/DensityMedium';
 import DensityPaddingSmallIcon from '@mui/icons-material/DensitySmall';
@@ -32,6 +34,8 @@ export interface DataGridIcons {
   CollapseIcon: any;
   ColumnActionsIcon: any;
   ColumnVisibilityIcon: any;
+  CopyIcon: any;
+  CheckBoxIcon: any;
   DensityPaddingMediumIcon: any;
   DensityPaddingSmallIcon: any;
   EditIcon: any;
@@ -59,6 +63,8 @@ export const DefaultDataGridIcons: DataGridIcons = {
   CloseIcon,
   CollapseIcon,
   ColumnActionsIcon,
+  CopyIcon,
+  CheckBoxIcon,
   ColumnVisibilityIcon,
   DensityPaddingMediumIcon,
   DensityPaddingSmallIcon,

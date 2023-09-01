@@ -5,8 +5,10 @@ export interface DataGridLocalization {
   clearFilter: string;
   clearSearch: string;
   clearSort: string;
+  clickToCopy: string;
   columnActions: string;
   contains: string;
+  copiedToClipboard: string;
   edit: string;
   empty: string;
   endsWidth: string;
@@ -54,8 +56,10 @@ export const DefaultLocalization: DataGridLocalization = {
   clearFilter: 'Clear filter',
   clearSearch: 'Clear search',
   clearSort: 'Clear sorting',
+  clickToCopy: 'Click to copy',
   columnActions: 'Column actions',
   contains: 'Contains exact',
+  copiedToClipboard: 'Copied to clipboard!',
   edit: 'Edit',
   empty: 'Empty',
   endsWidth: 'Ends with',
