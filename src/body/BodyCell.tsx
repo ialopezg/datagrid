@@ -1,4 +1,4 @@
-import { Box, Skeleton, TableCell, TableCellProps } from '@mui/material';
+import { Skeleton, TableCell, TableCellProps } from '@mui/material';
 import React, { FC } from 'react';
 import DataGridCopyAction from '../actions/DataGridCopyAction';
 
@@ -26,7 +26,7 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
   const {
     bodyCellProps,
     bodyCellSkeletonProps,
-    enableCellCopy,
+    enableClickToCopy,
     isLoading,
     onCellClick,
     table: {
@@ -81,11 +81,8 @@ export const BodyCell: FC<BodyCellProps> = ({ cell }) => {
         <span>
           {cell.render('Cell')} ({cell.row.subRows.length})
         </span>
-      ) : enableCellCopy && !cell.column.disableCopy ? (
-        <Box sx={{ whiteSpace: 'nowrap' }}>
-          {cell.render('Cell')}
-          <DataGridCopyAction cell={cell} />
-        </Box>
+      ) : enableClickToCopy && !cell.column.disableClickToCopy ? (
+        <DataGridCopyAction cell={cell} />
       ) : (
         cell.render('Cell')
       )}

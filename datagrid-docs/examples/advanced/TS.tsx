@@ -1,54 +1,79 @@
-import DataGrid from '@ialopezg/datagrid';
+import DataGrid, { DataGridCell } from '@ialopezg/datagrid';
 import { AccountCircle, Send } from '@mui/icons-material';
-import { ListItemIcon, Typography, MenuItem } from '@mui/material';
+import { ListItemIcon, Typography, MenuItem, Box } from '@mui/material';
 import React, { FC, useMemo, useState } from 'react';
 
 const Example: FC = () => {
   const columns = useMemo(
-    () => [
-      {
-        Header: 'Employee',
-        columns: [
-          {
-            Header: 'First Name',
-            accessor: 'firstName' as const,
-          },
-          {
-            Header: 'Last Name',
-            accessor: 'lastName' as const,
-          },
-          {
-            Header: 'Email',
-            accessor: 'email' as const,
-          },
-        ],
-      },
-      {
-        Header: 'Job Info',
-        columns: [
-          {
-            Header: 'Job Title',
-            accessor: 'jobTitle' as const,
-          },
-          {
-            Header: 'Salary',
-            accessor: 'salary' as const,
-            Cell: ({ cell: { value } }: any) =>
-              value.toLocaleString?.('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-              }),
-            disableEditing: true,
-          },
-          {
-            Header: 'Start Date',
-            accessor: 'startDate' as const,
-          },
-        ],
-      },
-    ],
+    () =>
+      [
+        {
+          Header: 'Employee',
+          columns: [
+            {
+              Header: 'Employee',
+              columns: [
+                {
+                  accessor: 'lastName' as const,
+                  Cell: ({ cell }: { cell: DataGridCell<any> }) => (
+                    <>
+                      {cell.row.original?.['firstName']}
+                      <br />
+                      {cell.row.original?.['lastName']}
+                    </>
+                  ),
+                  disableCopy: true,
+                },
+              ],
+            },
+            {
+              Header: 'Email',
+              accessor: 'email' as const,
+            },
+          ],
+        },
+        {
+          Header: 'Job Info',
+          columns: [
+            {
+              Header: 'Job Title',
+              accessor: 'jobTitle' as const,
+            },
+            {
+              Header: 'Salary',
+              accessor: 'salary' as const,
+              Cell: ({ cell: { value } }: { cell: DataGridCell<any> }) => (
+                <Box
+                  sx={(theme) => ({
+                    backgroundColor:
+                      value < 50_000
+                        ? theme.palette.error.main
+                        : value >= 50_000 && value < 75_000
+                        ? theme.palette.warning.main
+                        : theme.palette.success.main,
+                    borderRadius: '0.25rem',
+                    color: 'white',
+                    maxWidth: '9ch',
+                    p: '0.25rem',
+                  })}
+                >
+                  {Number(value)?.toLocaleString?.('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    maximumFractionDigits: 0,
+                    minimumFractionDigits: 0,
+                  })}
+                </Box>
+              ),
+              disableEditing: true,
+            },
+            {
+              Header: 'Start Date',
+              accessor: 'startDate' as const,
+            },
+          ],
+        },
+      ] as any[],
     [],
   );
 
@@ -1476,6 +1501,7 @@ const Example: FC = () => {
       columns={columns}
       data={data}
       enableColumnGrouping
+      enableCellCopy
       enableRowActions
       enableRowEditing
       enableSelection
@@ -1489,7 +1515,7 @@ const Example: FC = () => {
         >
           <img
             height={200}
-            src={row.original.avatar}
+            src={row.original['avatar']}
             loading="lazy"
             style={{ borderRadius: '50%' }}
             alt="avatar"
@@ -1497,13 +1523,13 @@ const Example: FC = () => {
           <div style={{ textAlign: 'center' }}>
             <Typography variant="h4">Signature Catch Phrase:</Typography>
             <Typography variant="h1">
-              &quot;{row.original.signatureCatchPhrase}&quot;
+              &quot;{row.original['signatureCatchPhrase']}&quot;
             </Typography>
           </div>
         </div>
       )}
       onRowEditSubmit={onSave}
-      rowActionsMenuItems={(_row: any, _table: any, onCloseMenu: Function) => [
+      rowActionMenuItems={(_row: any, _table: any, onCloseMenu: Function) => [
         <MenuItem
           key={0}
           onClick={() => {

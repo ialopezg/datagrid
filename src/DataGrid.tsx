@@ -133,7 +133,7 @@ export type DataGridColumnInterface<D extends {} = {}> = ColumnInterface<D> &
       | TextFieldProps
       | ((cell: DataGridCell<D>) => TextFieldProps);
     columns?: DataGridColumnInterface<D>[];
-    disableCopy?: boolean;
+    disableClickToCopy?: boolean;
     disableEditing?: boolean;
     disableFilters?: boolean;
     filter?: DataGridFilterType | string | FilterType<D>;
@@ -255,7 +255,7 @@ export type DataGridProps<D extends {} = {}> = UseTableOptions<D> &
     disableFullScreen?: boolean;
     disableSelectAll?: boolean;
     disableSubRowTree?: boolean;
-    enableCellCopy?: boolean;
+    enableClickToCopy?: boolean;
     enableColumnGrouping?: boolean;
     enableColumnResizing?: boolean;
     enableRowActions?: boolean;

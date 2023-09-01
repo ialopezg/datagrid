@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { DataGridCell } from '../DataGrid';
 import { useDataGrid } from '../providers';
@@ -8,10 +8,7 @@ interface DataGridCopyActionProps {
 }
 
 export const DataGridCopyAction: FC<DataGridCopyActionProps> = ({ cell }) => {
-  const {
-    icons: { CopyIcon, CheckBoxIcon },
-    localization,
-  } = useDataGrid();
+  const { localization } = useDataGrid();
 
   // ** State
   const [copied, setCopied] = useState<boolean>(false);
@@ -19,34 +16,37 @@ export const DataGridCopyAction: FC<DataGridCopyActionProps> = ({ cell }) => {
   const onCopy = (value: string) => {
     void navigator.clipboard.writeText(value);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 4000);
   };
 
   return (
     <Tooltip
+      enterDelay={1000}
+      enterNextDelay={1000}
+      placement="top"
       title={copied ? localization.copiedToClipboard : localization.clickToCopy}
     >
-      <IconButton
+      <Button
         aria-label={
           copied ? localization.copiedToClipboard : localization.clickToCopy
         }
         onClick={() => onCopy(cell.value)}
         size="small"
         sx={{
-          opacity: 0.05,
-          m: '0 0.5rem',
-          transition: 'all 0.2s ease-in-out',
-          '&:hover': {
-            opacity: 1,
-          },
+          backgroundColor: 'transparent',
+          color: 'inherit',
+          letterSpacing: 'inherit',
+          fontFamily: 'inherit',
+          fontSize: 'inherit',
+          m: '-0.25rem',
+          textTransform: 'inherit',
+          textAlign: 'inherit',
+          minWidth: 'unset',
         }}
+        variant="text"
       >
-        {copied ? (
-          <CheckBoxIcon color="success" fontSize="small" />
-        ) : (
-          <CopyIcon fontSize="small" />
-        )}
-      </IconButton>
+        {cell.render('Cell')}
+      </Button>
     </Tooltip>
   );
 };

@@ -7,7 +7,7 @@ import {
   TableSortLabel,
   Tooltip,
 } from '@mui/material';
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 
 import { DataGridHeaderGroup } from '../DataGrid';
 import { useDataGrid } from '../providers';
@@ -17,6 +17,11 @@ import ColumnActionsAction from '../actions/ColumnActionsAction';
 export const commonTableHeaderCellStyles = (
   densePadding: boolean,
   enableColumnResizing?: boolean,
+  widths?: {
+    maxWidth?: CSSProperties['maxWidth'],
+    minWidth?: CSSProperties['minWidth'],
+    width?: CSSProperties['width'],
+  },
 ) => ({
   fontWeight: 'bold',
   height: '100%',
@@ -24,6 +29,7 @@ export const commonTableHeaderCellStyles = (
   pt: densePadding ? '0.75rem' : '1.25rem',
   transition: `all ${enableColumnResizing ? '10ms' : '0.2s'} ease-in-out`,
   verticalAlign: 'text-top',
+  ...widths,
 });
 
 interface HeaderCellProps {
@@ -97,6 +103,11 @@ export const HeaderCell: FC<HeaderCellProps> = ({ column }) => {
         ...commonTableHeaderCellStyles(
           table.state.densePadding,
           enableColumnResizing,
+          {
+            maxWidth: column.maxWidth,
+            minWidth: column.minWidth,
+            width: column.width,
+          }
         ),
         ...tableCellProps?.sx,
       }}

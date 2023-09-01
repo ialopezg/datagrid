@@ -134,7 +134,7 @@ export const MaximumFeatures: Story<DataGridProps> = () => (
         state: faker.address.state(),
       })),
     }))}
-    enableCellCopy
+    enableClickToCopy
     enableColumnGrouping
     enableColumnResizing
     enableSelection

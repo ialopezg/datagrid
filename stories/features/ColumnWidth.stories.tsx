@@ -5,11 +5,11 @@ import React from 'react';
 import DataGrid, { DataGridProps } from './../../src';
 
 const meta: Meta = {
-  title: 'Features/Copy Cell Content',
+  title: 'Features/Column widths',
   component: DataGrid,
   parameters: {
     status: {
-      type: 'stable',
+      type: 'beta',
     },
   },
 };
@@ -17,40 +17,38 @@ export default meta;
 
 const columns = [
   {
+    Header: 'ID',
+    accessor: 'id' as const,
+    maxWidth: 20,
+  },
+  {
     Header: 'First Name',
     accessor: 'firstName' as const,
+    minWidth: 300,
   },
   {
     Header: 'Last Name',
     accessor: 'lastName' as const,
+    width: 100,
   },
   {
-    Header: 'Email Address',
-    accessor: 'email' as const,
+    Header: 'Age',
+    accessor: 'age' as const,
+    maxWidth: 20,
   },
   {
     Header: 'Address',
     accessor: 'address' as const,
   },
-  {
-    Header: 'City',
-    accessor: 'city' as const,
-  },
-  {
-    Header: 'State',
-    accessor: 'state' as const,
-  },
 ] as any[];
-
-const data = [...Array(100)].map((_) => ({
+const data = [...Array(21)].map((_) => ({
+  id: faker.datatype.number(100),
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
-  email: faker.internet.email(),
+  age: faker.datatype.number(80),
   address: faker.address.streetAddress(),
-  city: faker.address.city(),
-  state: faker.address.state(),
 }));
 
-export const EnableCellContentCopy: Story<DataGridProps> = () => (
-  <DataGrid columns={columns} data={data} enableCellCopy />
+export const CustomWidths: Story<DataGridProps> = () => (
+  <DataGrid columns={columns} data={data} />
 );
