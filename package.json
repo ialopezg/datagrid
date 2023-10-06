@@ -78,7 +78,7 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/addon-storysource": "^6.4.19",
     "@storybook/addons": "^6.4.19",
-    "@storybook/react": "^6.4.19",
+    "@storybook/react": "^7.4.6",
     "@types/faker": "^6.6.8",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
